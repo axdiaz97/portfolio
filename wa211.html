@@ -22,6 +22,15 @@
   --red-bg: #fbe9e7;
   --amber-bg: #fdf1e2;
 
+  --sev-1: #fbdede;
+  --sev-1-text: #8a3b3b;
+  --sev-2: #f2a8a8;
+  --sev-2-text: #7a2424;
+  --sev-3: #d9645f;
+  --sev-3-text: #ffffff;
+  --sev-4: #8a1f1f;
+  --sev-4-text: #ffffff;
+
   --bg: #ffffff;
   --bg-alt: #f5f7fb;
   --border: #e2e6ee;
@@ -131,6 +140,55 @@ h1, h2, h3 {
 }
 .back-link:hover { color: var(--orange-deep); }
 
+.toc-float {
+  position: fixed;
+  left: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 40;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 8px 0;
+  border-left: 2px solid var(--border);
+  background: rgba(255, 255, 255, 0.92);
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.toc-float a {
+  padding: 7px 14px 7px 14px;
+  font-family: var(--font-head);
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-decoration: none;
+  white-space: nowrap;
+  border-left: 2px solid transparent;
+  margin-left: -2px;
+  transition: color 0.15s ease;
+}
+
+.toc-float a.toc-sub {
+  padding-left: 26px;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.toc-float a:hover {
+  color: var(--navy);
+}
+
+.toc-float a.active {
+  color: var(--orange-deep);
+  border-left-color: var(--orange);
+  font-weight: 700;
+}
+
+@media (max-width: 1024px) {
+  .toc-float { display: none; }
+}
+
 /* ---------- Hero ---------- */
 .hero { padding: 56px var(--content-pad) 32px; }
 
@@ -208,24 +266,24 @@ h1, h2, h3 {
 
 /* ---------- Findings ---------- */
 .finding {
-  padding: 44px var(--content-pad);
-  position: relative;
-}
-
-.finding::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100%;
   max-width: var(--content-width);
-  height: 1px;
-  background: var(--border);
+  margin: 0 auto 28px;
+  padding: 32px var(--pad-page);
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: 16px;
 }
 
-.act-header-section + .finding::before {
-  display: none;
+.subsection-box {
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 32px var(--pad-page);
+  margin: 24px 0;
+}
+
+.section.alt .subsection-box {
+  background: #fff;
 }
 
 .finding-tag-row {
@@ -256,8 +314,89 @@ h1, h2, h3 {
   border-radius: 4px;
   text-transform: uppercase;
 }
-.severity-tag.critical { background: var(--red-bg); color: var(--red); }
-.severity-tag.major { background: var(--amber-bg); color: var(--orange-deep); }
+.severity-tag.critical { background: var(--sev-4); color: var(--sev-4-text); }
+.severity-tag.major { background: var(--sev-3); color: var(--sev-3-text); }
+
+.severity-scale {
+  max-width: 620px;
+  margin: 24px auto 0;
+}
+
+.severity-scale-bar {
+  display: flex;
+  height: 10px;
+  border-radius: 6px;
+  overflow: hidden;
+  gap: 2px;
+}
+
+.severity-scale-bar span {
+  flex: 1;
+}
+
+.severity-scale-bar span:nth-child(1) { background: var(--sev-1); }
+.severity-scale-bar span:nth-child(2) { background: var(--sev-2); }
+.severity-scale-bar span:nth-child(3) { background: var(--sev-3); }
+.severity-scale-bar span:nth-child(4) { background: var(--sev-4); }
+
+.severity-scale-labels {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  margin-top: 6px;
+  font-family: var(--font-head);
+  font-size: 10.5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.severity-scale-defs {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  margin-top: 4px;
+  font-size: 10.5px;
+  line-height: 1.3;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.severity-scale-defs span { padding: 0 4px; }
+
+.mini-seg-set {
+  display: flex;
+  gap: 2px;
+  height: 10px;
+  width: 40px;
+  position: relative;
+}
+
+.mini-seg-set span {
+  flex: 1;
+  height: 100%;
+  border-radius: 2px;
+}
+
+.mini-seg-set span:nth-child(1) { background: var(--sev-1); }
+.mini-seg-set span:nth-child(2) { background: var(--sev-2); }
+.mini-seg-set span:nth-child(3) { background: var(--sev-3); }
+.mini-seg-set span:nth-child(4) { background: var(--sev-4); }
+
+.mini-seg-arrow span.active::before {
+  content: '';
+  position: absolute;
+  top: -7px;
+  left: calc(100% * (var(--i, 0)) / 4 + 12.5% - 4px);
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 5px solid var(--navy);
+}
+
+.mini-seg-arrow span:nth-child(1).active { --i: 0; }
+.mini-seg-arrow span:nth-child(2).active { --i: 1; }
+.mini-seg-arrow span:nth-child(3).active { --i: 2; }
+.mini-seg-arrow span:nth-child(4).active { --i: 3; }
 
 .finding h3 {
   font-size: clamp(20px, 2.6vw, 25px);
@@ -306,6 +445,42 @@ h1, h2, h3 {
   font-size: 13px;
   margin: 22px 0;
   background: var(--bg-alt);
+}
+
+.finding-visual {
+  margin: 22px 0;
+}
+
+.finding-visual-pair {
+  display: flex;
+  gap: 14px;
+}
+
+.finding-visual figure {
+  flex: 1;
+  margin: 0;
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 10px;
+  text-align: center;
+}
+
+.finding-visual img {
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+  display: block;
+}
+
+.finding-visual figcaption {
+  font-size: 11.5px;
+  color: var(--text-muted);
+  margin-top: 8px;
+}
+
+@media (max-width: 600px) {
+  .finding-visual-pair { flex-direction: column; }
 }
 
 .quote {
@@ -925,13 +1100,53 @@ h1, h2, h3 {
 }
 
 .timeline-goal {
-  font-size: 12.5px;
-  color: var(--text-body);
-  margin-bottom: 20px;
-  text-align: center;
+  font-size: 13px;
+  color: var(--text-muted);
+  margin: 0 0 18px;
+  text-align: left;
 }
 
 .timeline-goal strong { color: var(--navy); }
+
+.phase-meta {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 0 0 20px;
+  flex-wrap: wrap;
+}
+
+.phase-meta-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  line-height: 1.15;
+  flex-shrink: 0;
+}
+
+.phase-meta-value {
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: 20px;
+  color: var(--navy);
+}
+
+.phase-meta-tag {
+  font-size: 9.5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+}
+
+.phase-meta-goal {
+  font-size: 13px;
+  color: var(--text-body);
+  border-left: 1px solid var(--border);
+  padding-left: 14px;
+}
+
+.phase-meta-goal strong { color: var(--navy); }
 
 .timeline-track {
   display: flex;
@@ -1121,6 +1336,236 @@ h1, h2, h3 {
   color: var(--orange-deep);
 }
 
+.problem-funnel {
+  max-width: 720px;
+  margin: 24px auto 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.funnel-row {
+  display: flex;
+  gap: 14px;
+  width: 100%;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 4px;
+}
+
+.funnel-card {
+  flex: 1;
+  min-width: 170px;
+  max-width: 230px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px 14px;
+  text-align: center;
+}
+
+.funnel-icon {
+  width: 24px;
+  height: 24px;
+  color: var(--orange-deep);
+  margin-bottom: 8px;
+}
+
+.funnel-card-label {
+  font-family: var(--font-head);
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+
+.funnel-card-title {
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--navy);
+  margin-bottom: 5px;
+}
+
+.funnel-card-sub {
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.4;
+  margin: 0;
+}
+
+.funnel-arrow {
+  color: var(--orange);
+  opacity: 0.55;
+  line-height: 0;
+}
+
+.funnel-barrier,
+.funnel-rq {
+  width: 100%;
+  max-width: 560px;
+  border-radius: var(--radius);
+  padding: 14px 22px;
+  text-align: center;
+  margin: 4px 0;
+}
+
+.funnel-barrier {
+  background: var(--amber-bg);
+  border-left: 4px solid var(--orange);
+  border-radius: 0 var(--radius) var(--radius) 0;
+}
+
+.funnel-barrier-label,
+.funnel-rq-label {
+  display: block;
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 4px;
+}
+
+.funnel-barrier-label { color: var(--orange-deep); }
+
+.funnel-barrier p {
+  margin: 0;
+  font-size: 14.5px;
+  color: var(--text-body);
+}
+
+.funnel-barrier p strong {
+  color: var(--orange-deep);
+  font-weight: 700;
+}
+
+.funnel-rq {
+  background: var(--navy);
+  color: #fff;
+}
+
+.funnel-rq-label { color: #ffcf94; }
+
+.funnel-rq p {
+  margin: 0;
+  font-size: 14.5px;
+  line-height: 1.4;
+  color: #fff;
+}
+
+@media (max-width: 640px) {
+  .funnel-row { flex-direction: column; align-items: center; }
+  .funnel-card { max-width: 320px; width: 100%; }
+}
+
+.rq-block {
+  max-width: 680px;
+  margin: 24px auto 32px;
+}
+
+.rq-banner {
+  background: var(--navy);
+  color: #fff;
+  border-radius: var(--radius);
+  padding: 16px 24px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.rq-banner-label {
+  display: block;
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #ffcf94;
+  margin-bottom: 6px;
+}
+
+.rq-banner p {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.4;
+  color: #fff;
+}
+
+.rq-col-heads {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 14px;
+  margin-bottom: 6px;
+}
+
+.rq-col-heads span {
+  font-family: var(--font-head);
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+}
+
+.rq-col-heads span:first-child { margin-left: 4%; }
+.rq-col-heads span:last-child { margin-right: 4%; }
+
+.rq-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  border-top: 1px solid var(--border);
+}
+
+.rq-row:last-child { border-bottom: 1px solid var(--border); }
+
+.rq-cause,
+.rq-effect {
+  flex: 1;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.rq-cause p,
+.rq-effect p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--text-body);
+}
+
+.rq-num {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--amber-bg);
+  color: var(--orange-deep);
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rq-arrow {
+  flex-shrink: 0;
+  color: var(--orange);
+  opacity: 0.6;
+}
+
+@media (max-width: 640px) {
+  .rq-row { flex-direction: column; align-items: stretch; gap: 8px; }
+  .rq-arrow { transform: rotate(90deg); align-self: center; }
+  .rq-col-heads { display: none; }
+}
+
 .strategy-subhead {
   font-family: var(--font-head);
   font-weight: 700;
@@ -1137,10 +1582,45 @@ h1, h2, h3 {
   margin-top: 28px;
 }
 
-.strategy-sub-p {
-  color: var(--text-body);
+.subsection-box > .strategy-subhead:first-child {
+  border-top: none;
+  padding-top: 0;
+  margin-top: 0;
+}
+
+.strategy-footnote {
+  color: var(--text-muted);
   font-size: 14.5px;
-  margin-bottom: 18px;
+  line-height: 1.5;
+  text-align: left;
+  max-width: 640px;
+  margin: 16px auto 0;
+}
+
+.pf-tier-1 { fill: var(--navy); }
+.pf-tier-2 { fill: #3d6ba3; }
+.pf-tier-3 { fill: var(--orange); }
+
+.pf-num {
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: 15px;
+  fill: #fff;
+}
+
+.pf-num-dark { fill: var(--navy); }
+
+.mobile-badge {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: var(--navy);
+  color: #ffcf94;
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 10.5px;
+  letter-spacing: 0.02em;
 }
 
 /* ============================================
@@ -1246,7 +1726,7 @@ h1, h2, h3 {
 }
 
 .snapshot-team {
-  max-width: 560px;
+  max-width: 600px;
   margin: 0 auto;
 }
 
@@ -1285,6 +1765,93 @@ h1, h2, h3 {
   font-size: 11.5px;
   padding: 6px 14px;
   border-radius: 20px;
+}
+
+.contributor-team-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  max-width: 620px;
+  margin: 18px auto 0;
+}
+
+.contributor-featured-row {
+  max-width: 320px;
+  margin: 12px auto 0;
+}
+
+.contributor-card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px;
+}
+
+.contributor-card.highlight {
+  background: var(--amber-bg);
+  border-color: transparent;
+}
+
+.contributor-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.contributor-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 11px;
+  background: var(--navy);
+  color: #fff;
+}
+
+.contributor-card.highlight .contributor-avatar {
+  background: var(--orange);
+  color: var(--navy);
+}
+
+.contributor-name {
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 12px;
+  color: var(--navy);
+  line-height: 1.3;
+}
+
+.contributor-role {
+  font-size: 10px;
+  color: var(--text-muted);
+  line-height: 1.3;
+  margin-top: 1px;
+}
+
+.contributor-list {
+  margin: 10px 0 0;
+  padding-left: 15px;
+  font-size: 10.5px;
+  color: var(--text-body);
+  line-height: 1.5;
+}
+
+.contributor-list li {
+  margin-bottom: 2px;
+}
+
+@media (max-width: 700px) {
+  .contributor-team-row { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 460px) {
+  .contributor-team-row { grid-template-columns: 1fr; }
+  .contributor-featured-row { max-width: 260px; }
 }
 
 /* ============================================
@@ -1462,7 +2029,10 @@ h1, h2, h3 {
   font-size: 10px;
   padding: 3px 9px;
   border-radius: 12px;
-  white-space: nowrap;
+  white-space: normal;
+  max-width: 92px;
+  text-align: center;
+  line-height: 1.25;
 }
 
 .chip.qual {
@@ -1570,11 +2140,11 @@ h1, h2, h3 {
 
 .stepper-dot {
   position: absolute;
-  top: -14px;
+  top: -18px;
   left: 50%;
   transform: translateX(-50%);
-  width: 28px;
-  height: 28px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
   background: var(--navy);
   color: #fff;
@@ -1582,8 +2152,8 @@ h1, h2, h3 {
   align-items: center;
   justify-content: center;
   font-family: var(--font-head);
-  font-weight: 700;
-  font-size: 13px;
+  font-weight: 800;
+  font-size: 16px;
   border: 3px solid #fff;
   z-index: 2;
 }
@@ -1592,7 +2162,7 @@ h1, h2, h3 {
   background: #fff;
   border: 1px solid var(--border);
   border-radius: 12px;
-  padding: 24px 14px 18px;
+  padding: 26px 14px 18px;
   text-align: center;
   height: 100%;
   display: flex;
@@ -1600,11 +2170,18 @@ h1, h2, h3 {
   align-items: center;
 }
 
-.stepper-icon {
-  width: 28px;
-  height: 28px;
-  color: var(--orange-deep);
+.stepper-head {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
   margin-bottom: 8px;
+}
+
+.stepper-icon {
+  width: 20px;
+  height: 20px;
+  color: var(--orange-deep);
   flex-shrink: 0;
 }
 
@@ -1614,11 +2191,47 @@ h1, h2, h3 {
   font-size: 12px;
   color: var(--navy);
   line-height: 1.3;
-  margin: 0 0 8px;
+  margin: 0;
+  text-align: left;
 }
 
 .stepper-step .owner-tag {
   margin-bottom: 8px;
+}
+
+.stepper-numB .stepper-box {
+  padding: 0;
+  overflow: hidden;
+}
+
+.step-banner {
+  width: 100%;
+  background: var(--navy);
+  padding: 8px 10px;
+  text-align: center;
+}
+
+.step-banner-label {
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: 16px;
+  letter-spacing: 0.03em;
+  color: #fff;
+}
+
+.stepper-content {
+  padding: 16px 14px 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.stepper-numB .stepper-icon { margin-bottom: 8px; }
+
+.stepper-numB .stepper-label {
+  text-align: center;
+  margin: 0 0 8px;
 }
 
 @media (max-width: 700px) {
@@ -1681,7 +2294,22 @@ h1, h2, h3 {
   <a href="index.html" class="back-link">&larr; Back to portfolio</a>
 </nav>
 
-<header class="hero">
+<nav class="toc-float" aria-label="Section navigation">
+  <a href="#intro" data-toc="intro">Intro</a>
+  <a href="#problem" data-toc="problem">01 &middot; Problem</a>
+  <a href="#strategy" data-toc="strategy">02 &middot; Strategy</a>
+  <a href="#rq" data-toc="rq" class="toc-sub">Research question</a>
+  <a href="#population" data-toc="population" class="toc-sub">Population &amp; setting</a>
+  <a href="#roles" data-toc="roles" class="toc-sub">Roles &amp; responsibilities</a>
+  <a href="#methodology" data-toc="methodology" class="toc-sub">Methodology</a>
+  <a href="#usability" data-toc="usability" class="toc-sub">Usability study</a>
+  <a href="#solution" data-toc="solution">03 &middot; Solution</a>
+  <a href="#finding1" data-toc="finding1" class="toc-sub">Finding 1</a>
+  <a href="#finding2" data-toc="finding2" class="toc-sub">Finding 2</a>
+  <a href="#impact" data-toc="impact">04 &middot; Impact</a>
+</nav>
+
+<header class="hero" id="intro">
   <span class="eyebrow">UX Research &middot; Usability Study</span>
   <h1>Washington 211: when a crisis resource is too hard to use in a crisis</h1>
   <p class="takeaway">
@@ -1694,79 +2322,99 @@ h1, h2, h3 {
 </header>
 
 <section class="snapshot-card">
-  <div class="snapshot-stats">
-    <div class="item">
-      <div class="label">Client</div>
-      <div class="value">Washington 211 (WA211)</div>
-    </div>
-    <div class="item">
-      <div class="label">Method</div>
-      <div class="value">Moderated usability study + heuristic evaluation</div>
-    </div>
-    <div class="item">
-      <div class="label">Participants</div>
-      <div class="value">40 screened &rarr; 14 scheduled &rarr; 6 completed</div>
-    </div>
-  </div>
-
-  <div class="snapshot-divider"></div>
-
   <div class="snapshot-team">
-    <svg viewBox="0 0 620 370" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Team and stakeholder map: WA211 and DSHS at top, the team in the middle, Angel Diaz at the base">
-      <circle cx="130" cy="60" r="34" fill="#f5f7fb" stroke="#c7d2e0" stroke-width="2" stroke-dasharray="4 3"/>
-      <text x="130" y="56" text-anchor="middle" font-family="Poppins, sans-serif" font-weight="700" font-size="13" fill="#0d3b78">WA211</text>
-      <text x="130" y="71" text-anchor="middle" font-family="Inter, sans-serif" font-size="8.5" fill="#6b7785">Stakeholder</text>
+    <svg viewBox="0 0 660 160" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Team and stakeholder map: team members on the left, Washington 211 and Department of Social and Health Services stakeholders on the right">
+      <text x="175" y="17" text-anchor="middle" font-family="Poppins, sans-serif" font-weight="700" font-size="12" letter-spacing="0.06em" fill="#55606b">TEAM</text>
+      <text x="500" y="17" text-anchor="middle" font-family="Poppins, sans-serif" font-weight="700" font-size="12" letter-spacing="0.06em" fill="#55606b">STAKEHOLDERS</text>
 
-      <circle cx="490" cy="60" r="34" fill="#f5f7fb" stroke="#c7d2e0" stroke-width="2" stroke-dasharray="4 3"/>
-      <text x="490" y="56" text-anchor="middle" font-family="Poppins, sans-serif" font-weight="700" font-size="13" fill="#0d3b78">DSHS</text>
-      <text x="490" y="71" text-anchor="middle" font-family="Inter, sans-serif" font-size="8.5" fill="#6b7785">Consultant</text>
+      <line x1="380" y1="5" x2="380" y2="150" stroke="#e2e6ee" stroke-width="1.5"/>
 
-      <circle cx="180" cy="180" r="28" fill="#0d3b78"/>
-      <text x="180" y="185" text-anchor="middle" font-family="Poppins, sans-serif" font-weight="700" font-size="13" fill="#fff">CD</text>
-      <text x="180" y="218" text-anchor="middle" font-family="Poppins, sans-serif" font-weight="600" font-size="10.5" fill="#0d3b78">Camilla Delgado</text>
-      <text x="180" y="231" text-anchor="middle" font-family="Inter, sans-serif" font-size="8.5" fill="#6b7785">Task Design &amp; Data Log</text>
+      <circle cx="55" cy="62" r="26" fill="#0d3b78"/>
+      <text x="55" y="68" text-anchor="middle" font-family="Poppins, sans-serif" font-weight="700" font-size="13" fill="#fff">CD</text>
+      <text x="55" y="104" text-anchor="middle" font-family="Poppins, sans-serif" font-weight="600" font-size="10" fill="#0d3b78">Camilla D</text>
 
-      <circle cx="310" cy="180" r="28" fill="#0d3b78"/>
-      <text x="310" y="185" text-anchor="middle" font-family="Poppins, sans-serif" font-weight="700" font-size="13" fill="#fff">KR</text>
-      <text x="310" y="218" text-anchor="middle" font-family="Poppins, sans-serif" font-weight="600" font-size="10.5" fill="#0d3b78">Konstantin Ritter</text>
-      <text x="310" y="231" text-anchor="middle" font-family="Inter, sans-serif" font-size="8.5" fill="#6b7785">Consent &amp; Compliance</text>
+      <circle cx="145" cy="62" r="26" fill="#0d3b78"/>
+      <text x="145" y="68" text-anchor="middle" font-family="Poppins, sans-serif" font-weight="700" font-size="13" fill="#fff">KR</text>
+      <text x="145" y="104" text-anchor="middle" font-family="Poppins, sans-serif" font-weight="600" font-size="10" fill="#0d3b78">Konstantin R</text>
 
-      <circle cx="440" cy="180" r="28" fill="#0d3b78"/>
-      <text x="440" y="185" text-anchor="middle" font-family="Poppins, sans-serif" font-weight="700" font-size="13" fill="#fff">TE</text>
-      <text x="440" y="218" text-anchor="middle" font-family="Poppins, sans-serif" font-weight="600" font-size="10.5" fill="#0d3b78">Tulasi Elangovan</text>
-      <text x="440" y="231" text-anchor="middle" font-family="Inter, sans-serif" font-size="8.5" fill="#6b7785">Heuristic Eval Lead</text>
+      <circle cx="235" cy="62" r="26" fill="#0d3b78"/>
+      <text x="235" y="68" text-anchor="middle" font-family="Poppins, sans-serif" font-weight="700" font-size="13" fill="#fff">TE</text>
+      <text x="235" y="104" text-anchor="middle" font-family="Poppins, sans-serif" font-weight="600" font-size="10" fill="#0d3b78">Tulasi E</text>
 
-      <circle cx="310" cy="290" r="38" fill="#e8963c"/>
-      <text x="310" y="297" text-anchor="middle" font-family="Poppins, sans-serif" font-weight="700" font-size="15" fill="#fff">AD</text>
-      <text x="310" y="345" text-anchor="middle" font-family="Poppins, sans-serif" font-weight="700" font-size="11.5" fill="#0d3b78">Angel Diaz</text>
-      <text x="310" y="358" text-anchor="middle" font-family="Inter, sans-serif" font-weight="600" font-size="9.5" fill="#d97f24">You &middot; Research Lead</text>
+      <circle cx="330" cy="62" r="30" fill="#e8963c"/>
+      <text x="330" y="69" text-anchor="middle" font-family="Poppins, sans-serif" font-weight="700" font-size="14" fill="#fff">AD</text>
+      <text x="330" y="104" text-anchor="middle" font-family="Poppins, sans-serif" font-weight="700" font-size="10" fill="#0d3b78">Angel D</text>
+
+      <circle cx="460" cy="62" r="30" fill="#f5f7fb" stroke="#c7d2e0" stroke-width="2" stroke-dasharray="4 3"/>
+      <text x="460" y="67" text-anchor="middle" font-family="Poppins, sans-serif" font-weight="700" font-size="13" fill="#0d3b78">211</text>
+      <text x="460" y="106" text-anchor="middle" font-family="Poppins, sans-serif" font-weight="600" font-size="10" fill="#0d3b78">Washington</text>
+      <text x="460" y="118" text-anchor="middle" font-family="Poppins, sans-serif" font-weight="600" font-size="10" fill="#0d3b78">211</text>
+
+      <circle cx="575" cy="62" r="30" fill="#f5f7fb" stroke="#c7d2e0" stroke-width="2" stroke-dasharray="4 3"/>
+      <text x="575" y="67" text-anchor="middle" font-family="Poppins, sans-serif" font-weight="700" font-size="12" fill="#0d3b78">DSHS</text>
+      <text x="575" y="106" text-anchor="middle" font-family="Poppins, sans-serif" font-weight="600" font-size="10" fill="#0d3b78">Department of</text>
+      <text x="575" y="118" text-anchor="middle" font-family="Poppins, sans-serif" font-weight="600" font-size="10" fill="#0d3b78">Social and</text>
+      <text x="575" y="130" text-anchor="middle" font-family="Poppins, sans-serif" font-weight="600" font-size="10" fill="#0d3b78">Health Services</text>
     </svg>
     <p class="snapshot-team-caption">4-person team &middot; WA211 and DSHS informed the study design</p>
   </div>
 </section>
 
-<section class="section">
+<section class="section" id="problem">
   <div class="act-marker">
     <span class="act-num">01</span>
     <span class="act-label">The Problem</span>
     <span class="act-rule"></span>
   </div>
+
+  <div class="subsection-box">
   <span class="eyebrow">Problem &amp; Barriers</span>
   <h2>An overburdened call line, and a website that wasn't picking up the slack</h2>
-  <p>
-    WA211 is a <strong>statewide crisis resource line</strong> connecting Washington residents to housing, food, and
-    health services. As part of a website redesign, WA211 needed to know whether people with <strong>cognitive
-    and physical accessibility needs</strong> &mdash; using individuals with TBI as a proxy population &mdash; could
-    actually find housing help <strong>on their own</strong>.
-  </p>
-  <p class="barrier-line">
-    <strong>Barrier:</strong> if they couldn't, they'd fall back on an already <strong>overburdened call
-    center</strong> &mdash; and there was <strong>no confirmed usability data</strong> on whether the redesign would actually
-    fix that.
-  </p>
+
+  <div class="problem-funnel">
+    <div class="funnel-row">
+      <div class="funnel-card">
+        <svg class="funnel-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 9h18"/><path d="M8 21h8"/><path d="M12 18v3"/></svg>
+        <div class="funnel-card-label">Product</div>
+        <div class="funnel-card-title">WA211 Website</div>
+        <p class="funnel-card-sub">Feedback here will inform future mobile app development</p>
+      </div>
+      <div class="funnel-card">
+        <svg class="funnel-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        <div class="funnel-card-label">Target Audience</div>
+        <div class="funnel-card-title">Users with TBI</div>
+        <p class="funnel-card-sub">Proxy for broader cognitive &amp; physical accessibility needs</p>
+      </div>
+      <div class="funnel-card">
+        <svg class="funnel-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        <div class="funnel-card-label">Problem</div>
+        <div class="funnel-card-title">Overburdened call center</div>
+        <p class="funnel-card-sub">Website needs to carry more of the load</p>
+      </div>
+    </div>
+
+    <div class="funnel-arrow" aria-hidden="true">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v14"/><path d="M6 13l6 6 6-6"/></svg>
+    </div>
+
+    <div class="funnel-barrier">
+      <span class="funnel-barrier-label">Barrier</span>
+      <p>No confirmed usability data on whether the redesign lets people with TBI find housing help <strong>on their own</strong>.</p>
+    </div>
+
+    <div class="funnel-arrow" aria-hidden="true">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v14"/><path d="M6 13l6 6 6-6"/></svg>
+    </div>
+
+    <div class="funnel-rq">
+      <span class="funnel-rq-label">Research Question</span>
+      <p>How does WA211's information architecture and UI elements enhance or deter usability for users with TBI?</p>
+    </div>
+  </div>
+  </div>
 </section>
 
-<section class="section alt">
+<section class="section alt" id="strategy">
   <div class="act-marker">
     <span class="act-num">02</span>
     <span class="act-label">The Strategy</span>
@@ -1774,37 +2422,57 @@ h1, h2, h3 {
   </div>
   <span class="eyebrow">Strategy &amp; Investigation</span>
   <h2>A study designed around the population being tested, not a standard playbook</h2>
-  <p>
-    Recruiting, screening, and moderating with individuals with TBI meant <strong>every stage of the standard
-    usability-study process needed rethinking</strong> &mdash; from how questions were worded to how much a
-    session could ask of someone before <strong>fatigue</strong> set in.
-  </p>
 
-  <h3 class="strategy-subhead">Population &amp; Setting</h3>
-  <p class="strategy-sub-p">
-    Individuals with TBI served as a <strong>proxy population</strong> for broader cognitive and physical accessibility
-    needs &mdash; common impacts include <strong>memory loss, fatigue, light sensitivity, and reduced
-    processing speed</strong>, all of which directly shaped session length, task design, and data collection.
-  </p>
+  <div class="subsection-box">
+  <div class="rq-block" id="rq">
+    <div class="rq-banner">
+      <span class="rq-banner-label">Research Question</span>
+      <p>How does WA211's information architecture and UI elements enhance or deter usability for users with TBI?</p>
+    </div>
+
+    <div class="rq-col-heads">
+      <span>Question</span>
+      <span>Direction</span>
+    </div>
+
+    <div class="rq-row">
+      <div class="rq-cause"><span class="rq-num">1</span><p>How does the website's navigation structure and visual hierarchy affect the ability of users with TBI to locate specific services without becoming distracted or overwhelmed?</p></div>
+      <span class="rq-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></span>
+      <div class="rq-effect"><p>Explore the website's information architecture and key navigation points to understand how it currently serves user needs.</p></div>
+    </div>
+
+    <div class="rq-row">
+      <div class="rq-cause"><span class="rq-num">2</span><p>How does the website support task completion for finding crisis resources for users with TBI?</p></div>
+      <span class="rq-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></span>
+      <div class="rq-effect"><p>Uncover pain points and difficulties users with TBI encounter when searching for resources and vital services.</p></div>
+    </div>
+
+    <div class="rq-row">
+      <div class="rq-cause"><span class="rq-num">3</span><p>Which specific elements on the WA211 directory contribute most to cognitive friction or fatigue for individuals with TBI?</p></div>
+      <span class="rq-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></span>
+      <div class="rq-effect"><p>Formulate a list of usability issues and provide actionable recommendations to mitigate and address them.</p></div>
+    </div>
+  </div>
+
+  </div>
+
+  <div class="subsection-box">
+  <h3 class="strategy-subhead" id="population">Population &amp; Setting</h3>
+
   <div class="who-where-row illustrated">
     <div class="who-where-card illustrated">
       <h5>Who</h5>
-      <svg class="illo" viewBox="0 0 160 110" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <ellipse cx="80" cy="60" rx="76" ry="46" fill="#f5f7fb"/>
-        <g>
-          <circle cx="48" cy="48" r="19" fill="#0d3b78"/>
-          <path d="M20 96c0-17 13-30 28-30s28 13 28 30" fill="#0d3b78"/>
-        </g>
-        <g>
-          <circle cx="88" cy="42" r="21" fill="#e8963c"/>
-          <path d="M57 96c0-19 14-33 31-33s31 14 31 33" fill="#e8963c"/>
-        </g>
-        <g>
-          <circle cx="124" cy="50" r="18" fill="#0d3b78" opacity="0.55"/>
-          <path d="M98 96c0-16 12-28 26-28s26 12 26 28" fill="#0d3b78" opacity="0.55"/>
-        </g>
+      <svg class="illo" viewBox="0 0 160 110" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Recruitment funnel: 40 screened, narrowing to 14 scheduled, narrowing to 6 completed">
+        <polygon points="8,4 152,4 130,40 30,40" class="pf-tier-1"/>
+        <text x="80" y="27" text-anchor="middle" class="pf-num">40</text>
+
+        <polygon points="30,42 130,42 106,76 54,76" class="pf-tier-2"/>
+        <text x="80" y="64" text-anchor="middle" class="pf-num">14</text>
+
+        <polygon points="54,78 106,78 90,106 70,106" class="pf-tier-3"/>
+        <text x="80" y="97" text-anchor="middle" class="pf-num pf-num-dark">6</text>
       </svg>
-      <p>6 completed (of 14 scheduled) &mdash; individuals with TBI, 1 withdrew mid-session</p>
+      <p>40 screened &rarr; 14 scheduled &rarr; 6 completed &mdash; individuals with TBI, 1 withdrew mid-session</p>
     </div>
     <div class="who-where-card illustrated">
       <h5>Where</h5>
@@ -1816,31 +2484,86 @@ h1, h2, h3 {
         <rect x="24" y="80" width="30" height="20" rx="3" fill="#e8963c"/>
         <rect x="100" y="76" width="20" height="28" rx="3" fill="#0d3b78" opacity="0.55"/>
       </svg>
-      <p>Remotely via Zoom &mdash; laptops, PCs, and mobile devices</p>
+      <p>Remotely via Zoom &mdash; scoped for laptops &amp; PCs</p>
+      <span class="mobile-badge">+ Mobile device</span>
     </div>
   </div>
 
-  <h3 class="strategy-subhead">Who Executed the Strategy</h3>
-  <p class="role-lede">
-    I <strong>ran point on this study end-to-end</strong> &mdash; from the first stakeholder conversation to the final
-    moderated session &mdash; while three teammates contributed across screener drafting, heuristic
-    evaluation, and reporting. <em>(Full team &amp; stakeholder map above.)</em>
+  <p class="strategy-footnote">
+    Individuals with TBI served as a proxy population for broader cognitive and physical accessibility
+    needs &mdash; common impacts include <em>memory loss, fatigue, light sensitivity, and reduced
+    processing speed</em>, all of which directly shaped session length, task design, and data collection.
   </p>
 
-  <div class="owned-pills">
-    <span class="pill">Stakeholder Consultation</span>
-    <span class="pill">Screener Design</span>
-    <span class="pill">Study &amp; Session Design</span>
-    <span class="pill">Moderation (all 6 sessions)</span>
-    <span class="pill">Client &amp; Participant Ops</span>
-    <span class="pill">Data Logging Framework</span>
   </div>
 
-  <h3 class="strategy-subhead">Methodology &amp; Data Recorded</h3>
-  <div class="stepper">
+  <div class="subsection-box">
+  <h3 class="strategy-subhead" id="roles">Roles &amp; Responsibilities</h3>
+
+  <div class="contributor-team-row">
+    <div class="contributor-card">
+      <div class="contributor-head">
+        <div class="contributor-avatar">CD</div>
+        <div>
+          <div class="contributor-name">Camilla Delgado</div>
+          <div class="contributor-role">Task Design &amp; Data Log</div>
+        </div>
+      </div>
+    </div>
+    <div class="contributor-card">
+      <div class="contributor-head">
+        <div class="contributor-avatar">KR</div>
+        <div>
+          <div class="contributor-name">Konstantin Ritter</div>
+          <div class="contributor-role">Consent &amp; Compliance</div>
+        </div>
+      </div>
+    </div>
+    <div class="contributor-card">
+      <div class="contributor-head">
+        <div class="contributor-avatar">TE</div>
+        <div>
+          <div class="contributor-name">Tulasi Elangovan</div>
+          <div class="contributor-role">Heuristic Eval Lead</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="contributor-featured-row">
+    <div class="contributor-card highlight">
+      <div class="contributor-head">
+        <div class="contributor-avatar">AD</div>
+        <div>
+          <div class="contributor-name">Angel Diaz</div>
+          <div class="contributor-role">You &middot; Research Lead</div>
+        </div>
+      </div>
+      <ul class="contributor-list">
+        <li>Stakeholder consultation &amp; screener design</li>
+        <li>Study &amp; session design</li>
+        <li>Moderation (all 6 sessions)</li>
+        <li>Client &amp; participant ops, data logging framework</li>
+      </ul>
+    </div>
+  </div>
+
+  </div>
+
+  <div class="subsection-box">
+  <h3 class="strategy-subhead" id="methodology">Methodology &amp; Data Recorded</h3>
+  <div class="phase-meta">
+    <div class="phase-meta-stat">
+      <span class="phase-meta-value">3 months</span>
+      <span class="phase-meta-tag">Timeframe</span>
+    </div>
+    <span class="phase-meta-goal"><strong>Purpose:</strong> identify triangulating methods to validate the usability study</span>
+  </div>
+  <div class="stepper stepper-numB">
     <div class="stepper-step">
-      <div class="stepper-dot">1</div>
       <div class="stepper-box">
+        <div class="step-banner"><span class="step-banner-label">Phase 1</span></div>
+        <div class="stepper-content">
         <svg class="stepper-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="M4 5h11a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2H9l-4 3v-3H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"/>
           <path d="M9 15h9a2 2 0 0 0 2-2V9"/>
@@ -1853,11 +2576,13 @@ h1, h2, h3 {
             <div class="chip-col-chips"><span class="chip qual">Expert guidance</span></div>
           </div>
         </div>
+        </div>
       </div>
     </div>
     <div class="stepper-step">
-      <div class="stepper-dot">2</div>
       <div class="stepper-box">
+        <div class="step-banner"><span class="step-banner-label">Phase 2</span></div>
+        <div class="stepper-content">
         <svg class="stepper-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <rect x="5" y="3" width="14" height="18" rx="2"/>
           <path d="M9 8h6M9 12h6M9 16h3"/>
@@ -1870,11 +2595,13 @@ h1, h2, h3 {
             <div class="chip-col-chips"><span class="chip quant">Survey responses</span></div>
           </div>
         </div>
+        </div>
       </div>
     </div>
     <div class="stepper-step">
-      <div class="stepper-dot">3</div>
       <div class="stepper-box">
+        <div class="step-banner"><span class="step-banner-label">Phase 3</span></div>
+        <div class="stepper-content">
         <svg class="stepper-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <circle cx="10" cy="10" r="6.5"/>
           <path d="M14.8 14.8L20 20"/>
@@ -1893,11 +2620,13 @@ h1, h2, h3 {
             <div class="chip-col-chips"><span class="chip qual">Findings &amp; recs</span></div>
           </div>
         </div>
+        </div>
       </div>
     </div>
     <div class="stepper-step">
-      <div class="stepper-dot">4</div>
       <div class="stepper-box">
+        <div class="step-banner"><span class="step-banner-label">Phase 4</span></div>
+        <div class="stepper-content">
         <svg class="stepper-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <rect x="3" y="4" width="18" height="12" rx="2"/>
           <path d="M8 20h8M12 16v4"/>
@@ -1922,6 +2651,7 @@ h1, h2, h3 {
             </div>
           </div>
         </div>
+        </div>
       </div>
     </div>
   </div>
@@ -1939,12 +2669,22 @@ h1, h2, h3 {
     </div>
   </div>
 
-  <h4 class="timeline-title">Usability Study | 20-Minute Limit</h4>
-  <p class="timeline-goal"><strong>Study Goal:</strong> Identify relevant housing help</p>
-  <div class="stepper">
+  </div>
+
+  <div class="subsection-box">
+  <h3 class="strategy-subhead" id="usability">Usability Study</h3>
+  <div class="phase-meta">
+    <div class="phase-meta-stat">
+      <span class="phase-meta-value">20 min</span>
+      <span class="phase-meta-tag">Session limit</span>
+    </div>
+    <span class="phase-meta-goal"><strong>Goal:</strong> identify relevant housing help</span>
+  </div>
+  <div class="stepper stepper-numB">
     <div class="stepper-step">
-      <div class="stepper-dot">1</div>
       <div class="stepper-box">
+        <div class="step-banner"><span class="step-banner-label">Task 1</span></div>
+        <div class="stepper-content">
         <svg class="stepper-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <circle cx="10" cy="10" r="6.5"/>
           <path d="M14.8 14.8L20 20"/>
@@ -1953,11 +2693,13 @@ h1, h2, h3 {
         <div class="mf-chip-groups">
           <div class="chip-row"><span class="chip quant">3:00 min</span></div>
         </div>
+        </div>
       </div>
     </div>
     <div class="stepper-step">
-      <div class="stepper-dot">2</div>
       <div class="stepper-box">
+        <div class="step-banner"><span class="step-banner-label">Task 2</span></div>
+        <div class="stepper-content">
         <svg class="stepper-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="M7 3h10a1 1 0 0 1 1 1v16l-6-3-6 3V4a1 1 0 0 1 1-1z"/>
         </svg>
@@ -1965,11 +2707,13 @@ h1, h2, h3 {
         <div class="mf-chip-groups">
           <div class="chip-row"><span class="chip quant">3:00 min</span></div>
         </div>
+        </div>
       </div>
     </div>
     <div class="stepper-step">
-      <div class="stepper-dot">3</div>
       <div class="stepper-box">
+        <div class="step-banner"><span class="step-banner-label">Task 3</span></div>
+        <div class="stepper-content">
         <svg class="stepper-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="M4 5h16l-6.5 7.5v5.5l-3 1.5v-7z"/>
         </svg>
@@ -1977,11 +2721,13 @@ h1, h2, h3 {
         <div class="mf-chip-groups">
           <div class="chip-row"><span class="chip quant">3:00 min</span></div>
         </div>
+        </div>
       </div>
     </div>
     <div class="stepper-step">
-      <div class="stepper-dot">4</div>
       <div class="stepper-box">
+        <div class="step-banner"><span class="step-banner-label">Task 4</span></div>
+        <div class="stepper-content">
         <svg class="stepper-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <circle cx="12" cy="12" r="9"/>
           <path d="M12 8h.01M11.25 11.5h1v5h1"/>
@@ -1990,24 +2736,47 @@ h1, h2, h3 {
         <div class="mf-chip-groups">
           <div class="chip-row"><span class="chip quant">3:00 min</span></div>
         </div>
+        </div>
       </div>
     </div>
   </div>
+  </div>
 </section>
 
-<section class="section act-header-section">
+<section class="section act-header-section" id="solution">
   <div class="act-marker">
     <span class="act-num">03</span>
     <span class="act-label">The Solution</span>
     <span class="act-rule"></span>
   </div>
   <p class="act-intro">Each finding below is paired with the fix it drove &mdash; the causal link from what we observed to what we recommended.</p>
+
+  <div class="severity-scale">
+    <div class="severity-scale-bar">
+      <span></span><span></span><span></span><span></span>
+    </div>
+    <div class="severity-scale-labels">
+      <span>1 &middot; Minor</span>
+      <span>2 &middot; Moderate</span>
+      <span>3 &middot; Major</span>
+      <span>4 &middot; Critical</span>
+    </div>
+    <div class="severity-scale-defs">
+      <span>Cosmetic, no task impact</span>
+      <span>Workaround exists, adds friction</span>
+      <span>Blocks the task without help</span>
+      <span>Task fails, user abandons</span>
+    </div>
+  </div>
 </section>
 
-<section class="finding">
+<section class="finding" id="finding1">
   <div class="finding-tag-row">
     <span class="finding-tag">Finding 1</span>
     <span class="severity-tag major">Major &middot; Severity 3</span>
+    <span class="mini-seg-set mini-seg-arrow" aria-hidden="true">
+      <span></span><span></span><span class="active"></span><span></span>
+    </span>
   </div>
   <h3>Navigation confusion</h3>
   <p>Users could not find where to start their search. The primary search function required a
@@ -2019,7 +2788,16 @@ h1, h2, h3 {
     <div class="stat-box"><span class="num">2/6</span><span class="desc">unaware filters existed at all</span></div>
   </div>
 
-  <div class="visual-slot">Visual slot &mdash; before/after homepage comparison (pending your photos)</div>
+  <div class="finding-visual finding-visual-pair">
+    <figure>
+      <img src="assets/finding1-desktop.png" alt="WA211 homepage on desktop, showing no persistent search bar in the header">
+      <figcaption>Desktop homepage</figcaption>
+    </figure>
+    <figure>
+      <img src="assets/finding1-mobile.png" alt="WA211 homepage on mobile, showing no persistent search bar in the header">
+      <figcaption>Mobile homepage</figcaption>
+    </figure>
+  </div>
 
   <div class="recommendation">
     <div class="rec-head">&rarr; Solution</div>
@@ -2028,10 +2806,13 @@ h1, h2, h3 {
   </div>
 </section>
 
-<section class="finding">
+<section class="finding" id="finding2">
   <div class="finding-tag-row">
     <span class="finding-tag">Finding 2</span>
     <span class="severity-tag critical">Critical &middot; Severity 4</span>
+    <span class="mini-seg-set mini-seg-arrow" aria-hidden="true">
+      <span></span><span></span><span></span><span class="active"></span>
+    </span>
   </div>
   <h3>Irrelevant search results</h3>
   <p>After successfully starting a search, results didn't match what participants were looking for &mdash;
@@ -2043,7 +2824,12 @@ h1, h2, h3 {
     <div class="stat-box"><span class="num">3/6</span><span class="desc">expressed intent to abandon site</span></div>
   </div>
 
-  <div class="visual-slot">Visual slot &mdash; search results screenshot showing the out-of-state mismatch (pending your photos)</div>
+  <div class="finding-visual">
+    <figure>
+      <img src="assets/finding2-search-results.png" alt="WA211 search results page showing no exact matches and a broad set of substitute results">
+      <figcaption>Search results for &ldquo;shelter/housing/roommate&rdquo;</figcaption>
+    </figure>
+  </div>
 
   <blockquote class="quote">
     "Now, it says Bellingham, Washington, right below the housing apartments. Why am I getting one in
@@ -2058,7 +2844,7 @@ h1, h2, h3 {
   </div>
 </section>
 
-<section class="impact">
+<section class="impact" id="impact">
   <div class="act-marker on-dark">
     <span class="act-num">04</span>
     <span class="act-label">The Impact</span>
@@ -2085,6 +2871,31 @@ h1, h2, h3 {
 <footer class="site-footer">
   <a href="index.html" class="back-link">&larr; Back to portfolio</a>
 </footer>
+
+<script>
+(function () {
+  var links = document.querySelectorAll('.toc-float a');
+  var sections = Array.prototype.map.call(links, function (a) {
+    return document.getElementById(a.getAttribute('data-toc'));
+  }).filter(Boolean);
+
+  function setActive(id) {
+    links.forEach(function (a) {
+      a.classList.toggle('active', a.getAttribute('data-toc') === id);
+    });
+  }
+
+  var observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        setActive(entry.target.id);
+      }
+    });
+  }, { rootMargin: '-45% 0px -45% 0px', threshold: 0 });
+
+  sections.forEach(function (s) { observer.observe(s); });
+})();
+</script>
 
 </body>
 </html>
