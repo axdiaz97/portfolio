@@ -190,6 +190,62 @@ h1, h2, h3 {
 }
 
 /* ---------- Hero ---------- */
+.cover-page {
+  min-height: 82vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+  background: var(--navy);
+  color: #fff;
+  padding: 40px var(--content-pad);
+  text-align: center;
+}
+
+.cover-kicker {
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: #ffcf94;
+}
+
+.cover-title {
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: clamp(40px, 7vw, 68px);
+  margin: 0;
+  line-height: 1.05;
+}
+
+.cover-sub {
+  font-size: clamp(15px, 2.2vw, 19px);
+  color: #cfe0f5;
+  max-width: 560px;
+  margin: 0;
+}
+
+.cover-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+  font-size: 13px;
+  color: #cfe0f5;
+  margin-top: 8px;
+}
+
+.cover-dot { opacity: 0.6; }
+
+.cover-scroll-cue {
+  color: #cfe0f5;
+  opacity: 0.7;
+  margin-top: 12px;
+}
+
 .hero { padding: 56px var(--content-pad) 32px; }
 
 .hero .eyebrow {
@@ -203,7 +259,7 @@ h1, h2, h3 {
   margin-bottom: 14px;
 }
 
-.hero h1 {
+.hero h2 {
   font-size: clamp(28px, 4.5vw, 40px);
   margin-bottom: 20px;
 }
@@ -1496,12 +1552,14 @@ h1, h2, h3 {
 
 .rq-col-heads {
   display: flex;
-  justify-content: space-between;
-  padding: 0 14px;
+  align-items: center;
+  gap: 12px;
   margin-bottom: 6px;
 }
 
 .rq-col-heads span {
+  flex: 1;
+  text-align: center;
   font-family: var(--font-head);
   font-size: 10px;
   font-weight: 700;
@@ -1510,8 +1568,9 @@ h1, h2, h3 {
   color: var(--text-muted);
 }
 
-.rq-col-heads span:first-child { margin-left: 4%; }
-.rq-col-heads span:last-child { margin-right: 4%; }
+.rq-col-head-spacer {
+  flex: 0 0 16px;
+}
 
 .rq-row {
   display: flex;
@@ -1541,14 +1600,11 @@ h1, h2, h3 {
 
 .rq-num {
   flex-shrink: 0;
-  width: 20px;
-  height: 20px;
+  width: 22px;
+  height: 22px;
   border-radius: 50%;
   background: var(--amber-bg);
   color: var(--orange-deep);
-  font-family: var(--font-head);
-  font-weight: 700;
-  font-size: 11px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1578,6 +1634,12 @@ h1, h2, h3 {
   border-top: 1px solid var(--border);
 }
 
+.sub-num {
+  display: inline-block;
+  color: var(--orange-deep);
+  margin-right: 8px;
+}
+
 .section .strategy-subhead:first-of-type {
   margin-top: 28px;
 }
@@ -1590,7 +1652,7 @@ h1, h2, h3 {
 
 .strategy-footnote {
   color: var(--text-muted);
-  font-size: 14.5px;
+  font-size: 12px;
   line-height: 1.5;
   text-align: left;
   max-width: 640px;
@@ -1776,8 +1838,31 @@ h1, h2, h3 {
 }
 
 .contributor-featured-row {
-  max-width: 320px;
+  max-width: 400px;
   margin: 12px auto 0;
+}
+
+.contributor-card.highlight {
+  padding: 18px;
+}
+
+.contributor-card.highlight .contributor-avatar {
+  width: 42px;
+  height: 42px;
+  font-size: 14px;
+}
+
+.contributor-card.highlight .contributor-name {
+  font-size: 15px;
+}
+
+.contributor-card.highlight .contributor-role {
+  font-size: 12px;
+}
+
+.contributor-card.highlight .contributor-list {
+  font-size: 12px;
+  margin-top: 12px;
 }
 
 .contributor-card {
@@ -1851,7 +1936,7 @@ h1, h2, h3 {
 
 @media (max-width: 460px) {
   .contributor-team-row { grid-template-columns: 1fr; }
-  .contributor-featured-row { max-width: 260px; }
+  .contributor-featured-row { max-width: 300px; }
 }
 
 /* ============================================
@@ -2024,6 +2109,9 @@ h1, h2, h3 {
 }
 
 .chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   font-family: var(--font-head);
   font-weight: 700;
   font-size: 10px;
@@ -2193,6 +2281,10 @@ h1, h2, h3 {
   line-height: 1.3;
   margin: 0;
   text-align: left;
+  min-height: 2.6em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .stepper-step .owner-tag {
@@ -2225,6 +2317,114 @@ h1, h2, h3 {
   flex-direction: column;
   align-items: center;
   width: 100%;
+  flex: 1;
+}
+
+.stepper-box.expandable {
+  cursor: pointer;
+}
+
+.card-expand-hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: auto;
+  padding-top: 12px;
+  padding-bottom: 6px;
+}
+
+.card-expand-hint span {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--amber-bg);
+  border: 1px solid #f0cba3;
+  color: var(--orange-deep);
+  padding: 5px 12px;
+  border-radius: 999px;
+  font-family: var(--font-head);
+  font-size: 9.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.stepper-box.expandable:hover .card-expand-hint span {
+  transform: scale(1.08);
+  box-shadow: 0 2px 6px rgba(217, 127, 36, 0.25);
+}
+
+.card-expand-hint i {
+  font-size: 12px;
+  transition: transform 0.15s ease;
+}
+
+.stepper-box.open .card-expand-hint i {
+  transform: rotate(180deg);
+}
+
+.card-expand {
+  display: none;
+  width: 100%;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px dashed var(--border);
+  text-align: left;
+}
+
+.stepper-box.open .card-expand {
+  display: block;
+}
+
+.card-expand ul {
+  margin: 0;
+  padding-left: 15px;
+  font-size: 11px;
+  color: var(--text-body);
+  line-height: 1.5;
+}
+
+.card-expand-metric {
+  margin: 8px 0 0;
+  font-size: 10px;
+  color: var(--text-muted);
+  font-style: italic;
+  line-height: 1.4;
+}
+
+.session-split {
+  max-width: 400px;
+  margin: 0 0 20px;
+}
+
+.session-split-bar {
+  display: flex;
+  height: 30px;
+  border-radius: 8px;
+  overflow: hidden;
+  gap: 2px;
+}
+
+.session-split-bar span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 10.5px;
+  text-align: center;
+  padding: 0 4px;
+}
+
+.session-split-tasks {
+  background: var(--navy);
+  color: #fff;
+}
+
+.session-split-buffer {
+  background: var(--amber-bg);
+  color: var(--orange-deep);
 }
 
 .stepper-numB .stepper-icon { margin-bottom: 8px; }
@@ -2309,15 +2509,36 @@ h1, h2, h3 {
   <a href="#impact" data-toc="impact">04 &middot; Impact</a>
 </nav>
 
+<section class="cover-page">
+  <div class="cover-inner">
+    <span class="cover-kicker">Case Study</span>
+    <h1 class="cover-title">Washington 211</h1>
+    <p class="cover-sub">When a crisis resource is too hard to use in a crisis</p>
+    <div class="cover-meta">
+      <span>Angel Diaz</span>
+      <span class="cover-dot">&middot;</span>
+      <span>UX Research &amp; Usability Study</span>
+      <span class="cover-dot">&middot;</span>
+      <span>HCDE 517, 2026</span>
+    </div>
+  </div>
+  <svg class="cover-scroll-cue" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M6 9l6 6 6-6"/>
+  </svg>
+</section>
+
 <header class="hero" id="intro">
   <span class="eyebrow">UX Research &middot; Usability Study</span>
-  <h1>Washington 211: when a crisis resource is too hard to use in a crisis</h1>
+  <h2>Washington 211: when a crisis resource is too hard to use in a crisis</h2>
+  <div class="act-marker">
+    <span class="act-label">Study Outline</span>
+    <span class="act-rule"></span>
+  </div>
   <p class="takeaway">
     A usability study with individuals with Traumatic Brain Injury (TBI) revealed <strong>critical navigation
     and search-relevance failures</strong> on Washington 211's housing resource site &mdash; where users in crisis
-    were <strong>choosing to abandon the site and call in instead</strong>. I <strong>led research design and execution
-    end-to-end</strong>, adapting every phase to the population's needs; WA211 <strong>acknowledged the findings</strong>, with
-    one team member confirming the search-discoverability fix as a known issue.
+    were <strong>choosing to abandon the site and call in instead</strong>. WA211 <strong>acknowledged the
+    findings</strong>, with one team member confirming the search-discoverability fix as a known issue.
   </p>
 </header>
 
@@ -2399,16 +2620,8 @@ h1, h2, h3 {
 
     <div class="funnel-barrier">
       <span class="funnel-barrier-label">Barrier</span>
-      <p>No confirmed usability data on whether the redesign lets people with TBI find housing help <strong>on their own</strong>.</p>
-    </div>
-
-    <div class="funnel-arrow" aria-hidden="true">
-      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v14"/><path d="M6 13l6 6 6-6"/></svg>
-    </div>
-
-    <div class="funnel-rq">
-      <span class="funnel-rq-label">Research Question</span>
-      <p>How does WA211's information architecture and UI elements enhance or deter usability for users with TBI?</p>
+      <p>Prior studies relied on <strong>proxy participants</strong> &mdash; never people with TBI
+      themselves &mdash; leaving <strong>no direct usability feedback</strong> from the actual population.</p>
     </div>
   </div>
   </div>
@@ -2423,8 +2636,9 @@ h1, h2, h3 {
   <span class="eyebrow">Strategy &amp; Investigation</span>
   <h2>A study designed around the population being tested, not a standard playbook</h2>
 
-  <div class="subsection-box">
-  <div class="rq-block" id="rq">
+  <div class="subsection-box" id="rq">
+  <h3 class="strategy-subhead"><span class="sub-num">02.1</span>Research Question &amp; Direction</h3>
+  <div class="rq-block">
     <div class="rq-banner">
       <span class="rq-banner-label">Research Question</span>
       <p>How does WA211's information architecture and UI elements enhance or deter usability for users with TBI?</p>
@@ -2432,32 +2646,33 @@ h1, h2, h3 {
 
     <div class="rq-col-heads">
       <span>Question</span>
+      <span class="rq-col-head-spacer" aria-hidden="true"></span>
       <span>Direction</span>
     </div>
 
     <div class="rq-row">
-      <div class="rq-cause"><span class="rq-num">1</span><p>How does the website's navigation structure and visual hierarchy affect the ability of users with TBI to locate specific services without becoming distracted or overwhelmed?</p></div>
+      <div class="rq-cause"><span class="rq-num"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg></span><p>Does <strong>navigation &amp; hierarchy</strong> help users locate services without distraction?</p></div>
       <span class="rq-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></span>
-      <div class="rq-effect"><p>Explore the website's information architecture and key navigation points to understand how it currently serves user needs.</p></div>
+      <div class="rq-effect"><p>Map the site's <strong>IA &amp; key nav points</strong> against real user needs.</p></div>
     </div>
 
     <div class="rq-row">
-      <div class="rq-cause"><span class="rq-num">2</span><p>How does the website support task completion for finding crisis resources for users with TBI?</p></div>
+      <div class="rq-cause"><span class="rq-num"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></span><p>Does the site support <strong>completing tasks</strong> to find crisis resources?</p></div>
       <span class="rq-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></span>
-      <div class="rq-effect"><p>Uncover pain points and difficulties users with TBI encounter when searching for resources and vital services.</p></div>
+      <div class="rq-effect"><p>Surface <strong>pain points</strong> in the resource-search flow.</p></div>
     </div>
 
     <div class="rq-row">
-      <div class="rq-cause"><span class="rq-num">3</span><p>Which specific elements on the WA211 directory contribute most to cognitive friction or fatigue for individuals with TBI?</p></div>
+      <div class="rq-cause"><span class="rq-num"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></span><p>Which elements cause the most <strong>cognitive friction or fatigue</strong>?</p></div>
       <span class="rq-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></span>
-      <div class="rq-effect"><p>Formulate a list of usability issues and provide actionable recommendations to mitigate and address them.</p></div>
+      <div class="rq-effect"><p>Turn findings into <strong>actionable recommendations</strong>.</p></div>
     </div>
   </div>
 
   </div>
 
   <div class="subsection-box">
-  <h3 class="strategy-subhead" id="population">Population &amp; Setting</h3>
+  <h3 class="strategy-subhead" id="population"><span class="sub-num">02.2</span>Population &amp; Setting</h3>
 
   <div class="who-where-row illustrated">
     <div class="who-where-card illustrated">
@@ -2498,7 +2713,7 @@ h1, h2, h3 {
   </div>
 
   <div class="subsection-box">
-  <h3 class="strategy-subhead" id="roles">Roles &amp; Responsibilities</h3>
+  <h3 class="strategy-subhead" id="roles"><span class="sub-num">02.3</span>Roles &amp; Responsibilities</h3>
 
   <div class="contributor-team-row">
     <div class="contributor-card">
@@ -2551,7 +2766,7 @@ h1, h2, h3 {
   </div>
 
   <div class="subsection-box">
-  <h3 class="strategy-subhead" id="methodology">Methodology &amp; Data Recorded</h3>
+  <h3 class="strategy-subhead" id="methodology"><span class="sub-num">02.4</span>Methodology &amp; Data Recorded</h3>
   <div class="phase-meta">
     <div class="phase-meta-stat">
       <span class="phase-meta-value">3 months</span>
@@ -2561,7 +2776,7 @@ h1, h2, h3 {
   </div>
   <div class="stepper stepper-numB">
     <div class="stepper-step">
-      <div class="stepper-box">
+      <div class="stepper-box expandable" onclick="toggleCardExpand(this)">
         <div class="step-banner"><span class="step-banner-label">Phase 1</span></div>
         <div class="stepper-content">
         <svg class="stepper-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -2576,11 +2791,19 @@ h1, h2, h3 {
             <div class="chip-col-chips"><span class="chip qual">Expert guidance</span></div>
           </div>
         </div>
+        <div class="card-expand-hint"><span>Why this method<i class="ti ti-chevron-down" aria-hidden="true"></i></span></div>
+        <div class="card-expand">
+          <ul>
+            <li>Grounded the study in clinical expertise before recruiting real participants</li>
+            <li>Mock interviews caught wording and pacing issues before they reached actual participants</li>
+            <li>De-risked session-length assumptions early</li>
+          </ul>
+        </div>
         </div>
       </div>
     </div>
     <div class="stepper-step">
-      <div class="stepper-box">
+      <div class="stepper-box expandable" onclick="toggleCardExpand(this)">
         <div class="step-banner"><span class="step-banner-label">Phase 2</span></div>
         <div class="stepper-content">
         <svg class="stepper-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -2595,11 +2818,19 @@ h1, h2, h3 {
             <div class="chip-col-chips"><span class="chip quant">Survey responses</span></div>
           </div>
         </div>
+        <div class="card-expand-hint"><span>Why this method<i class="ti ti-chevron-down" aria-hidden="true"></i></span></div>
+        <div class="card-expand">
+          <ul>
+            <li>Needed precise screening to responsibly recruit actual individuals with TBI, not proxies</li>
+            <li>Self-paced survey format reduced cognitive load during intake</li>
+            <li>Helped balance the sample across severity and symptom profiles</li>
+          </ul>
+        </div>
         </div>
       </div>
     </div>
     <div class="stepper-step">
-      <div class="stepper-box">
+      <div class="stepper-box expandable" onclick="toggleCardExpand(this)">
         <div class="step-banner"><span class="step-banner-label">Phase 3</span></div>
         <div class="stepper-content">
         <svg class="stepper-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -2620,11 +2851,19 @@ h1, h2, h3 {
             <div class="chip-col-chips"><span class="chip qual">Findings &amp; recs</span></div>
           </div>
         </div>
+        <div class="card-expand-hint"><span>Why this method<i class="ti ti-chevron-down" aria-hidden="true"></i></span></div>
+        <div class="card-expand">
+          <ul>
+            <li>Fast, low-cost way to catch known usability violations before spending limited participant time</li>
+            <li>Severity ratings helped prioritize what the moderated study should focus on</li>
+            <li>Reduced risk of spending scarce TBI participant sessions on already-known issues</li>
+          </ul>
+        </div>
         </div>
       </div>
     </div>
     <div class="stepper-step">
-      <div class="stepper-box">
+      <div class="stepper-box expandable" onclick="toggleCardExpand(this)">
         <div class="step-banner"><span class="step-banner-label">Phase 4</span></div>
         <div class="stepper-content">
         <svg class="stepper-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -2651,6 +2890,14 @@ h1, h2, h3 {
             </div>
           </div>
         </div>
+        <div class="card-expand-hint"><span>Why this method<i class="ti ti-chevron-down" aria-hidden="true"></i></span></div>
+        <div class="card-expand">
+          <ul>
+            <li>Only real participants could validate whether fixes reduced reliance on the call center</li>
+            <li>Think-aloud plus task success gave both qualitative and quantitative evidence</li>
+            <li>Directly tested the redesign against the population it was meant to serve</li>
+          </ul>
+        </div>
         </div>
       </div>
     </div>
@@ -2672,7 +2919,7 @@ h1, h2, h3 {
   </div>
 
   <div class="subsection-box">
-  <h3 class="strategy-subhead" id="usability">Usability Study</h3>
+  <h3 class="strategy-subhead" id="usability"><span class="sub-num">02.5</span>Usability Study</h3>
   <div class="phase-meta">
     <div class="phase-meta-stat">
       <span class="phase-meta-value">20 min</span>
@@ -2680,9 +2927,16 @@ h1, h2, h3 {
     </div>
     <span class="phase-meta-goal"><strong>Goal:</strong> identify relevant housing help</span>
   </div>
+
+  <div class="session-split" role="img" aria-label="20-minute session: 12 minutes of tasks, 8 minutes reserved for troubleshooting">
+    <div class="session-split-bar">
+      <span class="session-split-tasks" style="flex: 12;">12 min &middot; Tasks</span>
+      <span class="session-split-buffer" style="flex: 8;">8 min &middot; Troubleshooting</span>
+    </div>
+  </div>
   <div class="stepper stepper-numB">
     <div class="stepper-step">
-      <div class="stepper-box">
+      <div class="stepper-box expandable" onclick="toggleCardExpand(this)">
         <div class="step-banner"><span class="step-banner-label">Task 1</span></div>
         <div class="stepper-content">
         <svg class="stepper-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -2693,11 +2947,20 @@ h1, h2, h3 {
         <div class="mf-chip-groups">
           <div class="chip-row"><span class="chip quant">3:00 min</span></div>
         </div>
+        <div class="card-expand-hint"><span>Task steps<i class="ti ti-chevron-down" aria-hidden="true"></i></span></div>
+        <div class="card-expand">
+          <ul>
+            <li>Find search feature</li>
+            <li>Initiate search</li>
+            <li>Review &amp; select relevant results</li>
+          </ul>
+          <p class="card-expand-metric">Metric: time-on-task, 1&ndash;3 quant difficulty questions, 1 qual &ldquo;why difficult&rdquo; question</p>
+        </div>
         </div>
       </div>
     </div>
     <div class="stepper-step">
-      <div class="stepper-box">
+      <div class="stepper-box expandable" onclick="toggleCardExpand(this)">
         <div class="step-banner"><span class="step-banner-label">Task 2</span></div>
         <div class="stepper-content">
         <svg class="stepper-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -2707,11 +2970,20 @@ h1, h2, h3 {
         <div class="mf-chip-groups">
           <div class="chip-row"><span class="chip quant">3:00 min</span></div>
         </div>
+        <div class="card-expand-hint"><span>Task steps<i class="ti ti-chevron-down" aria-hidden="true"></i></span></div>
+        <div class="card-expand">
+          <ul>
+            <li>Find location/address</li>
+            <li>Find contact information</li>
+            <li>Identify availability (open/closed)</li>
+          </ul>
+          <p class="card-expand-metric">Metric: time-on-task, 1&ndash;3 quant difficulty questions, 1 qual &ldquo;why difficult&rdquo; question</p>
+        </div>
         </div>
       </div>
     </div>
     <div class="stepper-step">
-      <div class="stepper-box">
+      <div class="stepper-box expandable" onclick="toggleCardExpand(this)">
         <div class="step-banner"><span class="step-banner-label">Task 3</span></div>
         <div class="stepper-content">
         <svg class="stepper-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -2721,11 +2993,20 @@ h1, h2, h3 {
         <div class="mf-chip-groups">
           <div class="chip-row"><span class="chip quant">3:00 min</span></div>
         </div>
+        <div class="card-expand-hint"><span>Task steps<i class="ti ti-chevron-down" aria-hidden="true"></i></span></div>
+        <div class="card-expand">
+          <ul>
+            <li>Set location</li>
+            <li>Apply radius filtering</li>
+            <li>Filter by day, hours, or service constraints</li>
+          </ul>
+          <p class="card-expand-metric">Metric: time-on-task, 1&ndash;3 quant difficulty questions, 1 qual &ldquo;why difficult&rdquo; question</p>
+        </div>
         </div>
       </div>
     </div>
     <div class="stepper-step">
-      <div class="stepper-box">
+      <div class="stepper-box expandable" onclick="toggleCardExpand(this)">
         <div class="step-banner"><span class="step-banner-label">Task 4</span></div>
         <div class="stepper-content">
         <svg class="stepper-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -2735,6 +3016,14 @@ h1, h2, h3 {
         <h4 class="stepper-label">Understand Key Information</h4>
         <div class="mf-chip-groups">
           <div class="chip-row"><span class="chip quant">3:00 min</span></div>
+        </div>
+        <div class="card-expand-hint"><span>Task steps<i class="ti ti-chevron-down" aria-hidden="true"></i></span></div>
+        <div class="card-expand">
+          <ul>
+            <li>Locate eligibility requirements</li>
+            <li>Understand if they qualify</li>
+          </ul>
+          <p class="card-expand-metric">Metric: time-on-task, 1&ndash;3 quant difficulty questions, 1 qual &ldquo;why difficult&rdquo; question</p>
         </div>
         </div>
       </div>
@@ -2895,6 +3184,10 @@ h1, h2, h3 {
 
   sections.forEach(function (s) { observer.observe(s); });
 })();
+
+function toggleCardExpand(el) {
+  el.classList.toggle('open');
+}
 </script>
 
 </body>
