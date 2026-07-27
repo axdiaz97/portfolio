@@ -185,6 +185,49 @@ h1, h2, h3 {
   font-weight: 700;
 }
 
+.toc-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.toc-group-head {
+  display: flex;
+  align-items: center;
+}
+
+.toc-group-head a {
+  flex: 1;
+}
+
+.toc-toggle {
+  background: none;
+  border: none;
+  padding: 4px 10px 4px 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  cursor: pointer;
+}
+
+.toc-toggle i {
+  font-size: 12px;
+  transition: transform 0.15s ease;
+}
+
+.toc-group.collapsed .toc-toggle i {
+  transform: rotate(-90deg);
+}
+
+.toc-subgroup {
+  display: flex;
+  flex-direction: column;
+}
+
+.toc-group.collapsed .toc-subgroup {
+  display: none;
+}
+
 @media (max-width: 1024px) {
   .toc-float { display: none; }
 }
@@ -262,6 +305,63 @@ h1, h2, h3 {
 .hero h2 {
   font-size: clamp(28px, 4.5vw, 40px);
   margin-bottom: 20px;
+}
+
+.who-section {
+  padding: 8px var(--content-pad) 32px;
+}
+
+.who-heading {
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--orange-deep);
+  margin-bottom: 14px;
+}
+
+.who-strip {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  padding: 18px 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.who-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.who-icon {
+  width: 22px;
+  height: 22px;
+  color: var(--orange-deep);
+  flex-shrink: 0;
+}
+
+.who-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.who-value {
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: 15px;
+  color: var(--navy);
+  line-height: 1.2;
+}
+
+.who-label {
+  font-size: 10.5px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-weight: 600;
 }
 
 .hero .takeaway {
@@ -473,9 +573,33 @@ h1, h2, h3 {
   background: var(--navy);
   color: #fff;
   border-radius: var(--radius);
-  padding: 16px 22px;
-  min-width: 140px;
-  text-align: center;
+  min-width: 200px;
+  text-align: left;
+  display: flex;
+  align-items: stretch;
+  overflow: hidden;
+}
+
+.stat-icon-panel {
+  flex: 0 0 56px;
+  background: var(--orange);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.stat-icon {
+  width: 22px;
+  height: 22px;
+  color: var(--navy);
+}
+
+.stat-content {
+  flex: 1;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .stat-box .num {
@@ -619,6 +743,78 @@ h1, h2, h3 {
 .impact-card.acknowledged .status { background: var(--orange); color: #fff; }
 
 .impact-card p { color: #eaf1fb; font-size: 15px; margin: 0; }
+
+.impact-update {
+  margin-top: 32px;
+  padding-top: 28px;
+  border-top: 1px solid rgba(255,255,255,0.15);
+}
+
+.impact-update-label {
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #ffcf94;
+  margin-bottom: 14px;
+}
+
+.impact-update-images {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 12px;
+}
+
+.impact-update-images figure {
+  flex: 1;
+  margin: 0;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: var(--radius);
+  padding: 10px;
+  text-align: center;
+}
+
+.impact-update-images img {
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+  display: block;
+}
+
+.impact-update-images figcaption {
+  font-size: 11px;
+  color: #cfe0f5;
+  margin-top: 8px;
+}
+
+.impact-update-caption {
+  font-size: 13px;
+  color: #cfe0f5;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.impact-close {
+  margin-top: 28px;
+  padding-top: 28px;
+  border-top: 1px solid rgba(255,255,255,0.15);
+}
+
+.impact-close p {
+  color: #eaf1fb;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.impact-close p + p {
+  margin-top: 16px;
+}
+
+@media (max-width: 600px) {
+  .impact-update-images { flex-direction: column; }
+}
 
 /* ---------- Footer ---------- */
 .site-footer {
@@ -1196,7 +1392,7 @@ h1, h2, h3 {
 }
 
 .phase-meta-goal {
-  font-size: 13px;
+  font-size: 15px;
   color: var(--text-body);
   border-left: 1px solid var(--border);
   padding-left: 14px;
@@ -1672,17 +1868,20 @@ h1, h2, h3 {
 
 .pf-num-dark { fill: var(--navy); }
 
-.mobile-badge {
-  display: inline-block;
+.mobile-note {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
   margin-top: 8px;
-  padding: 3px 10px;
-  border-radius: 999px;
-  background: var(--navy);
-  color: #ffcf94;
   font-family: var(--font-head);
-  font-weight: 700;
-  font-size: 10.5px;
-  letter-spacing: 0.02em;
+  font-weight: 600;
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.mobile-note svg {
+  color: var(--navy);
+  flex-shrink: 0;
 }
 
 /* ============================================
@@ -2320,7 +2519,7 @@ h1, h2, h3 {
   flex: 1;
 }
 
-.stepper-box.expandable {
+.card-expand-hint span {
   cursor: pointer;
 }
 
@@ -2350,7 +2549,7 @@ h1, h2, h3 {
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
-.stepper-box.expandable:hover .card-expand-hint span {
+.card-expand-hint span:hover {
   transform: scale(1.08);
   box-shadow: 0 2px 6px rgba(217, 127, 36, 0.25);
 }
@@ -2393,9 +2592,29 @@ h1, h2, h3 {
   line-height: 1.4;
 }
 
+.session-group {
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px 18px;
+  margin-bottom: 20px;
+}
+
+.session-group .phase-meta {
+  margin-bottom: 14px;
+}
+
 .session-split {
-  max-width: 400px;
-  margin: 0 0 20px;
+  width: 100%;
+  margin: 0;
+}
+
+.session-split .session-split-caption {
+  margin: 8px 0 0;
+  font-size: 9.5px;
+  font-style: italic;
+  color: var(--text-muted);
+  text-align: center;
 }
 
 .session-split-bar {
@@ -2497,15 +2716,36 @@ h1, h2, h3 {
 <nav class="toc-float" aria-label="Section navigation">
   <a href="#intro" data-toc="intro">Intro</a>
   <a href="#problem" data-toc="problem">01 &middot; Problem</a>
-  <a href="#strategy" data-toc="strategy">02 &middot; Strategy</a>
-  <a href="#rq" data-toc="rq" class="toc-sub">Research question</a>
-  <a href="#population" data-toc="population" class="toc-sub">Population &amp; setting</a>
-  <a href="#roles" data-toc="roles" class="toc-sub">Roles &amp; responsibilities</a>
-  <a href="#methodology" data-toc="methodology" class="toc-sub">Methodology</a>
-  <a href="#usability" data-toc="usability" class="toc-sub">Usability study</a>
-  <a href="#solution" data-toc="solution">03 &middot; Solution</a>
-  <a href="#finding1" data-toc="finding1" class="toc-sub">Finding 1</a>
-  <a href="#finding2" data-toc="finding2" class="toc-sub">Finding 2</a>
+
+  <div class="toc-group">
+    <div class="toc-group-head">
+      <a href="#strategy" data-toc="strategy">02 &middot; Strategy</a>
+      <button class="toc-toggle" onclick="toggleTocGroup(this)" aria-label="Toggle Strategy subsections" aria-expanded="true">
+        <i class="ti ti-chevron-down" aria-hidden="true"></i>
+      </button>
+    </div>
+    <div class="toc-subgroup">
+      <a href="#rq" data-toc="rq" class="toc-sub">Research question</a>
+      <a href="#population" data-toc="population" class="toc-sub">Population &amp; setting</a>
+      <a href="#roles" data-toc="roles" class="toc-sub">Roles &amp; responsibilities</a>
+      <a href="#methodology" data-toc="methodology" class="toc-sub">Methodology</a>
+      <a href="#usability" data-toc="usability" class="toc-sub">Usability study</a>
+    </div>
+  </div>
+
+  <div class="toc-group">
+    <div class="toc-group-head">
+      <a href="#solution" data-toc="solution">03 &middot; Solution</a>
+      <button class="toc-toggle" onclick="toggleTocGroup(this)" aria-label="Toggle Solution subsections" aria-expanded="true">
+        <i class="ti ti-chevron-down" aria-hidden="true"></i>
+      </button>
+    </div>
+    <div class="toc-subgroup">
+      <a href="#finding1" data-toc="finding1" class="toc-sub">Finding 1</a>
+      <a href="#finding2" data-toc="finding2" class="toc-sub">Finding 2</a>
+    </div>
+  </div>
+
   <a href="#impact" data-toc="impact">04 &middot; Impact</a>
 </nav>
 
@@ -2513,7 +2753,7 @@ h1, h2, h3 {
   <div class="cover-inner">
     <span class="cover-kicker">Case Study</span>
     <h1 class="cover-title">Washington 211</h1>
-    <p class="cover-sub">When a crisis resource is too hard to use in a crisis</p>
+    <p class="cover-sub">Designing a crisis resource that works as well online as it does by phone</p>
     <div class="cover-meta">
       <span>Angel Diaz</span>
       <span class="cover-dot">&middot;</span>
@@ -2529,7 +2769,8 @@ h1, h2, h3 {
 
 <header class="hero" id="intro">
   <span class="eyebrow">UX Research &middot; Usability Study</span>
-  <h2>Washington 211: when a crisis resource is too hard to use in a crisis</h2>
+  <h2>Washington 211: designing a crisis resource that works as well online as it does by phone</h2>
+
   <div class="act-marker">
     <span class="act-label">Study Outline</span>
     <span class="act-rule"></span>
@@ -2541,6 +2782,27 @@ h1, h2, h3 {
     findings</strong>, with one team member confirming the search-discoverability fix as a known issue.
   </p>
 </header>
+
+<section class="who-section">
+  <h3 class="who-heading">Who is Washington 211?</h3>
+  <div class="who-strip" role="img" aria-label="Who is Washington 211: established 2006, over 6 million calls handled, connecting residents to housing, food, health, and utility assistance">
+    <div class="who-item">
+      <svg class="who-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="10" width="18" height="11" rx="1"/><path d="M8 10V6a4 4 0 0 1 8 0v4"/></svg>
+      <div class="who-text"><div class="who-value">2006</div>
+      <div class="who-label">Established</div></div>
+    </div>
+    <div class="who-item">
+      <svg class="who-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      <div class="who-text"><div class="who-value">6M+</div>
+      <div class="who-label">Calls handled</div></div>
+    </div>
+    <div class="who-item">
+      <svg class="who-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21V9.5a1 1 0 0 0-.4-.8l-6-4.5a1 1 0 0 0-1.2 0l-6 4.5a1 1 0 0 0-.4.8V21"/><path d="M9 21v-6h6v6"/></svg>
+      <div class="who-text"><div class="who-value">Housing &middot; Food &middot; Health</div>
+      <div class="who-label">Core services</div></div>
+    </div>
+  </div>
+</section>
 
 <section class="snapshot-card">
   <div class="snapshot-team">
@@ -2677,17 +2939,17 @@ h1, h2, h3 {
   <div class="who-where-row illustrated">
     <div class="who-where-card illustrated">
       <h5>Who</h5>
-      <svg class="illo" viewBox="0 0 160 110" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Recruitment funnel: 40 screened, narrowing to 14 scheduled, narrowing to 6 completed">
+      <svg class="illo" viewBox="0 0 160 110" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Recruitment funnel: 40 screened, narrowing to 15 scheduled, narrowing to 6 completed">
         <polygon points="8,4 152,4 130,40 30,40" class="pf-tier-1"/>
         <text x="80" y="27" text-anchor="middle" class="pf-num">40</text>
 
         <polygon points="30,42 130,42 106,76 54,76" class="pf-tier-2"/>
-        <text x="80" y="64" text-anchor="middle" class="pf-num">14</text>
+        <text x="80" y="64" text-anchor="middle" class="pf-num">15</text>
 
         <polygon points="54,78 106,78 90,106 70,106" class="pf-tier-3"/>
         <text x="80" y="97" text-anchor="middle" class="pf-num pf-num-dark">6</text>
       </svg>
-      <p>40 screened &rarr; 14 scheduled &rarr; 6 completed &mdash; individuals with TBI, 1 withdrew mid-session</p>
+      <p>40 screened &rarr; 15 scheduled &rarr; 6 completed &mdash; individuals with TBI</p>
     </div>
     <div class="who-where-card illustrated">
       <h5>Where</h5>
@@ -2700,7 +2962,7 @@ h1, h2, h3 {
         <rect x="100" y="76" width="20" height="28" rx="3" fill="#0d3b78" opacity="0.55"/>
       </svg>
       <p>Remotely via Zoom &mdash; scoped for laptops &amp; PCs</p>
-      <span class="mobile-badge">+ Mobile device</span>
+      <span class="mobile-note">+ mobile device<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg></span>
     </div>
   </div>
 
@@ -2776,7 +3038,7 @@ h1, h2, h3 {
   </div>
   <div class="stepper stepper-numB">
     <div class="stepper-step">
-      <div class="stepper-box expandable" onclick="toggleCardExpand(this)">
+      <div class="stepper-box expandable">
         <div class="step-banner"><span class="step-banner-label">Phase 1</span></div>
         <div class="stepper-content">
         <svg class="stepper-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -2791,7 +3053,7 @@ h1, h2, h3 {
             <div class="chip-col-chips"><span class="chip qual">Expert guidance</span></div>
           </div>
         </div>
-        <div class="card-expand-hint"><span>Why this method<i class="ti ti-chevron-down" aria-hidden="true"></i></span></div>
+        <div class="card-expand-hint"><span onclick="toggleCardExpand(this)">Why this method<i class="ti ti-chevron-down" aria-hidden="true"></i></span></div>
         <div class="card-expand">
           <ul>
             <li>Grounded the study in clinical expertise before recruiting real participants</li>
@@ -2803,7 +3065,7 @@ h1, h2, h3 {
       </div>
     </div>
     <div class="stepper-step">
-      <div class="stepper-box expandable" onclick="toggleCardExpand(this)">
+      <div class="stepper-box expandable">
         <div class="step-banner"><span class="step-banner-label">Phase 2</span></div>
         <div class="stepper-content">
         <svg class="stepper-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -2818,7 +3080,7 @@ h1, h2, h3 {
             <div class="chip-col-chips"><span class="chip quant">Survey responses</span></div>
           </div>
         </div>
-        <div class="card-expand-hint"><span>Why this method<i class="ti ti-chevron-down" aria-hidden="true"></i></span></div>
+        <div class="card-expand-hint"><span onclick="toggleCardExpand(this)">Why this method<i class="ti ti-chevron-down" aria-hidden="true"></i></span></div>
         <div class="card-expand">
           <ul>
             <li>Needed precise screening to responsibly recruit actual individuals with TBI, not proxies</li>
@@ -2830,7 +3092,7 @@ h1, h2, h3 {
       </div>
     </div>
     <div class="stepper-step">
-      <div class="stepper-box expandable" onclick="toggleCardExpand(this)">
+      <div class="stepper-box expandable">
         <div class="step-banner"><span class="step-banner-label">Phase 3</span></div>
         <div class="stepper-content">
         <svg class="stepper-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -2851,7 +3113,7 @@ h1, h2, h3 {
             <div class="chip-col-chips"><span class="chip qual">Findings &amp; recs</span></div>
           </div>
         </div>
-        <div class="card-expand-hint"><span>Why this method<i class="ti ti-chevron-down" aria-hidden="true"></i></span></div>
+        <div class="card-expand-hint"><span onclick="toggleCardExpand(this)">Why this method<i class="ti ti-chevron-down" aria-hidden="true"></i></span></div>
         <div class="card-expand">
           <ul>
             <li>Fast, low-cost way to catch known usability violations before spending limited participant time</li>
@@ -2863,7 +3125,7 @@ h1, h2, h3 {
       </div>
     </div>
     <div class="stepper-step">
-      <div class="stepper-box expandable" onclick="toggleCardExpand(this)">
+      <div class="stepper-box expandable">
         <div class="step-banner"><span class="step-banner-label">Phase 4</span></div>
         <div class="stepper-content">
         <svg class="stepper-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -2890,7 +3152,7 @@ h1, h2, h3 {
             </div>
           </div>
         </div>
-        <div class="card-expand-hint"><span>Why this method<i class="ti ti-chevron-down" aria-hidden="true"></i></span></div>
+        <div class="card-expand-hint"><span onclick="toggleCardExpand(this)">Why this method<i class="ti ti-chevron-down" aria-hidden="true"></i></span></div>
         <div class="card-expand">
           <ul>
             <li>Only real participants could validate whether fixes reduced reliance on the call center</li>
@@ -2920,23 +3182,26 @@ h1, h2, h3 {
 
   <div class="subsection-box">
   <h3 class="strategy-subhead" id="usability"><span class="sub-num">02.5</span>Usability Study</h3>
-  <div class="phase-meta">
-    <div class="phase-meta-stat">
-      <span class="phase-meta-value">20 min</span>
-      <span class="phase-meta-tag">Session limit</span>
+  <div class="session-group">
+    <div class="phase-meta">
+      <div class="phase-meta-stat">
+        <span class="phase-meta-value">20 min</span>
+        <span class="phase-meta-tag">Session limit</span>
+      </div>
+      <span class="phase-meta-goal"><strong>Goal:</strong> identify relevant housing help</span>
     </div>
-    <span class="phase-meta-goal"><strong>Goal:</strong> identify relevant housing help</span>
-  </div>
 
-  <div class="session-split" role="img" aria-label="20-minute session: 12 minutes of tasks, 8 minutes reserved for troubleshooting">
-    <div class="session-split-bar">
-      <span class="session-split-tasks" style="flex: 12;">12 min &middot; Tasks</span>
-      <span class="session-split-buffer" style="flex: 8;">8 min &middot; Troubleshooting</span>
+    <div class="session-split" role="img" aria-label="20-minute session: 12 minutes of tasks, 8 minutes reserved for troubleshooting">
+      <div class="session-split-bar">
+        <span class="session-split-tasks" style="flex: 12;">12 min &middot; Tasks</span>
+        <span class="session-split-buffer" style="flex: 8;">8 min &middot; Troubleshooting</span>
+      </div>
+      <p class="session-split-caption">8 min reserved to accommodate participant needs</p>
     </div>
   </div>
   <div class="stepper stepper-numB">
     <div class="stepper-step">
-      <div class="stepper-box expandable" onclick="toggleCardExpand(this)">
+      <div class="stepper-box expandable">
         <div class="step-banner"><span class="step-banner-label">Task 1</span></div>
         <div class="stepper-content">
         <svg class="stepper-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -2947,7 +3212,7 @@ h1, h2, h3 {
         <div class="mf-chip-groups">
           <div class="chip-row"><span class="chip quant">3:00 min</span></div>
         </div>
-        <div class="card-expand-hint"><span>Task steps<i class="ti ti-chevron-down" aria-hidden="true"></i></span></div>
+        <div class="card-expand-hint"><span onclick="toggleCardExpand(this)">Task steps<i class="ti ti-chevron-down" aria-hidden="true"></i></span></div>
         <div class="card-expand">
           <ul>
             <li>Find search feature</li>
@@ -2960,7 +3225,7 @@ h1, h2, h3 {
       </div>
     </div>
     <div class="stepper-step">
-      <div class="stepper-box expandable" onclick="toggleCardExpand(this)">
+      <div class="stepper-box expandable">
         <div class="step-banner"><span class="step-banner-label">Task 2</span></div>
         <div class="stepper-content">
         <svg class="stepper-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -2970,7 +3235,7 @@ h1, h2, h3 {
         <div class="mf-chip-groups">
           <div class="chip-row"><span class="chip quant">3:00 min</span></div>
         </div>
-        <div class="card-expand-hint"><span>Task steps<i class="ti ti-chevron-down" aria-hidden="true"></i></span></div>
+        <div class="card-expand-hint"><span onclick="toggleCardExpand(this)">Task steps<i class="ti ti-chevron-down" aria-hidden="true"></i></span></div>
         <div class="card-expand">
           <ul>
             <li>Find location/address</li>
@@ -2983,7 +3248,7 @@ h1, h2, h3 {
       </div>
     </div>
     <div class="stepper-step">
-      <div class="stepper-box expandable" onclick="toggleCardExpand(this)">
+      <div class="stepper-box expandable">
         <div class="step-banner"><span class="step-banner-label">Task 3</span></div>
         <div class="stepper-content">
         <svg class="stepper-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -2993,7 +3258,7 @@ h1, h2, h3 {
         <div class="mf-chip-groups">
           <div class="chip-row"><span class="chip quant">3:00 min</span></div>
         </div>
-        <div class="card-expand-hint"><span>Task steps<i class="ti ti-chevron-down" aria-hidden="true"></i></span></div>
+        <div class="card-expand-hint"><span onclick="toggleCardExpand(this)">Task steps<i class="ti ti-chevron-down" aria-hidden="true"></i></span></div>
         <div class="card-expand">
           <ul>
             <li>Set location</li>
@@ -3006,7 +3271,7 @@ h1, h2, h3 {
       </div>
     </div>
     <div class="stepper-step">
-      <div class="stepper-box expandable" onclick="toggleCardExpand(this)">
+      <div class="stepper-box expandable">
         <div class="step-banner"><span class="step-banner-label">Task 4</span></div>
         <div class="stepper-content">
         <svg class="stepper-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -3017,7 +3282,7 @@ h1, h2, h3 {
         <div class="mf-chip-groups">
           <div class="chip-row"><span class="chip quant">3:00 min</span></div>
         </div>
-        <div class="card-expand-hint"><span>Task steps<i class="ti ti-chevron-down" aria-hidden="true"></i></span></div>
+        <div class="card-expand-hint"><span onclick="toggleCardExpand(this)">Task steps<i class="ti ti-chevron-down" aria-hidden="true"></i></span></div>
         <div class="card-expand">
           <ul>
             <li>Locate eligibility requirements</li>
@@ -3072,9 +3337,9 @@ h1, h2, h3 {
   <strong>non-standard 3-step path</strong>, buried in a <strong>visually busy, low-contrast homepage</strong>.</p>
 
   <div class="stat-row">
-    <div class="stat-box"><span class="num">2/6</span><span class="desc">couldn't find search in time</span></div>
-    <div class="stat-box"><span class="num">4/6</span><span class="desc">struggled with location filters</span></div>
-    <div class="stat-box"><span class="num">2/6</span><span class="desc">unaware filters existed at all</span></div>
+    <div class="stat-box"><div class="stat-icon-panel"><svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10" cy="10" r="6.5"/><path d="M14.8 14.8L20 20"/></svg></div><div class="stat-content"><span class="num">2/6</span><span class="desc">couldn't find search in time</span></div></div>
+    <div class="stat-box"><div class="stat-icon-panel"><svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16l-6.5 7.5v5.5l-3 1.5v-7z"/></svg></div><div class="stat-content"><span class="num">4/6</span><span class="desc">struggled with location filters</span></div></div>
+    <div class="stat-box"><div class="stat-icon-panel"><svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11.25 11.5h1v5h1"/></svg></div><div class="stat-content"><span class="num">2/6</span><span class="desc">unaware filters existed at all</span></div></div>
   </div>
 
   <div class="finding-visual finding-visual-pair">
@@ -3108,9 +3373,9 @@ h1, h2, h3 {
   including <strong>out-of-state listings</strong> for searches <strong>explicitly filtered to Washington locations</strong>.</p>
 
   <div class="stat-row">
-    <div class="stat-box"><span class="num">4/6</span><span class="desc">received unrelated results</span></div>
-    <div class="stat-box"><span class="num">100%</span><span class="desc">out-of-state results in local searches</span></div>
-    <div class="stat-box"><span class="num">3/6</span><span class="desc">expressed intent to abandon site</span></div>
+    <div class="stat-box"><div class="stat-icon-panel"><svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 3h5v5"/><path d="M8 21H3v-5"/><path d="M21 3l-7 7"/><path d="M3 21l7-7"/></svg></div><div class="stat-content"><span class="num">4/6</span><span class="desc">received unrelated results</span></div></div>
+    <div class="stat-box"><div class="stat-icon-panel"><svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21V9.5a1 1 0 0 0-.4-.8l-6-4.5a1 1 0 0 0-1.2 0l-6 4.5a1 1 0 0 0-.4.8V21"/><path d="M9 21v-6h6v6"/></svg></div><div class="stat-content"><span class="num">100%</span><span class="desc">out-of-state results in local searches</span></div></div>
+    <div class="stat-box"><div class="stat-icon-panel"><svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5"/><path d="M21 12H9"/></svg></div><div class="stat-content"><span class="num">3/6</span><span class="desc">expressed intent to abandon site</span></div></div>
   </div>
 
   <div class="finding-visual">
@@ -3154,6 +3419,37 @@ h1, h2, h3 {
       though <strong>follow-through on implementation was not confirmed</strong> after the engagement ended.</p>
     </div>
   </div>
+
+  <div class="impact-update">
+    <h3 class="impact-update-label">What Changed</h3>
+    <div class="impact-update-images">
+      <figure>
+        <img src="assets/impact-update-desktop.png" alt="Updated WA211 homepage showing a new 'How WA211 Can Help You' section added below the hero">
+        <figcaption>Desktop</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/impact-update-mobile.png" alt="Updated WA211 mobile homepage showing the same new helper section and a View Helpful Tips button">
+        <figcaption>Mobile</figcaption>
+      </figure>
+    </div>
+    <p class="impact-update-caption">WA211 added a &ldquo;How WA211 Can Help You&rdquo; section and a &ldquo;View Helpful Tips&rdquo; entry point directly below the hero &mdash; a concrete, shipped response to the navigation-confusion finding.</p>
+  </div>
+
+  <div class="impact-close">
+    <p>This gap wasn't unique to WA211. The usability research this study replaced had only ever tested with
+    proxy participants standing in for cognitive and physical accessibility needs &mdash; never the people who
+    actually live with them. That's worth naming beyond this one engagement: any product serving a crisis
+    population should be tested with the population it's actually built for, not an approximation of it.
+    Where that hasn't happened yet, it's worth asking why &mdash; and it's the direction I want future work in
+    this space to keep pushing toward.</p>
+
+    <p>That gap is also what drew me into this work in the first place. My interest in research started in
+    psychology, driven by wanting to understand how people make decisions &mdash; and by extension, whose
+    decisions get overlooked. Studies like this one, where the process itself has to bend to meet participants
+    rather than the other way around, are the ones I look for. They ask more of the researcher, and that's the
+    kind of challenge I want to keep rising to &mdash; for communities whose needs are too often designed around
+    instead of designed with.</p>
+  </div>
 </section>
 
 
@@ -3186,7 +3482,18 @@ h1, h2, h3 {
 })();
 
 function toggleCardExpand(el) {
-  el.classList.toggle('open');
+  event.stopPropagation();
+  var card = el.closest('.stepper-box');
+  if (card) card.classList.toggle('open');
+}
+
+function toggleTocGroup(btn) {
+  event.preventDefault();
+  event.stopPropagation();
+  var group = btn.closest('.toc-group');
+  if (!group) return;
+  var collapsed = group.classList.toggle('collapsed');
+  btn.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
 }
 </script>
 
