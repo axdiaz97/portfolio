@@ -210,12 +210,11 @@ h1, h2, h3 {
   cursor: pointer;
 }
 
-.toc-toggle i {
-  font-size: 12px;
+.toc-toggle .chevron-icon {
   transition: transform 0.15s ease;
 }
 
-.toc-group.collapsed .toc-toggle i {
+.toc-group.collapsed .toc-toggle .chevron-icon {
   transform: rotate(-90deg);
 }
 
@@ -244,6 +243,40 @@ h1, h2, h3 {
   color: #fff;
   padding: 40px var(--content-pad);
   text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.cover-motif {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.cover-inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 22px;
+}
+
+.cover-logo-badge {
+  background: #fff;
+  border-radius: 16px;
+  padding: 14px 20px;
+  display: inline-flex;
+  margin-bottom: 4px;
+}
+
+.cover-logo-badge img {
+  width: 150px;
+  height: auto;
+  display: block;
 }
 
 .cover-kicker {
@@ -264,13 +297,25 @@ h1, h2, h3 {
 }
 
 .cover-sub {
-  font-size: clamp(15px, 2.2vw, 19px);
-  color: #cfe0f5;
-  max-width: 560px;
+  font-family: var(--font-head);
+  font-size: clamp(17px, 2.6vw, 22px);
+  font-weight: 600;
+  color: #fff;
+  max-width: 580px;
   margin: 0;
+  line-height: 1.35;
+}
+
+.cover-highlight {
+  color: var(--orange);
 }
 
 .cover-meta {
+  position: absolute;
+  bottom: 56px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -278,15 +323,20 @@ h1, h2, h3 {
   justify-content: center;
   font-size: 13px;
   color: #cfe0f5;
-  margin-top: 8px;
+  width: 100%;
+  padding: 0 20px;
 }
 
 .cover-dot { opacity: 0.6; }
 
 .cover-scroll-cue {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
   color: #cfe0f5;
   opacity: 0.7;
-  margin-top: 12px;
 }
 
 .hero { padding: 56px var(--content-pad) 32px; }
@@ -522,16 +572,16 @@ h1, h2, h3 {
 
 .mini-seg-set {
   display: flex;
-  gap: 2px;
-  height: 10px;
-  width: 40px;
+  gap: 3px;
+  height: 13px;
+  width: 54px;
   position: relative;
 }
 
 .mini-seg-set span {
   flex: 1;
   height: 100%;
-  border-radius: 2px;
+  border-radius: 3px;
 }
 
 .mini-seg-set span:nth-child(1) { background: var(--sev-1); }
@@ -542,11 +592,11 @@ h1, h2, h3 {
 .mini-seg-arrow span.active::before {
   content: '';
   position: absolute;
-  top: -7px;
-  left: calc(100% * (var(--i, 0)) / 4 + 12.5% - 4px);
-  border-left: 4px solid transparent;
-  border-right: 4px solid transparent;
-  border-top: 5px solid var(--navy);
+  top: -9px;
+  left: calc(100% * (var(--i, 0)) / 4 + 12.5% - 5px);
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 7px solid var(--navy);
 }
 
 .mini-seg-arrow span:nth-child(1).active { --i: 0; }
@@ -710,6 +760,37 @@ h1, h2, h3 {
   color: var(--text-body);
 }
 
+.rec-image {
+  padding: 0 20px 18px;
+}
+
+.rec-image img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  display: block;
+}
+
+.rec-image figcaption {
+  font-size: 11.5px;
+  color: var(--text-muted);
+  margin-top: 6px;
+}
+
+.rec-image-pending {
+  border-top: 1px dashed var(--border);
+  padding-top: 14px;
+  text-align: center;
+}
+
+.rec-image-pending span {
+  display: inline-block;
+  font-size: 12px;
+  font-style: italic;
+  color: var(--text-muted);
+}
+
 /* ---------- Impact ---------- */
 .impact {
   padding: 52px var(--content-pad);
@@ -719,54 +800,71 @@ h1, h2, h3 {
 .impact .eyebrow { color: #ffcf94; }
 .impact h2 { color: #fff; }
 
-.impact-grid { display: grid; gap: 16px; margin-top: 22px; }
+.impact-stat-highlight {
+  color: var(--orange);
+}
 
-.impact-card {
+.impact-outcomes {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 22px;
+}
+
+.impact-outcome-card {
   background: rgba(255,255,255,0.06);
   border: 1px solid rgba(255,255,255,0.15);
   border-radius: var(--radius);
   padding: 18px 22px;
 }
 
-.impact-card .status {
+.impact-outcome-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+
+.impact-outcome-ref {
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: 12px;
+  color: var(--orange);
+}
+
+.impact-outcome-head h4 {
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 15px;
+  color: #fff;
+  margin: 0;
+  flex: 1;
+}
+
+.impact-outcome-head .status {
   font-family: var(--font-head);
   font-size: 11px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  margin-bottom: 8px;
   display: inline-block;
   padding: 3px 10px;
   border-radius: 4px;
 }
-.impact-card.confirmed .status { background: #2f8f6a; color: #fff; }
-.impact-card.acknowledged .status { background: var(--orange); color: #fff; }
 
-.impact-card p { color: #eaf1fb; font-size: 15px; margin: 0; }
+.status.confirmed { background: #2f8f6a; color: #fff; }
+.status.acknowledged { background: var(--orange); color: #fff; }
 
-.impact-update {
-  margin-top: 32px;
-  padding-top: 28px;
-  border-top: 1px solid rgba(255,255,255,0.15);
-}
+.impact-outcome-card p { color: #eaf1fb; font-size: 15px; margin: 0; }
 
-.impact-update-label {
-  font-family: var(--font-head);
-  font-weight: 700;
-  font-size: 13px;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: #ffcf94;
-  margin-bottom: 14px;
-}
-
-.impact-update-images {
+.impact-outcome-images {
   display: flex;
   gap: 14px;
-  margin-bottom: 12px;
+  margin: 14px 0 10px;
 }
 
-.impact-update-images figure {
+.impact-outcome-images figure {
   flex: 1;
   margin: 0;
   background: rgba(255,255,255,0.06);
@@ -776,40 +874,74 @@ h1, h2, h3 {
   text-align: center;
 }
 
-.impact-update-images img {
+.impact-outcome-images img {
   width: 100%;
   height: auto;
   border-radius: 6px;
   display: block;
 }
 
-.impact-update-images figcaption {
+.impact-outcome-images figcaption {
   font-size: 11px;
   color: #cfe0f5;
   margin-top: 8px;
 }
 
-.impact-update-caption {
+.impact-outcome-card .impact-outcome-caption {
+  font-size: 13px;
+  color: #cfe0f5;
+  line-height: 1.5;
+}
+
+@media (max-width: 600px) {
+  .impact-outcome-images { flex-direction: column; }
+}
+
+.impact-close-cards {
+  display: flex;
+  gap: 16px;
+  margin-top: 28px;
+  padding-top: 28px;
+  border-top: 1px solid rgba(255,255,255,0.15);
+}
+
+.impact-close-card {
+  flex: 1;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+}
+
+.impact-close-label {
+  display: block;
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #ffcf94;
+  margin-bottom: 10px;
+}
+
+.impact-close-headline {
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 17px;
+  color: #fff;
+  margin: 0 0 8px;
+  line-height: 1.3;
+}
+
+.impact-close-support {
   font-size: 13px;
   color: #cfe0f5;
   line-height: 1.5;
   margin: 0;
 }
 
-.impact-close {
-  margin-top: 28px;
-  padding-top: 28px;
-  border-top: 1px solid rgba(255,255,255,0.15);
-}
-
-.impact-close p {
-  color: #eaf1fb;
-  font-size: 15px;
-  line-height: 1.6;
-}
-
-.impact-close p + p {
-  margin-top: 16px;
+@media (max-width: 600px) {
+  .impact-close-cards { flex-direction: column; }
 }
 
 @media (max-width: 600px) {
@@ -981,16 +1113,24 @@ h1, h2, h3 {
 }
 
 .owner-tag {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
   font-family: var(--font-head);
-  font-size: 9.5px;
+  font-size: 10px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  padding: 3px 10px;
-  border-radius: 4px;
+  color: var(--navy);
+}
+
+.owner-tag::before {
+  content: '';
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
   background: var(--navy);
-  color: #fff;
 }
 
 @media (max-width: 700px) {
@@ -1868,6 +2008,28 @@ h1, h2, h3 {
 
 .pf-num-dark { fill: var(--navy); }
 
+.pf-label {
+  font-family: var(--font-head);
+  font-weight: 600;
+  font-size: 8.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  fill: rgba(255,255,255,0.85);
+}
+
+.pf-label-dark { fill: rgba(13,59,120,0.75); }
+
+.pf-seg {
+  cursor: pointer;
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: transform 0.18s ease;
+}
+
+.pf-seg:hover {
+  transform: scale(1.1);
+}
+
 .mobile-note {
   display: inline-flex;
   align-items: center;
@@ -1909,6 +2071,12 @@ h1, h2, h3 {
   height: auto;
   display: block;
   margin: 4px auto 10px;
+}
+
+.who-where-card .illo-funnel {
+  max-width: 230px;
+  margin: 8px auto 0;
+  overflow: visible;
 }
 
 /* Compact contribution chips */
@@ -2285,7 +2453,7 @@ h1, h2, h3 {
 
 .chip-col-label {
   font-family: var(--font-head);
-  font-size: 9px;
+  font-size: 11px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.06em;
@@ -2536,9 +2704,9 @@ h1, h2, h3 {
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  background: var(--amber-bg);
-  border: 1px solid #f0cba3;
-  color: var(--orange-deep);
+  background: var(--navy);
+  border: 1px solid var(--navy);
+  color: #fff;
   padding: 5px 12px;
   border-radius: 999px;
   font-family: var(--font-head);
@@ -2551,15 +2719,14 @@ h1, h2, h3 {
 
 .card-expand-hint span:hover {
   transform: scale(1.08);
-  box-shadow: 0 2px 6px rgba(217, 127, 36, 0.25);
+  box-shadow: 0 2px 6px rgba(13, 59, 120, 0.35);
 }
 
-.card-expand-hint i {
-  font-size: 12px;
+.card-expand-hint .chevron-icon {
   transition: transform 0.15s ease;
 }
 
-.stepper-box.open .card-expand-hint i {
+.stepper-box.open .card-expand-hint .chevron-icon {
   transform: rotate(180deg);
 }
 
@@ -2582,6 +2749,38 @@ h1, h2, h3 {
   font-size: 11px;
   color: var(--text-body);
   line-height: 1.5;
+}
+
+.card-expand ul strong {
+  color: var(--navy);
+}
+
+.card-expand-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.card-expand-badge {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--amber-bg);
+  color: var(--orange-deep);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1px;
+}
+
+.card-expand-badge svg {
+  width: 13px;
+  height: 13px;
+}
+
+.card-expand-row ul {
+  flex: 1;
 }
 
 .card-expand-metric {
@@ -2721,7 +2920,7 @@ h1, h2, h3 {
     <div class="toc-group-head">
       <a href="#strategy" data-toc="strategy">02 &middot; Strategy</a>
       <button class="toc-toggle" onclick="toggleTocGroup(this)" aria-label="Toggle Strategy subsections" aria-expanded="true">
-        <i class="ti ti-chevron-down" aria-hidden="true"></i>
+        <svg class="chevron-icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
       </button>
     </div>
     <div class="toc-subgroup">
@@ -2737,7 +2936,7 @@ h1, h2, h3 {
     <div class="toc-group-head">
       <a href="#solution" data-toc="solution">03 &middot; Solution</a>
       <button class="toc-toggle" onclick="toggleTocGroup(this)" aria-label="Toggle Solution subsections" aria-expanded="true">
-        <i class="ti ti-chevron-down" aria-hidden="true"></i>
+        <svg class="chevron-icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
       </button>
     </div>
     <div class="toc-subgroup">
@@ -2750,17 +2949,35 @@ h1, h2, h3 {
 </nav>
 
 <section class="cover-page">
+  <svg class="cover-motif" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <path d="M -60 620 C 120 520, 220 720, 400 580 C 580 440, 640 640, 820 520 C 960 430, 1020 320, 1260 260" fill="none" stroke="rgba(255,255,255,0.16)" stroke-width="3" stroke-linecap="round"/>
+    <path d="M -80 180 C 80 260, 160 120, 340 200 C 500 270, 560 140, 760 210" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="3" stroke-linecap="round"/>
+    <path d="M 520 430 C 555 385, 610 470, 645 425 C 665 398, 630 375, 605 392 C 588 404, 600 425, 615 418" fill="none" stroke="var(--orange)" stroke-width="3" stroke-linecap="round" opacity="0.5"/>
+    <circle cx="120" cy="565" r="6" fill="var(--orange)" opacity="0.6"/>
+    <circle cx="400" cy="580" r="8" fill="var(--orange)" opacity="0.45"/>
+    <circle cx="640" cy="640" r="5" fill="var(--orange)" opacity="0.65"/>
+    <circle cx="820" cy="520" r="7" fill="var(--orange)" opacity="0.5"/>
+    <circle cx="1020" cy="320" r="6" fill="var(--orange)" opacity="0.6"/>
+    <circle cx="160" cy="120" r="5" fill="var(--orange)" opacity="0.45"/>
+    <circle cx="500" cy="270" r="6" fill="var(--orange)" opacity="0.5"/>
+    <circle cx="760" cy="210" r="5" fill="var(--orange)" opacity="0.45"/>
+    <circle cx="615" cy="418" r="4" fill="var(--orange)" opacity="0.7"/>
+  </svg>
+
   <div class="cover-inner">
+    <div class="cover-logo-badge">
+      <img src="assets/wa211-logo.png" alt="Washington 211 logo">
+    </div>
     <span class="cover-kicker">Case Study</span>
     <h1 class="cover-title">Washington 211</h1>
-    <p class="cover-sub">Designing a crisis resource that works as well online as it does by phone</p>
-    <div class="cover-meta">
-      <span>Angel Diaz</span>
-      <span class="cover-dot">&middot;</span>
-      <span>UX Research &amp; Usability Study</span>
-      <span class="cover-dot">&middot;</span>
-      <span>HCDE 517, 2026</span>
-    </div>
+    <p class="cover-sub">Designing a crisis resource that works as well <span class="cover-highlight">online</span> as it does by phone</p>
+  </div>
+  <div class="cover-meta">
+    <span>Angel Diaz</span>
+    <span class="cover-dot">&middot;</span>
+    <span>UX Research &amp; Usability Study</span>
+    <span class="cover-dot">&middot;</span>
+    <span>HCDE 517, 2026</span>
   </div>
   <svg class="cover-scroll-cue" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
     <path d="M6 9l6 6 6-6"/>
@@ -2939,17 +3156,25 @@ h1, h2, h3 {
   <div class="who-where-row illustrated">
     <div class="who-where-card illustrated">
       <h5>Who</h5>
-      <svg class="illo" viewBox="0 0 160 110" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Recruitment funnel: 40 screened, narrowing to 15 scheduled, narrowing to 6 completed">
-        <polygon points="8,4 152,4 130,40 30,40" class="pf-tier-1"/>
-        <text x="80" y="27" text-anchor="middle" class="pf-num">40</text>
+      <svg class="illo illo-funnel" viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Recruitment funnel: 40 screened, narrowing to 15 scheduled, narrowing to 6 completed">
+        <g class="pf-seg">
+          <polygon points="10,4 190,4 177.4,45 22.6,45" class="pf-tier-1"/>
+          <text x="100" y="27" text-anchor="middle" class="pf-num">40</text>
+          <text x="100" y="40" text-anchor="middle" class="pf-label">Screened</text>
+        </g>
 
-        <polygon points="30,42 130,42 106,76 54,76" class="pf-tier-2"/>
-        <text x="80" y="64" text-anchor="middle" class="pf-num">15</text>
+        <g class="pf-seg">
+          <polygon points="24.5,51 175.5,51 163.8,89 36.2,89" class="pf-tier-2"/>
+          <text x="100" y="71" text-anchor="middle" class="pf-num">15</text>
+          <text x="100" y="84" text-anchor="middle" class="pf-label">Scheduled</text>
+        </g>
 
-        <polygon points="54,78 106,78 90,106 70,106" class="pf-tier-3"/>
-        <text x="80" y="97" text-anchor="middle" class="pf-num pf-num-dark">6</text>
+        <g class="pf-seg">
+          <polygon points="38,95 162,95 150,134 50,134" class="pf-tier-3"/>
+          <text x="100" y="115" text-anchor="middle" class="pf-num pf-num-dark">6</text>
+          <text x="100" y="128" text-anchor="middle" class="pf-label pf-label-dark">Completed</text>
+        </g>
       </svg>
-      <p>40 screened &rarr; 15 scheduled &rarr; 6 completed &mdash; individuals with TBI</p>
     </div>
     <div class="who-where-card illustrated">
       <h5>Where</h5>
@@ -3046,19 +3271,18 @@ h1, h2, h3 {
           <path d="M9 15h9a2 2 0 0 0 2-2V9"/>
         </svg>
         <h4 class="stepper-label">Expert Consultation &amp; Mock Interviews (DSHS)</h4>
-        <span class="owner-tag">Led</span>
         <div class="mf-chip-cols">
           <div class="chip-col">
             <span class="chip-col-label qual-label">Qual</span>
             <div class="chip-col-chips"><span class="chip qual">Expert guidance</span></div>
           </div>
         </div>
-        <div class="card-expand-hint"><span onclick="toggleCardExpand(this)">Why this method<i class="ti ti-chevron-down" aria-hidden="true"></i></span></div>
+        <div class="card-expand-hint"><span onclick="toggleCardExpand(this)">Why this method<svg class="chevron-icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></span></div>
         <div class="card-expand">
           <ul>
-            <li>Grounded the study in clinical expertise before recruiting real participants</li>
-            <li>Mock interviews caught wording and pacing issues before they reached actual participants</li>
-            <li>De-risked session-length assumptions early</li>
+            <li><strong>Clinical Expertise</strong> &mdash; set direction and credibility before recruitment began</li>
+            <li><strong>Mock Interview</strong> &mdash; surfaced wording and pacing issues before real sessions</li>
+            <li><strong>Study Design Input</strong> &mdash; set realistic expectations for session length</li>
           </ul>
         </div>
         </div>
@@ -3073,19 +3297,18 @@ h1, h2, h3 {
           <path d="M9 8h6M9 12h6M9 16h3"/>
         </svg>
         <h4 class="stepper-label">Screener &amp; Recruitment</h4>
-        <span class="owner-tag">Co-developed</span>
         <div class="mf-chip-cols">
           <div class="chip-col">
             <span class="chip-col-label quant-label">Quant</span>
             <div class="chip-col-chips"><span class="chip quant">Survey responses</span></div>
           </div>
         </div>
-        <div class="card-expand-hint"><span onclick="toggleCardExpand(this)">Why this method<i class="ti ti-chevron-down" aria-hidden="true"></i></span></div>
+        <div class="card-expand-hint"><span onclick="toggleCardExpand(this)">Why this method<svg class="chevron-icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></span></div>
         <div class="card-expand">
           <ul>
-            <li>Needed precise screening to responsibly recruit actual individuals with TBI, not proxies</li>
-            <li>Self-paced survey format reduced cognitive load during intake</li>
-            <li>Helped balance the sample across severity and symptom profiles</li>
+            <li><strong>Precise Screening</strong> &mdash; ensured real TBI participants, not proxies</li>
+            <li><strong>Self-Paced Format</strong> &mdash; reduced cognitive load during intake</li>
+            <li><strong>Balanced Sampling</strong> &mdash; spread severity and symptom profiles evenly</li>
           </ul>
         </div>
         </div>
@@ -3101,7 +3324,6 @@ h1, h2, h3 {
           <path d="M7.3 10.2l1.8 1.8L12.7 8"/>
         </svg>
         <h4 class="stepper-label">Heuristic Evaluations</h4>
-        <span class="owner-tag">Contributed</span>
         <div class="mf-chip-cols">
           <div class="chip-col">
             <span class="chip-col-label quant-label">Quant</span>
@@ -3113,12 +3335,12 @@ h1, h2, h3 {
             <div class="chip-col-chips"><span class="chip qual">Findings &amp; recs</span></div>
           </div>
         </div>
-        <div class="card-expand-hint"><span onclick="toggleCardExpand(this)">Why this method<i class="ti ti-chevron-down" aria-hidden="true"></i></span></div>
+        <div class="card-expand-hint"><span onclick="toggleCardExpand(this)">Why this method<svg class="chevron-icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></span></div>
         <div class="card-expand">
           <ul>
-            <li>Fast, low-cost way to catch known usability violations before spending limited participant time</li>
-            <li>Severity ratings helped prioritize what the moderated study should focus on</li>
-            <li>Reduced risk of spending scarce TBI participant sessions on already-known issues</li>
+            <li><strong>Early Detection</strong> &mdash; caught known issues before spending participant time</li>
+            <li><strong>Severity Prioritization</strong> &mdash; focused the moderated study on what mattered most</li>
+            <li><strong>Session Efficiency</strong> &mdash; protected scarce TBI sessions from redundant testing</li>
           </ul>
         </div>
         </div>
@@ -3134,7 +3356,6 @@ h1, h2, h3 {
           <path d="M9.5 8.3v3.4l3-1.7z" fill="currentColor" stroke="none"/>
         </svg>
         <h4 class="stepper-label">Usability Study</h4>
-        <span class="owner-tag">Led</span>
         <div class="mf-chip-cols">
           <div class="chip-col">
             <span class="chip-col-label quant-label">Quant</span>
@@ -3152,12 +3373,12 @@ h1, h2, h3 {
             </div>
           </div>
         </div>
-        <div class="card-expand-hint"><span onclick="toggleCardExpand(this)">Why this method<i class="ti ti-chevron-down" aria-hidden="true"></i></span></div>
+        <div class="card-expand-hint"><span onclick="toggleCardExpand(this)">Why this method<svg class="chevron-icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></span></div>
         <div class="card-expand">
           <ul>
-            <li>Only real participants could validate whether fixes reduced reliance on the call center</li>
-            <li>Think-aloud plus task success gave both qualitative and quantitative evidence</li>
-            <li>Directly tested the redesign against the population it was meant to serve</li>
+            <li><strong>Real Validation</strong> &mdash; confirmed fixes actually reduced call-center reliance</li>
+            <li><strong>Mixed Methods</strong> &mdash; paired qualitative and quantitative evidence</li>
+            <li><strong>Direct Testing</strong> &mdash; tested against the exact population it serves</li>
           </ul>
         </div>
         </div>
@@ -3212,14 +3433,14 @@ h1, h2, h3 {
         <div class="mf-chip-groups">
           <div class="chip-row"><span class="chip quant">3:00 min</span></div>
         </div>
-        <div class="card-expand-hint"><span onclick="toggleCardExpand(this)">Task steps<i class="ti ti-chevron-down" aria-hidden="true"></i></span></div>
-        <div class="card-expand">
+        <div class="card-expand-hint"><span onclick="toggleCardExpand(this)">Task steps<svg class="chevron-icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></span></div>
+        <div class="card-expand card-expand-row">
+          <span class="card-expand-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10" cy="10" r="6.5"/><path d="M14.8 14.8L20 20"/></svg></span>
           <ul>
             <li>Find search feature</li>
             <li>Initiate search</li>
             <li>Review &amp; select relevant results</li>
           </ul>
-          <p class="card-expand-metric">Metric: time-on-task, 1&ndash;3 quant difficulty questions, 1 qual &ldquo;why difficult&rdquo; question</p>
         </div>
         </div>
       </div>
@@ -3235,14 +3456,14 @@ h1, h2, h3 {
         <div class="mf-chip-groups">
           <div class="chip-row"><span class="chip quant">3:00 min</span></div>
         </div>
-        <div class="card-expand-hint"><span onclick="toggleCardExpand(this)">Task steps<i class="ti ti-chevron-down" aria-hidden="true"></i></span></div>
-        <div class="card-expand">
+        <div class="card-expand-hint"><span onclick="toggleCardExpand(this)">Task steps<svg class="chevron-icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></span></div>
+        <div class="card-expand card-expand-row">
+          <span class="card-expand-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3h10a1 1 0 0 1 1 1v16l-6-3-6 3V4a1 1 0 0 1 1-1z"/></svg></span>
           <ul>
             <li>Find location/address</li>
             <li>Find contact information</li>
             <li>Identify availability (open/closed)</li>
           </ul>
-          <p class="card-expand-metric">Metric: time-on-task, 1&ndash;3 quant difficulty questions, 1 qual &ldquo;why difficult&rdquo; question</p>
         </div>
         </div>
       </div>
@@ -3258,14 +3479,14 @@ h1, h2, h3 {
         <div class="mf-chip-groups">
           <div class="chip-row"><span class="chip quant">3:00 min</span></div>
         </div>
-        <div class="card-expand-hint"><span onclick="toggleCardExpand(this)">Task steps<i class="ti ti-chevron-down" aria-hidden="true"></i></span></div>
-        <div class="card-expand">
+        <div class="card-expand-hint"><span onclick="toggleCardExpand(this)">Task steps<svg class="chevron-icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></span></div>
+        <div class="card-expand card-expand-row">
+          <span class="card-expand-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16l-6.5 7.5v5.5l-3 1.5v-7z"/></svg></span>
           <ul>
             <li>Set location</li>
             <li>Apply radius filtering</li>
             <li>Filter by day, hours, or service constraints</li>
           </ul>
-          <p class="card-expand-metric">Metric: time-on-task, 1&ndash;3 quant difficulty questions, 1 qual &ldquo;why difficult&rdquo; question</p>
         </div>
         </div>
       </div>
@@ -3282,13 +3503,13 @@ h1, h2, h3 {
         <div class="mf-chip-groups">
           <div class="chip-row"><span class="chip quant">3:00 min</span></div>
         </div>
-        <div class="card-expand-hint"><span onclick="toggleCardExpand(this)">Task steps<i class="ti ti-chevron-down" aria-hidden="true"></i></span></div>
-        <div class="card-expand">
+        <div class="card-expand-hint"><span onclick="toggleCardExpand(this)">Task steps<svg class="chevron-icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></span></div>
+        <div class="card-expand card-expand-row">
+          <span class="card-expand-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11.25 11.5h1v5h1"/></svg></span>
           <ul>
             <li>Locate eligibility requirements</li>
             <li>Understand if they qualify</li>
           </ul>
-          <p class="card-expand-metric">Metric: time-on-task, 1&ndash;3 quant difficulty questions, 1 qual &ldquo;why difficult&rdquo; question</p>
         </div>
         </div>
       </div>
@@ -3325,22 +3546,15 @@ h1, h2, h3 {
 </section>
 
 <section class="finding" id="finding1">
+  <h3><span class="sub-num">03.1</span>Finding &mdash; Navigation Confusion</h3>
   <div class="finding-tag-row">
-    <span class="finding-tag">Finding 1</span>
     <span class="severity-tag major">Major &middot; Severity 3</span>
     <span class="mini-seg-set mini-seg-arrow" aria-hidden="true">
       <span></span><span></span><span class="active"></span><span></span>
     </span>
   </div>
-  <h3>Navigation confusion</h3>
   <p>Users could not find where to start their search. The primary search function required a
   <strong>non-standard 3-step path</strong>, buried in a <strong>visually busy, low-contrast homepage</strong>.</p>
-
-  <div class="stat-row">
-    <div class="stat-box"><div class="stat-icon-panel"><svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10" cy="10" r="6.5"/><path d="M14.8 14.8L20 20"/></svg></div><div class="stat-content"><span class="num">2/6</span><span class="desc">couldn't find search in time</span></div></div>
-    <div class="stat-box"><div class="stat-icon-panel"><svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16l-6.5 7.5v5.5l-3 1.5v-7z"/></svg></div><div class="stat-content"><span class="num">4/6</span><span class="desc">struggled with location filters</span></div></div>
-    <div class="stat-box"><div class="stat-icon-panel"><svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11.25 11.5h1v5h1"/></svg></div><div class="stat-content"><span class="num">2/6</span><span class="desc">unaware filters existed at all</span></div></div>
-  </div>
 
   <div class="finding-visual finding-visual-pair">
     <figure>
@@ -3353,36 +3567,45 @@ h1, h2, h3 {
     </figure>
   </div>
 
+  <div class="stat-row">
+    <div class="stat-box"><div class="stat-icon-panel"><svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10" cy="10" r="6.5"/><path d="M14.8 14.8L20 20"/></svg></div><div class="stat-content"><span class="num">2/6</span><span class="desc">couldn't find search in time</span></div></div>
+    <div class="stat-box"><div class="stat-icon-panel"><svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16l-6.5 7.5v5.5l-3 1.5v-7z"/></svg></div><div class="stat-content"><span class="num">4/6</span><span class="desc">struggled with location filters</span></div></div>
+    <div class="stat-box"><div class="stat-icon-panel"><svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11.25 11.5h1v5h1"/></svg></div><div class="stat-content"><span class="num">2/6</span><span class="desc">unaware filters existed at all</span></div></div>
+  </div>
+
   <div class="recommendation">
     <div class="rec-head">&rarr; Solution</div>
     <div class="rec-body">Move the search bar to a <strong>fixed position in the global header</strong>, above the fold,
     always visible &mdash; eliminating the non-obvious multi-step path.</div>
+    <div class="rec-image">
+      <img src="assets/impact-update-desktop.png" alt="Updated WA211 homepage showing a new 'How WA211 Can Help You' helper section shipped in response to this finding">
+      <figcaption>Shipped: a dedicated helper section was added below the hero &mdash; see What Changed in Section 04</figcaption>
+    </div>
   </div>
 </section>
 
 <section class="finding" id="finding2">
+  <h3><span class="sub-num">03.2</span>Finding &mdash; Irrelevant Search Results</h3>
   <div class="finding-tag-row">
-    <span class="finding-tag">Finding 2</span>
     <span class="severity-tag critical">Critical &middot; Severity 4</span>
     <span class="mini-seg-set mini-seg-arrow" aria-hidden="true">
       <span></span><span></span><span></span><span class="active"></span>
     </span>
   </div>
-  <h3>Irrelevant search results</h3>
   <p>After successfully starting a search, results didn't match what participants were looking for &mdash;
   including <strong>out-of-state listings</strong> for searches <strong>explicitly filtered to Washington locations</strong>.</p>
-
-  <div class="stat-row">
-    <div class="stat-box"><div class="stat-icon-panel"><svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 3h5v5"/><path d="M8 21H3v-5"/><path d="M21 3l-7 7"/><path d="M3 21l7-7"/></svg></div><div class="stat-content"><span class="num">4/6</span><span class="desc">received unrelated results</span></div></div>
-    <div class="stat-box"><div class="stat-icon-panel"><svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21V9.5a1 1 0 0 0-.4-.8l-6-4.5a1 1 0 0 0-1.2 0l-6 4.5a1 1 0 0 0-.4.8V21"/><path d="M9 21v-6h6v6"/></svg></div><div class="stat-content"><span class="num">100%</span><span class="desc">out-of-state results in local searches</span></div></div>
-    <div class="stat-box"><div class="stat-icon-panel"><svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5"/><path d="M21 12H9"/></svg></div><div class="stat-content"><span class="num">3/6</span><span class="desc">expressed intent to abandon site</span></div></div>
-  </div>
 
   <div class="finding-visual">
     <figure>
       <img src="assets/finding2-search-results.png" alt="WA211 search results page showing no exact matches and a broad set of substitute results">
       <figcaption>Search results for &ldquo;shelter/housing/roommate&rdquo;</figcaption>
     </figure>
+  </div>
+
+  <div class="stat-row">
+    <div class="stat-box"><div class="stat-icon-panel"><svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 3h5v5"/><path d="M8 21H3v-5"/><path d="M21 3l-7 7"/><path d="M3 21l7-7"/></svg></div><div class="stat-content"><span class="num">4/6</span><span class="desc">received unrelated results</span></div></div>
+    <div class="stat-box"><div class="stat-icon-panel"><svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21V9.5a1 1 0 0 0-.4-.8l-6-4.5a1 1 0 0 0-1.2 0l-6 4.5a1 1 0 0 0-.4.8V21"/><path d="M9 21v-6h6v6"/></svg></div><div class="stat-content"><span class="num">100%</span><span class="desc">out-of-state results in local searches</span></div></div>
+    <div class="stat-box"><div class="stat-icon-panel"><svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5"/><path d="M21 12H9"/></svg></div><div class="stat-content"><span class="num">3/6</span><span class="desc">expressed intent to abandon site</span></div></div>
   </div>
 
   <blockquote class="quote">
@@ -3395,6 +3618,9 @@ h1, h2, h3 {
     <div class="rec-head">&rarr; Solution</div>
     <div class="rec-body">Implement <strong>keyword-matching and mandatory proximity-first ordering</strong>, so results
     actually reflect what users searched for.</div>
+    <div class="rec-image rec-image-pending">
+      <span>Implementation not yet confirmed &mdash; see Acknowledged in Section 04</span>
+    </div>
   </div>
 </section>
 
@@ -3405,50 +3631,54 @@ h1, h2, h3 {
     <span class="act-rule"></span>
   </div>
   <span class="eyebrow">So What</span>
-  <h2>Half of participants said they'd rather call than keep using the site &mdash; the exact outcome the redesign was meant to prevent</h2>
-  <div class="impact-grid">
-    <div class="impact-card confirmed">
-      <span class="status">Confirmed</span>
+  <h2><span class="impact-stat-highlight">Half of participants</span> said they'd rather call than keep using the site &mdash; the exact outcome the redesign was meant to prevent</h2>
+  <div class="impact-outcomes">
+    <div class="impact-outcome-card">
+      <div class="impact-outcome-head">
+        <span class="impact-outcome-ref">03.1</span>
+        <h4>Navigation Confusion</h4>
+        <span class="status confirmed">Confirmed &amp; Shipped</span>
+      </div>
       <p>WA211 <strong>acknowledged the search-discoverability finding directly</strong> &mdash; a team member confirmed it
-      as a known issue on their end, validating the recommendation to move search into the global
-      header.</p>
+      as a known issue on their end, validating the recommendation to move search into the global header.</p>
+      <div class="impact-outcome-images">
+        <figure>
+          <img src="assets/impact-update-desktop.png" alt="Updated WA211 homepage showing a new 'How WA211 Can Help You' section added below the hero">
+          <figcaption>Desktop</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/impact-update-mobile.png" alt="Updated WA211 mobile homepage showing the same new helper section and a View Helpful Tips button">
+          <figcaption>Mobile</figcaption>
+        </figure>
+      </div>
+      <p class="impact-outcome-caption">WA211 added a &ldquo;How WA211 Can Help You&rdquo; section and a &ldquo;View Helpful Tips&rdquo; entry point directly below the hero &mdash; a concrete, shipped response to this finding.</p>
     </div>
-    <div class="impact-card acknowledged">
-      <span class="status">Acknowledged</span>
-      <p>The search relevance/irrelevant-results finding was <strong>acknowledged as critical</strong> by the client,
-      though <strong>follow-through on implementation was not confirmed</strong> after the engagement ended.</p>
+
+    <div class="impact-outcome-card">
+      <div class="impact-outcome-head">
+        <span class="impact-outcome-ref">03.2</span>
+        <h4>Irrelevant Search Results</h4>
+        <span class="status acknowledged">Acknowledged</span>
+      </div>
+      <p>This finding was <strong>acknowledged as critical</strong> by the client, though <strong>follow-through on
+      implementation was not confirmed</strong> after the engagement ended.</p>
     </div>
   </div>
 
-  <div class="impact-update">
-    <h3 class="impact-update-label">What Changed</h3>
-    <div class="impact-update-images">
-      <figure>
-        <img src="assets/impact-update-desktop.png" alt="Updated WA211 homepage showing a new 'How WA211 Can Help You' section added below the hero">
-        <figcaption>Desktop</figcaption>
-      </figure>
-      <figure>
-        <img src="assets/impact-update-mobile.png" alt="Updated WA211 mobile homepage showing the same new helper section and a View Helpful Tips button">
-        <figcaption>Mobile</figcaption>
-      </figure>
+  <!-- Tailor these two cards per audience/role -- each is just a headline + one supporting line -->
+  <div class="impact-close-cards">
+    <div class="impact-close-card">
+      <span class="impact-close-label">The Bigger Picture</span>
+      <p class="impact-close-headline">This gap isn't unique to WA211.</p>
+      <p class="impact-close-support">Prior research relied on proxies, never the actual population &mdash; testing
+      with real users is what surfaced what standard methods would've missed.</p>
     </div>
-    <p class="impact-update-caption">WA211 added a &ldquo;How WA211 Can Help You&rdquo; section and a &ldquo;View Helpful Tips&rdquo; entry point directly below the hero &mdash; a concrete, shipped response to the navigation-confusion finding.</p>
-  </div>
-
-  <div class="impact-close">
-    <p>This gap wasn't unique to WA211. The usability research this study replaced had only ever tested with
-    proxy participants standing in for cognitive and physical accessibility needs &mdash; never the people who
-    actually live with them. That's worth naming beyond this one engagement: any product serving a crisis
-    population should be tested with the population it's actually built for, not an approximation of it.
-    Where that hasn't happened yet, it's worth asking why &mdash; and it's the direction I want future work in
-    this space to keep pushing toward.</p>
-
-    <p>That gap is also what drew me into this work in the first place. My interest in research started in
-    psychology, driven by wanting to understand how people make decisions &mdash; and by extension, whose
-    decisions get overlooked. Studies like this one, where the process itself has to bend to meet participants
-    rather than the other way around, are the ones I look for. They ask more of the researcher, and that's the
-    kind of challenge I want to keep rising to &mdash; for communities whose needs are too often designed around
-    instead of designed with.</p>
+    <div class="impact-close-card">
+      <span class="impact-close-label">Why This Matters to Me</span>
+      <p class="impact-close-headline">This is the kind of challenge I look for.</p>
+      <p class="impact-close-support">My research roots are in understanding people whose needs get overlooked
+      &mdash; and I want to keep building for communities who depend on it, not just benefit from it.</p>
+    </div>
   </div>
 </section>
 
