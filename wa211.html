@@ -394,10 +394,6 @@ h1, h2, h3 {
   margin-bottom: 20px;
 }
 
-.who-section {
-  padding: 8px var(--content-pad) 32px;
-}
-
 .who-heading {
   font-family: var(--font-head);
   font-weight: 700;
@@ -405,50 +401,132 @@ h1, h2, h3 {
   text-transform: uppercase;
   letter-spacing: 0.05em;
   color: var(--orange-deep);
-  margin-bottom: 14px;
+  margin-bottom: 10px;
 }
 
-.who-strip {
+.intro-who-block {
   display: flex;
-  gap: 24px;
-  flex-wrap: wrap;
-  padding: 18px 0;
+  gap: 20px;
+  align-items: center;
+  padding: 20px 0;
+  margin: 20px 0 28px;
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
 }
 
-.who-item {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.who-icon {
-  width: 22px;
-  height: 22px;
-  color: var(--orange-deep);
-  flex-shrink: 0;
-}
-
-.who-text {
+.intro-who-image {
+  flex: 0 0 140px;
+  height: 140px;
+  border: 2px dashed var(--border);
+  border-radius: var(--radius);
+  background: var(--bg-alt);
   display: flex;
   flex-direction: column;
-}
-
-.who-value {
-  font-family: var(--font-head);
-  font-weight: 800;
-  font-size: 15px;
-  color: var(--navy);
-  line-height: 1.2;
-}
-
-.who-label {
-  font-size: 10.5px;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
   color: var(--text-muted);
+}
+
+.intro-who-image span {
+  font-size: 10px;
+  text-align: center;
+}
+
+.intro-who-text p {
+  margin: 0;
+  font-size: 14px;
+  color: var(--text-body);
+  line-height: 1.55;
+}
+
+.intro-people {
+  margin-top: 8px;
+}
+
+.intro-people-heading {
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 13px;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
-  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: var(--orange-deep);
+  margin: 24px 0 12px;
+}
+
+.intro-people-heading:first-child {
+  margin-top: 0;
+}
+
+.intro-people-row {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.intro-people-card {
+  flex: 1;
+  min-width: 220px;
+  background: var(--bg-alt);
+  border-radius: var(--radius);
+  padding: 16px 18px;
+}
+
+.intro-people-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--navy);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.intro-people-name {
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--navy);
+  margin-bottom: 4px;
+}
+
+.intro-people-sub {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.intro-people-desc {
+  margin: 0;
+  font-size: 12.5px;
+  color: var(--text-body);
+  line-height: 1.5;
+}
+
+.intro-bridge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+  text-align: center;
+  color: var(--text-muted);
+}
+
+.intro-bridge p {
+  margin: 0;
+  font-size: 13px;
+  font-style: italic;
+}
+
+@media (max-width: 600px) {
+  .intro-who-block { flex-direction: column; }
+  .intro-who-image { width: 100%; }
 }
 
 .hero .takeaway {
@@ -2673,6 +2751,13 @@ h1, h2, h3 {
   color: #7a2a2a;
   padding: 0 12px;
   position: relative;
+  cursor: default;
+  transition: color 0.15s ease;
+}
+
+.avoided-item:hover {
+  color: #b23b3b;
+  font-weight: 700;
 }
 
 .avoided-item:first-child {
@@ -2692,6 +2777,38 @@ h1, h2, h3 {
   width: 1px;
   height: 12px;
   background: #c17b7b;
+}
+
+.avoided-examples {
+  position: relative;
+  min-height: 0;
+  margin: 10px -18px 0;
+  padding: 10px 18px 0;
+  border-top: 1px dashed #e8a099;
+  background: #fef6f5;
+  text-align: center;
+}
+
+.avoided-example {
+  display: block;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  font-weight: 400;
+  font-style: italic;
+  font-size: 11px;
+  color: #a8574f;
+  line-height: 1.4;
+  transition: max-height 0.25s ease, opacity 0.2s ease, margin-top 0.25s ease;
+}
+
+.avoided-box:has(.avoided-i1:hover) .ex1,
+.avoided-box:has(.avoided-i2:hover) .ex2,
+.avoided-box:has(.avoided-i3:hover) .ex3,
+.avoided-box:has(.avoided-i4:hover) .ex4 {
+  max-height: 60px;
+  opacity: 1;
+  margin-top: 8px;
 }
 
 /* ============================================
@@ -2769,8 +2886,8 @@ h1, h2, h3 {
 }
 
 .stepper-icon {
-  width: 20px;
-  height: 20px;
+  width: 23px;
+  height: 23px;
   color: var(--orange-deep);
   flex-shrink: 0;
 }
@@ -2794,7 +2911,7 @@ h1, h2, h3 {
 .stepper-label {
   font-family: var(--font-head);
   font-weight: 700;
-  font-size: 12px;
+  font-size: 13.5px;
   color: var(--navy);
   line-height: 1.3;
   margin: 0;
@@ -2954,13 +3071,13 @@ h1, h2, h3 {
 }
 
 .task-split-main {
-  flex: 3;
+  flex: 1;
   background: #eef2f8;
   color: var(--navy);
 }
 
 .task-split-qs {
-  flex: 2;
+  flex: 1;
   background: var(--amber-bg);
   color: var(--orange-deep);
 }
@@ -3137,9 +3254,8 @@ h1, h2, h3 {
     <div class="toc-subgroup">
       <a href="#rq" data-toc="rq" class="toc-sub"><span class="toc-sub-num">02.1</span>Research question</a>
       <a href="#population" data-toc="population" class="toc-sub"><span class="toc-sub-num">02.2</span>Population &amp; setting</a>
-      <a href="#roles" data-toc="roles" class="toc-sub"><span class="toc-sub-num">02.3</span>Roles &amp; responsibilities</a>
-      <a href="#methodology" data-toc="methodology" class="toc-sub"><span class="toc-sub-num">02.4</span>Methodology</a>
-      <a href="#usability" data-toc="usability" class="toc-sub"><span class="toc-sub-num">02.5</span>Usability study</a>
+      <a href="#methodology" data-toc="methodology" class="toc-sub"><span class="toc-sub-num">02.3</span>Methodology</a>
+      <a href="#usability" data-toc="usability" class="toc-sub"><span class="toc-sub-num">02.4</span>Usability study</a>
     </div>
   </div>
 
@@ -3199,6 +3315,20 @@ h1, h2, h3 {
   <span class="eyebrow">UX Research &middot; Usability Study</span>
   <h2>Washington 211: designing a crisis resource that works as well online as it does by phone</h2>
 
+  <div class="intro-who-block">
+    <div class="intro-who-image">
+      <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+      <span>Photo placeholder</span>
+    </div>
+    <div class="intro-who-text">
+      <h3 class="who-heading">Who is Washington 211?</h3>
+      <p>Washington 211 is a free, confidential, multilingual helpline &mdash; Washington State's one-stop
+      connection to community services, including utility assistance, food, housing, healthcare, elder care,
+      childcare, and mental health support. Since 2006, WA211 has fielded over <strong>6 million calls</strong>,
+      backed by a statewide directory of more than <strong>17,000 local resources</strong>.</p>
+    </div>
+  </div>
+
   <div class="act-marker">
     <span class="act-label">Study Outline</span>
     <span class="act-rule"></span>
@@ -3209,67 +3339,84 @@ h1, h2, h3 {
     were <strong>choosing to abandon the site and call in instead</strong>. WA211 <strong>acknowledged the
     findings</strong>, with one team member confirming the search-discoverability fix as a known issue.
   </p>
+
+  <div class="intro-people">
+    <h3 class="intro-people-heading">Stakeholders</h3>
+    <div class="intro-people-row">
+      <div class="intro-people-card">
+        <div class="intro-people-icon">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        </div>
+        <div class="intro-people-name">Washington 211</div>
+        <p class="intro-people-desc">Commissioned the study to understand whether the redesigned site actually
+        works for the population it needs to reach.</p>
+      </div>
+      <div class="intro-people-card">
+        <div class="intro-people-icon">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2a4 4 0 0 1 4 4c0 1.5-1 3-2 4l-2 2-2-2c-1-1-2-2.5-2-4a4 4 0 0 1 4-4z"/><path d="M12 12v10"/><path d="M8 18h8"/></svg>
+        </div>
+        <div class="intro-people-name">DSHS <span class="intro-people-sub">(Dept. of Social &amp; Health Services)</span></div>
+        <p class="intro-people-desc">Our expert consultant &mdash; provided background on TBI, stayed available
+        for questions throughout, and joined a mock usability study to pressure-test the design in a realistic
+        setting.</p>
+      </div>
+    </div>
+
+    <h3 class="intro-people-heading">Team</h3>
+    <div class="contributor-team-row">
+      <div class="contributor-card">
+        <div class="contributor-head">
+          <div class="contributor-avatar">CD</div>
+          <div>
+            <div class="contributor-name">Camilla Delgado</div>
+            <div class="contributor-role">Task Design &amp; Data Log</div>
+          </div>
+        </div>
+      </div>
+      <div class="contributor-card">
+        <div class="contributor-head">
+          <div class="contributor-avatar">KR</div>
+          <div>
+            <div class="contributor-name">Konstantin Ritter</div>
+            <div class="contributor-role">Consent &amp; Compliance</div>
+          </div>
+        </div>
+      </div>
+      <div class="contributor-card">
+        <div class="contributor-head">
+          <div class="contributor-avatar">TE</div>
+          <div>
+            <div class="contributor-name">Tulasi Elangovan</div>
+            <div class="contributor-role">Heuristic Eval Lead</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="contributor-featured-row">
+      <div class="contributor-card highlight">
+        <div class="contributor-head">
+          <div class="contributor-avatar">AD</div>
+          <div>
+            <div class="contributor-name">Angel Diaz</div>
+            <div class="contributor-role">Research Lead</div>
+          </div>
+        </div>
+        <ul class="contributor-list">
+          <li>Stakeholder consultation &amp; screener design</li>
+          <li>Study &amp; session design</li>
+          <li>Moderation (all 6 sessions)</li>
+          <li>Client &amp; participant ops, data logging framework</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="intro-bridge">
+    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v14"/><path d="M6 13l6 6 6-6"/></svg>
+    <p>Here's the problem that set this study in motion.</p>
+  </div>
 </header>
-
-<section class="who-section">
-  <h3 class="who-heading">Who is Washington 211?</h3>
-  <div class="who-strip" role="img" aria-label="Who is Washington 211: established 2006, over 6 million calls handled, connecting residents to housing, food, health, and utility assistance">
-    <div class="who-item">
-      <svg class="who-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="10" width="18" height="11" rx="1"/><path d="M8 10V6a4 4 0 0 1 8 0v4"/></svg>
-      <div class="who-text"><div class="who-value">2006</div>
-      <div class="who-label">Established</div></div>
-    </div>
-    <div class="who-item">
-      <svg class="who-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-      <div class="who-text"><div class="who-value">6M+</div>
-      <div class="who-label">Calls handled</div></div>
-    </div>
-    <div class="who-item">
-      <svg class="who-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21V9.5a1 1 0 0 0-.4-.8l-6-4.5a1 1 0 0 0-1.2 0l-6 4.5a1 1 0 0 0-.4.8V21"/><path d="M9 21v-6h6v6"/></svg>
-      <div class="who-text"><div class="who-value">Housing &middot; Food &middot; Health</div>
-      <div class="who-label">Core services</div></div>
-    </div>
-  </div>
-</section>
-
-<section class="snapshot-card">
-  <div class="snapshot-team">
-    <svg viewBox="0 0 660 160" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Team and stakeholder map: team members on the left, Washington 211 and Department of Social and Health Services stakeholders on the right">
-      <text x="175" y="17" text-anchor="middle" font-family="Poppins, sans-serif" font-weight="700" font-size="12" letter-spacing="0.06em" fill="#55606b">TEAM</text>
-      <text x="500" y="17" text-anchor="middle" font-family="Poppins, sans-serif" font-weight="700" font-size="12" letter-spacing="0.06em" fill="#55606b">STAKEHOLDERS</text>
-
-      <line x1="380" y1="5" x2="380" y2="150" stroke="#e2e6ee" stroke-width="1.5"/>
-
-      <circle cx="55" cy="62" r="26" fill="#0d3b78"/>
-      <text x="55" y="68" text-anchor="middle" font-family="Poppins, sans-serif" font-weight="700" font-size="13" fill="#fff">CD</text>
-      <text x="55" y="104" text-anchor="middle" font-family="Poppins, sans-serif" font-weight="600" font-size="10" fill="#0d3b78">Camilla D</text>
-
-      <circle cx="145" cy="62" r="26" fill="#0d3b78"/>
-      <text x="145" y="68" text-anchor="middle" font-family="Poppins, sans-serif" font-weight="700" font-size="13" fill="#fff">KR</text>
-      <text x="145" y="104" text-anchor="middle" font-family="Poppins, sans-serif" font-weight="600" font-size="10" fill="#0d3b78">Konstantin R</text>
-
-      <circle cx="235" cy="62" r="26" fill="#0d3b78"/>
-      <text x="235" y="68" text-anchor="middle" font-family="Poppins, sans-serif" font-weight="700" font-size="13" fill="#fff">TE</text>
-      <text x="235" y="104" text-anchor="middle" font-family="Poppins, sans-serif" font-weight="600" font-size="10" fill="#0d3b78">Tulasi E</text>
-
-      <circle cx="330" cy="62" r="30" fill="#e8963c"/>
-      <text x="330" y="69" text-anchor="middle" font-family="Poppins, sans-serif" font-weight="700" font-size="14" fill="#fff">AD</text>
-      <text x="330" y="104" text-anchor="middle" font-family="Poppins, sans-serif" font-weight="700" font-size="10" fill="#0d3b78">Angel D</text>
-
-      <circle cx="460" cy="62" r="30" fill="#f5f7fb" stroke="#c7d2e0" stroke-width="2" stroke-dasharray="4 3"/>
-      <text x="460" y="67" text-anchor="middle" font-family="Poppins, sans-serif" font-weight="700" font-size="13" fill="#0d3b78">211</text>
-      <text x="460" y="106" text-anchor="middle" font-family="Poppins, sans-serif" font-weight="600" font-size="10" fill="#0d3b78">Washington</text>
-      <text x="460" y="118" text-anchor="middle" font-family="Poppins, sans-serif" font-weight="600" font-size="10" fill="#0d3b78">211</text>
-
-      <circle cx="575" cy="62" r="30" fill="#f5f7fb" stroke="#c7d2e0" stroke-width="2" stroke-dasharray="4 3"/>
-      <text x="575" y="67" text-anchor="middle" font-family="Poppins, sans-serif" font-weight="700" font-size="12" fill="#0d3b78">DSHS</text>
-      <text x="575" y="106" text-anchor="middle" font-family="Poppins, sans-serif" font-weight="600" font-size="10" fill="#0d3b78">Department of</text>
-      <text x="575" y="118" text-anchor="middle" font-family="Poppins, sans-serif" font-weight="600" font-size="10" fill="#0d3b78">Social and</text>
-      <text x="575" y="130" text-anchor="middle" font-family="Poppins, sans-serif" font-weight="600" font-size="10" fill="#0d3b78">Health Services</text>
-    </svg>
-    <p class="snapshot-team-caption">4-person team &middot; WA211 and DSHS informed the study design</p>
-  </div>
-</section>
 
 <section class="section" id="problem">
   <div class="act-marker">
@@ -3427,60 +3574,7 @@ h1, h2, h3 {
   </div>
 
   <div class="subsection-box">
-  <h3 class="strategy-subhead" id="roles"><span class="sub-num">02.3</span>Roles &amp; Responsibilities</h3>
-
-  <div class="contributor-team-row">
-    <div class="contributor-card">
-      <div class="contributor-head">
-        <div class="contributor-avatar">CD</div>
-        <div>
-          <div class="contributor-name">Camilla Delgado</div>
-          <div class="contributor-role">Task Design &amp; Data Log</div>
-        </div>
-      </div>
-    </div>
-    <div class="contributor-card">
-      <div class="contributor-head">
-        <div class="contributor-avatar">KR</div>
-        <div>
-          <div class="contributor-name">Konstantin Ritter</div>
-          <div class="contributor-role">Consent &amp; Compliance</div>
-        </div>
-      </div>
-    </div>
-    <div class="contributor-card">
-      <div class="contributor-head">
-        <div class="contributor-avatar">TE</div>
-        <div>
-          <div class="contributor-name">Tulasi Elangovan</div>
-          <div class="contributor-role">Heuristic Eval Lead</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="contributor-featured-row">
-    <div class="contributor-card highlight">
-      <div class="contributor-head">
-        <div class="contributor-avatar">AD</div>
-        <div>
-          <div class="contributor-name">Angel Diaz</div>
-          <div class="contributor-role">You &middot; Research Lead</div>
-        </div>
-      </div>
-      <ul class="contributor-list">
-        <li>Stakeholder consultation &amp; screener design</li>
-        <li>Study &amp; session design</li>
-        <li>Moderation (all 6 sessions)</li>
-        <li>Client &amp; participant ops, data logging framework</li>
-      </ul>
-    </div>
-  </div>
-
-  </div>
-
-  <div class="subsection-box">
-  <h3 class="strategy-subhead" id="methodology"><span class="sub-num">02.4</span>Methodology &amp; Data Recorded</h3>
+  <h3 class="strategy-subhead" id="methodology"><span class="sub-num">02.3</span>Methodology &amp; Data Recorded</h3>
   <div class="phase-meta">
     <div class="phase-meta-stat">
       <span class="phase-meta-value">3 months</span>
@@ -3497,7 +3591,7 @@ h1, h2, h3 {
           <path d="M4 5h11a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2H9l-4 3v-3H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"/>
           <path d="M9 15h9a2 2 0 0 0 2-2V9"/>
         </svg>
-        <h4 class="stepper-label">Expert Consultation &amp; Mock Interviews (DSHS)</h4>
+        <h4 class="stepper-label">Expert Consultation &amp; Mock Interviews</h4>
         <div class="mf-chip-cols">
           <div class="chip-col">
             <span class="chip-col-label qual-label">Qual</span>
@@ -3619,17 +3713,23 @@ h1, h2, h3 {
       <span class="avoided-scope">Participant-facing methods only (consultation, screener, usability study)</span>
     </p>
     <div class="avoided-plain">
-      <span class="avoided-item">Complex framing</span>
-      <span class="avoided-item">Open-ended questions</span>
-      <span class="avoided-item">Likert scales</span>
-      <span class="avoided-item">Complex matrices</span>
+      <span class="avoided-item avoided-i1">Complex framing</span>
+      <span class="avoided-item avoided-i2">Open-ended questions</span>
+      <span class="avoided-item avoided-i3">Likert scales</span>
+      <span class="avoided-item avoided-i4">Complex matrices</span>
+    </div>
+    <div class="avoided-examples">
+      <span class="avoided-example ex1">e.g. &ldquo;To what extent does the current information architecture facilitate task completion?&rdquo;</span>
+      <span class="avoided-example ex2">e.g. &ldquo;Walk me through your experience using the site.&rdquo;</span>
+      <span class="avoided-example ex3">e.g. &ldquo;Rate ease of use from 1 (very difficult) to 7 (very easy)&rdquo;</span>
+      <span class="avoided-example ex4">e.g. a grid rating 6 features across 5 criteria</span>
     </div>
   </div>
 
   </div>
 
   <div class="subsection-box">
-  <h3 class="strategy-subhead" id="usability"><span class="sub-num">02.5</span>Usability Study</h3>
+  <h3 class="strategy-subhead" id="usability"><span class="sub-num">02.4</span>Usability Study</h3>
   <div class="session-group">
     <div class="phase-meta">
       <div class="phase-meta-stat">
@@ -3647,8 +3747,6 @@ h1, h2, h3 {
       <p class="session-split-caption">8 min reserved to accommodate participant needs</p>
     </div>
   </div>
-  <p class="task-constraint-note">Each task below carried its own strict 3-minute limit &mdash; task and
-  post-task questions both had to fit inside it, even as participant needs varied session to session.</p>
   <div class="stepper stepper-numB">
     <div class="stepper-step">
       <div class="stepper-box expandable">
