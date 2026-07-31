@@ -394,29 +394,18 @@ h1, h2, h3 {
   margin-bottom: 20px;
 }
 
-.who-heading {
-  font-family: var(--font-head);
-  font-weight: 700;
-  font-size: 13px;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--orange-deep);
-  margin-bottom: 10px;
-}
-
 .intro-who-block {
   display: flex;
   gap: 20px;
   align-items: center;
-  padding: 20px 0;
-  margin: 20px 0 28px;
-  border-top: 1px solid var(--border);
+  padding-bottom: 20px;
+  margin-bottom: 20px;
   border-bottom: 1px solid var(--border);
 }
 
 .intro-who-image {
-  flex: 0 0 140px;
-  height: 140px;
+  flex: 0 0 200px;
+  height: 200px;
   border: 2px dashed var(--border);
   border-radius: var(--radius);
   background: var(--bg-alt);
@@ -426,6 +415,12 @@ h1, h2, h3 {
   justify-content: center;
   gap: 6px;
   color: var(--text-muted);
+  overflow: hidden;
+}
+
+.intro-who-image svg {
+  width: 90px;
+  height: auto;
 }
 
 .intro-who-image span {
@@ -434,10 +429,49 @@ h1, h2, h3 {
 }
 
 .intro-who-text p {
-  margin: 0;
+  margin: 0 0 12px;
   font-size: 14px;
   color: var(--text-body);
   line-height: 1.55;
+}
+
+.intro-who-stats {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.intro-who-stat {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.intro-who-stat svg {
+  color: var(--orange-deep);
+  flex-shrink: 0;
+}
+
+.intro-who-stat div {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+}
+
+.stat-val {
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: 13px;
+  color: var(--navy);
+}
+
+.stat-lbl {
+  font-size: 9px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  font-weight: 600;
 }
 
 .intro-people {
@@ -458,10 +492,31 @@ h1, h2, h3 {
   margin-top: 0;
 }
 
+.intro-section-tag {
+  display: block;
+  font-size: 13px;
+  color: var(--navy);
+  margin-bottom: 4px;
+}
+
+.intro-section-tag + .intro-people-heading {
+  margin-top: 0;
+}
+
+.intro-team-heading {
+  color: var(--navy);
+}
+
 .intro-people-row {
   display: flex;
   gap: 14px;
   flex-wrap: wrap;
+}
+
+.intro-people-divider {
+  height: 1px;
+  background: var(--border);
+  margin: 24px 0;
 }
 
 .intro-people-card {
@@ -470,6 +525,13 @@ h1, h2, h3 {
   background: var(--bg-alt);
   border-radius: var(--radius);
   padding: 16px 18px;
+}
+
+.intro-people-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
 }
 
 .intro-people-icon {
@@ -481,7 +543,13 @@ h1, h2, h3 {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 10px;
+  flex-shrink: 0;
+}
+
+.intro-people-head > div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
 }
 
 .intro-people-name {
@@ -489,7 +557,18 @@ h1, h2, h3 {
   font-weight: 700;
   font-size: 14px;
   color: var(--navy);
-  margin-bottom: 4px;
+  line-height: 1.15;
+}
+
+.intro-people-title {
+  display: inline-block;
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 9.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--orange-deep);
+  line-height: 1.15;
 }
 
 .intro-people-sub {
@@ -504,6 +583,11 @@ h1, h2, h3 {
   font-size: 12.5px;
   color: var(--text-body);
   line-height: 1.5;
+}
+
+.intro-people-desc strong {
+  color: var(--navy);
+  font-weight: 700;
 }
 
 .intro-bridge {
@@ -530,7 +614,7 @@ h1, h2, h3 {
 }
 
 .hero .takeaway {
-  font-size: clamp(16px, 2vw, 18px);
+  font-size: 14px;
   color: var(--text-body);
   font-weight: 400;
   background: var(--bg-alt);
@@ -2044,15 +2128,29 @@ h1, h2, h3 {
 }
 
 .rq-banner {
+  position: relative;
   background: var(--navy);
   color: #fff;
   border-radius: var(--radius);
   padding: 16px 24px;
   text-align: center;
   margin-bottom: 20px;
+  overflow: hidden;
+}
+
+.rq-banner-watermark {
+  position: absolute;
+  bottom: -18px;
+  right: -18px;
+  width: 90px;
+  height: 90px;
+  color: rgba(255, 255, 255, 0.08);
+  pointer-events: none;
 }
 
 .rq-banner-label {
+  position: relative;
+  z-index: 1;
   display: block;
   font-family: var(--font-head);
   font-weight: 800;
@@ -2064,10 +2162,17 @@ h1, h2, h3 {
 }
 
 .rq-banner p {
+  position: relative;
+  z-index: 1;
   margin: 0;
   font-size: 15px;
   line-height: 1.4;
   color: #fff;
+}
+
+#rq .rq-banner p strong {
+  color: #ffcf94;
+  font-weight: 700;
 }
 
 .rq-col-heads {
@@ -2781,34 +2886,95 @@ h1, h2, h3 {
 
 .avoided-examples {
   position: relative;
-  min-height: 0;
-  margin: 10px -18px 0;
-  padding: 10px 18px 0;
-  border-top: 1px dashed #e8a099;
-  background: #fef6f5;
-  text-align: center;
+  margin: 0 -18px;
+  padding: 0 18px;
 }
 
 .avoided-example {
-  display: block;
-  max-height: 0;
-  opacity: 0;
-  overflow: hidden;
-  font-weight: 400;
-  font-style: italic;
-  font-size: 11px;
+  display: none;
+  padding: 14px 18px;
+  text-align: center;
+  font-weight: 600;
+  font-style: normal;
+  font-size: 13px;
   color: #a8574f;
   line-height: 1.4;
-  transition: max-height 0.25s ease, opacity 0.2s ease, margin-top 0.25s ease;
+}
+
+.avoided-box:has(.avoided-i1:hover) .avoided-examples,
+.avoided-box:has(.avoided-i2:hover) .avoided-examples,
+.avoided-box:has(.avoided-i3:hover) .avoided-examples,
+.avoided-box:has(.avoided-i4:hover) .avoided-examples {
+  border-top: 1px solid #e8a099;
+  background: #fef6f5;
 }
 
 .avoided-box:has(.avoided-i1:hover) .ex1,
 .avoided-box:has(.avoided-i2:hover) .ex2,
 .avoided-box:has(.avoided-i3:hover) .ex3,
 .avoided-box:has(.avoided-i4:hover) .ex4 {
-  max-height: 60px;
-  opacity: 1;
-  margin-top: 8px;
+  display: block;
+}
+
+.likert-demo,
+.matrix-demo {
+  color: #7a2a2a;
+}
+
+.likert-q {
+  margin: 0 0 8px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #7a2a2a;
+}
+
+.likert-row {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.likert-dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 1.5px solid #b23b3b;
+  display: inline-block;
+}
+
+.likert-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 9px;
+  color: #a8574f;
+  max-width: 200px;
+  margin: 0 auto;
+}
+
+.matrix-demo table {
+  border-collapse: collapse;
+  margin: 0 auto;
+}
+
+.matrix-demo th,
+.matrix-demo td {
+  border: 1px solid #e8a099;
+  padding: 4px 10px;
+  font-size: 10px;
+  color: #7a2a2a;
+  font-weight: 600;
+}
+
+.matrix-demo th {
+  background: #fdecea;
+  font-size: 9.5px;
+}
+
+.matrix-demo td {
+  text-align: center;
+  color: #b23b3b;
+  font-size: 11px;
 }
 
 /* ============================================
@@ -2824,6 +2990,21 @@ h1, h2, h3 {
   max-width: 900px;
   margin: 34px auto 0;
   gap: 16px;
+}
+
+.stepper-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  max-width: 620px;
+  gap: 20px;
+}
+
+.stepper-grid .stepper-step {
+  flex: none;
+}
+
+.stepper-grid .stepper-step::before {
+  display: none;
 }
 
 .stepper-step {
@@ -3044,17 +3225,24 @@ h1, h2, h3 {
 }
 
 .task-split {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
+  justify-content: center;
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: #fff;
+  padding: 16px 20px 14px;
+  margin-top: 12px;
 }
 
 .task-split-bar {
   display: flex;
-  height: 20px;
-  width: 150px;
-  border-radius: 5px;
+  height: 26px;
+  width: 100%;
+  border-radius: 6px;
   overflow: hidden;
 }
 
@@ -3064,8 +3252,8 @@ h1, h2, h3 {
   align-items: center;
   justify-content: center;
   font-family: var(--font-head);
-  font-weight: 700;
-  font-size: 8.5px;
+  font-weight: 500;
+  font-size: 10px;
   text-transform: uppercase;
   letter-spacing: 0.02em;
 }
@@ -3082,11 +3270,39 @@ h1, h2, h3 {
   color: var(--orange-deep);
 }
 
-.task-split-total {
+.task-split-ticks {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 4px;
+  padding: 0 2px;
+}
+
+.task-split-ticks span {
   font-family: var(--font-head);
-  font-weight: 800;
-  font-size: 13px;
+  font-size: 8.5px;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.task-split-total {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--bg-alt);
   color: var(--navy);
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 9.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  padding: 3px 12px;
+  border-radius: 5px;
+  white-space: nowrap;
 }
 
 .card-expand-badge {
@@ -3198,6 +3414,7 @@ h1, h2, h3 {
     align-items: center;
   }
   .stepper-step { max-width: 260px; width: 100%; flex-basis: auto; }
+  .stepper-grid { grid-template-columns: 1fr; max-width: 300px; margin: 34px auto 0; }
 }
 
 /* ============================================
@@ -3315,54 +3532,87 @@ h1, h2, h3 {
   <span class="eyebrow">UX Research &middot; Usability Study</span>
   <h2>Washington 211: designing a crisis resource that works as well online as it does by phone</h2>
 
-  <div class="intro-who-block">
-    <div class="intro-who-image">
-      <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-      <span>Photo placeholder</span>
-    </div>
-    <div class="intro-who-text">
-      <h3 class="who-heading">Who is Washington 211?</h3>
-      <p>Washington 211 is a free, confidential, multilingual helpline &mdash; Washington State's one-stop
-      connection to community services, including utility assistance, food, housing, healthcare, elder care,
-      childcare, and mental health support. Since 2006, WA211 has fielded over <strong>6 million calls</strong>,
-      backed by a statewide directory of more than <strong>17,000 local resources</strong>.</p>
-    </div>
-  </div>
-
-  <div class="act-marker">
-    <span class="act-label">Study Outline</span>
-    <span class="act-rule"></span>
-  </div>
-  <p class="takeaway">
-    A usability study with individuals with Traumatic Brain Injury (TBI) revealed <strong>critical navigation
-    and search-relevance failures</strong> on Washington 211's housing resource site &mdash; where users in crisis
-    were <strong>choosing to abandon the site and call in instead</strong>. WA211 <strong>acknowledged the
-    findings</strong>, with one team member confirming the search-discoverability fix as a known issue.
-  </p>
-
+  <div class="subsection-box">
   <div class="intro-people">
-    <h3 class="intro-people-heading">Stakeholders</h3>
+    <span class="intro-people-title intro-section-tag">Stakeholders</span>
+    <h3 class="intro-people-heading">Who is Washington 211?</h3>
+
+    <div class="intro-who-block">
+      <div class="intro-who-image">
+        <svg viewBox="0 0 160 140" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <ellipse cx="80" cy="70" rx="74" ry="54" fill="#eef2f8"/>
+          <circle cx="80" cy="52" r="20" fill="#0d3b78"/>
+          <path d="M45 108c0-20 15-35 35-35s35 15 35 35" fill="#0d3b78"/>
+          <circle cx="80" cy="52" r="7" fill="#fff"/>
+          <path d="M74 56h12M80 50v12" stroke="#0d3b78" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <span>Photo placeholder</span>
+      </div>
+      <div class="intro-who-text">
+        <p>Washington 211 is a free, confidential, multilingual helpline &mdash; Washington State's one-stop
+        connection to community services, including utility assistance, food, housing, healthcare, elder care,
+        childcare, and mental health support.</p>
+        <div class="intro-who-stats">
+          <div class="intro-who-stat">
+            <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="10" width="18" height="11" rx="1"/><path d="M8 10V6a4 4 0 0 1 8 0v4"/></svg>
+            <div><span class="stat-val">2006</span><span class="stat-lbl">Established</span></div>
+          </div>
+          <div class="intro-who-stat">
+            <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            <div><span class="stat-val">6M+</span><span class="stat-lbl">Calls handled</span></div>
+          </div>
+          <div class="intro-who-stat">
+            <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21V9.5a1 1 0 0 0-.4-.8l-6-4.5a1 1 0 0 0-1.2 0l-6 4.5a1 1 0 0 0-.4.8V21"/><path d="M9 21v-6h6v6"/></svg>
+            <div><span class="stat-val">17,000+</span><span class="stat-lbl">Local resources</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="intro-people-row">
       <div class="intro-people-card">
-        <div class="intro-people-icon">
-          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        <div class="intro-people-head">
+          <div class="intro-people-icon">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </div>
+          <div>
+            <div class="intro-people-name">Washington 211</div>
+            <span class="intro-people-title">Client</span>
+          </div>
         </div>
-        <div class="intro-people-name">Washington 211</div>
-        <p class="intro-people-desc">Commissioned the study to understand whether the redesigned site actually
-        works for the population it needs to reach.</p>
+        <p class="intro-people-desc"><strong>Commissioned the study</strong> to understand whether the
+        redesigned site actually works for the population it needs to reach.</p>
       </div>
       <div class="intro-people-card">
-        <div class="intro-people-icon">
-          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2a4 4 0 0 1 4 4c0 1.5-1 3-2 4l-2 2-2-2c-1-1-2-2.5-2-4a4 4 0 0 1 4-4z"/><path d="M12 12v10"/><path d="M8 18h8"/></svg>
+        <div class="intro-people-head">
+          <div class="intro-people-icon">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2a4 4 0 0 1 4 4c0 1.5-1 3-2 4l-2 2-2-2c-1-1-2-2.5-2-4a4 4 0 0 1 4-4z"/><path d="M12 12v10"/><path d="M8 18h8"/></svg>
+          </div>
+          <div>
+            <div class="intro-people-name">DSHS <span class="intro-people-sub">(Dept. of Social &amp; Health Services)</span></div>
+            <span class="intro-people-title">Expert Consultant</span>
+          </div>
         </div>
-        <div class="intro-people-name">DSHS <span class="intro-people-sub">(Dept. of Social &amp; Health Services)</span></div>
-        <p class="intro-people-desc">Our expert consultant &mdash; provided background on TBI, stayed available
-        for questions throughout, and joined a mock usability study to pressure-test the design in a realistic
-        setting.</p>
+        <p class="intro-people-desc"><strong>Provided background on TBI</strong>, stayed available for questions
+        throughout, and <strong>joined a mock usability study</strong> to pressure-test the design in a
+        realistic setting.</p>
       </div>
     </div>
 
-    <h3 class="intro-people-heading">Team</h3>
+    <div class="act-marker">
+      <span class="act-label">Study Outline</span>
+      <span class="act-rule"></span>
+    </div>
+    <p class="takeaway">
+      A usability study with individuals with Traumatic Brain Injury (TBI) revealed <strong>critical navigation
+      and search-relevance failures</strong> on Washington 211's housing resource site &mdash; where users in crisis
+      were <strong>choosing to abandon the site and call in instead</strong>. WA211 <strong>acknowledged the
+      findings</strong>, with one team member confirming the search-discoverability fix as a known issue.
+    </p>
+
+    <div class="intro-people-divider"></div>
+
+    <h3 class="intro-people-heading intro-team-heading">Team</h3>
     <div class="contributor-team-row">
       <div class="contributor-card">
         <div class="contributor-head">
@@ -3410,6 +3660,7 @@ h1, h2, h3 {
         </ul>
       </div>
     </div>
+  </div>
   </div>
 
   <div class="intro-bridge">
@@ -3493,8 +3744,9 @@ h1, h2, h3 {
   <h3 class="strategy-subhead"><span class="sub-num">02.1</span>Research Question &amp; Direction</h3>
   <div class="rq-block">
     <div class="rq-banner">
+      <svg class="rq-banner-watermark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
       <span class="rq-banner-label">Research Question</span>
-      <p>How does WA211's information architecture and UI elements enhance or deter usability for users with TBI?</p>
+      <p>How does WA211's <strong>information architecture</strong> and <strong>UI elements</strong> enhance or deter <strong>usability</strong> for users with <strong>TBI</strong>?</p>
     </div>
 
     <div class="rq-col-heads">
@@ -3564,12 +3816,6 @@ h1, h2, h3 {
       <span class="mobile-note">+ mobile device<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg></span>
     </div>
   </div>
-
-  <p class="strategy-footnote">
-    Individuals with TBI served as a proxy population for broader cognitive and physical accessibility
-    needs &mdash; common impacts include <em>memory loss, fatigue, light sensitivity, and reduced
-    processing speed</em>, all of which directly shaped session length, task design, and data collection.
-  </p>
 
   </div>
 
@@ -3721,8 +3967,31 @@ h1, h2, h3 {
     <div class="avoided-examples">
       <span class="avoided-example ex1">e.g. &ldquo;To what extent does the current information architecture facilitate task completion?&rdquo;</span>
       <span class="avoided-example ex2">e.g. &ldquo;Walk me through your experience using the site.&rdquo;</span>
-      <span class="avoided-example ex3">e.g. &ldquo;Rate ease of use from 1 (very difficult) to 7 (very easy)&rdquo;</span>
-      <span class="avoided-example ex4">e.g. a grid rating 6 features across 5 criteria</span>
+      <div class="avoided-example ex3">
+        <div class="likert-demo">
+          <p class="likert-q">Rate ease of use:</p>
+          <div class="likert-row">
+            <span class="likert-dot"></span>
+            <span class="likert-dot"></span>
+            <span class="likert-dot"></span>
+            <span class="likert-dot"></span>
+            <span class="likert-dot"></span>
+            <span class="likert-dot"></span>
+            <span class="likert-dot"></span>
+          </div>
+          <div class="likert-labels"><span>1 &middot; Very difficult</span><span>7 &middot; Very easy</span></div>
+        </div>
+      </div>
+      <div class="avoided-example ex4">
+        <div class="matrix-demo">
+          <table>
+            <tr><th></th><th>A</th><th>B</th><th>C</th></tr>
+            <tr><th>Feature 1</th><td>&#9679;</td><td>&#9675;</td><td>&#9679;</td></tr>
+            <tr><th>Feature 2</th><td>&#9675;</td><td>&#9679;</td><td>&#9679;</td></tr>
+            <tr><th>Feature 3</th><td>&#9679;</td><td>&#9679;</td><td>&#9675;</td></tr>
+          </table>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -3747,7 +4016,7 @@ h1, h2, h3 {
       <p class="session-split-caption">8 min reserved to accommodate participant needs</p>
     </div>
   </div>
-  <div class="stepper stepper-numB">
+  <div class="stepper stepper-numB stepper-grid">
     <div class="stepper-step">
       <div class="stepper-box expandable">
         <div class="step-banner"><span class="step-banner-label">Task 1</span></div>
@@ -3760,11 +4029,12 @@ h1, h2, h3 {
           <h4 class="stepper-label">Locate &amp; Initiate Search</h4>
         </div>
         <div class="task-split" role="img" aria-label="3 minutes total, shared between the task itself and post-task questions">
-          <span class="task-split-total">3 minutes</span>
+          <span class="task-split-total"><svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>3 minutes</span>
           <div class="task-split-bar">
             <span class="task-split-main">Task</span>
             <span class="task-split-qs">Questions</span>
           </div>
+          <div class="task-split-ticks"><span>0:00</span><span>3:00</span></div>
         </div>
         <div class="card-expand-hint"><span onclick="toggleCardExpand(this)">Task steps<svg class="chevron-icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></span></div>
         <div class="card-expand card-expand-row">
@@ -3789,11 +4059,12 @@ h1, h2, h3 {
           <h4 class="stepper-label">Identify Resources</h4>
         </div>
         <div class="task-split" role="img" aria-label="3 minutes total, shared between the task itself and post-task questions">
-          <span class="task-split-total">3 minutes</span>
+          <span class="task-split-total"><svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>3 minutes</span>
           <div class="task-split-bar">
             <span class="task-split-main">Task</span>
             <span class="task-split-qs">Questions</span>
           </div>
+          <div class="task-split-ticks"><span>0:00</span><span>3:00</span></div>
         </div>
         <div class="card-expand-hint"><span onclick="toggleCardExpand(this)">Task steps<svg class="chevron-icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></span></div>
         <div class="card-expand card-expand-row">
@@ -3818,11 +4089,12 @@ h1, h2, h3 {
           <h4 class="stepper-label">Utilize Filter Mechanics</h4>
         </div>
         <div class="task-split" role="img" aria-label="3 minutes total, shared between the task itself and post-task questions">
-          <span class="task-split-total">3 minutes</span>
+          <span class="task-split-total"><svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>3 minutes</span>
           <div class="task-split-bar">
             <span class="task-split-main">Task</span>
             <span class="task-split-qs">Questions</span>
           </div>
+          <div class="task-split-ticks"><span>0:00</span><span>3:00</span></div>
         </div>
         <div class="card-expand-hint"><span onclick="toggleCardExpand(this)">Task steps<svg class="chevron-icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></span></div>
         <div class="card-expand card-expand-row">
@@ -3848,11 +4120,12 @@ h1, h2, h3 {
           <h4 class="stepper-label">Understand Key Information</h4>
         </div>
         <div class="task-split" role="img" aria-label="3 minutes total, shared between the task itself and post-task questions">
-          <span class="task-split-total">3 minutes</span>
+          <span class="task-split-total"><svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>3 minutes</span>
           <div class="task-split-bar">
             <span class="task-split-main">Task</span>
             <span class="task-split-qs">Questions</span>
           </div>
+          <div class="task-split-ticks"><span>0:00</span><span>3:00</span></div>
         </div>
         <div class="card-expand-hint"><span onclick="toggleCardExpand(this)">Task steps<svg class="chevron-icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></span></div>
         <div class="card-expand card-expand-row">
