@@ -406,28 +406,21 @@ h1, h2, h3 {
 .intro-who-image {
   flex: 0 0 200px;
   height: 200px;
-  border: 2px dashed var(--border);
+  border: 1px solid var(--border);
   border-radius: var(--radius);
-  background: var(--bg-alt);
+  background: #fff;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 6px;
-  color: var(--text-muted);
+  padding: 24px;
   overflow: hidden;
 }
 
-.intro-who-image svg {
-  width: 90px;
-  height: auto;
+.intro-who-image img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
 }
-
-.intro-who-image span {
-  font-size: 10px;
-  text-align: center;
-}
-
 .intro-who-text p {
   margin: 0 0 12px;
   font-size: 14px;
@@ -501,6 +494,7 @@ h1, h2, h3 {
 
 .intro-section-tag + .intro-people-heading {
   margin-top: 0;
+  font-size: 9.5px;
 }
 
 .intro-team-heading {
@@ -525,6 +519,27 @@ h1, h2, h3 {
   background: var(--bg-alt);
   border-radius: var(--radius);
   padding: 16px 18px;
+  display: block;
+  color: inherit;
+  text-decoration: none;
+  transition: background 0.15s ease, box-shadow 0.15s ease;
+}
+
+.intro-people-card:hover {
+  background: #edf1f9;
+  box-shadow: inset 0 0 0 1px var(--border);
+}
+
+.intro-people-card:focus-visible {
+  outline: 2px solid var(--navy);
+  outline-offset: 2px;
+}
+
+.intro-people-link-icon {
+  color: var(--text-muted);
+  margin-left: 5px;
+  vertical-align: -1px;
+  flex-shrink: 0;
 }
 
 .intro-people-head {
@@ -569,6 +584,11 @@ h1, h2, h3 {
   letter-spacing: 0.06em;
   color: var(--orange-deep);
   line-height: 1.15;
+}
+
+.intro-section-tag.intro-people-title {
+  font-size: 13px;
+  color: var(--navy);
 }
 
 .intro-people-sub {
@@ -817,6 +837,170 @@ h1, h2, h3 {
   gap: 10px;
   margin: 22px 0;
   flex-wrap: nowrap;
+}
+
+.stat-groups {
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+  margin: 24px 0;
+}
+
+.stat-group {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.stat-group-evidence {
+  width: 100%;
+}
+
+.stat-group-evidence img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  display: block;
+}
+
+.stat-group-evidence.placeholder {
+  height: 160px;
+  border: 1.5px dashed var(--border);
+  border-radius: 8px;
+  background: var(--bg-alt);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.stat-group-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.mini-stat {
+  flex: 0 0 110px;
+  background: #eef2f8;
+  border-radius: 8px;
+  padding: 12px 10px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.mini-stat-pair {
+  flex: 0 0 110px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.mini-stat-pair .mini-stat {
+  flex: none;
+  width: 100%;
+}
+
+.mini-stat-num {
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: 18px;
+  color: var(--navy);
+}
+
+.mini-stat-desc {
+  font-size: 9px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.stat-group-arrow {
+  flex-shrink: 0;
+  color: var(--orange);
+}
+
+.solution-box {
+  flex: 1;
+  min-width: 0;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 16px;
+}
+
+.solution-label {
+  display: block;
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--navy);
+  margin-bottom: 6px;
+}
+
+.solution-text {
+  margin: 0 0 10px;
+  font-size: 12.5px;
+  color: var(--text-body);
+  line-height: 1.45;
+}
+
+.wireframe {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.solution-media {
+  border-radius: 4px;
+  border: 1px solid var(--border);
+}
+
+.stat-group-divider {
+  height: 1px;
+  background: var(--border);
+  margin: 2px 0;
+}
+
+.finding-headline {
+  text-align: center;
+  margin: 20px 0 4px;
+}
+
+.finding-headline-num {
+  display: block;
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: 34px;
+  color: var(--navy);
+  line-height: 1.1;
+}
+
+.finding-headline-desc {
+  display: block;
+  font-size: 13px;
+  color: var(--text-body);
+  margin-top: 4px;
+}
+
+.finding-why {
+  text-align: center;
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--orange-deep);
+  margin-bottom: 18px;
+}
+
+@media (max-width: 640px) {
+  .stat-group-row { flex-direction: column; align-items: stretch; }
+  .stat-group-arrow { transform: rotate(90deg); align-self: center; }
+  .mini-stat, .mini-stat-pair { flex: none; width: 100%; }
 }
 
 .stat-box {
@@ -1944,6 +2128,95 @@ h1, h2, h3 {
   background: rgba(255, 255, 255, 0.25);
 }
 
+.intro-timeline {
+  margin: -8px 0 20px;
+}
+
+.intro-timeline-meta {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.intro-timeline-value {
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: 20px;
+  color: var(--navy);
+}
+
+.intro-timeline-range {
+  font-size: 9.5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+}
+
+.intro-timeline-track {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 0 6px;
+}
+
+.intro-timeline-track::before {
+  content: '';
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  top: 6px;
+  height: 2px;
+  background: var(--orange);
+  opacity: 0.45;
+}
+
+.intro-timeline-step {
+  position: relative;
+  flex: 1;
+  text-align: center;
+  padding: 0 4px;
+}
+
+.intro-timeline-dot {
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: var(--orange);
+  margin: 0 auto 10px;
+}
+
+.intro-timeline-phase {
+  font-size: 9.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--orange-deep);
+  margin-bottom: 3px;
+}
+
+.intro-timeline-label {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--navy);
+  line-height: 1.3;
+}
+
+@media (max-width: 600px) {
+  .intro-timeline-track {
+    flex-wrap: wrap;
+    row-gap: 16px;
+  }
+  .intro-timeline-track::before {
+    display: none;
+  }
+  .intro-timeline-step {
+    flex: 1 1 40%;
+  }
+}
+
 .act-header-section {
   padding-bottom: 12px;
 }
@@ -2856,13 +3129,20 @@ h1, h2, h3 {
   color: #7a2a2a;
   padding: 0 12px;
   position: relative;
-  cursor: default;
+  cursor: pointer;
   transition: color 0.15s ease;
 }
 
-.avoided-item:hover {
+.avoided-item:hover,
+.avoided-item.active {
   color: #b23b3b;
   font-weight: 700;
+}
+
+.avoided-item:focus-visible {
+  outline: 2px solid #b23b3b;
+  outline-offset: 2px;
+  border-radius: 4px;
 }
 
 .avoided-item:first-child {
@@ -2901,19 +3181,91 @@ h1, h2, h3 {
   line-height: 1.4;
 }
 
-.avoided-box:has(.avoided-i1:hover) .avoided-examples,
-.avoided-box:has(.avoided-i2:hover) .avoided-examples,
-.avoided-box:has(.avoided-i3:hover) .avoided-examples,
-.avoided-box:has(.avoided-i4:hover) .avoided-examples {
+.avoided-box.show-1 .avoided-examples,
+.avoided-box.show-2 .avoided-examples,
+.avoided-box.show-3 .avoided-examples,
+.avoided-box.show-4 .avoided-examples {
   border-top: 1px solid #e8a099;
   background: #fef6f5;
 }
 
-.avoided-box:has(.avoided-i1:hover) .ex1,
-.avoided-box:has(.avoided-i2:hover) .ex2,
-.avoided-box:has(.avoided-i3:hover) .ex3,
-.avoided-box:has(.avoided-i4:hover) .ex4 {
+.avoided-box.show-1 .ex1,
+.avoided-box.show-2 .ex2,
+.avoided-box.show-3 .ex3,
+.avoided-box.show-4 .ex4 {
   display: block;
+}
+
+.avoided-compare {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-align: left;
+  max-width: 440px;
+  margin: 0 auto;
+}
+
+.avoided-compare-row {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.avoided-compare-tag {
+  flex: none;
+  font-family: var(--font-head);
+  font-size: 9.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 2px 8px;
+  border-radius: 4px;
+  background: #f6c9c4;
+  color: #8a1f1f;
+}
+
+.avoided-compare-row.is-better .avoided-compare-tag {
+  background: var(--navy);
+  color: #fff;
+}
+
+.avoided-compare-row p {
+  margin: 0;
+  font-weight: 600;
+  font-size: 13px;
+  color: #a8574f;
+  line-height: 1.4;
+}
+
+.avoided-compare-row.is-better p {
+  color: var(--navy);
+}
+
+.likert-demo.full {
+  width: 100%;
+}
+
+.likert-row-full {
+  display: flex;
+  justify-content: space-between;
+  gap: 4px;
+  margin: 0 0 4px;
+}
+
+.likert-point {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.likert-point-label {
+  font-size: 8.5px;
+  font-weight: 600;
+  color: #a8574f;
+  text-align: center;
+  line-height: 1.25;
 }
 
 .likert-demo,
@@ -3253,19 +3605,19 @@ h1, h2, h3 {
   justify-content: center;
   font-family: var(--font-head);
   font-weight: 500;
-  font-size: 10px;
+  font-size: 9px;
   text-transform: uppercase;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  padding: 0 3px;
 }
 
 .task-split-main {
-  flex: 1;
   background: #eef2f8;
   color: var(--navy);
 }
 
 .task-split-qs {
-  flex: 1;
   background: var(--amber-bg);
   color: var(--orange-deep);
 }
@@ -3433,6 +3785,10 @@ h1, h2, h3 {
   font-weight: 700;
 }
 
+.finding p strong.wa-highlight {
+  color: #b8860b;
+}
+
 .barrier-line strong {
   color: var(--orange-deep);
   font-weight: 700;
@@ -3539,14 +3895,7 @@ h1, h2, h3 {
 
     <div class="intro-who-block">
       <div class="intro-who-image">
-        <svg viewBox="0 0 160 140" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <ellipse cx="80" cy="70" rx="74" ry="54" fill="#eef2f8"/>
-          <circle cx="80" cy="52" r="20" fill="#0d3b78"/>
-          <path d="M45 108c0-20 15-35 35-35s35 15 35 35" fill="#0d3b78"/>
-          <circle cx="80" cy="52" r="7" fill="#fff"/>
-          <path d="M74 56h12M80 50v12" stroke="#0d3b78" stroke-width="2" stroke-linecap="round"/>
-        </svg>
-        <span>Photo placeholder</span>
+        <img src="assets/wa211-logo.png" alt="Washington 211 logo">
       </div>
       <div class="intro-who-text">
         <p>Washington 211 is a free, confidential, multilingual helpline &mdash; Washington State's one-stop
@@ -3570,39 +3919,70 @@ h1, h2, h3 {
     </div>
 
     <div class="intro-people-row">
-      <div class="intro-people-card">
+      <a class="intro-people-card" href="https://wa211.org/" target="_blank" rel="noopener noreferrer">
         <div class="intro-people-head">
           <div class="intro-people-icon">
             <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
           </div>
           <div>
-            <div class="intro-people-name">Washington 211</div>
+            <div class="intro-people-name">Washington 211<svg class="intro-people-link-icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14L21 3"/></svg></div>
             <span class="intro-people-title">Client</span>
           </div>
         </div>
         <p class="intro-people-desc"><strong>Commissioned the study</strong> to understand whether the
         redesigned site actually works for the population it needs to reach.</p>
-      </div>
-      <div class="intro-people-card">
+      </a>
+      <a class="intro-people-card" href="https://www.dshs.wa.gov/" target="_blank" rel="noopener noreferrer">
         <div class="intro-people-head">
           <div class="intro-people-icon">
             <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2a4 4 0 0 1 4 4c0 1.5-1 3-2 4l-2 2-2-2c-1-1-2-2.5-2-4a4 4 0 0 1 4-4z"/><path d="M12 12v10"/><path d="M8 18h8"/></svg>
           </div>
           <div>
-            <div class="intro-people-name">DSHS <span class="intro-people-sub">(Dept. of Social &amp; Health Services)</span></div>
+            <div class="intro-people-name">DSHS<svg class="intro-people-link-icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14L21 3"/></svg></div>
+            <span class="intro-people-sub">(Dept. of Social &amp; Health Services)</span>
             <span class="intro-people-title">Expert Consultant</span>
           </div>
         </div>
         <p class="intro-people-desc"><strong>Provided background on TBI</strong>, stayed available for questions
         throughout, and <strong>joined a mock usability study</strong> to pressure-test the design in a
         realistic setting.</p>
-      </div>
+      </a>
     </div>
 
     <div class="act-marker">
       <span class="act-label">Study Outline</span>
       <span class="act-rule"></span>
     </div>
+
+    <div class="intro-timeline">
+      <div class="intro-timeline-meta">
+        <span class="intro-timeline-value">4 months</span>
+        <span class="intro-timeline-range">January &ndash; April</span>
+      </div>
+      <div class="intro-timeline-track">
+        <div class="intro-timeline-step">
+          <div class="intro-timeline-dot"></div>
+          <div class="intro-timeline-phase">Phase 1</div>
+          <div class="intro-timeline-label">Expert consultation and mock interviews</div>
+        </div>
+        <div class="intro-timeline-step">
+          <div class="intro-timeline-dot"></div>
+          <div class="intro-timeline-phase">Phase 2</div>
+          <div class="intro-timeline-label">Screener and recruitment</div>
+        </div>
+        <div class="intro-timeline-step">
+          <div class="intro-timeline-dot"></div>
+          <div class="intro-timeline-phase">Phase 3</div>
+          <div class="intro-timeline-label">Heuristic evaluations</div>
+        </div>
+        <div class="intro-timeline-step">
+          <div class="intro-timeline-dot"></div>
+          <div class="intro-timeline-phase">Phase 4</div>
+          <div class="intro-timeline-label">Usability study</div>
+        </div>
+      </div>
+    </div>
+
     <p class="takeaway">
       A usability study with individuals with Traumatic Brain Injury (TBI) revealed <strong>critical navigation
       and search-relevance failures</strong> on Washington 211's housing resource site &mdash; where users in crisis
@@ -3663,10 +4043,6 @@ h1, h2, h3 {
   </div>
   </div>
 
-  <div class="intro-bridge">
-    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v14"/><path d="M6 13l6 6 6-6"/></svg>
-    <p>Here's the problem that set this study in motion.</p>
-  </div>
 </header>
 
 <section class="section" id="problem">
@@ -3712,24 +4088,9 @@ h1, h2, h3 {
       themselves &mdash; leaving <strong>no direct usability feedback</strong> from the actual population.</p>
     </div>
 
-    <div class="funnel-arrow" aria-hidden="true">
-      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v14"/><path d="M6 13l6 6 6-6"/></svg>
-    </div>
-
     </div>
   </div>
 </section>
-
-<div class="section-bridge">
-  <svg class="bridge-path" viewBox="0 0 40 80" aria-hidden="true">
-    <circle cx="20" cy="6" r="3" fill="var(--orange)"/>
-    <path d="M20 10v60" fill="none" stroke="var(--border-strong, #c7d2e0)" stroke-width="2" stroke-linecap="round" stroke-dasharray="1 8"/>
-    <circle cx="20" cy="74" r="3" fill="var(--navy)"/>
-  </svg>
-  <p class="bridge-question">WA211 is counting on the website to <strong>take pressure off the call line</strong>
-  &mdash; but only if it works for the people who need it most. So we asked: could someone with TBI actually
-  use it on their own?</p>
-</div>
 
 <section class="section alt" id="strategy">
   <div class="act-marker">
@@ -3959,27 +4320,48 @@ h1, h2, h3 {
       <span class="avoided-scope">Participant-facing methods only (consultation, screener, usability study)</span>
     </p>
     <div class="avoided-plain">
-      <span class="avoided-item avoided-i1">Complex framing</span>
-      <span class="avoided-item avoided-i2">Open-ended questions</span>
-      <span class="avoided-item avoided-i3">Likert scales</span>
-      <span class="avoided-item avoided-i4">Complex matrices</span>
+      <span class="avoided-item avoided-i1" role="button" tabindex="0" onclick="toggleAvoided(this, 1)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleAvoided(this,1);}">Complex framing</span>
+      <span class="avoided-item avoided-i2" role="button" tabindex="0" onclick="toggleAvoided(this, 2)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleAvoided(this,2);}">Open-ended questions</span>
+      <span class="avoided-item avoided-i3" role="button" tabindex="0" onclick="toggleAvoided(this, 3)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleAvoided(this,3);}">Likert scales</span>
+      <span class="avoided-item avoided-i4" role="button" tabindex="0" onclick="toggleAvoided(this, 4)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleAvoided(this,4);}">Complex matrices</span>
     </div>
     <div class="avoided-examples">
-      <span class="avoided-example ex1">e.g. &ldquo;To what extent does the current information architecture facilitate task completion?&rdquo;</span>
-      <span class="avoided-example ex2">e.g. &ldquo;Walk me through your experience using the site.&rdquo;</span>
-      <div class="avoided-example ex3">
-        <div class="likert-demo">
-          <p class="likert-q">Rate ease of use:</p>
-          <div class="likert-row">
-            <span class="likert-dot"></span>
-            <span class="likert-dot"></span>
-            <span class="likert-dot"></span>
-            <span class="likert-dot"></span>
-            <span class="likert-dot"></span>
-            <span class="likert-dot"></span>
-            <span class="likert-dot"></span>
+      <div class="avoided-example ex1">
+        <div class="avoided-compare">
+          <div class="avoided-compare-row">
+            <span class="avoided-compare-tag">Complex</span>
+            <p>&ldquo;To what extent does the current information architecture facilitate task completion?&rdquo;</p>
           </div>
-          <div class="likert-labels"><span>1 &middot; Very difficult</span><span>7 &middot; Very easy</span></div>
+          <div class="avoided-compare-row is-better">
+            <span class="avoided-compare-tag">Simplified</span>
+            <p>&ldquo;Was it easy to find what you needed?&rdquo;</p>
+          </div>
+        </div>
+      </div>
+      <div class="avoided-example ex2">
+        <div class="avoided-compare">
+          <div class="avoided-compare-row">
+            <span class="avoided-compare-tag">Open-ended</span>
+            <p>&ldquo;Tell us about your experience with that last task.&rdquo;</p>
+          </div>
+          <div class="avoided-compare-row is-better">
+            <span class="avoided-compare-tag">Closed</span>
+            <p>&ldquo;What made that easy or hard?&rdquo;</p>
+          </div>
+        </div>
+      </div>
+      <div class="avoided-example ex3">
+        <div class="likert-demo full">
+          <p class="likert-q">Rate ease of use:</p>
+          <div class="likert-row-full">
+            <div class="likert-point"><span class="likert-dot"></span><span class="likert-point-label">1<br>Very difficult</span></div>
+            <div class="likert-point"><span class="likert-dot"></span><span class="likert-point-label">2<br>Difficult</span></div>
+            <div class="likert-point"><span class="likert-dot"></span><span class="likert-point-label">3<br>Somewhat difficult</span></div>
+            <div class="likert-point"><span class="likert-dot"></span><span class="likert-point-label">4<br>Neutral</span></div>
+            <div class="likert-point"><span class="likert-dot"></span><span class="likert-point-label">5<br>Somewhat easy</span></div>
+            <div class="likert-point"><span class="likert-dot"></span><span class="likert-point-label">6<br>Easy</span></div>
+            <div class="likert-point"><span class="likert-dot"></span><span class="likert-point-label">7<br>Very easy</span></div>
+          </div>
         </div>
       </div>
       <div class="avoided-example ex4">
@@ -4028,11 +4410,11 @@ h1, h2, h3 {
           </svg>
           <h4 class="stepper-label">Locate &amp; Initiate Search</h4>
         </div>
-        <div class="task-split" role="img" aria-label="3 minutes total, shared between the task itself and post-task questions">
+        <div class="task-split" role="img" aria-label="3 minutes total: 1 minute on the task, 2 minutes on questions">
           <span class="task-split-total"><svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>3 minutes</span>
           <div class="task-split-bar">
-            <span class="task-split-main">Task</span>
-            <span class="task-split-qs">Questions</span>
+            <span class="task-split-main" style="flex: 1;">1 min &middot; Task</span>
+            <span class="task-split-qs" style="flex: 2;">2 min &middot; Questions</span>
           </div>
           <div class="task-split-ticks"><span>0:00</span><span>3:00</span></div>
         </div>
@@ -4058,11 +4440,11 @@ h1, h2, h3 {
           </svg>
           <h4 class="stepper-label">Identify Resources</h4>
         </div>
-        <div class="task-split" role="img" aria-label="3 minutes total, shared between the task itself and post-task questions">
+        <div class="task-split" role="img" aria-label="3 minutes total: 1 minute on the task, 2 minutes on questions">
           <span class="task-split-total"><svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>3 minutes</span>
           <div class="task-split-bar">
-            <span class="task-split-main">Task</span>
-            <span class="task-split-qs">Questions</span>
+            <span class="task-split-main" style="flex: 1;">1 min &middot; Task</span>
+            <span class="task-split-qs" style="flex: 2;">2 min &middot; Questions</span>
           </div>
           <div class="task-split-ticks"><span>0:00</span><span>3:00</span></div>
         </div>
@@ -4088,11 +4470,11 @@ h1, h2, h3 {
           </svg>
           <h4 class="stepper-label">Utilize Filter Mechanics</h4>
         </div>
-        <div class="task-split" role="img" aria-label="3 minutes total, shared between the task itself and post-task questions">
+        <div class="task-split" role="img" aria-label="3 minutes total: 1 minute on the task, 2 minutes on questions">
           <span class="task-split-total"><svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>3 minutes</span>
           <div class="task-split-bar">
-            <span class="task-split-main">Task</span>
-            <span class="task-split-qs">Questions</span>
+            <span class="task-split-main" style="flex: 1;">1 min &middot; Task</span>
+            <span class="task-split-qs" style="flex: 2;">2 min &middot; Questions</span>
           </div>
           <div class="task-split-ticks"><span>0:00</span><span>3:00</span></div>
         </div>
@@ -4119,11 +4501,11 @@ h1, h2, h3 {
           </svg>
           <h4 class="stepper-label">Understand Key Information</h4>
         </div>
-        <div class="task-split" role="img" aria-label="3 minutes total, shared between the task itself and post-task questions">
+        <div class="task-split" role="img" aria-label="3 minutes total: 1 minute on the task, 2 minutes on questions">
           <span class="task-split-total"><svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>3 minutes</span>
           <div class="task-split-bar">
-            <span class="task-split-main">Task</span>
-            <span class="task-split-qs">Questions</span>
+            <span class="task-split-main" style="flex: 1;">1 min &middot; Task</span>
+            <span class="task-split-qs" style="flex: 2;">2 min &middot; Questions</span>
           </div>
           <div class="task-split-ticks"><span>0:00</span><span>3:00</span></div>
         </div>
@@ -4180,30 +4562,49 @@ h1, h2, h3 {
   <p>Users could not find where to start their search. The primary search function required a
   <strong>non-standard 3-step path</strong>, buried in a <strong>visually busy, low-contrast homepage</strong>.</p>
 
-  <div class="finding-visual finding-visual-pair">
-    <figure>
-      <img src="assets/finding1-desktop.png" alt="WA211 homepage on desktop, showing no persistent search bar in the header">
-      <figcaption>Desktop homepage</figcaption>
-    </figure>
-    <figure>
-      <img src="assets/finding1-mobile.png" alt="WA211 homepage on mobile, showing no persistent search bar in the header">
-      <figcaption>Mobile homepage</figcaption>
-    </figure>
-  </div>
+  <div class="stat-groups">
+    <div class="stat-group">
+      <div class="stat-group-evidence">
+        <img src="assets/finding1-desktop.png" alt="WA211 homepage on desktop, showing no persistent search bar in the header">
+      </div>
+      <div class="stat-group-row">
+        <div class="mini-stat">
+          <span class="mini-stat-num">2/6</span>
+          <span class="mini-stat-desc">couldn't find search</span>
+        </div>
+        <svg class="stat-group-arrow" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+        <div class="solution-box">
+          <span class="solution-label">Solution</span>
+          <p class="solution-text">Move search to a fixed, always-visible header spot.</p>
+          <video class="wireframe solution-media" autoplay muted loop playsinline aria-label="Demo of the fixed, always-visible search header">
+            <source src="assets/finding1-search-demo.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
 
-  <div class="stat-row">
-    <div class="stat-box"><div class="stat-box-inner"><div class="stat-icon-panel"><svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10" cy="10" r="6.5"/><path d="M14.8 14.8L20 20"/></svg></div><div class="stat-content"><span class="num">2/6</span><span class="desc">couldn't find search in time</span></div></div><div class="stat-quote"><em>&ldquo;[Placeholder &mdash; participant quote pending]&rdquo;</em></div></div>
-    <div class="stat-box"><div class="stat-box-inner"><div class="stat-icon-panel"><svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16l-6.5 7.5v5.5l-3 1.5v-7z"/></svg></div><div class="stat-content"><span class="num">4/6</span><span class="desc">struggled with location filters</span></div></div><div class="stat-quote"><em>&ldquo;[Placeholder &mdash; participant quote pending]&rdquo;</em></div></div>
-    <div class="stat-box"><div class="stat-box-inner"><div class="stat-icon-panel"><svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11.25 11.5h1v5h1"/></svg></div><div class="stat-content"><span class="num">2/6</span><span class="desc">unaware filters existed at all</span></div></div><div class="stat-quote"><em>&ldquo;[Placeholder &mdash; participant quote pending]&rdquo;</em></div></div>
-  </div>
+    <div class="stat-group-divider"></div>
 
-  <div class="recommendation">
-    <div class="rec-head">&rarr; Solution</div>
-    <div class="rec-body">Move the search bar to a <strong>fixed position in the global header</strong>, above the fold,
-    always visible &mdash; eliminating the non-obvious multi-step path.</div>
-    <div class="rec-image">
-      <img src="assets/impact-update-desktop.png" alt="Updated WA211 homepage showing a new 'How WA211 Can Help You' helper section shipped in response to this finding">
-      <figcaption>Shipped: a dedicated helper section was added below the hero &mdash; see What Changed in Section 04</figcaption>
+    <div class="stat-group">
+      <div class="stat-group-evidence placeholder">screenshot</div>
+      <div class="stat-group-row">
+        <div class="mini-stat-pair">
+          <div class="mini-stat">
+            <span class="mini-stat-num">4/6</span>
+            <span class="mini-stat-desc">struggled with filters</span>
+          </div>
+          <div class="mini-stat">
+            <span class="mini-stat-num">2/6</span>
+            <span class="mini-stat-desc">unaware filters existed</span>
+          </div>
+        </div>
+        <svg class="stat-group-arrow" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+        <div class="solution-box">
+          <span class="solution-label">Solution</span>
+          <p class="solution-text">Add an explicit "Apply Filter" button + a visible active-filter indicator.</p>
+          <img class="wireframe solution-media" src="assets/finding1-filter-screenshot.png" alt="WA211 search results page with a filter sidebar (age group, languages, days of week)">
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -4217,7 +4618,7 @@ h1, h2, h3 {
     </span>
   </div>
   <p>After successfully starting a search, results didn't match what participants were looking for &mdash;
-  including <strong>out-of-state listings</strong> for searches <strong>explicitly filtered to Washington locations</strong>.</p>
+  including <strong>out-of-state listings</strong> for searches <strong>explicitly filtered to</strong> <strong class="wa-highlight">Washington locations</strong>.</p>
 
   <div class="finding-visual">
     <figure>
@@ -4226,18 +4627,63 @@ h1, h2, h3 {
     </figure>
   </div>
 
-  <div class="stat-row">
-    <div class="stat-box"><div class="stat-box-inner"><div class="stat-icon-panel"><svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 3h5v5"/><path d="M8 21H3v-5"/><path d="M21 3l-7 7"/><path d="M3 21l7-7"/></svg></div><div class="stat-content"><span class="num">4/6</span><span class="desc">received unrelated results</span></div></div><div class="stat-quote"><em>&ldquo;[Placeholder &mdash; participant quote pending]&rdquo;</em></div></div>
-    <div class="stat-box"><div class="stat-box-inner"><div class="stat-icon-panel"><svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21V9.5a1 1 0 0 0-.4-.8l-6-4.5a1 1 0 0 0-1.2 0l-6 4.5a1 1 0 0 0-.4.8V21"/><path d="M9 21v-6h6v6"/></svg></div><div class="stat-content"><span class="num">100%</span><span class="desc">out-of-state results in local searches</span></div></div><div class="stat-quote"><em>&ldquo;Now, it says Bellingham, Washington, right below the housing apartments. Why am I getting one in San Diego?&rdquo;</em><cite>&mdash; Participant 4</cite></div></div>
-    <div class="stat-box"><div class="stat-box-inner"><div class="stat-icon-panel"><svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5"/><path d="M21 12H9"/></svg></div><div class="stat-content"><span class="num">3/6</span><span class="desc">expressed intent to abandon site</span></div></div><div class="stat-quote"><em>&ldquo;[Placeholder &mdash; participant quote pending]&rdquo;</em></div></div>
+  <div class="finding-headline">
+    <span class="finding-headline-num">3/6</span>
+    <span class="finding-headline-desc">expressed intent to abandon the site</span>
   </div>
+  <div class="finding-why">Why?</div>
 
-  <div class="recommendation">
-    <div class="rec-head">&rarr; Solution</div>
-    <div class="rec-body">Implement <strong>keyword-matching and mandatory proximity-first ordering</strong>, so results
-    actually reflect what users searched for.</div>
-    <div class="rec-image rec-image-pending">
-      <span>Implementation not yet confirmed &mdash; see Acknowledged in Section 04</span>
+  <div class="stat-group-divider"></div>
+
+  <div class="stat-groups">
+    <div class="stat-group">
+      <div class="stat-group-row">
+        <div class="mini-stat">
+          <span class="mini-stat-num">4/6</span>
+          <span class="mini-stat-desc">received unrelated results</span>
+        </div>
+        <svg class="stat-group-arrow" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+        <div class="solution-box">
+          <span class="solution-label">Solution</span>
+          <p class="solution-text">Tune the search algorithm to match plain-language queries (e.g. &ldquo;housing&rdquo;) to the right resource category.</p>
+          <svg class="wireframe" viewBox="0 0 300 90" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Wireframe showing a search query matched to the correct resource category">
+            <rect x="2" y="2" width="296" height="86" rx="4" style="fill:#fff;stroke:var(--border);stroke-width:1"/>
+            <rect x="14" y="14" width="150" height="12" rx="3" style="fill:var(--amber-bg);stroke:var(--orange);stroke-width:1"/>
+            <text x="20" y="23" style="font-family:var(--font-body);font-size:8px;fill:var(--orange-deep)">&ldquo;housing&rdquo;</text>
+            <path d="M89 32 L89 42" style="stroke:var(--orange);stroke-width:1.3;fill:none" marker-end="url(#f2arrow1)"/>
+            <defs><marker id="f2arrow1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M2 1L8 5L2 9" fill="none" stroke="var(--orange)" stroke-width="1.5"/></marker></defs>
+            <rect x="14" y="48" width="272" height="14" rx="3" style="fill:#eef2f8;stroke:var(--navy);stroke-width:1"/>
+            <text x="20" y="58" style="font-family:var(--font-body);font-size:7.5px;fill:var(--navy)">Housing resources</text>
+            <rect x="14" y="68" width="140" height="6" rx="2" style="fill:#eef0f3"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="stat-group-divider"></div>
+
+    <div class="stat-group">
+      <div class="stat-group-row">
+        <div class="mini-stat">
+          <span class="mini-stat-num">100%</span>
+          <span class="mini-stat-desc">out-of-state results</span>
+        </div>
+        <svg class="stat-group-arrow" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+        <div class="solution-box">
+          <span class="solution-label">Solution</span>
+          <p class="solution-text">Apply mandatory proximity-first ordering &mdash; results sorted by distance from the entered location by default.</p>
+          <svg class="wireframe" viewBox="0 0 300 90" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Wireframe showing results ordered by distance from nearest to farthest">
+            <rect x="2" y="2" width="296" height="86" rx="4" style="fill:#fff;stroke:var(--border);stroke-width:1"/>
+            <rect x="14" y="12" width="272" height="16" rx="3" style="fill:var(--amber-bg);stroke:var(--orange);stroke-width:1.3"/>
+            <text x="20" y="23" style="font-family:var(--font-body);font-size:7.5px;fill:var(--orange-deep)">1.2 mi &mdash; Bellingham, WA</text>
+            <rect x="14" y="34" width="272" height="14" rx="3" style="fill:#eef2f8;stroke:var(--border);stroke-width:1"/>
+            <text x="20" y="44" style="font-family:var(--font-body);font-size:7.5px;fill:var(--text-muted)">3.8 mi &mdash; Mount Vernon, WA</text>
+            <rect x="14" y="54" width="272" height="14" rx="3" style="fill:#eef2f8;stroke:var(--border);stroke-width:1"/>
+            <text x="20" y="64" style="font-family:var(--font-body);font-size:7.5px;fill:var(--text-muted)">6.1 mi &mdash; Ferndale, WA</text>
+            <rect x="14" y="72" width="180" height="6" rx="2" style="fill:#eef0f3"/>
+          </svg>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -4333,6 +4779,20 @@ function toggleCardExpand(el) {
   event.stopPropagation();
   var card = el.closest('.stepper-box');
   if (card) card.classList.toggle('open');
+}
+
+function toggleAvoided(el, n) {
+  var box = el.closest('.avoided-box');
+  if (!box) return;
+  var isActive = box.classList.contains('show-' + n);
+  for (var i = 1; i <= 4; i++) box.classList.remove('show-' + i);
+  box.querySelectorAll('.avoided-item').forEach(function (item) {
+    item.classList.remove('active');
+  });
+  if (!isActive) {
+    box.classList.add('show-' + n);
+    el.classList.add('active');
+  }
 }
 
 function toggleTocGroup(btn) {
