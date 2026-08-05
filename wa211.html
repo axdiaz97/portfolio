@@ -1148,11 +1148,71 @@ h1, h2, h3 {
   width: 100%;
   height: auto;
   display: block;
+  cursor: zoom-in;
+  transition: opacity 0.15s ease;
+}
+
+.is-media-box img:hover,
+.is-media-box video:hover {
+  opacity: 0.92;
 }
 
 .is-media-box .filter-mock,
 .is-media-box .result-mock {
   border-radius: 0;
+}
+
+.lightbox-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 20, 38, 0.9);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+  padding: 48px;
+}
+
+.lightbox-overlay.open {
+  display: flex;
+}
+
+.lightbox-content {
+  max-width: min(1100px, 92vw);
+  max-height: 88vh;
+}
+
+.lightbox-content img,
+.lightbox-content video {
+  width: 100%;
+  height: auto;
+  max-height: 88vh;
+  object-fit: contain;
+  border-radius: 10px;
+  display: block;
+}
+
+.lightbox-close {
+  position: fixed;
+  top: 20px;
+  right: 24px;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+  border: none;
+  color: #fff;
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 201;
+}
+
+.lightbox-close:hover {
+  background: rgba(255, 255, 255, 0.22);
 }
 
 .carousel {
@@ -5373,13 +5433,6 @@ h1, h2, h3 {
   <p>After successfully starting a search, results didn't match what participants were looking for &mdash;
   including <strong>out-of-state listings</strong> for searches <strong>explicitly filtered to</strong> <strong class="wa-highlight">Washington locations</strong>.</p>
 
-  <div class="finding-visual">
-    <figure>
-      <img src="assets/finding2-search-results.png" alt="WA211 search results page showing no exact matches and a broad set of substitute results">
-      <figcaption>Search results for &ldquo;shelter/housing/roommate&rdquo;</figcaption>
-    </figure>
-  </div>
-
   <div class="finding-headline">
     <span class="finding-headline-num">3/6</span>
     <span class="finding-headline-desc">expressed intent to abandon the site</span>
@@ -5422,6 +5475,9 @@ h1, h2, h3 {
                 <div class="is-point-label">Couldn&rsquo;t tell why results didn&rsquo;t match</div>
               </div>
             </div>
+          </div>
+          <div class="is-media-box">
+            <img src="assets/finding2-search-results.png" alt="WA211 search results page showing no exact matches and a broad set of substitute results">
           </div>
         </div>
       </div>
@@ -5494,6 +5550,9 @@ h1, h2, h3 {
                 <div class="is-point-label">Users couldn&rsquo;t verify relevance</div>
               </div>
             </div>
+          </div>
+          <div class="is-media-box">
+            <img src="assets/finding2-search-results.png" alt="WA211 search results page showing no exact matches and a broad set of substitute results">
           </div>
         </div>
       </div>
@@ -5620,6 +5679,11 @@ h1, h2, h3 {
   <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5"/><path d="M5 12l7-7 7 7"/></svg>
 </button>
 
+<div class="lightbox-overlay" id="lightboxOverlay" role="dialog" aria-modal="true" aria-label="Expanded media view">
+  <button class="lightbox-close" id="lightboxClose" aria-label="Close expanded view" type="button">&times;</button>
+  <div class="lightbox-content" id="lightboxContent"></div>
+</div>
+
 <script>
 (function () {
   var btn = document.getElementById('backToTop');
@@ -5695,6 +5759,56 @@ function toggleAvoided(el, n) {
     el.classList.add('active');
   }
 }
+
+function initLightbox() {
+  var overlay = document.getElementById('lightboxOverlay');
+  var content = document.getElementById('lightboxContent');
+  var closeBtn = document.getElementById('lightboxClose');
+  if (!overlay || !content) return;
+
+  function openLightbox(el) {
+    content.innerHTML = '';
+    var clone;
+    if (el.tagName === 'IMG') {
+      clone = document.createElement('img');
+      clone.src = el.currentSrc || el.src;
+      clone.alt = el.alt || '';
+    } else if (el.tagName === 'VIDEO') {
+      clone = document.createElement('video');
+      var source = el.querySelector('source');
+      clone.src = source ? source.src : el.src;
+      clone.controls = true;
+      clone.autoplay = true;
+      clone.loop = true;
+      clone.muted = true;
+      clone.playsInline = true;
+    }
+    if (!clone) return;
+    content.appendChild(clone);
+    overlay.classList.add('open');
+  }
+
+  function closeLightbox() {
+    overlay.classList.remove('open');
+    content.innerHTML = '';
+  }
+
+  document.querySelectorAll('.is-media-box img, .is-media-box video').forEach(function (el) {
+    el.addEventListener('click', function () {
+      openLightbox(el);
+    });
+  });
+
+  closeBtn.addEventListener('click', closeLightbox);
+  overlay.addEventListener('click', function (e) {
+    if (e.target === overlay) closeLightbox();
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closeLightbox();
+  });
+}
+
+initLightbox();
 
 function initCarousels() {
   document.querySelectorAll('.carousel').forEach(function (carousel) {
