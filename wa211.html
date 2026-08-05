@@ -1016,16 +1016,8 @@ h1, h2, h3 {
 .is-box {
   border-radius: 12px;
   padding: 18px 20px;
-}
-
-.is-box.is-issue {
-  background: #fdf6f5;
-  border: 1px solid #f0d3d1;
-}
-
-.is-box.is-solution {
-  background: #f4f8fc;
-  border: 1px solid #cfdcee;
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
 }
 
 .is-label {
@@ -1043,53 +1035,7 @@ h1, h2, h3 {
 }
 
 .is-label.is-solution-label {
-  color: #3b6ba8;
-}
-
-.is-stat-box {
-  background: #fff;
-  border-radius: 10px;
-  padding: 14px 18px;
-  margin-bottom: 16px;
-  display: flex;
-  align-items: baseline;
-  gap: 10px;
-}
-
-.is-issue .is-stat-box {
-  border: 1px solid #f0d3d1;
-}
-
-.is-solution .is-stat-box {
-  border: 1px solid #cfdcee;
-}
-
-.is-stat-num {
-  font-family: var(--font-head);
-  font-size: 40px;
-  font-weight: 800;
-  line-height: 1;
-  color: #b23b3b;
-  border-bottom: 4px solid #b23b3b;
-  padding-bottom: 2px;
-}
-
-.is-stat-caption {
-  font-family: var(--font-head);
-  font-size: 14px;
-  font-weight: 700;
-  color: #7a2a2a;
-}
-
-.is-headline {
-  font-family: var(--font-head);
-  font-size: 16px;
-  font-weight: 800;
-  line-height: 1.3;
-  color: var(--navy);
-  border-bottom: 4px solid var(--navy);
-  padding-bottom: 2px;
-  display: inline-block;
+  color: #2f8a5c;
 }
 
 .is-points-group {
@@ -1097,33 +1043,46 @@ h1, h2, h3 {
   overflow: hidden;
   margin-bottom: 16px;
   background: #fff;
-}
-
-.is-issue .is-points-group {
-  border: 1px solid #f0d3d1;
-}
-
-.is-solution .is-points-group {
-  border: 1px solid #cfdcee;
+  border: 1px solid var(--border);
 }
 
 .is-points-head {
-  padding: 6px 14px;
+  padding: 9px 14px;
   font-family: var(--font-head);
+}
+
+.is-points-head-label {
+  display: block;
   font-size: 9px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.06em;
+  margin-bottom: 3px;
+}
+
+.is-points-head-stat {
+  display: block;
+  font-size: 15px;
+  font-weight: 800;
+  line-height: 1.3;
 }
 
 .is-issue .is-points-head {
   background: #f6dedb;
+}
+
+.is-issue .is-points-head-label,
+.is-issue .is-points-head-stat {
   color: #8a1f1f;
 }
 
 .is-solution .is-points-head {
-  background: #dce8f7;
-  color: var(--navy);
+  background: #d5f0e0;
+}
+
+.is-solution .is-points-head-label,
+.is-solution .is-points-head-stat {
+  color: #1f6b3a;
 }
 
 .is-points-row {
@@ -1136,12 +1095,8 @@ h1, h2, h3 {
   text-align: center;
 }
 
-.is-issue .is-point + .is-point {
-  border-left: 1px solid #f0d3d1;
-}
-
-.is-solution .is-point + .is-point {
-  border-left: 1px solid #cfdcee;
+.is-point + .is-point {
+  border-left: 1px solid var(--border);
 }
 
 .is-point-icon {
@@ -1151,13 +1106,6 @@ h1, h2, h3 {
 
 .is-point-icon svg {
   display: block;
-}
-
-.is-issue .is-point-icon svg {
-  color: #b23b3b;
-}
-
-.is-solution .is-point-icon svg {
   color: var(--navy);
 }
 
@@ -1170,34 +1118,29 @@ h1, h2, h3 {
   color: #2f8a5c;
 }
 
+.is-point-x {
+  position: absolute;
+  top: -4px;
+  right: -6px;
+  background: #fff;
+  border-radius: 50%;
+  color: #b23b3b;
+}
+
 .is-point-label {
   font-family: var(--font-head);
   font-size: 10px;
   font-weight: 600;
   margin-top: 6px;
   line-height: 1.3;
-}
-
-.is-issue .is-point-label {
-  color: #7a2a2a;
-}
-
-.is-solution .is-point-label {
-  color: var(--navy);
+  color: var(--text-body);
 }
 
 .is-media-box {
   background: #fff;
   border-radius: 8px;
   overflow: hidden;
-}
-
-.is-issue .is-media-box {
-  border: 1px solid #f0d3d1;
-}
-
-.is-solution .is-media-box {
-  border: 1px solid #cfdcee;
+  border: 1px solid var(--border);
 }
 
 .is-media-box img,
@@ -1210,6 +1153,113 @@ h1, h2, h3 {
 .is-media-box .filter-mock,
 .is-media-box .result-mock {
   border-radius: 0;
+}
+
+.carousel {
+  margin-top: 8px;
+}
+
+.carousel-outer-toggle {
+  position: relative;
+  display: flex;
+  background: #eef0f3;
+  border-radius: 12px;
+  padding: 4px;
+  margin-bottom: 14px;
+}
+
+.carousel-thumb {
+  position: absolute;
+  top: 4px;
+  bottom: 4px;
+  left: 4px;
+  width: calc(50% - 4px);
+  background: #fff;
+  border-radius: 9px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+  transition: transform 0.22s ease;
+}
+
+.carousel-outer-btn {
+  position: relative;
+  flex: 1;
+  padding: 10px 10px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-family: var(--font-head);
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--text-muted);
+  transition: color 0.15s ease, transform 0.15s ease;
+}
+
+.carousel-outer-btn.active {
+  color: var(--navy);
+}
+
+.carousel-outer-btn:hover:not(.active) {
+  color: var(--navy);
+  transform: scale(1.04);
+}
+
+.carousel-outer-btn:focus-visible {
+  outline: 2px solid var(--orange);
+  outline-offset: -2px;
+  border-radius: 8px;
+}
+
+.carousel-inner-tabs {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+.carousel-tab {
+  padding: 6px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-family: var(--font-head);
+  font-size: 11px;
+  font-weight: 700;
+  border: 1.5px solid var(--border);
+  background: #fff;
+  color: var(--text-muted);
+  transition: all 0.15s ease;
+}
+
+.carousel-tab[data-mode="issue"]:hover:not(.active) {
+  background: #fdf6f5;
+  border-color: #f0d3d1;
+  color: #b23b3b;
+  transform: scale(1.06);
+}
+
+.carousel-tab[data-mode="solution"]:hover:not(.active) {
+  background: #eaf6ef;
+  border-color: #c3e6d0;
+  color: #1f6b3a;
+  transform: scale(1.06);
+}
+
+.carousel-tab[data-mode="issue"].active {
+  border-color: #b23b3b;
+  background: #fdf6f5;
+  color: #b23b3b;
+}
+
+.carousel-tab[data-mode="solution"].active {
+  border-color: #1f6b3a;
+  background: #eaf6ef;
+  color: #1f6b3a;
+}
+
+.carousel-panel {
+  display: none;
+}
+
+.carousel-panel.active {
+  display: block;
 }
 
 .solution-box {
@@ -5158,141 +5208,153 @@ h1, h2, h3 {
   <p>Users could not find where to start their search. The primary search function required a
   <strong>non-standard 3-step path</strong>, buried in a <strong>visually busy, low-contrast homepage</strong>.</p>
 
-  <div class="stat-groups">
-    <div class="sub-issue">
-      <div class="sub-issue-title">Search Discoverability</div>
-
-      <div class="is-box is-issue">
-        <span class="is-label is-issue-label">Issue</span>
-        <div class="is-stat-box">
-          <span class="is-stat-num">2/6</span>
-          <span class="is-stat-caption">pts couldn&rsquo;t find search</span>
-        </div>
-        <div class="is-points-group">
-          <div class="is-points-head">Why it failed</div>
-          <div class="is-points-row">
-            <div class="is-point">
-              <span class="is-point-icon"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20h4v-4h4v-4h4v-4h4"/></svg></span>
-              <div class="is-point-label">Non-standard 3-step path</div>
-            </div>
-            <div class="is-point">
-              <span class="is-point-icon"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3l18 18"/><path d="M10.6 10.6a2 2 0 0 0 2.8 2.8"/><path d="M9.9 4.24A9.1 9.1 0 0 1 12 4c5 0 9 4 10 8a13 13 0 0 1-1.67 3.06M6.61 6.61A13 13 0 0 0 2 12s4 8 10 8a9 9 0 0 0 4.3-1.1"/></svg></span>
-              <div class="is-point-label">Low-contrast, busy homepage</div>
-            </div>
-            <div class="is-point">
-              <span class="is-point-icon"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10" cy="10" r="6"/><path d="M14.5 14.5L20 20"/><path d="M3 3l18 18"/></svg></span>
-              <div class="is-point-label">No persistent header search</div>
-            </div>
-          </div>
-        </div>
-        <div class="is-media-box">
-          <img src="assets/finding1-desktop.png" alt="WA211 homepage on desktop, showing no persistent search bar in the header">
-        </div>
-      </div>
-
-      <div class="is-box is-solution">
-        <span class="is-label is-solution-label">Solution</span>
-        <div class="is-stat-box">
-          <span class="is-headline">Fixed, always-visible header search</span>
-        </div>
-        <div class="is-points-group">
-          <div class="is-points-head">What it fixes</div>
-          <div class="is-points-row">
-            <div class="is-point">
-              <span class="is-point-icon"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-6.5 7-12a7 7 0 0 0-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="9" r="2.5"/></svg><svg class="is-point-check" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-6"/></svg></span>
-              <div class="is-point-label">Persists across every page</div>
-            </div>
-            <div class="is-point">
-              <span class="is-point-icon"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg><svg class="is-point-check" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-6"/></svg></span>
-              <div class="is-point-label">Follows conventional norms</div>
-            </div>
-            <div class="is-point">
-              <span class="is-point-icon"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s4-8 10-8 10 8 10 8-4 8-10 8-10-8-10-8z"/><circle cx="12" cy="12" r="3"/></svg><svg class="is-point-check" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-6"/></svg></span>
-              <div class="is-point-label">High-contrast placement</div>
-            </div>
-          </div>
-        </div>
-        <div class="is-media-box">
-          <video autoplay muted loop playsinline aria-label="Demo of the fixed, always-visible search header">
-            <source src="assets/finding1-search-demo.mp4" type="video/mp4">
-          </video>
-        </div>
-      </div>
+  <div class="carousel" data-active-sub="search" data-active-mode="issue">
+    <div class="carousel-outer-toggle">
+      <div class="carousel-thumb"></div>
+      <button class="carousel-outer-btn" data-sub="search" type="button">Search Discoverability</button>
+      <button class="carousel-outer-btn" data-sub="filter" type="button">Filter Usability</button>
+    </div>
+    <div class="carousel-inner-tabs">
+      <button class="carousel-tab" data-mode="issue" type="button">Issue</button>
+      <button class="carousel-tab" data-mode="solution" type="button">Solution</button>
     </div>
 
-    <div class="stat-group-divider"></div>
-
-    <div class="sub-issue">
-      <div class="sub-issue-title">Filter Usability</div>
-
-      <div class="is-box is-issue">
-        <span class="is-label is-issue-label">Issue</span>
-        <div class="is-stat-box">
-          <span class="is-stat-num">4/6</span>
-          <span class="is-stat-caption">pts struggled with filters</span>
-        </div>
-        <div class="is-points-group">
-          <div class="is-points-head">Why it failed</div>
-          <div class="is-points-row">
-            <div class="is-point">
-              <span class="is-point-icon"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="8" width="18" height="8" rx="4"/><circle cx="16" cy="12" r="2.2" fill="currentColor" stroke="none"/></svg></span>
-              <div class="is-point-label">No Apply button feedback</div>
+    <div class="carousel-panels">
+      <div class="carousel-panel" data-sub="search" data-mode="issue">
+        <div class="is-box is-issue">
+          <span class="is-label is-issue-label">Issue</span>
+          <div class="is-points-group">
+            <div class="is-points-head">
+              <span class="is-points-head-label">Why it failed</span>
+              <span class="is-points-head-stat">2/6 pts couldn&rsquo;t find search</span>
             </div>
-            <div class="is-point">
-              <span class="is-point-icon"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11V5a2 2 0 0 1 2-2h6l10 10-8 8L3 11z"/><circle cx="8" cy="8" r="1.4" fill="currentColor" stroke="none"/></svg></span>
-              <div class="is-point-label">No active-filter indicator</div>
-            </div>
-            <div class="is-point">
-              <span class="is-point-icon"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3l18 18"/><path d="M10.6 10.6a2 2 0 0 0 2.8 2.8"/><path d="M9.9 4.24A9.1 9.1 0 0 1 12 4c5 0 9 4 10 8a13 13 0 0 1-1.67 3.06M6.61 6.61A13 13 0 0 0 2 12s4 8 10 8a9 9 0 0 0 4.3-1.1"/></svg></span>
-              <div class="is-point-label">2/6 didn&rsquo;t notice filters existed</div>
+            <div class="is-points-row">
+              <div class="is-point">
+                <span class="is-point-icon"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20h4v-4h4v-4h4v-4h4"/></svg><svg class="is-point-x" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9 9l6 6M15 9l-6 6"/></svg></span>
+                <div class="is-point-label">Non-standard 3-step path</div>
+              </div>
+              <div class="is-point">
+                <span class="is-point-icon"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3l18 18"/><path d="M10.6 10.6a2 2 0 0 0 2.8 2.8"/><path d="M9.9 4.24A9.1 9.1 0 0 1 12 4c5 0 9 4 10 8a13 13 0 0 1-1.67 3.06M6.61 6.61A13 13 0 0 0 2 12s4 8 10 8a9 9 0 0 0 4.3-1.1"/></svg><svg class="is-point-x" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9 9l6 6M15 9l-6 6"/></svg></span>
+                <div class="is-point-label">Low-contrast, busy homepage</div>
+              </div>
+              <div class="is-point">
+                <span class="is-point-icon"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10" cy="10" r="6"/><path d="M14.5 14.5L20 20"/><path d="M3 3l18 18"/></svg><svg class="is-point-x" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9 9l6 6M15 9l-6 6"/></svg></span>
+                <div class="is-point-label">No persistent header search</div>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="is-media-box">
-          <img src="assets/finding1-filter-screenshot.png" alt="WA211 search results page with a filter sidebar (age group, languages, days of week), no Apply button or active-filter indicator">
+          <div class="is-media-box">
+            <video autoplay muted loop playsinline aria-label="Demo of the fixed, always-visible search header">
+              <source src="assets/finding1-search-demo.mp4" type="video/mp4">
+            </video>
+          </div>
         </div>
       </div>
 
-      <div class="is-box is-solution">
-        <span class="is-label is-solution-label">Solution</span>
-        <div class="is-stat-box">
-          <span class="is-headline">Explicit Apply + active-filter indicator</span>
-        </div>
-        <div class="is-points-group">
-          <div class="is-points-head">What it fixes</div>
-          <div class="is-points-row">
-            <div class="is-point">
-              <span class="is-point-icon"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="8" width="18" height="8" rx="4"/><circle cx="16" cy="12" r="2.2" fill="currentColor" stroke="none"/></svg><svg class="is-point-check" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-6"/></svg></span>
-              <div class="is-point-label">Clear Apply Filter action</div>
+      <div class="carousel-panel" data-sub="search" data-mode="solution">
+        <div class="is-box is-solution">
+          <span class="is-label is-solution-label">Solution</span>
+          <div class="is-points-group">
+            <div class="is-points-head">
+              <span class="is-points-head-label">What it fixes</span>
+              <span class="is-points-head-stat">Fixed, always-visible header search</span>
             </div>
-            <div class="is-point">
-              <span class="is-point-icon"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11V5a2 2 0 0 1 2-2h6l10 10-8 8L3 11z"/><circle cx="8" cy="8" r="1.4" fill="currentColor" stroke="none"/></svg><svg class="is-point-check" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-6"/></svg></span>
-              <div class="is-point-label">Visible &ldquo;2 Active&rdquo; badge</div>
-            </div>
-            <div class="is-point">
-              <span class="is-point-icon"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg><svg class="is-point-check" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-6"/></svg></span>
-              <div class="is-point-label">Follows conventional norms</div>
+            <div class="is-points-row">
+              <div class="is-point">
+                <span class="is-point-icon"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-6.5 7-12a7 7 0 0 0-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="9" r="2.5"/></svg><svg class="is-point-check" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-6"/></svg></span>
+                <div class="is-point-label">Persists across every page</div>
+              </div>
+              <div class="is-point">
+                <span class="is-point-icon"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg><svg class="is-point-check" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-6"/></svg></span>
+                <div class="is-point-label">Follows conventional norms</div>
+              </div>
+              <div class="is-point">
+                <span class="is-point-icon"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s4-8 10-8 10 8 10 8-4 8-10 8-10-8-10-8z"/><circle cx="12" cy="12" r="3"/></svg><svg class="is-point-check" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-6"/></svg></span>
+                <div class="is-point-label">High-contrast placement</div>
+              </div>
             </div>
           </div>
+          <div class="is-media-box">
+            <img src="assets/finding1-desktop.png" alt="WA211 homepage on desktop, showing no persistent search bar in the header">
+          </div>
         </div>
-        <div class="is-media-box">
-          <div class="filter-mock" role="img" aria-label="Mockup of the filter panel with an Apply Filter button and a 2 Active badge added">
-            <div class="filter-mock-brand">
-              <span class="filter-mock-logo">2&middot;1&middot;1</span>
-              <span class="filter-mock-brand-label">Washington</span>
+      </div>
+
+      <div class="carousel-panel" data-sub="filter" data-mode="issue">
+        <div class="is-box is-issue">
+          <span class="is-label is-issue-label">Issue</span>
+          <div class="is-stat-box">
+            <span class="is-stat-num">4/6</span>
+            <span class="is-stat-caption">pts struggled with filters</span>
+          </div>
+          <div class="is-points-group">
+            <div class="is-points-head">
+              <span class="is-points-head-label">Why it failed</span>
+              <span class="is-points-head-stat">4/6 pts struggled with filters</span>
             </div>
-            <div class="filter-mock-head">
-              <span class="filter-mock-title">Filters</span>
-              <span class="filter-mock-badge">2 Active</span>
+            <div class="is-points-row">
+              <div class="is-point">
+                <span class="is-point-icon"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="8" width="18" height="8" rx="4"/><circle cx="16" cy="12" r="2.2" fill="currentColor" stroke="none"/></svg><svg class="is-point-x" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9 9l6 6M15 9l-6 6"/></svg></span>
+                <div class="is-point-label">No Apply button feedback</div>
+              </div>
+              <div class="is-point">
+                <span class="is-point-icon"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11V5a2 2 0 0 1 2-2h6l10 10-8 8L3 11z"/><circle cx="8" cy="8" r="1.4" fill="currentColor" stroke="none"/></svg><svg class="is-point-x" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9 9l6 6M15 9l-6 6"/></svg></span>
+                <div class="is-point-label">No active-filter indicator</div>
+              </div>
+              <div class="is-point">
+                <span class="is-point-icon"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3l18 18"/><path d="M10.6 10.6a2 2 0 0 0 2.8 2.8"/><path d="M9.9 4.24A9.1 9.1 0 0 1 12 4c5 0 9 4 10 8a13 13 0 0 1-1.67 3.06M6.61 6.61A13 13 0 0 0 2 12s4 8 10 8a9 9 0 0 0 4.3-1.1"/></svg><svg class="is-point-x" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9 9l6 6M15 9l-6 6"/></svg></span>
+                <div class="is-point-label">2/6 didn&rsquo;t notice filters existed</div>
+              </div>
             </div>
-            <div class="filter-mock-group-label">Age Group</div>
-            <label class="filter-mock-check"><input type="checkbox" checked disabled> Older Adults (65+)</label>
-            <div class="filter-mock-group-label">Languages</div>
-            <label class="filter-mock-check"><input type="checkbox" checked disabled> Spanish</label>
-            <div class="filter-mock-group-label">Days of the Week</div>
-            <label class="filter-mock-check"><input type="checkbox" disabled> Monday</label>
-            <label class="filter-mock-check"><input type="checkbox" disabled> Tuesday</label>
-            <button class="filter-mock-apply" type="button" tabindex="-1">Apply Filter</button>
+          </div>
+          <div class="is-media-box">
+            <img src="assets/finding1-filter-screenshot.png" alt="WA211 search results page with a filter sidebar (age group, languages, days of week), no Apply button or active-filter indicator">
+          </div>
+        </div>
+      </div>
+
+      <div class="carousel-panel" data-sub="filter" data-mode="solution">
+        <div class="is-box is-solution">
+          <span class="is-label is-solution-label">Solution</span>
+          <div class="is-points-group">
+            <div class="is-points-head">
+              <span class="is-points-head-label">What it fixes</span>
+              <span class="is-points-head-stat">Explicit Apply + active-filter indicator</span>
+            </div>
+            <div class="is-points-row">
+              <div class="is-point">
+                <span class="is-point-icon"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="8" width="18" height="8" rx="4"/><circle cx="16" cy="12" r="2.2" fill="currentColor" stroke="none"/></svg><svg class="is-point-check" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-6"/></svg></span>
+                <div class="is-point-label">Clear Apply Filter action</div>
+              </div>
+              <div class="is-point">
+                <span class="is-point-icon"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11V5a2 2 0 0 1 2-2h6l10 10-8 8L3 11z"/><circle cx="8" cy="8" r="1.4" fill="currentColor" stroke="none"/></svg><svg class="is-point-check" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-6"/></svg></span>
+                <div class="is-point-label">Visible &ldquo;2 Active&rdquo; badge</div>
+              </div>
+              <div class="is-point">
+                <span class="is-point-icon"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg><svg class="is-point-check" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-6"/></svg></span>
+                <div class="is-point-label">Follows conventional norms</div>
+              </div>
+            </div>
+          </div>
+          <div class="is-media-box">
+            <div class="filter-mock" role="img" aria-label="Mockup of the filter panel with an Apply Filter button and a 2 Active badge added">
+              <div class="filter-mock-brand">
+                <span class="filter-mock-logo">2&middot;1&middot;1</span>
+                <span class="filter-mock-brand-label">Washington</span>
+              </div>
+              <div class="filter-mock-head">
+                <span class="filter-mock-title">Filters</span>
+                <span class="filter-mock-badge">2 Active</span>
+              </div>
+              <div class="filter-mock-group-label">Age Group</div>
+              <label class="filter-mock-check"><input type="checkbox" checked disabled> Older Adults (65+)</label>
+              <div class="filter-mock-group-label">Languages</div>
+              <label class="filter-mock-check"><input type="checkbox" checked disabled> Spanish</label>
+              <div class="filter-mock-group-label">Days of the Week</div>
+              <label class="filter-mock-check"><input type="checkbox" disabled> Monday</label>
+              <label class="filter-mock-check"><input type="checkbox" disabled> Tuesday</label>
+              <button class="filter-mock-apply" type="button" tabindex="-1">Apply Filter</button>
+            </div>
           </div>
         </div>
       </div>
@@ -5326,158 +5388,166 @@ h1, h2, h3 {
 
   <div class="stat-group-divider"></div>
 
-  <div class="stat-groups">
-    <div class="sub-issue">
-      <div class="sub-issue-title">Search Relevance</div>
-
-      <div class="is-box is-issue">
-        <span class="is-label is-issue-label">Issue</span>
-        <div class="is-stat-box">
-          <span class="is-stat-num">4/6</span>
-          <span class="is-stat-caption">pts received unrelated results</span>
-        </div>
-        <div class="is-points-group">
-          <div class="is-points-head">Why it failed</div>
-          <div class="is-points-row">
-            <div class="is-point">
-              <span class="is-point-icon"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10" cy="10" r="6"/><path d="M14.5 14.5L20 20"/><path d="M3 3l18 18"/></svg></span>
-              <div class="is-point-label">No exact matches for plain-language terms</div>
-            </div>
-            <div class="is-point">
-              <span class="is-point-icon"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 1 1 3.5 2.3c-.9.4-1.5 1-1.5 2.2"/><line x1="12" y1="17" x2="12" y2="17.01"/></svg></span>
-              <div class="is-point-label">Broad substitutes with no explanation</div>
-            </div>
-            <div class="is-point">
-              <span class="is-point-icon"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3l18 18"/><path d="M10.6 10.6a2 2 0 0 0 2.8 2.8"/><path d="M9.9 4.24A9.1 9.1 0 0 1 12 4c5 0 9 4 10 8a13 13 0 0 1-1.67 3.06M6.61 6.61A13 13 0 0 0 2 12s4 8 10 8a9 9 0 0 0 4.3-1.1"/></svg></span>
-              <div class="is-point-label">Couldn&rsquo;t tell why results didn&rsquo;t match</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="is-box is-solution">
-        <span class="is-label is-solution-label">Solution</span>
-        <div class="is-stat-box">
-          <span class="is-headline">Search tuned to plain-language queries</span>
-        </div>
-        <div class="is-points-group">
-          <div class="is-points-head">What it fixes</div>
-          <div class="is-points-row">
-            <div class="is-point">
-              <span class="is-point-icon"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10" cy="10" r="6"/><path d="M20 20l-4.35-4.35"/></svg><svg class="is-point-check" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-6"/></svg></span>
-              <div class="is-point-label">Matches plain-language terms directly</div>
-            </div>
-            <div class="is-point">
-              <span class="is-point-icon"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.2" fill="currentColor" stroke="none"/></svg><svg class="is-point-check" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-6"/></svg></span>
-              <div class="is-point-label">Right category surfaces first</div>
-            </div>
-            <div class="is-point">
-              <span class="is-point-icon"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg><svg class="is-point-check" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-6"/></svg></span>
-              <div class="is-point-label">Follows conventional norms</div>
-            </div>
-          </div>
-        </div>
-        <div class="is-media-box">
-          <div class="result-mock" role="img" aria-label="Mockup of a search result correctly matched to Housing Search and Information after a plain-language 'housing' query">
-            <div class="result-mock-brand">
-              <span class="result-mock-logo">2&middot;1&middot;1</span>
-              <span class="result-mock-brand-label">Washington</span>
-            </div>
-            <div class="result-mock-card">
-              <div class="result-mock-card-title">Housing Search and Information</div>
-              <div class="result-mock-card-meta">offered by Serenity House Housing Resource Center &middot; Forks, WA</div>
-              <div class="result-mock-card-desc">Provides centralized intake, assessment, and coordinated entry for housing search assistance.</div>
-              <div class="result-mock-tags">
-                <span class="result-mock-tag">Housing Search Assistance</span>
-                <span class="result-mock-tag">Transitional Housing</span>
-              </div>
-              <div class="result-mock-actions">
-                <span>Call</span><span>Website</span><span>Directions</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+  <div class="carousel" data-active-sub="search" data-active-mode="issue">
+    <div class="carousel-outer-toggle">
+      <div class="carousel-thumb"></div>
+      <button class="carousel-outer-btn" data-sub="search" type="button">Search Relevance</button>
+      <button class="carousel-outer-btn" data-sub="filter" type="button">Location Accuracy</button>
+    </div>
+    <div class="carousel-inner-tabs">
+      <button class="carousel-tab" data-mode="issue" type="button">Issue</button>
+      <button class="carousel-tab" data-mode="solution" type="button">Solution</button>
     </div>
 
-    <div class="stat-group-divider"></div>
-
-    <div class="sub-issue">
-      <div class="sub-issue-title">Location Accuracy</div>
-
-      <div class="is-box is-issue">
-        <span class="is-label is-issue-label">Issue</span>
-        <div class="is-stat-box">
-          <span class="is-stat-num">100%</span>
-          <span class="is-stat-caption">results were out-of-state</span>
-        </div>
-        <div class="is-points-group">
-          <div class="is-points-head">Why it failed</div>
-          <div class="is-points-row">
-            <div class="is-point">
-              <span class="is-point-icon"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16l-6 8v6l-4 2v-8L4 4z"/></svg></span>
-              <div class="is-point-label">Location filter not enforced</div>
+    <div class="carousel-panels">
+      <div class="carousel-panel" data-sub="search" data-mode="issue">
+        <div class="is-box is-issue">
+          <span class="is-label is-issue-label">Issue</span>
+          <div class="is-points-group">
+            <div class="is-points-head">
+              <span class="is-points-head-label">Why it failed</span>
+              <span class="is-points-head-stat">4/6 pts received unrelated results</span>
             </div>
-            <div class="is-point">
-              <span class="is-point-icon"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3l18 18"/><path d="M10.6 10.6a2 2 0 0 0 2.8 2.8"/><path d="M9.9 4.24A9.1 9.1 0 0 1 12 4c5 0 9 4 10 8a13 13 0 0 1-1.67 3.06M6.61 6.61A13 13 0 0 0 2 12s4 8 10 8a9 9 0 0 0 4.3-1.1"/></svg></span>
-              <div class="is-point-label">No distance shown for any result</div>
-            </div>
-            <div class="is-point">
-              <span class="is-point-icon"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 1 1 3.5 2.3c-.9.4-1.5 1-1.5 2.2"/><line x1="12" y1="17" x2="12" y2="17.01"/></svg></span>
-              <div class="is-point-label">Users couldn&rsquo;t verify relevance</div>
+            <div class="is-points-row">
+              <div class="is-point">
+                <span class="is-point-icon"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10" cy="10" r="6"/><path d="M14.5 14.5L20 20"/><path d="M3 3l18 18"/></svg><svg class="is-point-x" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9 9l6 6M15 9l-6 6"/></svg></span>
+                <div class="is-point-label">No exact matches for plain-language terms</div>
+              </div>
+              <div class="is-point">
+                <span class="is-point-icon"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 1 1 3.5 2.3c-.9.4-1.5 1-1.5 2.2"/><line x1="12" y1="17" x2="12" y2="17.01"/></svg><svg class="is-point-x" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9 9l6 6M15 9l-6 6"/></svg></span>
+                <div class="is-point-label">Broad substitutes with no explanation</div>
+              </div>
+              <div class="is-point">
+                <span class="is-point-icon"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3l18 18"/><path d="M10.6 10.6a2 2 0 0 0 2.8 2.8"/><path d="M9.9 4.24A9.1 9.1 0 0 1 12 4c5 0 9 4 10 8a13 13 0 0 1-1.67 3.06M6.61 6.61A13 13 0 0 0 2 12s4 8 10 8a9 9 0 0 0 4.3-1.1"/></svg><svg class="is-point-x" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9 9l6 6M15 9l-6 6"/></svg></span>
+                <div class="is-point-label">Couldn&rsquo;t tell why results didn&rsquo;t match</div>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      <div class="is-box is-solution">
-        <span class="is-label is-solution-label">Solution</span>
-        <div class="is-stat-box">
-          <span class="is-headline">Mandatory proximity-first ordering</span>
-        </div>
-        <div class="is-points-group">
-          <div class="is-points-head">What it fixes</div>
-          <div class="is-points-row">
-            <div class="is-point">
-              <span class="is-point-icon"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 17l14-14 4 4-14 14H3v-4z"/><path d="M13 6l3 3"/><path d="M10 9l2 2"/><path d="M7 12l2 2"/></svg><svg class="is-point-check" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-6"/></svg></span>
-              <div class="is-point-label">Distance shown for every result</div>
+      <div class="carousel-panel" data-sub="search" data-mode="solution">
+        <div class="is-box is-solution">
+          <span class="is-label is-solution-label">Solution</span>
+          <div class="is-points-group">
+            <div class="is-points-head">
+              <span class="is-points-head-label">What it fixes</span>
+              <span class="is-points-head-stat">Search tuned to plain-language queries</span>
             </div>
-            <div class="is-point">
-              <span class="is-point-icon"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-6.5 7-12a7 7 0 0 0-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="9" r="2.5"/></svg><svg class="is-point-check" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-6"/></svg></span>
-              <div class="is-point-label">Nearest match surfaces first</div>
+            <div class="is-points-row">
+              <div class="is-point">
+                <span class="is-point-icon"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10" cy="10" r="6"/><path d="M20 20l-4.35-4.35"/></svg><svg class="is-point-check" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-6"/></svg></span>
+                <div class="is-point-label">Matches plain-language terms directly</div>
+              </div>
+              <div class="is-point">
+                <span class="is-point-icon"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.2" fill="currentColor" stroke="none"/></svg><svg class="is-point-check" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-6"/></svg></span>
+                <div class="is-point-label">Right category surfaces first</div>
+              </div>
+              <div class="is-point">
+                <span class="is-point-icon"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg><svg class="is-point-check" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-6"/></svg></span>
+                <div class="is-point-label">Follows conventional norms</div>
+              </div>
             </div>
-            <div class="is-point">
-              <span class="is-point-icon"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg><svg class="is-point-check" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-6"/></svg></span>
-              <div class="is-point-label">Follows conventional norms</div>
+          </div>
+          <div class="is-media-box">
+            <div class="result-mock" role="img" aria-label="Mockup of a search result correctly matched to Housing Search and Information after a plain-language 'housing' query">
+              <div class="result-mock-brand">
+                <span class="result-mock-logo">2&middot;1&middot;1</span>
+                <span class="result-mock-brand-label">Washington</span>
+              </div>
+              <div class="result-mock-card">
+                <div class="result-mock-card-title">Housing Search and Information</div>
+                <div class="result-mock-card-meta">offered by Serenity House Housing Resource Center &middot; Forks, WA</div>
+                <div class="result-mock-card-desc">Provides centralized intake, assessment, and coordinated entry for housing search assistance.</div>
+                <div class="result-mock-tags">
+                  <span class="result-mock-tag">Housing Search Assistance</span>
+                  <span class="result-mock-tag">Transitional Housing</span>
+                </div>
+                <div class="result-mock-actions">
+                  <span>Call</span><span>Website</span><span>Directions</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-        <div class="is-media-box">
-          <div class="result-mock" role="img" aria-label="Mockup of search results sorted by distance, nearest first">
-            <div class="result-mock-brand">
-              <span class="result-mock-logo">2&middot;1&middot;1</span>
-              <span class="result-mock-brand-label">Washington</span>
+      </div>
+
+      <div class="carousel-panel" data-sub="filter" data-mode="issue">
+        <div class="is-box is-issue">
+          <span class="is-label is-issue-label">Issue</span>
+          <div class="is-points-group">
+            <div class="is-points-head">
+              <span class="is-points-head-label">Why it failed</span>
+              <span class="is-points-head-stat">100% results were out-of-state</span>
             </div>
-            <div class="result-mock-card nearest">
-              <div class="result-mock-distance-row">
-                <span class="result-mock-card-title" style="margin-bottom:0;">Housing Resource Center</span>
-                <span class="result-mock-distance">1.2 mi</span>
+            <div class="is-points-row">
+              <div class="is-point">
+                <span class="is-point-icon"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16l-6 8v6l-4 2v-8L4 4z"/></svg><svg class="is-point-x" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9 9l6 6M15 9l-6 6"/></svg></span>
+                <div class="is-point-label">Location filter not enforced</div>
               </div>
-              <div class="result-mock-city">Bellingham, WA</div>
+              <div class="is-point">
+                <span class="is-point-icon"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3l18 18"/><path d="M10.6 10.6a2 2 0 0 0 2.8 2.8"/><path d="M9.9 4.24A9.1 9.1 0 0 1 12 4c5 0 9 4 10 8a13 13 0 0 1-1.67 3.06M6.61 6.61A13 13 0 0 0 2 12s4 8 10 8a9 9 0 0 0 4.3-1.1"/></svg><svg class="is-point-x" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9 9l6 6M15 9l-6 6"/></svg></span>
+                <div class="is-point-label">No distance shown for any result</div>
+              </div>
+              <div class="is-point">
+                <span class="is-point-icon"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 1 1 3.5 2.3c-.9.4-1.5 1-1.5 2.2"/><line x1="12" y1="17" x2="12" y2="17.01"/></svg><svg class="is-point-x" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9 9l6 6M15 9l-6 6"/></svg></span>
+                <div class="is-point-label">Users couldn&rsquo;t verify relevance</div>
+              </div>
             </div>
-            <div class="result-mock-card">
-              <div class="result-mock-distance-row">
-                <span style="font-family:var(--font-head);font-weight:700;font-size:11.5px;color:var(--text-body);">Transitional Housing Program</span>
-                <span class="result-mock-distance">3.8 mi</span>
-              </div>
-              <div class="result-mock-city">Mount Vernon, WA</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="carousel-panel" data-sub="filter" data-mode="solution">
+        <div class="is-box is-solution">
+          <span class="is-label is-solution-label">Solution</span>
+          <div class="is-points-group">
+            <div class="is-points-head">
+              <span class="is-points-head-label">What it fixes</span>
+              <span class="is-points-head-stat">Mandatory proximity-first ordering</span>
             </div>
-            <div class="result-mock-card">
-              <div class="result-mock-distance-row">
-                <span style="font-family:var(--font-head);font-weight:700;font-size:11.5px;color:var(--text-body);">Emergency Shelter Intake</span>
-                <span class="result-mock-distance">6.1 mi</span>
+            <div class="is-points-row">
+              <div class="is-point">
+                <span class="is-point-icon"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 17l14-14 4 4-14 14H3v-4z"/><path d="M13 6l3 3"/><path d="M10 9l2 2"/><path d="M7 12l2 2"/></svg><svg class="is-point-check" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-6"/></svg></span>
+                <div class="is-point-label">Distance shown for every result</div>
               </div>
-              <div class="result-mock-city">Ferndale, WA</div>
+              <div class="is-point">
+                <span class="is-point-icon"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-6.5 7-12a7 7 0 0 0-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="9" r="2.5"/></svg><svg class="is-point-check" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-6"/></svg></span>
+                <div class="is-point-label">Nearest match surfaces first</div>
+              </div>
+              <div class="is-point">
+                <span class="is-point-icon"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg><svg class="is-point-check" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-6"/></svg></span>
+                <div class="is-point-label">Follows conventional norms</div>
+              </div>
+            </div>
+          </div>
+          <div class="is-media-box">
+            <div class="result-mock" role="img" aria-label="Mockup of search results sorted by distance, nearest first">
+              <div class="result-mock-brand">
+                <span class="result-mock-logo">2&middot;1&middot;1</span>
+                <span class="result-mock-brand-label">Washington</span>
+              </div>
+              <div class="result-mock-card nearest">
+                <div class="result-mock-distance-row">
+                  <span class="result-mock-card-title" style="margin-bottom:0;">Housing Resource Center</span>
+                  <span class="result-mock-distance">1.2 mi</span>
+                </div>
+                <div class="result-mock-city">Bellingham, WA</div>
+              </div>
+              <div class="result-mock-card">
+                <div class="result-mock-distance-row">
+                  <span style="font-family:var(--font-head);font-weight:700;font-size:11.5px;color:var(--text-body);">Transitional Housing Program</span>
+                  <span class="result-mock-distance">3.8 mi</span>
+                </div>
+                <div class="result-mock-city">Mount Vernon, WA</div>
+              </div>
+              <div class="result-mock-card">
+                <div class="result-mock-distance-row">
+                  <span style="font-family:var(--font-head);font-weight:700;font-size:11.5px;color:var(--text-body);">Emergency Shelter Intake</span>
+                  <span class="result-mock-distance">6.1 mi</span>
+                </div>
+                <div class="result-mock-city">Ferndale, WA</div>
+              </div>
             </div>
           </div>
         </div>
@@ -5625,6 +5695,54 @@ function toggleAvoided(el, n) {
     el.classList.add('active');
   }
 }
+
+function initCarousels() {
+  document.querySelectorAll('.carousel').forEach(function (carousel) {
+    var outerBtns = carousel.querySelectorAll('.carousel-outer-btn');
+    var thumb = carousel.querySelector('.carousel-thumb');
+    var tabs = carousel.querySelectorAll('.carousel-tab');
+    var panels = carousel.querySelectorAll('.carousel-panel');
+    var n = outerBtns.length;
+
+    function update() {
+      var sub = carousel.getAttribute('data-active-sub');
+      var mode = carousel.getAttribute('data-active-mode');
+      outerBtns.forEach(function (btn, i) {
+        var active = btn.getAttribute('data-sub') === sub;
+        btn.classList.toggle('active', active);
+        if (active && thumb) {
+          thumb.style.width = 'calc(' + (100 / n) + '% - 4px)';
+          thumb.style.transform = 'translateX(' + (i * 100) + '%)';
+        }
+      });
+      tabs.forEach(function (tab) {
+        tab.classList.toggle('active', tab.getAttribute('data-mode') === mode);
+      });
+      panels.forEach(function (panel) {
+        var isActive = panel.getAttribute('data-sub') === sub && panel.getAttribute('data-mode') === mode;
+        panel.classList.toggle('active', isActive);
+      });
+    }
+
+    outerBtns.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        carousel.setAttribute('data-active-sub', btn.getAttribute('data-sub'));
+        carousel.setAttribute('data-active-mode', 'issue');
+        update();
+      });
+    });
+    tabs.forEach(function (tab) {
+      tab.addEventListener('click', function () {
+        carousel.setAttribute('data-active-mode', tab.getAttribute('data-mode'));
+        update();
+      });
+    });
+
+    update();
+  });
+}
+
+initCarousels();
 
 function toggleTocGroup(btn) {
   event.preventDefault();
