@@ -140,6 +140,64 @@ h1, h2, h3 {
 }
 .back-link:hover { color: var(--orange-deep); }
 
+.sticky-section-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 45;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 20px;
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(10px) saturate(160%);
+  -webkit-backdrop-filter: blur(10px) saturate(160%);
+  border-bottom: 1px solid var(--border);
+  opacity: 0;
+  transform: translateY(-100%);
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.sticky-section-header.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.sticky-section-num {
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: 11px;
+  color: var(--orange-deep);
+}
+
+.sticky-section-label {
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 12.5px;
+  color: var(--navy);
+}
+
+.sticky-section-divider {
+  font-size: 12px;
+  color: var(--border-strong, #c7d2e0);
+  display: none;
+}
+
+.sticky-section-sub {
+  font-family: var(--font-head);
+  font-weight: 600;
+  font-size: 11.5px;
+  color: var(--text-muted);
+  display: none;
+}
+
+.sticky-section-divider.visible,
+.sticky-section-sub.visible {
+  display: inline;
+}
+
 .toc-float {
   position: fixed;
   left: 18px;
@@ -1015,27 +1073,90 @@ h1, h2, h3 {
 
 .is-box {
   border-radius: 12px;
-  padding: 18px 20px;
-  background: var(--bg-alt);
+  overflow: hidden;
   border: 1px solid var(--border);
+  padding: 0;
 }
 
-.is-label {
+.is-box.is-issue {
+  border-color: #f0d3d1;
+}
+
+.is-box.is-solution {
+  border-color: #c3e6d0;
+}
+
+.is-toggle-header {
+  position: relative;
+  display: flex;
+  padding: 4px;
+}
+
+.is-issue .is-toggle-header {
+  background: #f6dedb;
+}
+
+.is-solution .is-toggle-header {
+  background: #d5f0e0;
+}
+
+.is-toggle-thumb {
+  position: absolute;
+  top: 4px;
+  bottom: 4px;
+  width: calc(50% - 4px);
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.is-issue .is-toggle-thumb {
+  left: 4px;
+}
+
+.is-solution .is-toggle-thumb {
+  left: 50%;
+}
+
+.is-toggle-btn {
+  position: relative;
+  flex: 1;
+  padding: 10px 10px;
+  border: none;
+  background: none;
+  cursor: pointer;
   font-family: var(--font-head);
-  font-size: 9.5px;
+  font-size: 13px;
   font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  margin-bottom: 10px;
-  display: block;
+  transition: color 0.15s ease;
 }
 
-.is-label.is-issue-label {
-  color: #a8574f;
+.is-issue .is-toggle-btn[data-mode="issue"] {
+  color: #b23b3b;
 }
 
-.is-label.is-solution-label {
-  color: #2f8a5c;
+.is-issue .is-toggle-btn[data-mode="solution"] {
+  color: #8a97ab;
+}
+
+.is-solution .is-toggle-btn[data-mode="solution"] {
+  color: #1f6b3a;
+}
+
+.is-solution .is-toggle-btn[data-mode="issue"] {
+  color: #8a97ab;
+}
+
+.is-box-content {
+  padding: 18px 20px;
+}
+
+.is-issue .is-box-content {
+  background: #fdf6f5;
+}
+
+.is-solution .is-box-content {
+  background: #eaf6ef;
 }
 
 .is-points-group {
@@ -1044,6 +1165,14 @@ h1, h2, h3 {
   margin-bottom: 16px;
   background: #fff;
   border: 1px solid var(--border);
+}
+
+.is-issue .is-points-group {
+  border-color: #f0d3d1;
+}
+
+.is-solution .is-points-group {
+  border-color: #c3e6d0;
 }
 
 .is-points-head {
@@ -1099,6 +1228,14 @@ h1, h2, h3 {
   border-left: 1px solid var(--border);
 }
 
+.is-issue .is-point + .is-point {
+  border-left-color: #f0d3d1;
+}
+
+.is-solution .is-point + .is-point {
+  border-left-color: #c3e6d0;
+}
+
 .is-point-icon {
   position: relative;
   display: inline-block;
@@ -1115,7 +1252,7 @@ h1, h2, h3 {
   right: -6px;
   background: #fff;
   border-radius: 50%;
-  color: #2f8a5c;
+  color: #16a34a;
 }
 
 .is-point-x {
@@ -1124,7 +1261,15 @@ h1, h2, h3 {
   right: -6px;
   background: #fff;
   border-radius: 50%;
-  color: #b23b3b;
+  color: #dc2626;
+}
+
+.finding .is-point-check {
+  color: #16a34a;
+}
+
+.finding .is-point-x {
+  color: #dc2626;
 }
 
 .is-point-label {
@@ -1141,6 +1286,14 @@ h1, h2, h3 {
   border-radius: 8px;
   overflow: hidden;
   border: 1px solid var(--border);
+}
+
+.is-issue .is-media-box {
+  border-color: #f0d3d1;
+}
+
+.is-solution .is-media-box {
+  border-color: #c3e6d0;
 }
 
 .is-media-box img,
@@ -1282,10 +1435,18 @@ h1, h2, h3 {
   font-family: var(--font-head);
   font-size: 11px;
   font-weight: 700;
-  border: 1.5px solid var(--border);
   background: #fff;
-  color: var(--text-muted);
   transition: all 0.15s ease;
+}
+
+.carousel-tab[data-mode="issue"] {
+  border: 1.5px solid #f0d3d1;
+  color: #c17b7b;
+}
+
+.carousel-tab[data-mode="solution"] {
+  border: 1.5px solid #c3e6d0;
+  color: #7fa88f;
 }
 
 .carousel-tab[data-mode="issue"]:hover:not(.active) {
@@ -1676,6 +1837,65 @@ h1, h2, h3 {
   font-size: 13px;
   color: var(--text-body);
   margin-top: 4px;
+}
+
+.finding-hookline {
+  background: var(--navy);
+  border-radius: 12px;
+  padding: 28px 26px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin: 20px 0 4px;
+}
+
+.finding-hookline-stat {
+  flex: none;
+  text-align: center;
+}
+
+.finding-hookline-num {
+  display: block;
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: 58px;
+  color: #fff;
+  line-height: 1;
+}
+
+.finding-hookline .finding-hookline-caption {
+  font-size: 11px;
+  color: #cfe0f5;
+  margin-top: 6px;
+  white-space: nowrap;
+}
+
+.finding-hookline .finding-hookline-caption strong {
+  color: #ffcf94;
+  font-weight: 700;
+  font-size: 12.5px;
+}
+
+.finding-hookline-divider {
+  flex: none;
+  width: 1px;
+  align-self: stretch;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.finding-hookline .finding-hookline-question {
+  flex: 1;
+  font-family: var(--font-head);
+  font-weight: 600;
+  font-size: 15px;
+  color: #ffcf94;
+  margin: 0;
+  line-height: 1.4;
+}
+
+@media (max-width: 600px) {
+  .finding-hookline { flex-direction: column; text-align: center; }
+  .finding-hookline-divider { width: 60%; height: 1px; }
 }
 
 .finding-why {
@@ -3128,11 +3348,11 @@ h1, h2, h3 {
   display: block;
   font-family: var(--font-head);
   font-weight: 800;
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
+  font-size: 22px;
+  text-transform: none;
+  letter-spacing: 0.01em;
   color: #ffcf94;
-  margin-bottom: 6px;
+  margin-bottom: 8px;
 }
 
 .rq-banner p {
@@ -3171,54 +3391,99 @@ h1, h2, h3 {
   flex: 0 0 16px;
 }
 
-.rq-row {
+.rq-items {
   display: flex;
-  align-items: center;
+  flex-direction: column;
   gap: 12px;
-  padding: 12px 0;
-  border-top: 1px solid var(--border);
 }
 
-.rq-row:last-child { border-bottom: 1px solid var(--border); }
+.rq-item {
+  display: flex;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+}
 
-.rq-cause,
-.rq-effect {
+.rq-item-media {
+  flex: 0 0 38%;
+  aspect-ratio: 4 / 3;
+  border-right: 1.5px dashed var(--border-strong);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  color: var(--text-muted);
+  background: var(--bg-alt);
+}
+
+.rq-item-media span {
+  font-size: 9px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.rq-item-text {
   flex: 1;
+  padding: 16px 18px;
+  position: relative;
+  overflow: hidden;
   display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.rq-cause p,
-.rq-effect p {
-  margin: 0;
-  font-size: 13px;
-  line-height: 1.45;
-  color: var(--text-body);
-}
-
-.rq-num {
-  flex-shrink: 0;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  background: var(--amber-bg);
-  color: var(--orange-deep);
-  display: flex;
-  align-items: center;
+  flex-direction: column;
   justify-content: center;
 }
 
-.rq-arrow {
-  flex-shrink: 0;
-  color: var(--orange);
-  opacity: 0.6;
+.rq-item-watermark {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  width: 72px;
+  height: 72px;
+  color: rgba(232, 150, 60, 0.14);
+  pointer-events: none;
+}
+
+.rq-item-eyebrow {
+  position: relative;
+  z-index: 1;
+  font-family: var(--font-head);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--orange-deep);
+  margin-bottom: 4px;
+}
+
+.rq-item-title {
+  position: relative;
+  z-index: 1;
+  font-family: var(--font-head);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--navy);
+  margin: 0 0 6px;
+  line-height: 1.3;
+}
+
+.rq-item-question {
+  position: relative;
+  z-index: 1;
+  font-size: 11.5px;
+  color: var(--text-muted);
+  margin: 0;
+  line-height: 1.4;
+}
+
+.rq-item-question strong {
+  color: var(--text-body);
+  font-weight: 700;
 }
 
 @media (max-width: 640px) {
-  .rq-row { flex-direction: column; align-items: stretch; gap: 8px; }
-  .rq-arrow { transform: rotate(90deg); align-self: center; }
-  .rq-col-heads { display: none; }
+  .rq-item { flex-direction: column; }
+  .rq-item-media { flex: none; aspect-ratio: 16 / 9; border-right: none; border-bottom: 1.5px dashed var(--border-strong); }
 }
 
 .strategy-subhead {
@@ -4066,6 +4331,63 @@ h1, h2, h3 {
   position: relative;
 }
 
+.phase-carousel .stepper-step {
+  display: none;
+}
+
+.phase-carousel .stepper-step.active-phase {
+  display: block;
+}
+
+.phase-carousel .stepper-step::before {
+  display: none;
+}
+
+.phase-carousel {
+  position: relative;
+}
+
+.phase-carousel-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: #fff;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 5;
+  transition: border-color 0.15s ease, color 0.15s ease, opacity 0.15s ease;
+}
+
+.phase-carousel-nav:hover:not(:disabled) {
+  border-color: var(--orange);
+  color: var(--navy);
+}
+
+.phase-carousel-nav:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.phase-carousel-prev {
+  left: -15px;
+}
+
+.phase-carousel-next {
+  right: -15px;
+}
+
+@media (max-width: 700px) {
+  .phase-carousel-prev { left: -6px; }
+  .phase-carousel-next { right: -6px; }
+}
+
 .stepper-step:not(:first-child)::before {
   content: '';
   position: absolute;
@@ -4160,6 +4482,135 @@ h1, h2, h3 {
   margin-bottom: 8px;
 }
 
+.phase-timeline {
+  margin: 20px 0 28px;
+}
+
+.phase-timeline-track {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 4px;
+}
+
+.phase-timeline-line {
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  top: 6px;
+  height: 2px;
+  background: var(--border);
+}
+
+.phase-timeline-fill {
+  position: absolute;
+  left: 14px;
+  top: 6px;
+  height: 2px;
+  background: var(--orange);
+  transition: width 0.25s ease;
+}
+
+.phase-timeline-step {
+  position: relative;
+  flex: 1;
+  text-align: center;
+  cursor: pointer;
+  padding: 26px 8px 0;
+  border-radius: 8px;
+  background: none;
+  border: none;
+  font-family: inherit;
+  transition: transform 0.15s ease;
+}
+
+.phase-timeline-step:hover {
+  transform: scale(1.05);
+}
+
+.phase-timeline-step.active {
+  transform: scale(1.08);
+}
+
+.phase-timeline-step.active:hover {
+  transform: scale(1.1);
+}
+
+.phase-timeline-step:focus-visible {
+  outline: 2px solid var(--orange);
+  outline-offset: 2px;
+}
+
+.phase-timeline-dot {
+  position: absolute;
+  top: 7px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--border-strong, #c7d2e0);
+  border: 2px solid #fff;
+  box-shadow: 0 0 0 1px var(--border-strong, #c7d2e0);
+  transition: width 0.2s ease, height 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.phase-timeline-step.active .phase-timeline-dot,
+.phase-timeline-step.past .phase-timeline-dot {
+  background: var(--orange);
+  box-shadow: 0 0 0 1px var(--orange);
+}
+
+.phase-timeline-step.active .phase-timeline-dot {
+  width: 16px;
+  height: 16px;
+}
+
+.phase-timeline-step:hover .phase-timeline-dot {
+  box-shadow: 0 0 0 1px var(--orange-deep);
+}
+
+.phase-timeline-num {
+  display: block;
+  font-size: 9.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  transition: color 0.15s ease;
+}
+
+.phase-timeline-step.active .phase-timeline-num {
+  color: var(--navy);
+}
+
+.phase-timeline-step:hover .phase-timeline-num {
+  color: var(--navy);
+}
+
+.phase-timeline-name {
+  display: block;
+  font-size: 9.5px;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-top: 4px;
+  line-height: 1.4;
+  transition: color 0.15s ease, font-weight 0.15s ease;
+}
+
+.phase-timeline-step.active .phase-timeline-name {
+  color: var(--orange-deep);
+  font-weight: 800;
+}
+
+.phase-timeline-step:hover .phase-timeline-name {
+  color: var(--orange-deep);
+}
+
+@media (max-width: 640px) {
+  .phase-timeline-name { display: none; }
+}
+
 .stepper-numB .stepper-box {
   padding: 0;
   overflow: hidden;
@@ -4178,6 +4629,246 @@ h1, h2, h3 {
   font-size: 16px;
   letter-spacing: 0.03em;
   color: #fff;
+}
+
+.phase-banner {
+  width: 100%;
+  background: var(--navy);
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.phase-banner-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.phase-banner-icon svg {
+  color: #fff;
+}
+
+.phase-banner-text {
+  text-align: left;
+}
+
+.phase-banner-num {
+  display: block;
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #ffcf94;
+  margin-bottom: 2px;
+}
+
+.phase-banner-title {
+  display: block;
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: 16px;
+  color: #fff;
+}
+
+.phase-body {
+  padding: 20px 22px;
+  text-align: left;
+  display: flex;
+  gap: 20px;
+  align-items: stretch;
+}
+
+.phase-body-full {
+  padding: 0 22px 20px;
+  text-align: left;
+}
+
+.phase-body-media {
+  flex: 0 0 44%;
+  display: flex;
+}
+
+.phase-body-content {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.phase-why {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px 16px;
+}
+
+.phase-why-label {
+  font-family: var(--font-head);
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+
+.phase-why ul {
+  margin: 0;
+  padding-left: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.phase-why li {
+  font-size: 12.5px;
+  color: var(--text-body);
+  line-height: 1.4;
+}
+
+#taskCarousel .phase-why {
+  background: #f4f8fc;
+  border-color: #cfdcee;
+}
+
+#taskCarousel .phase-why-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.task-checklist-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.task-checklist-title svg {
+  color: var(--navy);
+}
+
+.task-checklist-progress {
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 10px;
+  color: var(--navy);
+  background: #dce8f7;
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+
+#taskCarousel .phase-why li {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.task-check-box {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  margin-top: 1px;
+  border: 1.5px solid var(--border-strong, #c7d2e0);
+  border-radius: 4px;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.task-check-box svg {
+  width: 11px;
+  height: 11px;
+  opacity: 0;
+  transition: opacity 0.1s ease;
+}
+
+#taskCarousel .phase-why li.checked .task-check-box {
+  background: var(--navy);
+  border-color: var(--navy);
+}
+
+#taskCarousel .phase-why li.checked .task-check-box svg {
+  opacity: 1;
+}
+
+#taskCarousel .phase-why li.checked .task-check-text {
+  color: var(--text-muted);
+  text-decoration: line-through;
+}
+
+.phase-why li strong {
+  color: var(--navy);
+}
+
+.phase-why.phase-avoided {
+  border-color: #f0d3d1;
+  background: #fdf6f5;
+}
+
+.phase-why.phase-avoided .phase-why-label {
+  color: #a8574f;
+}
+
+.phase-why.phase-avoided li strong {
+  color: #8a1f1f;
+}
+
+.phase-why-cols {
+  display: flex;
+  gap: 14px;
+}
+
+.phase-why-col {
+  flex: 1;
+  min-width: 0;
+}
+
+.phase-why-col .phase-why-label {
+  margin-bottom: 8px;
+}
+
+.phase-why-col-divider {
+  width: 1px;
+  background: var(--border);
+}
+
+.phase-media-placeholder {
+  flex: 1;
+  min-height: 160px;
+  background: var(--bg-alt);
+  border-radius: 10px;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  color: var(--text-muted);
+  font-size: 11px;
+  text-align: center;
+}
+
+@media (max-width: 640px) {
+  .phase-body { flex-direction: column; }
+  .phase-body-media { flex: none; }
+  .phase-media-placeholder { min-height: 120px; }
 }
 
 .stepper-content {
@@ -4277,85 +4968,94 @@ h1, h2, h3 {
   line-height: 1.5;
 }
 
-.task-split {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+.task-split-interactive {
   width: 100%;
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  background: #fff;
-  padding: 16px 20px 14px;
   margin-top: 12px;
 }
 
-.task-split-bar {
+.task-split-labels {
   display: flex;
-  height: 26px;
-  width: 100%;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 8px;
+}
+
+.task-split-label-task {
+  font-family: var(--font-head);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--navy);
+}
+
+.task-split-label-q {
+  font-family: var(--font-head);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--orange-deep);
+}
+
+.task-split-track {
+  position: relative;
+  height: 28px;
+  border-radius: 6px;
+  background: var(--bg-alt);
+  touch-action: none;
+}
+
+.task-split-track-mask {
+  position: absolute;
+  inset: 0;
   border-radius: 6px;
   overflow: hidden;
 }
 
-.task-split-main,
-.task-split-qs {
+.task-split-fill-task {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  background: #eef2f8;
+}
+
+.task-split-fill-q {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: var(--amber-bg);
+}
+
+.task-split-handle {
+  position: absolute;
+  top: 50%;
+  width: 18px;
+  height: 34px;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  border: 1.5px solid var(--navy);
+  border-radius: 6px;
+  cursor: grab;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: var(--font-head);
-  font-weight: 500;
-  font-size: 9px;
-  text-transform: uppercase;
-  letter-spacing: 0.01em;
-  white-space: nowrap;
-  padding: 0 3px;
+  gap: 2px;
+  box-shadow: 0 1px 3px rgba(13, 59, 120, 0.2);
 }
 
-.task-split-main {
-  background: #eef2f8;
-  color: var(--navy);
+.task-split-handle:active {
+  cursor: grabbing;
 }
 
-.task-split-qs {
-  background: var(--amber-bg);
-  color: var(--orange-deep);
+.task-split-handle span {
+  width: 2px;
+  height: 14px;
+  background: var(--navy);
+  border-radius: 1px;
 }
 
-.task-split-ticks {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  margin-top: 4px;
-  padding: 0 2px;
-}
-
-.task-split-ticks span {
-  font-family: var(--font-head);
-  font-size: 8.5px;
-  font-weight: 600;
-  color: var(--text-muted);
-}
-
-.task-split-total {
-  position: absolute;
-  top: -10px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  background: var(--bg-alt);
-  color: var(--navy);
-  font-family: var(--font-head);
-  font-weight: 700;
-  font-size: 9.5px;
-  text-transform: uppercase;
-  letter-spacing: 0.03em;
-  padding: 3px 12px;
-  border-radius: 5px;
-  white-space: nowrap;
+.task-split-handle:focus-visible {
+  outline: 2px solid var(--orange);
+  outline-offset: 2px;
 }
 
 .card-expand-badge {
@@ -4486,6 +5186,11 @@ h1, h2, h3 {
   font-weight: 700;
 }
 
+.wa-highlight {
+  color: var(--orange-deep);
+  font-weight: 700;
+}
+
 .finding p strong.wa-highlight {
   color: var(--orange-deep);
 }
@@ -4513,6 +5218,13 @@ h1, h2, h3 {
   <a href="index.html" class="home-link">Angel Diaz</a>
   <a href="index.html" class="back-link">&larr; Back to portfolio</a>
 </nav>
+
+<div class="sticky-section-header" id="stickySectionHeader">
+  <span class="sticky-section-num" id="stickySectionNum">01</span>
+  <span class="sticky-section-label" id="stickySectionLabel">Problem</span>
+  <span class="sticky-section-divider" id="stickySectionDivider">/</span>
+  <span class="sticky-section-sub" id="stickySectionSub"></span>
+</div>
 
 <nav class="toc-float" aria-label="Section navigation">
   <a href="#cover" data-toc="cover">Cover</a>
@@ -4650,7 +5362,7 @@ h1, h2, h3 {
             <span class="intro-people-title">Expert Consultant</span>
           </div>
         </div>
-        <p class="intro-people-desc"><strong>Provided background on TBI</strong>, stayed available for questions
+        <p class="intro-people-desc"><strong>Provided background on Traumatic Brain Injury (TBI)</strong>, stayed available for questions
         throughout, and <strong>joined a mock usability study</strong> to pressure-test the design in a
         realistic setting.</p>
       </a>
@@ -4691,7 +5403,7 @@ h1, h2, h3 {
     </div>
 
     <p class="takeaway">
-      A usability study with individuals with Traumatic Brain Injury (TBI) revealed <strong>critical navigation
+      A usability study with individuals with TBI revealed <strong>critical navigation
       and search-relevance failures</strong> on Washington 211's housing resource site &mdash; where users in crisis
       were <strong>choosing to abandon the site and call in instead</strong>. WA211 <strong>acknowledged the
       findings</strong>, with one team member confirming the search-discoverability fix as a known issue.
@@ -4766,6 +5478,12 @@ h1, h2, h3 {
   <div class="problem-funnel">
     <div class="funnel-row">
       <div class="funnel-card">
+        <svg class="funnel-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        <div class="funnel-card-label">Problem</div>
+        <div class="funnel-card-title">Overburdened call center</div>
+        <p class="funnel-card-sub">The site needs to actually hold people, or they call instead</p>
+      </div>
+      <div class="funnel-card">
         <svg class="funnel-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 9h18"/><path d="M8 21h8"/><path d="M12 18v3"/></svg>
         <div class="funnel-card-label">Product</div>
         <div class="funnel-card-title">WA211 Website</div>
@@ -4775,13 +5493,7 @@ h1, h2, h3 {
         <svg class="funnel-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
         <div class="funnel-card-label">Target Audience</div>
         <div class="funnel-card-title">Users with TBI</div>
-        <p class="funnel-card-sub">Proxy for broader cognitive &amp; physical accessibility needs</p>
-      </div>
-      <div class="funnel-card">
-        <svg class="funnel-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-        <div class="funnel-card-label">Problem</div>
-        <div class="funnel-card-title">Overburdened call center</div>
-        <p class="funnel-card-sub">Website needs to carry more of the load</p>
+        <p class="funnel-card-sub">Most likely to hit friction and revert to the phone &mdash; the hardest test</p>
       </div>
     </div>
 
@@ -4809,36 +5521,53 @@ h1, h2, h3 {
   <h2>A study designed around the population being tested, not a standard playbook</h2>
 
   <div class="subsection-box" id="rq">
-  <h3 class="strategy-subhead"><span class="sub-num">02.1</span>Research Question &amp; Direction</h3>
+  <h3 class="strategy-subhead"><span class="sub-num">02.1</span>Research Question &amp; Focus Areas</h3>
   <div class="rq-block">
     <div class="rq-banner">
       <svg class="rq-banner-watermark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
       <span class="rq-banner-label">Research Question</span>
-      <p>How does WA211's <strong>information architecture</strong> and <strong>UI elements</strong> enhance or deter <strong>usability</strong> for users with <strong>TBI</strong>?</p>
+      <p>How does WA211's <strong>information architecture (IA)</strong> and <strong>User Interface (UI)</strong> elements enhance or deter <strong>usability</strong> for users with <strong>TBI</strong>?</p>
     </div>
 
-    <div class="rq-col-heads">
-      <span class="rq-col-head-q">Question</span>
-      <span class="rq-col-head-spacer" aria-hidden="true"></span>
-      <span class="rq-col-head-d">Direction</span>
-    </div>
+    <div class="rq-items">
+      <div class="rq-item">
+        <div class="rq-item-media">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          <span>gif / mp4 placeholder</span>
+        </div>
+        <div class="rq-item-text">
+          <svg class="rq-item-watermark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
+          <span class="rq-item-eyebrow">Focus Area 01</span>
+          <p class="rq-item-title">Map the site&rsquo;s IA &amp; key nav points against real user needs.</p>
+          <p class="rq-item-question">Does <strong>navigation &amp; hierarchy</strong> help users locate services without distraction?</p>
+        </div>
+      </div>
 
-    <div class="rq-row">
-      <div class="rq-cause"><span class="rq-num"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg></span><p>Does <strong>navigation &amp; hierarchy</strong> help users locate services without distraction?</p></div>
-      <span class="rq-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></span>
-      <div class="rq-effect"><p>Map the site's <strong>IA &amp; key nav points</strong> against real user needs.</p></div>
-    </div>
+      <div class="rq-item">
+        <div class="rq-item-media">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          <span>gif / mp4 placeholder</span>
+        </div>
+        <div class="rq-item-text">
+          <svg class="rq-item-watermark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+          <span class="rq-item-eyebrow">Focus Area 02</span>
+          <p class="rq-item-title">Surface pain points in the resource-search flow.</p>
+          <p class="rq-item-question">Does the site support <strong>completing tasks</strong> to find crisis resources?</p>
+        </div>
+      </div>
 
-    <div class="rq-row">
-      <div class="rq-cause"><span class="rq-num"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></span><p>Does the site support <strong>completing tasks</strong> to find crisis resources?</p></div>
-      <span class="rq-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></span>
-      <div class="rq-effect"><p>Surface <strong>pain points</strong> in the resource-search flow.</p></div>
-    </div>
-
-    <div class="rq-row">
-      <div class="rq-cause"><span class="rq-num"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></span><p>Which elements cause the most <strong>cognitive friction or fatigue</strong>?</p></div>
-      <span class="rq-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></span>
-      <div class="rq-effect"><p>Turn findings into <strong>actionable recommendations</strong>.</p></div>
+      <div class="rq-item">
+        <div class="rq-item-media">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          <span>gif / mp4 placeholder</span>
+        </div>
+        <div class="rq-item-text">
+          <svg class="rq-item-watermark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          <span class="rq-item-eyebrow">Focus Area 03</span>
+          <p class="rq-item-title">Turn findings into actionable recommendations.</p>
+          <p class="rq-item-question">Which elements cause the most <strong>cognitive friction or fatigue</strong>?</p>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -4849,7 +5578,7 @@ h1, h2, h3 {
 
   <div class="who-where-row illustrated">
     <div class="who-where-card illustrated">
-      <h5>Who</h5>
+      <h5>Users</h5>
       <svg class="illo illo-funnel" viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Recruitment funnel: 40 screened, narrowing to 15 scheduled, narrowing to 6 completed">
         <g class="pf-seg">
           <polygon points="10,4 190,4 177.4,45 22.6,45" class="pf-tier-1"/>
@@ -4896,189 +5625,318 @@ h1, h2, h3 {
     </div>
     <span class="phase-meta-goal"><strong>Purpose:</strong> identify triangulating methods to validate the usability study</span>
   </div>
-  <div class="stepper stepper-numB">
-    <div class="stepper-step">
-      <div class="stepper-box expandable">
-        <div class="step-banner"><span class="step-banner-label">Phase 1</span></div>
-        <div class="stepper-content">
-        <svg class="stepper-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M4 5h11a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2H9l-4 3v-3H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"/>
-          <path d="M9 15h9a2 2 0 0 0 2-2V9"/>
-        </svg>
-        <h4 class="stepper-label">Expert Consultation &amp; Mock Interviews</h4>
-        <div class="mf-chip-cols">
-          <div class="chip-col">
-            <span class="chip-col-label qual-label">Qual</span>
-            <div class="chip-col-chips"><span class="chip qual">Expert guidance</span></div>
-          </div>
-        </div>
-        <div class="card-expand-hint"><span onclick="toggleCardExpand(this)">Why this method<svg class="chevron-icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></span></div>
-        <div class="card-expand">
-          <ul>
-            <li><strong>Clinical Expertise</strong> &mdash; set direction and credibility before recruitment began</li>
-            <li><strong>Mock Interview</strong> &mdash; surfaced wording and pacing issues before real sessions</li>
-            <li><strong>Study Design Input</strong> &mdash; set realistic expectations for session length</li>
-          </ul>
-        </div>
-        </div>
-      </div>
-    </div>
-    <div class="stepper-step">
-      <div class="stepper-box expandable">
-        <div class="step-banner"><span class="step-banner-label">Phase 2</span></div>
-        <div class="stepper-content">
-        <svg class="stepper-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <rect x="5" y="3" width="14" height="18" rx="2"/>
-          <path d="M9 8h6M9 12h6M9 16h3"/>
-        </svg>
-        <h4 class="stepper-label">Screener &amp; Recruitment</h4>
-        <div class="mf-chip-cols">
-          <div class="chip-col">
-            <span class="chip-col-label quant-label">Quant</span>
-            <div class="chip-col-chips"><span class="chip quant">Survey responses</span></div>
-          </div>
-        </div>
-        <div class="card-expand-hint"><span onclick="toggleCardExpand(this)">Why this method<svg class="chevron-icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></span></div>
-        <div class="card-expand">
-          <ul>
-            <li><strong>Precise Screening</strong> &mdash; ensured real TBI participants, not proxies</li>
-            <li><strong>Self-Paced Format</strong> &mdash; reduced cognitive load during intake</li>
-            <li><strong>Balanced Sampling</strong> &mdash; spread severity and symptom profiles evenly</li>
-          </ul>
-        </div>
-        </div>
-      </div>
-    </div>
-    <div class="stepper-step">
-      <div class="stepper-box expandable">
-        <div class="step-banner"><span class="step-banner-label">Phase 3</span></div>
-        <div class="stepper-content">
-        <svg class="stepper-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <circle cx="10" cy="10" r="6.5"/>
-          <path d="M14.8 14.8L20 20"/>
-          <path d="M7.3 10.2l1.8 1.8L12.7 8"/>
-        </svg>
-        <h4 class="stepper-label">Heuristic Evaluations</h4>
-        <div class="mf-chip-cols">
-          <div class="chip-col">
-            <span class="chip-col-label quant-label">Quant</span>
-            <div class="chip-col-chips"><span class="chip quant">Severity ratings</span></div>
-          </div>
-          <div class="chip-col-divider"></div>
-          <div class="chip-col">
-            <span class="chip-col-label qual-label">Qual</span>
-            <div class="chip-col-chips"><span class="chip qual">Findings &amp; recs</span></div>
-          </div>
-        </div>
-        <div class="card-expand-hint"><span onclick="toggleCardExpand(this)">Why this method<svg class="chevron-icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></span></div>
-        <div class="card-expand">
-          <ul>
-            <li><strong>Early Detection</strong> &mdash; caught known issues before spending participant time</li>
-            <li><strong>Severity Prioritization</strong> &mdash; focused the moderated study on what mattered most</li>
-            <li><strong>Session Efficiency</strong> &mdash; protected scarce TBI sessions from redundant testing</li>
-          </ul>
-        </div>
-        </div>
-      </div>
-    </div>
-    <div class="stepper-step">
-      <div class="stepper-box expandable">
-        <div class="step-banner"><span class="step-banner-label">Phase 4</span></div>
-        <div class="stepper-content">
-        <svg class="stepper-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <rect x="3" y="4" width="18" height="12" rx="2"/>
-          <path d="M8 20h8M12 16v4"/>
-          <path d="M9.5 8.3v3.4l3-1.7z" fill="currentColor" stroke="none"/>
-        </svg>
-        <h4 class="stepper-label">Usability Study</h4>
-        <div class="mf-chip-cols">
-          <div class="chip-col">
-            <span class="chip-col-label quant-label">Quant</span>
-            <div class="chip-col-chips">
-              <span class="chip quant">Time on task</span>
-              <span class="chip quant">Binary responses</span>
-            </div>
-          </div>
-          <div class="chip-col-divider"></div>
-          <div class="chip-col">
-            <span class="chip-col-label qual-label">Qual</span>
-            <div class="chip-col-chips">
-              <span class="chip qual">Think-aloud</span>
-              <span class="chip qual">Navigation paths</span>
-            </div>
-          </div>
-        </div>
-        <div class="card-expand-hint"><span onclick="toggleCardExpand(this)">Why this method<svg class="chevron-icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></span></div>
-        <div class="card-expand">
-          <ul>
-            <li><strong>Real Validation</strong> &mdash; confirmed fixes actually reduced call-center reliance</li>
-            <li><strong>Mixed Methods</strong> &mdash; paired qualitative and quantitative evidence</li>
-            <li><strong>Direct Testing</strong> &mdash; tested against the exact population it serves</li>
-          </ul>
-        </div>
-        </div>
-      </div>
+
+  <div class="phase-timeline" id="phaseTimeline" data-carousel-target="phaseCarousel">
+    <div class="phase-timeline-track">
+      <div class="phase-timeline-line"></div>
+      <div class="phase-timeline-fill" id="phaseTimelineFill"></div>
+      <button class="phase-timeline-step" data-phase="1" type="button">
+        <span class="phase-timeline-dot"></span>
+        <span class="phase-timeline-num">Phase 1</span>
+        <span class="phase-timeline-name">Expert Consultation &amp; Mock Interviews</span>
+      </button>
+      <button class="phase-timeline-step" data-phase="2" type="button">
+        <span class="phase-timeline-dot"></span>
+        <span class="phase-timeline-num">Phase 2</span>
+        <span class="phase-timeline-name">Screener &amp; Recruitment</span>
+      </button>
+      <button class="phase-timeline-step" data-phase="3" type="button">
+        <span class="phase-timeline-dot"></span>
+        <span class="phase-timeline-num">Phase 3</span>
+        <span class="phase-timeline-name">Heuristic Evaluations</span>
+      </button>
+      <button class="phase-timeline-step" data-phase="4" type="button">
+        <span class="phase-timeline-dot"></span>
+        <span class="phase-timeline-num">Phase 4</span>
+        <span class="phase-timeline-name">Usability Study</span>
+      </button>
     </div>
   </div>
 
-  <div class="avoided-box">
-    <p class="avoided-label">
-      What We Avoided
-      <span class="avoided-scope">Participant-facing methods only (consultation, screener, usability study)</span>
-    </p>
-    <div class="avoided-plain">
-      <span class="avoided-item avoided-i1" role="button" tabindex="0" onclick="toggleAvoided(this, 1)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleAvoided(this,1);}">Complex framing</span>
-      <span class="avoided-item avoided-i2" role="button" tabindex="0" onclick="toggleAvoided(this, 2)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleAvoided(this,2);}">Open-ended questions</span>
-      <span class="avoided-item avoided-i3" role="button" tabindex="0" onclick="toggleAvoided(this, 3)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleAvoided(this,3);}">Likert scales</span>
-      <span class="avoided-item avoided-i4" role="button" tabindex="0" onclick="toggleAvoided(this, 4)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleAvoided(this,4);}">Complex matrices</span>
+  <div class="stepper stepper-numB phase-carousel" id="phaseCarousel">
+    <button class="phase-carousel-nav phase-carousel-prev" type="button" aria-label="Previous phase">
+      <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
+    </button>
+    <button class="phase-carousel-nav phase-carousel-next" type="button" aria-label="Next phase">
+      <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+    </button>
+    <div class="stepper-step" data-phase="1">
+      <div class="stepper-box">
+        <div class="phase-banner">
+          <div class="phase-banner-icon">
+            <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M4 5h11a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2H9l-4 3v-3H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"/>
+              <path d="M9 15h9a2 2 0 0 0 2-2V9"/>
+            </svg>
+          </div>
+          <div class="phase-banner-text">
+            <span class="phase-banner-num">Phase 1</span>
+            <span class="phase-banner-title">Expert Consultation &amp; Mock Interviews</span>
+          </div>
+        </div>
+        <div class="phase-body">
+          <div class="phase-body-media">
+            <div class="phase-media-placeholder">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg>
+              visual placeholder
+            </div>
+          </div>
+          <div class="phase-body-content">
+            <div class="phase-why">
+              <div class="phase-why-label">Why this method</div>
+              <ul>
+                <li><strong>Mock Interview</strong> &mdash; surfaced wording and pacing issues before real sessions</li>
+                <li><strong>Study Design Input</strong> &mdash; set realistic expectations for session length</li>
+              </ul>
+            </div>
+            <div class="phase-why">
+              <div class="phase-why-label">TBI Design Considerations</div>
+              <ul>
+                <li><strong>Cognitive Fatigue</strong> &mdash; watch for signs of tiring over the course of a session</li>
+                <li><strong>Complexity</strong> &mdash; avoid multi-step or high-stakes scenarios</li>
+                <li><strong>Troubleshooting</strong> &mdash; provide clear instructions if a participant gets stuck</li>
+                <li><strong>Accessibility Mindset</strong> &mdash; design and moderate with accommodation top of mind</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="avoided-examples">
-      <div class="avoided-example ex1">
-        <div class="avoided-compare">
-          <div class="avoided-compare-row">
-            <span class="avoided-compare-tag">Complex</span>
-            <p>&ldquo;To what extent does the current information architecture facilitate task completion?&rdquo;</p>
+    <div class="stepper-step" data-phase="2">
+      <div class="stepper-box">
+        <div class="phase-banner">
+          <div class="phase-banner-icon">
+            <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="5" y="3" width="14" height="18" rx="2"/>
+              <path d="M9 8h6M9 12h6M9 16h3"/>
+            </svg>
           </div>
-          <div class="avoided-compare-row is-better">
-            <span class="avoided-compare-tag">Simplified</span>
-            <p>&ldquo;Was it easy to find what you needed?&rdquo;</p>
+          <div class="phase-banner-text">
+            <span class="phase-banner-num">Phase 2</span>
+            <span class="phase-banner-title">Screener &amp; Recruitment</span>
+          </div>
+        </div>
+        <div class="phase-body">
+          <div class="phase-body-media">
+            <div class="phase-media-placeholder">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg>
+              visual placeholder
+            </div>
+          </div>
+          <div class="phase-body-content">
+            <div class="phase-why">
+              <div class="phase-why-label">Why this method</div>
+              <ul>
+                <li><strong>Precise Screening</strong> &mdash; ensured real TBI participants, not proxies</li>
+                <li><strong>Self-Paced Format</strong> &mdash; reduced cognitive load during intake</li>
+                <li><strong>Balanced Sampling</strong> &mdash; spread severity and symptom profiles evenly</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="phase-body-full">
+          <div class="avoided-box">
+            <p class="avoided-label">
+              What We Avoided
+              <span class="avoided-scope">Screener design specifically</span>
+            </p>
+            <div class="avoided-plain">
+              <span class="avoided-item avoided-i1" role="button" tabindex="0" onclick="toggleAvoided(this, 1)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleAvoided(this,1);}">Complex framing</span>
+              <span class="avoided-item avoided-i2" role="button" tabindex="0" onclick="toggleAvoided(this, 2)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleAvoided(this,2);}">Likert scales</span>
+            </div>
+            <div class="avoided-examples">
+              <div class="avoided-example ex1">
+                <div class="avoided-compare">
+                  <div class="avoided-compare-row">
+                    <span class="avoided-compare-tag">Complex</span>
+                    <p>&ldquo;To what extent do your current mobility limitations impact instrumental activities of daily living?&rdquo;</p>
+                  </div>
+                  <div class="avoided-compare-row is-better">
+                    <span class="avoided-compare-tag">Simplified</span>
+                    <p>&ldquo;Do you need help getting around or doing everyday tasks?&rdquo;</p>
+                  </div>
+                </div>
+              </div>
+              <div class="avoided-example ex2">
+                <div class="likert-demo full">
+                  <p class="likert-q">Rate your comfort with technology:</p>
+                  <div class="likert-row-full">
+                    <div class="likert-point"><span class="likert-dot"></span><span class="likert-point-label">1<br>Very uncomfortable</span></div>
+                    <div class="likert-point"><span class="likert-dot"></span><span class="likert-point-label">2<br>Uncomfortable</span></div>
+                    <div class="likert-point"><span class="likert-dot"></span><span class="likert-point-label">3<br>Somewhat uncomfortable</span></div>
+                    <div class="likert-point"><span class="likert-dot"></span><span class="likert-point-label">4<br>Neutral</span></div>
+                    <div class="likert-point"><span class="likert-dot"></span><span class="likert-point-label">5<br>Somewhat comfortable</span></div>
+                    <div class="likert-point"><span class="likert-dot"></span><span class="likert-point-label">6<br>Comfortable</span></div>
+                    <div class="likert-point"><span class="likert-dot"></span><span class="likert-point-label">7<br>Very comfortable</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-      <div class="avoided-example ex2">
-        <div class="avoided-compare">
-          <div class="avoided-compare-row">
-            <span class="avoided-compare-tag">Open-ended</span>
-            <p>&ldquo;Tell us about your experience with that last task.&rdquo;</p>
+    </div>
+    <div class="stepper-step" data-phase="3">
+      <div class="stepper-box">
+        <div class="phase-banner">
+          <div class="phase-banner-icon">
+            <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="10" cy="10" r="6.5"/>
+              <path d="M14.8 14.8L20 20"/>
+              <path d="M7.3 10.2l1.8 1.8L12.7 8"/>
+            </svg>
           </div>
-          <div class="avoided-compare-row is-better">
-            <span class="avoided-compare-tag">Closed</span>
-            <p>&ldquo;What made that easy or hard?&rdquo;</p>
+          <div class="phase-banner-text">
+            <span class="phase-banner-num">Phase 3</span>
+            <span class="phase-banner-title">Heuristic Evaluations</span>
+          </div>
+        </div>
+        <div class="phase-body">
+          <div class="phase-body-media">
+            <div class="phase-media-placeholder">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg>
+              visual placeholder
+            </div>
+          </div>
+          <div class="phase-body-content">
+            <div class="phase-why">
+              <div class="phase-why-label">Why this method</div>
+              <ul>
+                <li><strong>Early Detection</strong> &mdash; caught known issues before spending participant time</li>
+                <li><strong>Severity Prioritization</strong> &mdash; focused the moderated study on what mattered most</li>
+                <li><strong>Session Efficiency</strong> &mdash; protected scarce TBI sessions from redundant testing</li>
+              </ul>
+            </div>
+            <div class="phase-why">
+              <div class="phase-why-label">Heuristics Evaluated</div>
+              <ul>
+                <li><strong>H1 Recognition over Recall</strong></li>
+                <li><strong>H2 Cognitive Load &amp; Information Density</strong></li>
+                <li><strong>H3 Consistency &amp; Predictability</strong></li>
+                <li><strong>H4 Visibility of System Status</strong></li>
+                <li><strong>H5 Error Prevention</strong></li>
+                <li><strong>H6 Visual &amp; Interactive Accessibility</strong></li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
-      <div class="avoided-example ex3">
-        <div class="likert-demo full">
-          <p class="likert-q">Rate ease of use:</p>
-          <div class="likert-row-full">
-            <div class="likert-point"><span class="likert-dot"></span><span class="likert-point-label">1<br>Very difficult</span></div>
-            <div class="likert-point"><span class="likert-dot"></span><span class="likert-point-label">2<br>Difficult</span></div>
-            <div class="likert-point"><span class="likert-dot"></span><span class="likert-point-label">3<br>Somewhat difficult</span></div>
-            <div class="likert-point"><span class="likert-dot"></span><span class="likert-point-label">4<br>Neutral</span></div>
-            <div class="likert-point"><span class="likert-dot"></span><span class="likert-point-label">5<br>Somewhat easy</span></div>
-            <div class="likert-point"><span class="likert-dot"></span><span class="likert-point-label">6<br>Easy</span></div>
-            <div class="likert-point"><span class="likert-dot"></span><span class="likert-point-label">7<br>Very easy</span></div>
+    </div>
+    <div class="stepper-step" data-phase="4">
+      <div class="stepper-box">
+        <div class="phase-banner">
+          <div class="phase-banner-icon">
+            <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="3" y="4" width="18" height="12" rx="2"/>
+              <path d="M8 20h8M12 16v4"/>
+              <path d="M9.5 8.3v3.4l3-1.7z" fill="currentColor" stroke="none"/>
+            </svg>
+          </div>
+          <div class="phase-banner-text">
+            <span class="phase-banner-num">Phase 4</span>
+            <span class="phase-banner-title">Usability Study</span>
           </div>
         </div>
-      </div>
-      <div class="avoided-example ex4">
-        <div class="matrix-demo">
-          <table>
-            <tr><th></th><th>A</th><th>B</th><th>C</th></tr>
-            <tr><th>Feature 1</th><td>&#9679;</td><td>&#9675;</td><td>&#9679;</td></tr>
-            <tr><th>Feature 2</th><td>&#9675;</td><td>&#9679;</td><td>&#9679;</td></tr>
-            <tr><th>Feature 3</th><td>&#9679;</td><td>&#9679;</td><td>&#9675;</td></tr>
-          </table>
+        <div class="phase-body">
+          <div class="phase-body-media">
+            <div class="phase-media-placeholder">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg>
+              visual placeholder
+            </div>
+          </div>
+          <div class="phase-body-content">
+            <div class="phase-why">
+              <div class="phase-why-label">Why this method</div>
+              <ul>
+                <li><strong>Real Validation</strong> &mdash; confirmed fixes actually reduced call-center reliance</li>
+                <li><strong>Mixed Methods</strong> &mdash; paired qualitative and quantitative evidence</li>
+                <li><strong>Direct Testing</strong> &mdash; tested against the exact population it serves</li>
+              </ul>
+            </div>
+            <div class="phase-why">
+              <div class="phase-why-cols">
+                <div class="phase-why-col">
+                  <div class="phase-why-label">Quant</div>
+                  <ul>
+                    <li><strong>Time on Task</strong></li>
+                    <li><strong>Binary Responses</strong></li>
+                  </ul>
+                </div>
+                <div class="phase-why-col-divider"></div>
+                <div class="phase-why-col">
+                  <div class="phase-why-label">Qual</div>
+                  <ul>
+                    <li><strong>Think-Aloud</strong></li>
+                    <li><strong>Navigation Paths</strong></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="phase-body-full">
+          <div class="avoided-box">
+            <p class="avoided-label">
+              What We Avoided
+              <span class="avoided-scope">Participant-facing methods only (consultation, screener, usability study)</span>
+            </p>
+            <div class="avoided-plain">
+              <span class="avoided-item avoided-i1" role="button" tabindex="0" onclick="toggleAvoided(this, 1)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleAvoided(this,1);}">Complex framing</span>
+              <span class="avoided-item avoided-i2" role="button" tabindex="0" onclick="toggleAvoided(this, 2)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleAvoided(this,2);}">Open-ended questions</span>
+              <span class="avoided-item avoided-i3" role="button" tabindex="0" onclick="toggleAvoided(this, 3)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleAvoided(this,3);}">Likert scales</span>
+              <span class="avoided-item avoided-i4" role="button" tabindex="0" onclick="toggleAvoided(this, 4)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleAvoided(this,4);}">Complex matrices</span>
+            </div>
+            <div class="avoided-examples">
+              <div class="avoided-example ex1">
+                <div class="avoided-compare">
+                  <div class="avoided-compare-row">
+                    <span class="avoided-compare-tag">Complex</span>
+                    <p>&ldquo;To what extent does the current information architecture facilitate task completion?&rdquo;</p>
+                  </div>
+                  <div class="avoided-compare-row is-better">
+                    <span class="avoided-compare-tag">Simplified</span>
+                    <p>&ldquo;Was it easy to find what you needed?&rdquo;</p>
+                  </div>
+                </div>
+              </div>
+              <div class="avoided-example ex2">
+                <div class="avoided-compare">
+                  <div class="avoided-compare-row">
+                    <span class="avoided-compare-tag">Open-ended</span>
+                    <p>&ldquo;Tell us about your experience with that last task.&rdquo;</p>
+                  </div>
+                  <div class="avoided-compare-row is-better">
+                    <span class="avoided-compare-tag">Closed</span>
+                    <p>&ldquo;What made that easy or hard?&rdquo;</p>
+                  </div>
+                </div>
+              </div>
+              <div class="avoided-example ex3">
+                <div class="likert-demo full">
+                  <p class="likert-q">Rate ease of use:</p>
+                  <div class="likert-row-full">
+                    <div class="likert-point"><span class="likert-dot"></span><span class="likert-point-label">1<br>Very difficult</span></div>
+                    <div class="likert-point"><span class="likert-dot"></span><span class="likert-point-label">2<br>Difficult</span></div>
+                    <div class="likert-point"><span class="likert-dot"></span><span class="likert-point-label">3<br>Somewhat difficult</span></div>
+                    <div class="likert-point"><span class="likert-dot"></span><span class="likert-point-label">4<br>Neutral</span></div>
+                    <div class="likert-point"><span class="likert-dot"></span><span class="likert-point-label">5<br>Somewhat easy</span></div>
+                    <div class="likert-point"><span class="likert-dot"></span><span class="likert-point-label">6<br>Easy</span></div>
+                    <div class="likert-point"><span class="likert-dot"></span><span class="likert-point-label">7<br>Very easy</span></div>
+                  </div>
+                </div>
+              </div>
+              <div class="avoided-example ex4">
+                <div class="matrix-demo">
+                  <table>
+                    <tr><th></th><th>A</th><th>B</th><th>C</th></tr>
+                    <tr><th>Feature 1</th><td>&#9679;</td><td>&#9675;</td><td>&#9679;</td></tr>
+                    <tr><th>Feature 2</th><td>&#9675;</td><td>&#9679;</td><td>&#9679;</td></tr>
+                    <tr><th>Feature 3</th><td>&#9679;</td><td>&#9679;</td><td>&#9675;</td></tr>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -5094,7 +5952,7 @@ h1, h2, h3 {
         <span class="phase-meta-value">20 min</span>
         <span class="phase-meta-tag">Session limit</span>
       </div>
-      <span class="phase-meta-goal"><strong>Goal:</strong> identify relevant housing help</span>
+      <span class="phase-meta-goal"><strong>Goal:</strong> identify <span class="wa-highlight">relevant housing help</span></span>
     </div>
 
     <div class="session-split" role="img" aria-label="20-minute session: 12 minutes of tasks, 8 minutes reserved for troubleshooting">
@@ -5105,125 +5963,242 @@ h1, h2, h3 {
       <p class="session-split-caption">8 min reserved to accommodate participant needs</p>
     </div>
   </div>
-  <div class="stepper stepper-numB stepper-grid">
-    <div class="stepper-step">
-      <div class="stepper-box expandable">
-        <div class="step-banner"><span class="step-banner-label">Task 1</span></div>
-        <div class="stepper-content">
-        <div class="usability-head">
-          <svg class="stepper-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <circle cx="10" cy="10" r="6.5"/>
-            <path d="M14.8 14.8L20 20"/>
-          </svg>
-          <h4 class="stepper-label">Locate &amp; Initiate Search</h4>
-        </div>
-        <div class="task-split" role="img" aria-label="3 minutes total: 1 minute on the task, 2 minutes on questions">
-          <span class="task-split-total"><svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>3 minutes</span>
-          <div class="task-split-bar">
-            <span class="task-split-main" style="flex: 1;">1 min &middot; Task</span>
-            <span class="task-split-qs" style="flex: 2;">2 min &middot; Questions</span>
+
+  <div class="phase-timeline" id="taskTimeline" data-carousel-target="taskCarousel">
+    <div class="phase-timeline-track">
+      <div class="phase-timeline-line"></div>
+      <div class="phase-timeline-fill"></div>
+      <button class="phase-timeline-step" data-phase="1" type="button">
+        <span class="phase-timeline-dot"></span>
+        <span class="phase-timeline-num">Task 1</span>
+        <span class="phase-timeline-name">Locate &amp; Initiate Search</span>
+      </button>
+      <button class="phase-timeline-step" data-phase="2" type="button">
+        <span class="phase-timeline-dot"></span>
+        <span class="phase-timeline-num">Task 2</span>
+        <span class="phase-timeline-name">Identify Resources</span>
+      </button>
+      <button class="phase-timeline-step" data-phase="3" type="button">
+        <span class="phase-timeline-dot"></span>
+        <span class="phase-timeline-num">Task 3</span>
+        <span class="phase-timeline-name">Utilize Filter Mechanics</span>
+      </button>
+      <button class="phase-timeline-step" data-phase="4" type="button">
+        <span class="phase-timeline-dot"></span>
+        <span class="phase-timeline-num">Task 4</span>
+        <span class="phase-timeline-name">Understand Key Information</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="stepper stepper-numB phase-carousel" id="taskCarousel">
+    <button class="phase-carousel-nav phase-carousel-prev" type="button" aria-label="Previous task">
+      <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
+    </button>
+    <button class="phase-carousel-nav phase-carousel-next" type="button" aria-label="Next task">
+      <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+    </button>
+    <div class="stepper-step" data-phase="1">
+      <div class="stepper-box">
+        <div class="phase-banner">
+          <div class="phase-banner-icon">
+            <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="10" cy="10" r="6.5"/>
+              <path d="M14.8 14.8L20 20"/>
+            </svg>
           </div>
-          <div class="task-split-ticks"><span>0:00</span><span>3:00</span></div>
+          <div class="phase-banner-text">
+            <span class="phase-banner-num">Task 1</span>
+            <span class="phase-banner-title">Locate &amp; Initiate Search</span>
+          </div>
         </div>
-        <div class="card-expand-hint"><span onclick="toggleCardExpand(this)">Task steps<svg class="chevron-icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></span></div>
-        <div class="card-expand card-expand-row">
-          <span class="card-expand-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10" cy="10" r="6.5"/><path d="M14.8 14.8L20 20"/></svg></span>
-          <ul>
-            <li>Find search feature</li>
-            <li>Initiate search</li>
-            <li>Review &amp; select relevant results</li>
-          </ul>
-        </div>
+        <div class="phase-body">
+          <div class="phase-body-media">
+            <div class="phase-media-placeholder">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg>
+              visual placeholder
+            </div>
+          </div>
+          <div class="phase-body-content">
+            <div class="task-split-interactive" data-task-sec="60">
+              <div class="task-split-labels">
+                <span class="task-split-label-task">1:00 &middot; Task</span>
+                <span class="task-split-label-q">2:00 &middot; Questions</span>
+              </div>
+              <div class="task-split-track">
+                <div class="task-split-track-mask">
+                  <div class="task-split-fill-task"></div>
+                  <div class="task-split-fill-q"></div>
+                </div>
+                <div class="task-split-handle" role="slider" tabindex="0" aria-label="Task and questions time split" aria-valuemin="30" aria-valuemax="150" aria-valuenow="60" aria-valuetext="1 minute on the task, 2 minutes on questions">
+                  <span></span><span></span>
+                </div>
+              </div>
+            </div>
+            <div class="phase-why">
+              <div class="phase-why-label">
+                <span class="task-checklist-title"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 11l3 3 8-8"/><path d="M20 12v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h9"/></svg>Task Checklist</span>
+                <span class="task-checklist-progress">0/3</span>
+              </div>
+              <ul>
+                <li><span class="task-check-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></span><span class="task-check-text">Find search feature</span></li>
+                <li><span class="task-check-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></span><span class="task-check-text">Initiate search</span></li>
+                <li><span class="task-check-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></span><span class="task-check-text">Review &amp; select relevant results</span></li>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-    <div class="stepper-step">
-      <div class="stepper-box expandable">
-        <div class="step-banner"><span class="step-banner-label">Task 2</span></div>
-        <div class="stepper-content">
-        <div class="usability-head">
-          <svg class="stepper-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M7 3h10a1 1 0 0 1 1 1v16l-6-3-6 3V4a1 1 0 0 1 1-1z"/>
-          </svg>
-          <h4 class="stepper-label">Identify Resources</h4>
-        </div>
-        <div class="task-split" role="img" aria-label="3 minutes total: 1 minute on the task, 2 minutes on questions">
-          <span class="task-split-total"><svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>3 minutes</span>
-          <div class="task-split-bar">
-            <span class="task-split-main" style="flex: 1;">1 min &middot; Task</span>
-            <span class="task-split-qs" style="flex: 2;">2 min &middot; Questions</span>
+    <div class="stepper-step" data-phase="2">
+      <div class="stepper-box">
+        <div class="phase-banner">
+          <div class="phase-banner-icon">
+            <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M7 3h10a1 1 0 0 1 1 1v16l-6-3-6 3V4a1 1 0 0 1 1-1z"/>
+            </svg>
           </div>
-          <div class="task-split-ticks"><span>0:00</span><span>3:00</span></div>
+          <div class="phase-banner-text">
+            <span class="phase-banner-num">Task 2</span>
+            <span class="phase-banner-title">Identify Resources</span>
+          </div>
         </div>
-        <div class="card-expand-hint"><span onclick="toggleCardExpand(this)">Task steps<svg class="chevron-icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></span></div>
-        <div class="card-expand card-expand-row">
-          <span class="card-expand-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3h10a1 1 0 0 1 1 1v16l-6-3-6 3V4a1 1 0 0 1 1-1z"/></svg></span>
-          <ul>
-            <li>Find location/address</li>
-            <li>Find contact information</li>
-            <li>Identify availability (open/closed)</li>
-          </ul>
-        </div>
+        <div class="phase-body">
+          <div class="phase-body-media">
+            <div class="phase-media-placeholder">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg>
+              visual placeholder
+            </div>
+          </div>
+          <div class="phase-body-content">
+            <div class="task-split-interactive" data-task-sec="60">
+              <div class="task-split-labels">
+                <span class="task-split-label-task">1:00 &middot; Task</span>
+                <span class="task-split-label-q">2:00 &middot; Questions</span>
+              </div>
+              <div class="task-split-track">
+                <div class="task-split-track-mask">
+                  <div class="task-split-fill-task"></div>
+                  <div class="task-split-fill-q"></div>
+                </div>
+                <div class="task-split-handle" role="slider" tabindex="0" aria-label="Task and questions time split" aria-valuemin="30" aria-valuemax="150" aria-valuenow="60" aria-valuetext="1 minute on the task, 2 minutes on questions">
+                  <span></span><span></span>
+                </div>
+              </div>
+            </div>
+            <div class="phase-why">
+              <div class="phase-why-label">
+                <span class="task-checklist-title"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 11l3 3 8-8"/><path d="M20 12v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h9"/></svg>Task Checklist</span>
+                <span class="task-checklist-progress">0/3</span>
+              </div>
+              <ul>
+                <li><span class="task-check-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></span><span class="task-check-text">Find location/address</span></li>
+                <li><span class="task-check-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></span><span class="task-check-text">Find contact information</span></li>
+                <li><span class="task-check-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></span><span class="task-check-text">Identify availability (open/closed)</span></li>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-    <div class="stepper-step">
-      <div class="stepper-box expandable">
-        <div class="step-banner"><span class="step-banner-label">Task 3</span></div>
-        <div class="stepper-content">
-        <div class="usability-head">
-          <svg class="stepper-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M4 5h16l-6.5 7.5v5.5l-3 1.5v-7z"/>
-          </svg>
-          <h4 class="stepper-label">Utilize Filter Mechanics</h4>
-        </div>
-        <div class="task-split" role="img" aria-label="3 minutes total: 1 minute on the task, 2 minutes on questions">
-          <span class="task-split-total"><svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>3 minutes</span>
-          <div class="task-split-bar">
-            <span class="task-split-main" style="flex: 1;">1 min &middot; Task</span>
-            <span class="task-split-qs" style="flex: 2;">2 min &middot; Questions</span>
+    <div class="stepper-step" data-phase="3">
+      <div class="stepper-box">
+        <div class="phase-banner">
+          <div class="phase-banner-icon">
+            <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M4 5h16l-6.5 7.5v5.5l-3 1.5v-7z"/>
+            </svg>
           </div>
-          <div class="task-split-ticks"><span>0:00</span><span>3:00</span></div>
+          <div class="phase-banner-text">
+            <span class="phase-banner-num">Task 3</span>
+            <span class="phase-banner-title">Utilize Filter Mechanics</span>
+          </div>
         </div>
-        <div class="card-expand-hint"><span onclick="toggleCardExpand(this)">Task steps<svg class="chevron-icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></span></div>
-        <div class="card-expand card-expand-row">
-          <span class="card-expand-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16l-6.5 7.5v5.5l-3 1.5v-7z"/></svg></span>
-          <ul>
-            <li>Set location</li>
-            <li>Apply radius filtering</li>
-            <li>Filter by day, hours, or service constraints</li>
-          </ul>
-        </div>
+        <div class="phase-body">
+          <div class="phase-body-media">
+            <div class="phase-media-placeholder">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg>
+              visual placeholder
+            </div>
+          </div>
+          <div class="phase-body-content">
+            <div class="task-split-interactive" data-task-sec="60">
+              <div class="task-split-labels">
+                <span class="task-split-label-task">1:00 &middot; Task</span>
+                <span class="task-split-label-q">2:00 &middot; Questions</span>
+              </div>
+              <div class="task-split-track">
+                <div class="task-split-track-mask">
+                  <div class="task-split-fill-task"></div>
+                  <div class="task-split-fill-q"></div>
+                </div>
+                <div class="task-split-handle" role="slider" tabindex="0" aria-label="Task and questions time split" aria-valuemin="30" aria-valuemax="150" aria-valuenow="60" aria-valuetext="1 minute on the task, 2 minutes on questions">
+                  <span></span><span></span>
+                </div>
+              </div>
+            </div>
+            <div class="phase-why">
+              <div class="phase-why-label">
+                <span class="task-checklist-title"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 11l3 3 8-8"/><path d="M20 12v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h9"/></svg>Task Checklist</span>
+                <span class="task-checklist-progress">0/3</span>
+              </div>
+              <ul>
+                <li><span class="task-check-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></span><span class="task-check-text">Set location</span></li>
+                <li><span class="task-check-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></span><span class="task-check-text">Apply radius filtering</span></li>
+                <li><span class="task-check-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></span><span class="task-check-text">Filter by day, hours, or service constraints</span></li>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-    <div class="stepper-step">
-      <div class="stepper-box expandable">
-        <div class="step-banner"><span class="step-banner-label">Task 4</span></div>
-        <div class="stepper-content">
-        <div class="usability-head">
-          <svg class="stepper-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <circle cx="12" cy="12" r="9"/>
-            <path d="M12 8h.01M11.25 11.5h1v5h1"/>
-          </svg>
-          <h4 class="stepper-label">Understand Key Information</h4>
-        </div>
-        <div class="task-split" role="img" aria-label="3 minutes total: 1 minute on the task, 2 minutes on questions">
-          <span class="task-split-total"><svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>3 minutes</span>
-          <div class="task-split-bar">
-            <span class="task-split-main" style="flex: 1;">1 min &middot; Task</span>
-            <span class="task-split-qs" style="flex: 2;">2 min &middot; Questions</span>
+    <div class="stepper-step" data-phase="4">
+      <div class="stepper-box">
+        <div class="phase-banner">
+          <div class="phase-banner-icon">
+            <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="9"/>
+              <path d="M12 8h.01M11.25 11.5h1v5h1"/>
+            </svg>
           </div>
-          <div class="task-split-ticks"><span>0:00</span><span>3:00</span></div>
+          <div class="phase-banner-text">
+            <span class="phase-banner-num">Task 4</span>
+            <span class="phase-banner-title">Understand Key Information</span>
+          </div>
         </div>
-        <div class="card-expand-hint"><span onclick="toggleCardExpand(this)">Task steps<svg class="chevron-icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></span></div>
-        <div class="card-expand card-expand-row">
-          <span class="card-expand-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11.25 11.5h1v5h1"/></svg></span>
-          <ul>
-            <li>Locate eligibility requirements</li>
-            <li>Understand if they qualify</li>
-          </ul>
-        </div>
+        <div class="phase-body">
+          <div class="phase-body-media">
+            <div class="phase-media-placeholder">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg>
+              visual placeholder
+            </div>
+          </div>
+          <div class="phase-body-content">
+            <div class="task-split-interactive" data-task-sec="60">
+              <div class="task-split-labels">
+                <span class="task-split-label-task">1:00 &middot; Task</span>
+                <span class="task-split-label-q">2:00 &middot; Questions</span>
+              </div>
+              <div class="task-split-track">
+                <div class="task-split-track-mask">
+                  <div class="task-split-fill-task"></div>
+                  <div class="task-split-fill-q"></div>
+                </div>
+                <div class="task-split-handle" role="slider" tabindex="0" aria-label="Task and questions time split" aria-valuemin="30" aria-valuemax="150" aria-valuenow="60" aria-valuetext="1 minute on the task, 2 minutes on questions">
+                  <span></span><span></span>
+                </div>
+              </div>
+            </div>
+            <div class="phase-why">
+              <div class="phase-why-label">
+                <span class="task-checklist-title"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 11l3 3 8-8"/><path d="M20 12v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h9"/></svg>Task Checklist</span>
+                <span class="task-checklist-progress">0/1</span>
+              </div>
+              <ul>
+                <li><span class="task-check-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></span><span class="task-check-text">Locate and understand eligibility requirements</span></li>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -5257,6 +6232,11 @@ h1, h2, h3 {
     </div>
   </div>
 
+  <div class="phase-media-placeholder" style="margin-top:12px;min-height:56px;flex:none;flex-direction:row;gap:8px;">
+    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 16h.01"/></svg>
+    why this scale &mdash; placeholder, notes pending
+  </div>
+
   <div class="finding" id="finding1">
     <h3><span class="sub-num">03.1</span>Finding &mdash; Navigation Confusion</h3>
   <div class="finding-tag-row">
@@ -5274,15 +6254,15 @@ h1, h2, h3 {
       <button class="carousel-outer-btn" data-sub="search" type="button">Search Discoverability</button>
       <button class="carousel-outer-btn" data-sub="filter" type="button">Filter Usability</button>
     </div>
-    <div class="carousel-inner-tabs">
-      <button class="carousel-tab" data-mode="issue" type="button">Issue</button>
-      <button class="carousel-tab" data-mode="solution" type="button">Solution</button>
-    </div>
-
     <div class="carousel-panels">
       <div class="carousel-panel" data-sub="search" data-mode="issue">
         <div class="is-box is-issue">
-          <span class="is-label is-issue-label">Issue</span>
+          <div class="is-toggle-header">
+            <div class="is-toggle-thumb"></div>
+            <button class="is-toggle-btn" data-mode="issue" type="button">Issue</button>
+            <button class="is-toggle-btn" data-mode="solution" type="button">Solution</button>
+          </div>
+          <div class="is-box-content">
           <div class="is-points-group">
             <div class="is-points-head">
               <span class="is-points-head-label">Why it failed</span>
@@ -5291,7 +6271,7 @@ h1, h2, h3 {
             <div class="is-points-row">
               <div class="is-point">
                 <span class="is-point-icon"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20h4v-4h4v-4h4v-4h4"/></svg><svg class="is-point-x" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9 9l6 6M15 9l-6 6"/></svg></span>
-                <div class="is-point-label">Non-standard 3-step path</div>
+                <div class="is-point-label">Takes 3 steps instead of 1</div>
               </div>
               <div class="is-point">
                 <span class="is-point-icon"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3l18 18"/><path d="M10.6 10.6a2 2 0 0 0 2.8 2.8"/><path d="M9.9 4.24A9.1 9.1 0 0 1 12 4c5 0 9 4 10 8a13 13 0 0 1-1.67 3.06M6.61 6.61A13 13 0 0 0 2 12s4 8 10 8a9 9 0 0 0 4.3-1.1"/></svg><svg class="is-point-x" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9 9l6 6M15 9l-6 6"/></svg></span>
@@ -5308,12 +6288,18 @@ h1, h2, h3 {
               <source src="assets/finding1-search-demo.mp4" type="video/mp4">
             </video>
           </div>
-        </div>
+                </div>
+</div>
       </div>
 
       <div class="carousel-panel" data-sub="search" data-mode="solution">
         <div class="is-box is-solution">
-          <span class="is-label is-solution-label">Solution</span>
+          <div class="is-toggle-header">
+            <div class="is-toggle-thumb"></div>
+            <button class="is-toggle-btn" data-mode="issue" type="button">Issue</button>
+            <button class="is-toggle-btn" data-mode="solution" type="button">Solution</button>
+          </div>
+          <div class="is-box-content">
           <div class="is-points-group">
             <div class="is-points-head">
               <span class="is-points-head-label">What it fixes</span>
@@ -5337,12 +6323,18 @@ h1, h2, h3 {
           <div class="is-media-box">
             <img src="assets/finding1-desktop.png" alt="WA211 homepage on desktop, showing no persistent search bar in the header">
           </div>
-        </div>
+                </div>
+</div>
       </div>
 
       <div class="carousel-panel" data-sub="filter" data-mode="issue">
         <div class="is-box is-issue">
-          <span class="is-label is-issue-label">Issue</span>
+          <div class="is-toggle-header">
+            <div class="is-toggle-thumb"></div>
+            <button class="is-toggle-btn" data-mode="issue" type="button">Issue</button>
+            <button class="is-toggle-btn" data-mode="solution" type="button">Solution</button>
+          </div>
+          <div class="is-box-content">
           <div class="is-stat-box">
             <span class="is-stat-num">4/6</span>
             <span class="is-stat-caption">pts struggled with filters</span>
@@ -5370,12 +6362,18 @@ h1, h2, h3 {
           <div class="is-media-box">
             <img src="assets/finding1-filter-screenshot.png" alt="WA211 search results page with a filter sidebar (age group, languages, days of week), no Apply button or active-filter indicator">
           </div>
-        </div>
+                </div>
+</div>
       </div>
 
       <div class="carousel-panel" data-sub="filter" data-mode="solution">
         <div class="is-box is-solution">
-          <span class="is-label is-solution-label">Solution</span>
+          <div class="is-toggle-header">
+            <div class="is-toggle-thumb"></div>
+            <button class="is-toggle-btn" data-mode="issue" type="button">Issue</button>
+            <button class="is-toggle-btn" data-mode="solution" type="button">Solution</button>
+          </div>
+          <div class="is-box-content">
           <div class="is-points-group">
             <div class="is-points-head">
               <span class="is-points-head-label">What it fixes</span>
@@ -5416,7 +6414,8 @@ h1, h2, h3 {
               <button class="filter-mock-apply" type="button" tabindex="-1">Apply Filter</button>
             </div>
           </div>
-        </div>
+                </div>
+</div>
       </div>
     </div>
   </div>
@@ -5433,12 +6432,14 @@ h1, h2, h3 {
   <p>After successfully starting a search, results didn't match what participants were looking for &mdash;
   including <strong>out-of-state listings</strong> for searches <strong>explicitly filtered to</strong> <strong class="wa-highlight">Washington locations</strong>.</p>
 
-  <div class="finding-headline">
-    <span class="finding-headline-num">3/6</span>
-    <span class="finding-headline-desc">expressed intent to abandon the site</span>
+  <div class="finding-hookline">
+    <div class="finding-hookline-stat">
+      <span class="finding-hookline-num">3/6</span>
+      <p class="finding-hookline-caption">wanted to <strong>abandon</strong></p>
+    </div>
+    <div class="finding-hookline-divider"></div>
+    <p class="finding-hookline-question">Would you keep using a site that kept sending you elsewhere?</p>
   </div>
-  <div class="finding-why">Why?</div>
-
   <div class="stat-group-divider"></div>
 
   <div class="carousel" data-active-sub="search" data-active-mode="issue">
@@ -5447,15 +6448,15 @@ h1, h2, h3 {
       <button class="carousel-outer-btn" data-sub="search" type="button">Search Relevance</button>
       <button class="carousel-outer-btn" data-sub="filter" type="button">Location Accuracy</button>
     </div>
-    <div class="carousel-inner-tabs">
-      <button class="carousel-tab" data-mode="issue" type="button">Issue</button>
-      <button class="carousel-tab" data-mode="solution" type="button">Solution</button>
-    </div>
-
     <div class="carousel-panels">
       <div class="carousel-panel" data-sub="search" data-mode="issue">
         <div class="is-box is-issue">
-          <span class="is-label is-issue-label">Issue</span>
+          <div class="is-toggle-header">
+            <div class="is-toggle-thumb"></div>
+            <button class="is-toggle-btn" data-mode="issue" type="button">Issue</button>
+            <button class="is-toggle-btn" data-mode="solution" type="button">Solution</button>
+          </div>
+          <div class="is-box-content">
           <div class="is-points-group">
             <div class="is-points-head">
               <span class="is-points-head-label">Why it failed</span>
@@ -5479,12 +6480,18 @@ h1, h2, h3 {
           <div class="is-media-box">
             <img src="assets/finding2-search-results.png" alt="WA211 search results page showing no exact matches and a broad set of substitute results">
           </div>
-        </div>
+                </div>
+</div>
       </div>
 
       <div class="carousel-panel" data-sub="search" data-mode="solution">
         <div class="is-box is-solution">
-          <span class="is-label is-solution-label">Solution</span>
+          <div class="is-toggle-header">
+            <div class="is-toggle-thumb"></div>
+            <button class="is-toggle-btn" data-mode="issue" type="button">Issue</button>
+            <button class="is-toggle-btn" data-mode="solution" type="button">Solution</button>
+          </div>
+          <div class="is-box-content">
           <div class="is-points-group">
             <div class="is-points-head">
               <span class="is-points-head-label">What it fixes</span>
@@ -5525,12 +6532,18 @@ h1, h2, h3 {
               </div>
             </div>
           </div>
-        </div>
+                </div>
+</div>
       </div>
 
       <div class="carousel-panel" data-sub="filter" data-mode="issue">
         <div class="is-box is-issue">
-          <span class="is-label is-issue-label">Issue</span>
+          <div class="is-toggle-header">
+            <div class="is-toggle-thumb"></div>
+            <button class="is-toggle-btn" data-mode="issue" type="button">Issue</button>
+            <button class="is-toggle-btn" data-mode="solution" type="button">Solution</button>
+          </div>
+          <div class="is-box-content">
           <div class="is-points-group">
             <div class="is-points-head">
               <span class="is-points-head-label">Why it failed</span>
@@ -5554,12 +6567,18 @@ h1, h2, h3 {
           <div class="is-media-box">
             <img src="assets/finding2-search-results.png" alt="WA211 search results page showing no exact matches and a broad set of substitute results">
           </div>
-        </div>
+                </div>
+</div>
       </div>
 
       <div class="carousel-panel" data-sub="filter" data-mode="solution">
         <div class="is-box is-solution">
-          <span class="is-label is-solution-label">Solution</span>
+          <div class="is-toggle-header">
+            <div class="is-toggle-thumb"></div>
+            <button class="is-toggle-btn" data-mode="issue" type="button">Issue</button>
+            <button class="is-toggle-btn" data-mode="solution" type="button">Solution</button>
+          </div>
+          <div class="is-box-content">
           <div class="is-points-group">
             <div class="is-points-head">
               <span class="is-points-head-label">What it fixes</span>
@@ -5609,7 +6628,8 @@ h1, h2, h3 {
               </div>
             </div>
           </div>
-        </div>
+                </div>
+</div>
       </div>
     </div>
   </div>
@@ -5723,10 +6743,46 @@ h1, h2, h3 {
     return document.getElementById(a.getAttribute('data-toc'));
   }).filter(Boolean);
 
+  var stickyHeader = document.getElementById('stickySectionHeader');
+  var stickyNum = document.getElementById('stickySectionNum');
+  var stickyLabel = document.getElementById('stickySectionLabel');
+  var stickyDivider = document.getElementById('stickySectionDivider');
+  var stickySub = document.getElementById('stickySectionSub');
+
+  var sectionMap = {
+    problem: { num: '01', label: 'Problem' },
+    strategy: { num: '02', label: 'Strategy' },
+    rq: { num: '02', label: 'Strategy', subNum: '02.1', subLabel: 'Research question' },
+    population: { num: '02', label: 'Strategy', subNum: '02.2', subLabel: 'Population & setting' },
+    methodology: { num: '02', label: 'Strategy', subNum: '02.3', subLabel: 'Methodology' },
+    usability: { num: '02', label: 'Strategy', subNum: '02.4', subLabel: 'Usability study' },
+    solution: { num: '03', label: 'Solution' },
+    finding1: { num: '03', label: 'Solution', subNum: '03.1', subLabel: 'Finding 1' },
+    finding2: { num: '03', label: 'Solution', subNum: '03.2', subLabel: 'Finding 2' },
+    reflections: { num: '04', label: 'Reflection' }
+  };
+
   function setActive(id) {
     links.forEach(function (a) {
       a.classList.toggle('active', a.getAttribute('data-toc') === id);
     });
+    if (!stickyHeader) return;
+    var info = sectionMap[id];
+    if (info) {
+      stickyNum.textContent = info.num;
+      stickyLabel.textContent = info.label;
+      if (info.subNum) {
+        stickySub.textContent = info.subNum + ' \u00b7 ' + info.subLabel;
+        stickyDivider.classList.add('visible');
+        stickySub.classList.add('visible');
+      } else {
+        stickyDivider.classList.remove('visible');
+        stickySub.classList.remove('visible');
+      }
+      stickyHeader.classList.add('visible');
+    } else {
+      stickyHeader.classList.remove('visible');
+    }
   }
 
   var observer = new IntersectionObserver(function (entries) {
@@ -5759,6 +6815,147 @@ function toggleAvoided(el, n) {
     el.classList.add('active');
   }
 }
+
+function initPhaseTimeline() {
+  document.querySelectorAll('.phase-timeline').forEach(function (timeline) {
+    var carouselId = timeline.getAttribute('data-carousel-target');
+    var carousel = carouselId ? document.getElementById(carouselId) : null;
+    if (!carousel) return;
+
+    var fill = timeline.querySelector('.phase-timeline-fill');
+    var steps = timeline.querySelectorAll('.phase-timeline-step');
+    var panels = carousel.querySelectorAll('.stepper-step');
+    var total = steps.length;
+    var current = 1;
+    var prevBtn = carousel.querySelector('.phase-carousel-prev');
+    var nextBtn = carousel.querySelector('.phase-carousel-next');
+
+    function setActive(phase) {
+      current = phase;
+      steps.forEach(function (step) {
+        var p = parseInt(step.getAttribute('data-phase'), 10);
+        step.classList.toggle('active', p === phase);
+        step.classList.toggle('past', p < phase);
+      });
+      panels.forEach(function (panel) {
+        var p = parseInt(panel.getAttribute('data-phase'), 10);
+        panel.classList.toggle('active-phase', p === phase);
+      });
+      var pct = ((phase - 1) / (total - 1)) * 100;
+      if (fill) fill.style.width = pct + '%';
+      if (prevBtn) prevBtn.disabled = phase === 1;
+      if (nextBtn) nextBtn.disabled = phase === total;
+    }
+
+    steps.forEach(function (step) {
+      step.addEventListener('click', function () {
+        setActive(parseInt(step.getAttribute('data-phase'), 10));
+      });
+    });
+
+    if (prevBtn) {
+      prevBtn.addEventListener('click', function () {
+        if (current > 1) setActive(current - 1);
+      });
+    }
+    if (nextBtn) {
+      nextBtn.addEventListener('click', function () {
+        if (current < total) setActive(current + 1);
+      });
+    }
+
+    setActive(1);
+  });
+}
+
+initPhaseTimeline();
+
+function initTaskSplitSliders() {
+  document.querySelectorAll('.task-split-interactive').forEach(function (el) {
+    var track = el.querySelector('.task-split-track');
+    var handle = el.querySelector('.task-split-handle');
+    var fillTask = el.querySelector('.task-split-fill-task');
+    var fillQ = el.querySelector('.task-split-fill-q');
+    var labelTask = el.querySelector('.task-split-label-task');
+    var labelQ = el.querySelector('.task-split-label-q');
+    var taskSec = parseInt(el.getAttribute('data-task-sec'), 10) || 60;
+
+    function fmt(sec) {
+      var m = Math.floor(sec / 60);
+      var s = sec % 60;
+      return m + ':' + (s === 0 ? '00' : s);
+    }
+
+    function render() {
+      var pct = (taskSec / 180) * 100;
+      fillTask.style.width = pct + '%';
+      fillQ.style.width = (100 - pct) + '%';
+      handle.style.left = pct + '%';
+      labelTask.textContent = fmt(taskSec) + ' \u00b7 Task';
+      labelQ.textContent = fmt(180 - taskSec) + ' \u00b7 Questions';
+      handle.setAttribute('aria-valuenow', taskSec);
+      handle.setAttribute('aria-valuetext', fmt(taskSec) + ' on the task, ' + fmt(180 - taskSec) + ' on questions');
+    }
+
+    function setFromClientX(clientX) {
+      var rect = track.getBoundingClientRect();
+      var pct = (clientX - rect.left) / rect.width;
+      pct = Math.max(0, Math.min(1, pct));
+      var sec = Math.round((pct * 180) / 30) * 30;
+      sec = Math.max(30, Math.min(150, sec));
+      taskSec = sec;
+      render();
+    }
+
+    handle.addEventListener('pointerdown', function (e) {
+      handle.setPointerCapture(e.pointerId);
+    });
+    handle.addEventListener('pointermove', function (e) {
+      if (e.buttons !== 1) return;
+      setFromClientX(e.clientX);
+    });
+    handle.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowLeft') {
+        taskSec = Math.max(30, taskSec - 30);
+        render();
+        e.preventDefault();
+      } else if (e.key === 'ArrowRight') {
+        taskSec = Math.min(150, taskSec + 30);
+        render();
+        e.preventDefault();
+      }
+    });
+
+    render();
+  });
+}
+
+initTaskSplitSliders();
+
+function initTaskChecklists() {
+  var carousel = document.getElementById('taskCarousel');
+  if (!carousel) return;
+  carousel.querySelectorAll('.phase-why').forEach(function (box) {
+    var items = box.querySelectorAll('li');
+    if (!items.length) return;
+    var progress = box.querySelector('.task-checklist-progress');
+
+    function updateProgress() {
+      if (!progress) return;
+      var checked = box.querySelectorAll('li.checked').length;
+      progress.textContent = checked + '/' + items.length;
+    }
+
+    items.forEach(function (li) {
+      li.addEventListener('click', function () {
+        li.classList.toggle('checked');
+        updateProgress();
+      });
+    });
+  });
+}
+
+initTaskChecklists();
 
 function initLightbox() {
   var overlay = document.getElementById('lightboxOverlay');
@@ -5814,7 +7011,7 @@ function initCarousels() {
   document.querySelectorAll('.carousel').forEach(function (carousel) {
     var outerBtns = carousel.querySelectorAll('.carousel-outer-btn');
     var thumb = carousel.querySelector('.carousel-thumb');
-    var tabs = carousel.querySelectorAll('.carousel-tab');
+    var tabs = carousel.querySelectorAll('.is-toggle-btn');
     var panels = carousel.querySelectorAll('.carousel-panel');
     var n = outerBtns.length;
 
@@ -5828,9 +7025,6 @@ function initCarousels() {
           thumb.style.width = 'calc(' + (100 / n) + '% - 4px)';
           thumb.style.transform = 'translateX(' + (i * 100) + '%)';
         }
-      });
-      tabs.forEach(function (tab) {
-        tab.classList.toggle('active', tab.getAttribute('data-mode') === mode);
       });
       panels.forEach(function (panel) {
         var isActive = panel.getAttribute('data-sub') === sub && panel.getAttribute('data-mode') === mode;
