@@ -276,6 +276,27 @@ h1, h2, h3 {
   transition: color 0.15s ease;
 }
 
+.toc-float a.toc-top {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  font-weight: 500;
+  font-style: italic;
+  color: var(--text-muted);
+  opacity: 0.75;
+}
+
+.toc-float a.toc-top:hover {
+  opacity: 1;
+}
+
+.toc-divider {
+  height: 1px;
+  background: var(--border);
+  margin: 4px 10px 6px;
+}
+
 .toc-float a.toc-sub {
   padding-left: 26px;
   font-size: 11px;
@@ -1078,14 +1099,6 @@ h1, h2, h3 {
   padding: 0;
 }
 
-.is-box.is-issue {
-  border-color: #f0d3d1;
-}
-
-.is-box.is-solution {
-  border-color: #c3e6d0;
-}
-
 .is-toggle-header {
   position: relative;
   display: flex;
@@ -1149,14 +1162,7 @@ h1, h2, h3 {
 
 .is-box-content {
   padding: 18px 20px;
-}
-
-.is-issue .is-box-content {
-  background: #fdf6f5;
-}
-
-.is-solution .is-box-content {
-  background: #eaf6ef;
+  background: var(--bg-alt);
 }
 
 .is-points-group {
@@ -1165,14 +1171,6 @@ h1, h2, h3 {
   margin-bottom: 16px;
   background: #fff;
   border: 1px solid var(--border);
-}
-
-.is-issue .is-points-group {
-  border-color: #f0d3d1;
-}
-
-.is-solution .is-points-group {
-  border-color: #c3e6d0;
 }
 
 .is-points-head {
@@ -1228,14 +1226,6 @@ h1, h2, h3 {
   border-left: 1px solid var(--border);
 }
 
-.is-issue .is-point + .is-point {
-  border-left-color: #f0d3d1;
-}
-
-.is-solution .is-point + .is-point {
-  border-left-color: #c3e6d0;
-}
-
 .is-point-icon {
   position: relative;
   display: inline-block;
@@ -1286,14 +1276,6 @@ h1, h2, h3 {
   border-radius: 8px;
   overflow: hidden;
   border: 1px solid var(--border);
-}
-
-.is-issue .is-media-box {
-  border-color: #f0d3d1;
-}
-
-.is-solution .is-media-box {
-  border-color: #c3e6d0;
 }
 
 .is-media-box img,
@@ -3424,6 +3406,528 @@ h1, h2, h3 {
   letter-spacing: 0.04em;
 }
 
+.rq-item-media-live {
+  padding: 0 16px;
+}
+
+.ah-search-demo {
+  position: relative;
+  width: 100%;
+}
+
+.ah-search-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #fff;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  padding: 8px 10px;
+}
+
+.ah-search-line {
+  flex: 1;
+  height: 6px;
+  background: var(--bg-alt);
+  border-radius: 3px;
+}
+
+.ah-search-btn {
+  width: 22px;
+  height: 22px;
+  border-radius: 5px;
+  background: var(--navy);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: transform 0.15s ease;
+}
+
+.ah-search-ripple {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  border-radius: 5px;
+  border: 2px solid var(--orange);
+  opacity: 0;
+}
+
+.ah-cursor {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.25));
+}
+
+.ah-frustration-card {
+  background: #fff;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  padding: 10px;
+  width: 100%;
+  position: relative;
+}
+
+.ah-frustration-line {
+  height: 6px;
+  background: var(--bg-alt);
+  border-radius: 3px;
+  margin-bottom: 6px;
+}
+
+.ah-frustration-line:last-child {
+  margin-bottom: 0;
+}
+
+.ah-frustration-badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #b23b3b;
+  color: #fff;
+  font-weight: 800;
+  font-size: 12px;
+  font-family: var(--font-head);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+}
+
+.ah-transform-demo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  width: 100%;
+}
+
+.ah-transform-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  background: #f0c179;
+  border: 1.5px solid #1d4ed8;
+  border-radius: 6px;
+  padding: 7px 8px;
+  width: 100%;
+}
+
+.ah-transform-btn span {
+  font-weight: 800;
+  font-size: 10px;
+  color: var(--navy);
+  font-family: var(--font-head);
+}
+
+.ah-transform-arrow {
+  opacity: 0;
+  transform: translateY(-4px);
+}
+
+.ah-transform-bar {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: #fff;
+  border: 1.5px solid var(--border);
+  border-radius: 6px;
+  padding: 7px 9px;
+  width: 100%;
+}
+
+.ah-transform-bar-line {
+  flex: 1;
+  height: 6px;
+  background: var(--bg-alt);
+  border-radius: 3px;
+}
+
+.ah-transform-check {
+  opacity: 0;
+  transform: scale(0.5);
+  flex-shrink: 0;
+}
+
+.ah-clickpath-demo {
+  position: relative;
+  width: 100%;
+  background: #fff;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.ah-clickpath-line {
+  height: 6px;
+  background: var(--bg-alt);
+  border-radius: 3px;
+  margin-bottom: 8px;
+}
+
+.ah-clickpath-row {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+
+.ah-clickpath-target {
+  flex: 1;
+  height: 20px;
+  border-radius: 5px;
+  background: var(--bg-alt);
+  border: 1.5px solid transparent;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.ah-clickpath-target.hit {
+  border-color: var(--orange);
+  background: #fdf1e2;
+}
+
+.ah-cursor2 {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.25));
+}
+
+.ah-heur-demo {
+  width: 100%;
+  font-family: var(--font-head);
+}
+
+.ah-heur-evaluators {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.ah-heur-avatar {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #eef2f8;
+  border: 1.5px solid #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 8px;
+  font-weight: 700;
+  color: var(--navy);
+  margin-left: -6px;
+}
+
+.ah-heur-avatar:first-child {
+  margin-left: 0;
+}
+
+.ah-heur-evaluators-label {
+  font-size: 8.5px;
+  color: var(--text-muted);
+  margin-left: 6px;
+}
+
+.ah-heur-groups {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.ah-heur-group {
+  background: var(--bg-alt);
+  border-radius: 6px;
+  padding: 6px 8px;
+}
+
+.ah-heur-group-label {
+  font-size: 7.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+
+.ah-heur-group-row {
+  display: flex;
+  gap: 5px;
+}
+
+.ah-heur-chip {
+  flex: 1;
+  text-align: center;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 3px;
+  font-size: 9px;
+  font-weight: 800;
+  color: var(--navy);
+}
+
+.ah-heur-scale {
+  border-top: 1px solid var(--border);
+  padding-top: 10px;
+}
+
+.ah-heur-scale-label {
+  font-size: 8px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+
+.ah-heur-scale-bar {
+  display: flex;
+  gap: 3px;
+}
+
+.ah-heur-scale-bar span {
+  flex: 1;
+  height: 6px;
+  border-radius: 3px;
+}
+
+.ah-heur-scale-ticks {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 3px;
+}
+
+.ah-heur-scale-ticks span {
+  font-size: 7px;
+  color: var(--text-muted);
+}
+
+.ah-screener-demo {
+  width: 100%;
+  font-family: var(--font-head);
+}
+
+.ah-screener-label {
+  font-size: 8px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+
+.ah-screener-factors {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 14px;
+}
+
+.ah-screener-factor {
+  background: var(--bg-alt);
+  border-radius: 5px;
+  padding: 6px 9px;
+}
+
+.ah-screener-factor span {
+  font-size: 9px;
+  font-weight: 700;
+  color: var(--navy);
+}
+
+.ah-screener-q-wrap {
+  border-top: 1px solid var(--border);
+  padding-top: 10px;
+}
+
+.ah-screener-q-card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 9px 11px;
+}
+
+.ah-screener-q-text {
+  font-size: 9px;
+  color: var(--text-body);
+  margin: 0 0 7px;
+  line-height: 1.4;
+  font-weight: 600;
+}
+
+.ah-screener-q-options {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.ah-screener-q-option {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.ah-screener-q-option-box {
+  width: 9px;
+  height: 9px;
+  border: 1.3px solid var(--border-strong, #c7d2e0);
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.ah-screener-q-option span {
+  font-size: 7.5px;
+  color: var(--text-muted);
+}
+
+.ah-locmismatch-demo {
+  width: 100%;
+}
+
+.ah-locmismatch-search {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--bg-alt);
+  border-radius: 6px;
+  padding: 7px 10px;
+  margin-bottom: 10px;
+}
+
+.ah-locmismatch-search span:first-of-type {
+  font-family: var(--font-head);
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--navy);
+}
+
+.ah-locmismatch-search span:last-of-type {
+  margin-left: auto;
+  font-size: 8px;
+  color: var(--text-muted);
+}
+
+.ah-locmismatch-card {
+  border: 1.5px solid #f0d3d1;
+  border-radius: 8px;
+  padding: 10px 12px;
+  background: #fdf6f5;
+  margin-bottom: 10px;
+}
+
+.ah-locmismatch-card-title {
+  font-family: var(--font-head);
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 4px;
+}
+
+.ah-locmismatch-card-loc {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.ah-locmismatch-card-loc span {
+  font-family: var(--font-head);
+  font-size: 9px;
+  font-weight: 700;
+  color: #c0392b;
+}
+
+.ah-locmismatch-map {
+  background: var(--bg-alt);
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.ah-notes-demo {
+  width: 100%;
+}
+
+.ah-notes-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.ah-notes-icon {
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  background: #eef2f8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.ah-notes-title {
+  font-size: 9.5px;
+  font-weight: 700;
+  color: var(--navy);
+  font-family: var(--font-head);
+}
+
+.ah-notes-card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px 10px;
+}
+
+.ah-notes-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 5px;
+}
+
+.ah-notes-row + .ah-notes-row {
+  margin-top: 7px;
+}
+
+.ah-notes-tag {
+  font-size: 7.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  padding: 2px 5px;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.ah-notes-tag.before {
+  background: #fdf1e2;
+  color: #a8574f;
+}
+
+.ah-notes-tag.after {
+  background: #eaf6ef;
+  color: #1f6b3a;
+}
+
+.ah-notes-text {
+  font-size: 9px;
+  color: var(--text-muted);
+  margin: 0;
+  line-height: 1.35;
+}
+
+.ah-notes-text.after-text {
+  color: var(--text-body);
+  font-weight: 600;
+}
+
 .rq-item-text {
   flex: 1;
   padding: 16px 18px;
@@ -4051,6 +4555,12 @@ h1, h2, h3 {
   border-radius: var(--radius);
   padding: 14px 18px;
   text-align: center;
+}
+
+.phase-body-full .avoided-box {
+  max-width: none;
+  width: 100%;
+  margin: 0;
 }
 
 .avoided-box .avoided-label {
@@ -4687,13 +5197,15 @@ h1, h2, h3 {
 }
 
 .phase-body-full {
-  padding: 0 22px 20px;
+  padding: 0 0 20px;
   text-align: left;
 }
 
 .phase-body-media {
   flex: 0 0 44%;
   display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .phase-body-content {
@@ -5227,14 +5739,18 @@ h1, h2, h3 {
 </div>
 
 <nav class="toc-float" aria-label="Section navigation">
-  <a href="#cover" data-toc="cover">Cover</a>
+  <a href="#cover" data-toc="cover" class="toc-top">
+    <svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5"/><path d="M5 12l7-7 7 7"/></svg>
+    Top of Page
+  </a>
+  <div class="toc-divider"></div>
   <a href="#intro" data-toc="intro">Intro</a>
   <a href="#problem" data-toc="problem">01 &middot; Problem</a>
 
-  <div class="toc-group">
+  <div class="toc-group collapsed">
     <div class="toc-group-head">
       <a href="#strategy" data-toc="strategy">02 &middot; Strategy</a>
-      <button class="toc-toggle" onclick="toggleTocGroup(this)" aria-label="Toggle Strategy subsections" aria-expanded="true">
+      <button class="toc-toggle" onclick="toggleTocGroup(this)" aria-label="Toggle Strategy subsections" aria-expanded="false">
         <svg class="chevron-icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
       </button>
     </div>
@@ -5246,10 +5762,10 @@ h1, h2, h3 {
     </div>
   </div>
 
-  <div class="toc-group">
+  <div class="toc-group collapsed">
     <div class="toc-group-head">
       <a href="#solution" data-toc="solution">03 &middot; Solution</a>
-      <button class="toc-toggle" onclick="toggleTocGroup(this)" aria-label="Toggle Solution subsections" aria-expanded="true">
+      <button class="toc-toggle" onclick="toggleTocGroup(this)" aria-label="Toggle Solution subsections" aria-expanded="false">
         <svg class="chevron-icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
       </button>
     </div>
@@ -5521,7 +6037,7 @@ h1, h2, h3 {
   <h2>A study designed around the population being tested, not a standard playbook</h2>
 
   <div class="subsection-box" id="rq">
-  <h3 class="strategy-subhead"><span class="sub-num">02.1</span>Research Question &amp; Focus Areas</h3>
+  <h3 class="strategy-subhead"><span class="sub-num">02.1</span>Research Question &amp; Angles</h3>
   <div class="rq-block">
     <div class="rq-banner">
       <svg class="rq-banner-watermark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
@@ -5531,39 +6047,61 @@ h1, h2, h3 {
 
     <div class="rq-items">
       <div class="rq-item">
-        <div class="rq-item-media">
-          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-          <span>gif / mp4 placeholder</span>
+        <div class="rq-item-media rq-item-media-live">
+          <div class="ah-search-demo">
+            <div class="ah-search-bar">
+              <div class="ah-search-line"></div>
+              <div class="ah-search-btn" id="ah1Btn">
+                <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg>
+              </div>
+            </div>
+            <div class="ah-search-ripple" id="ah1Ripple"></div>
+            <svg class="ah-cursor" id="ah1Cursor" viewBox="0 0 24 24" fill="var(--navy)"><path d="M4 2l16 8-7 2-2 7-7-17z"/></svg>
+          </div>
         </div>
         <div class="rq-item-text">
           <svg class="rq-item-watermark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
-          <span class="rq-item-eyebrow">Focus Area 01</span>
+          <span class="rq-item-eyebrow">Angle 01</span>
           <p class="rq-item-title">Map the site&rsquo;s IA &amp; key nav points against real user needs.</p>
           <p class="rq-item-question">Does <strong>navigation &amp; hierarchy</strong> help users locate services without distraction?</p>
         </div>
       </div>
 
       <div class="rq-item">
-        <div class="rq-item-media">
-          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-          <span>gif / mp4 placeholder</span>
+        <div class="rq-item-media rq-item-media-live">
+          <div class="ah-frustration-card" id="ah2Card">
+            <div class="ah-frustration-line" style="width:70%;"></div>
+            <div class="ah-frustration-line" style="width:90%;"></div>
+            <div class="ah-frustration-line" style="width:50%;"></div>
+            <div class="ah-frustration-badge" id="ah2Badge">?</div>
+          </div>
         </div>
         <div class="rq-item-text">
           <svg class="rq-item-watermark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
-          <span class="rq-item-eyebrow">Focus Area 02</span>
+          <span class="rq-item-eyebrow">Angle 02</span>
           <p class="rq-item-title">Surface pain points in the resource-search flow.</p>
           <p class="rq-item-question">Does the site support <strong>completing tasks</strong> to find crisis resources?</p>
         </div>
       </div>
 
       <div class="rq-item">
-        <div class="rq-item-media">
-          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-          <span>gif / mp4 placeholder</span>
+        <div class="rq-item-media rq-item-media-live">
+          <div class="ah-transform-demo">
+            <div class="ah-transform-btn">
+              <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="var(--navy)" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14L21 3"/></svg>
+              <span>Search Online</span>
+            </div>
+            <svg class="ah-transform-arrow" id="ah3Arrow" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="var(--orange)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="M6 13l6 6 6-6"/></svg>
+            <div class="ah-transform-bar">
+              <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="#8a97ab" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg>
+              <div class="ah-transform-bar-line"></div>
+              <svg class="ah-transform-check" id="ah3Check" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="#16a34a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>
+            </div>
+          </div>
         </div>
         <div class="rq-item-text">
           <svg class="rq-item-watermark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-          <span class="rq-item-eyebrow">Focus Area 03</span>
+          <span class="rq-item-eyebrow">Angle 03</span>
           <p class="rq-item-title">Turn findings into actionable recommendations.</p>
           <p class="rq-item-question">Which elements cause the most <strong>cognitive friction or fatigue</strong>?</p>
         </div>
@@ -5676,9 +6214,23 @@ h1, h2, h3 {
         </div>
         <div class="phase-body">
           <div class="phase-body-media">
-            <div class="phase-media-placeholder">
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg>
-              visual placeholder
+            <div class="ah-notes-demo">
+              <div class="ah-notes-header">
+                <div class="ah-notes-icon">
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="var(--navy)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="M9 12l2 2 4-4"/></svg>
+                </div>
+                <span class="ah-notes-title">Consultant notes</span>
+              </div>
+              <div class="ah-notes-card">
+                <div class="ah-notes-row">
+                  <span class="ah-notes-tag before">Before</span>
+                  <p class="ah-notes-text">&ldquo;Can you walk me through your typical process for locating community services?&rdquo;</p>
+                </div>
+                <div class="ah-notes-row">
+                  <span class="ah-notes-tag after">After</span>
+                  <p class="ah-notes-text after-text">&ldquo;Tell me about the last time you looked for help.&rdquo;</p>
+                </div>
+              </div>
             </div>
           </div>
           <div class="phase-body-content">
@@ -5718,9 +6270,27 @@ h1, h2, h3 {
         </div>
         <div class="phase-body">
           <div class="phase-body-media">
-            <div class="phase-media-placeholder">
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg>
-              visual placeholder
+            <div class="ah-screener-demo">
+              <div class="ah-screener-label">Screening factors</div>
+              <div class="ah-screener-factors">
+                <div class="ah-screener-factor"><span>Digital Usage</span></div>
+                <div class="ah-screener-factor"><span>Digital Literacy</span></div>
+                <div class="ah-screener-factor"><span>Accessibility Needs</span></div>
+                <div class="ah-screener-factor"><span>Cognitive Endurance</span></div>
+              </div>
+              <div class="ah-screener-q-wrap">
+                <div class="ah-screener-label">Sample question</div>
+                <div class="ah-screener-q-card">
+                  <p class="ah-screener-q-text">Do you use any of these tools to help you use your mobile phone, tablet, or laptop?</p>
+                  <div class="ah-screener-q-options">
+                    <div class="ah-screener-q-option"><span class="ah-screener-q-option-box"></span><span>Screen reader (e.g. VoiceOver, TalkBack)</span></div>
+                    <div class="ah-screener-q-option"><span class="ah-screener-q-option-box"></span><span>Voice-to-text (e.g. Dictation)</span></div>
+                    <div class="ah-screener-q-option"><span class="ah-screener-q-option-box"></span><span>Text magnification</span></div>
+                    <div class="ah-screener-q-option"><span class="ah-screener-q-option-box"></span><span>Blue light filters or high-contrast mode</span></div>
+                    <div class="ah-screener-q-option"><span class="ah-screener-q-option-box"></span><span>Specialized mouse or keyboard</span></div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
           <div class="phase-body-content">
@@ -5793,9 +6363,51 @@ h1, h2, h3 {
         </div>
         <div class="phase-body">
           <div class="phase-body-media">
-            <div class="phase-media-placeholder">
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg>
-              visual placeholder
+            <div class="ah-heur-demo">
+              <div class="ah-heur-evaluators">
+                <span class="ah-heur-avatar">A</span>
+                <span class="ah-heur-avatar">C</span>
+                <span class="ah-heur-avatar">K</span>
+                <span class="ah-heur-avatar">T</span>
+                <span class="ah-heur-evaluators-label">4 evaluators, independently</span>
+              </div>
+              <div class="ah-heur-groups">
+                <div class="ah-heur-group">
+                  <div class="ah-heur-group-label">Cognitive load</div>
+                  <div class="ah-heur-group-row">
+                    <span class="ah-heur-chip">H1</span>
+                    <span class="ah-heur-chip">H2</span>
+                  </div>
+                </div>
+                <div class="ah-heur-group">
+                  <div class="ah-heur-group-label">Predictability &amp; feedback</div>
+                  <div class="ah-heur-group-row">
+                    <span class="ah-heur-chip">H3</span>
+                    <span class="ah-heur-chip">H4</span>
+                  </div>
+                </div>
+                <div class="ah-heur-group">
+                  <div class="ah-heur-group-label">Safety &amp; accessibility</div>
+                  <div class="ah-heur-group-row">
+                    <span class="ah-heur-chip">H5</span>
+                    <span class="ah-heur-chip">H6</span>
+                  </div>
+                </div>
+              </div>
+              <div class="ah-heur-scale">
+                <div class="ah-heur-scale-label">Severity scale</div>
+                <div class="ah-heur-scale-bar">
+                  <span style="background:#d5f0e0;"></span>
+                  <span style="background:#fdf1e2;"></span>
+                  <span style="background:#f5c99a;"></span>
+                  <span style="background:#e8963c;"></span>
+                  <span style="background:#c0392b;"></span>
+                </div>
+                <div class="ah-heur-scale-ticks">
+                  <span>0 &middot; none</span>
+                  <span>4 &middot; critical</span>
+                </div>
+              </div>
             </div>
           </div>
           <div class="phase-body-content">
@@ -5839,9 +6451,15 @@ h1, h2, h3 {
         </div>
         <div class="phase-body">
           <div class="phase-body-media">
-            <div class="phase-media-placeholder">
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg>
-              visual placeholder
+            <div class="ah-clickpath-demo">
+              <div class="ah-clickpath-line" style="width:60%;"></div>
+              <div class="ah-clickpath-row">
+                <div class="ah-clickpath-target" id="ah4T1"></div>
+                <div class="ah-clickpath-target" id="ah4T2"></div>
+              </div>
+              <div class="ah-clickpath-line" style="width:85%;"></div>
+              <div class="ah-clickpath-line" style="width:40%;"></div>
+              <svg class="ah-cursor2" id="ah4Cursor" viewBox="0 0 24 24" fill="var(--navy)"><path d="M4 2l16 8-7 2-2 7-7-17z"/></svg>
             </div>
           </div>
           <div class="phase-body-content">
@@ -6014,9 +6632,10 @@ h1, h2, h3 {
         </div>
         <div class="phase-body">
           <div class="phase-body-media">
-            <div class="phase-media-placeholder">
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg>
-              visual placeholder
+            <div class="is-media-box" style="width:100%;">
+              <video autoplay muted loop playsinline aria-label="Screen recording of Locate &amp; Initiate Search">
+                <source src="assets/task_1-demo.mp4" type="video/mp4">
+              </video>
             </div>
           </div>
           <div class="phase-body-content">
@@ -6065,9 +6684,10 @@ h1, h2, h3 {
         </div>
         <div class="phase-body">
           <div class="phase-body-media">
-            <div class="phase-media-placeholder">
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg>
-              visual placeholder
+            <div class="is-media-box" style="width:100%;">
+              <video autoplay muted loop playsinline aria-label="Screen recording of Identify Resources">
+                <source src="assets/task_2-demo.mp4" type="video/mp4">
+              </video>
             </div>
           </div>
           <div class="phase-body-content">
@@ -6116,9 +6736,10 @@ h1, h2, h3 {
         </div>
         <div class="phase-body">
           <div class="phase-body-media">
-            <div class="phase-media-placeholder">
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg>
-              visual placeholder
+            <div class="is-media-box" style="width:100%;">
+              <video autoplay muted loop playsinline aria-label="Screen recording of Utilize Filter Mechanics">
+                <source src="assets/task_3-demo.mp4" type="video/mp4">
+              </video>
             </div>
           </div>
           <div class="phase-body-content">
@@ -6168,9 +6789,10 @@ h1, h2, h3 {
         </div>
         <div class="phase-body">
           <div class="phase-body-media">
-            <div class="phase-media-placeholder">
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg>
-              visual placeholder
+            <div class="is-media-box" style="width:100%;">
+              <video autoplay muted loop playsinline aria-label="Screen recording of Understand Key Information">
+                <source src="assets/task_4-demo.mp4" type="video/mp4">
+              </video>
             </div>
           </div>
           <div class="phase-body-content">
@@ -6565,7 +7187,20 @@ h1, h2, h3 {
             </div>
           </div>
           <div class="is-media-box">
-            <img src="assets/finding2-search-results.png" alt="WA211 search results page showing no exact matches and a broad set of substitute results">
+            <div class="ah-locmismatch-demo">
+              <div class="ah-locmismatch-search">
+                <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="#8a97ab" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.5 7-12a7 7 0 0 0-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="9" r="2.5"/></svg>
+                <span>Seattle, WA</span>
+                <span>shelter</span>
+              </div>
+              <div class="ah-locmismatch-card">
+                <div class="ah-locmismatch-card-title">Rose City Emergency Shelter</div>
+                <div class="ah-locmismatch-card-loc">
+                  <svg viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="#c0392b" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.5 7-12a7 7 0 0 0-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="9" r="2.5"/></svg>
+                  <span>Portland, OR &middot; 174 mi away</span>
+                </div>
+              </div>
+            </div>
           </div>
                 </div>
 </div>
@@ -6869,6 +7504,177 @@ function initPhaseTimeline() {
 }
 
 initPhaseTimeline();
+
+function initAngleAnimations() {
+  var t1 = document.getElementById('ah4T1');
+  var t2 = document.getElementById('ah4T2');
+  var cursor4 = document.getElementById('ah4Cursor');
+
+  if (t1 && t2 && cursor4) {
+    var demo = cursor4.closest('.ah-clickpath-demo');
+    var t1Rect, t2Rect, demoRect;
+
+    function measure() {
+      demoRect = demo.getBoundingClientRect();
+      t1Rect = t1.getBoundingClientRect();
+      t2Rect = t2.getBoundingClientRect();
+    }
+
+    function posFor(rect) {
+      return {
+        left: (rect.left - demoRect.left + rect.width / 2 - 7) + 'px',
+        top: (rect.top - demoRect.top + rect.height / 2 - 7) + 'px'
+      };
+    }
+
+    function animateClickPath() {
+      measure();
+      t1.classList.remove('hit');
+      t2.classList.remove('hit');
+      cursor4.style.transition = 'none';
+      var p0 = posFor(t1);
+      cursor4.style.left = 'calc(' + p0.left + ' - 30px)';
+      cursor4.style.top = p0.top;
+
+      requestAnimationFrame(function () {
+        setTimeout(function () {
+          cursor4.style.transition = 'left 0.6s ease, top 0.6s ease';
+          var p1 = posFor(t1);
+          cursor4.style.left = p1.left;
+          cursor4.style.top = p1.top;
+        }, 250);
+
+        setTimeout(function () { t1.classList.add('hit'); }, 900);
+
+        setTimeout(function () {
+          cursor4.style.transition = 'left 0.6s ease, top 0.6s ease';
+          var p2 = posFor(t2);
+          cursor4.style.left = p2.left;
+          cursor4.style.top = p2.top;
+        }, 1300);
+
+        setTimeout(function () { t2.classList.add('hit'); }, 1950);
+      });
+    }
+
+    animateClickPath();
+    setInterval(animateClickPath, 3200);
+  }
+
+  var cursor = document.getElementById('ah1Cursor');
+  var btn = document.getElementById('ah1Btn');
+  var ripple = document.getElementById('ah1Ripple');
+
+  if (cursor && btn && ripple) {
+    var demo = cursor.closest('.ah-search-demo');
+    function positionCursor(leftPct, topPx) {
+      cursor.style.left = leftPct;
+      cursor.style.top = topPx;
+    }
+    cursor.style.position = 'absolute';
+    ripple.style.left = 'calc(100% - 30px)';
+    ripple.style.top = '8px';
+
+    function animateSearch() {
+      cursor.style.transition = 'none';
+      positionCursor('10%', '46px');
+      ripple.style.opacity = '0';
+      btn.style.transform = 'scale(1)';
+
+      requestAnimationFrame(function () {
+        setTimeout(function () {
+          cursor.style.transition = 'left 0.8s ease, top 0.8s ease';
+          positionCursor('calc(100% - 26px)', '6px');
+        }, 300);
+
+        setTimeout(function () {
+          btn.style.transform = 'scale(0.85)';
+          ripple.style.transition = 'none';
+          ripple.style.opacity = '1';
+          ripple.style.transform = 'scale(1)';
+        }, 1150);
+
+        setTimeout(function () {
+          btn.style.transform = 'scale(1)';
+          ripple.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+          ripple.style.opacity = '0';
+          ripple.style.transform = 'scale(1.6)';
+        }, 1300);
+      });
+    }
+
+    animateSearch();
+    setInterval(animateSearch, 2600);
+  }
+
+  var card = document.getElementById('ah2Card');
+  var badge = document.getElementById('ah2Badge');
+
+  if (card && badge) {
+    function animateFrustration() {
+      card.style.transition = 'none';
+      card.style.transform = 'translateX(0)';
+      badge.style.transition = 'none';
+      badge.style.opacity = '0';
+      badge.style.transform = 'scale(0.5)';
+
+      requestAnimationFrame(function () {
+        setTimeout(function () {
+          badge.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+          badge.style.opacity = '1';
+          badge.style.transform = 'scale(1)';
+        }, 300);
+
+        setTimeout(function () { card.style.transition = 'transform 0.08s ease'; card.style.transform = 'translateX(-4px)'; }, 500);
+        setTimeout(function () { card.style.transform = 'translateX(4px)'; }, 580);
+        setTimeout(function () { card.style.transform = 'translateX(-3px)'; }, 660);
+        setTimeout(function () { card.style.transform = 'translateX(3px)'; }, 740);
+        setTimeout(function () { card.style.transform = 'translateX(0)'; }, 820);
+
+        setTimeout(function () {
+          badge.style.transition = 'opacity 0.4s ease';
+          badge.style.opacity = '0';
+        }, 1600);
+      });
+    }
+
+    animateFrustration();
+    setInterval(animateFrustration, 2800);
+  }
+
+  var arrow3 = document.getElementById('ah3Arrow');
+  var check3 = document.getElementById('ah3Check');
+
+  if (arrow3 && check3) {
+    function animateTransform() {
+      arrow3.style.transition = 'none';
+      arrow3.style.opacity = '0';
+      arrow3.style.transform = 'translateY(-4px)';
+      check3.style.transition = 'none';
+      check3.style.opacity = '0';
+      check3.style.transform = 'scale(0.5)';
+
+      requestAnimationFrame(function () {
+        setTimeout(function () {
+          arrow3.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+          arrow3.style.opacity = '1';
+          arrow3.style.transform = 'translateY(0)';
+        }, 400);
+
+        setTimeout(function () {
+          check3.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+          check3.style.opacity = '1';
+          check3.style.transform = 'scale(1)';
+        }, 900);
+      });
+    }
+
+    animateTransform();
+    setInterval(animateTransform, 2600);
+  }
+}
+
+initAngleAnimations();
 
 function initTaskSplitSliders() {
   document.querySelectorAll('.task-split-interactive').forEach(function (el) {
