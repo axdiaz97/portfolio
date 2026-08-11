@@ -31,7 +31,7 @@
   --sev-4: #8a1f1f;
   --sev-4-text: #ffffff;
 
-  --bg: #ffffff;
+  --bg: #faf6ee;
   --bg-alt: #f5f7fb;
   --border: #e2e6ee;
 
@@ -53,7 +53,10 @@
 
 body {
   margin: 0;
-  background: var(--bg);
+  background-color: var(--bg);
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iNTAwIiB2aWV3Qm94PSIwIDAgMzAwIDUwMCI+CjxwYXRoIGQ9Ik0xMDAgMCBDIDE1MCA1MCwgNjAgOTAsIDExMCAxNTAgUyAxOTAgMjIwLCAxMTAgMjgwIFMgNDAgMzQwLCAxMjAgNDAwIFMgMTcwIDQ2MCwgMTAwIDUwMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZGRkM2JjIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1kYXNoYXJyYXk9IjkgNyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CjxjaXJjbGUgY3g9IjEwMCIgY3k9IjAiIHI9IjQiIGZpbGw9IiNlOGE1NWMiLz4KPGNpcmNsZSBjeD0iMTEwIiBjeT0iMTUwIiByPSI0IiBmaWxsPSIjZThhNTVjIi8+CjxjaXJjbGUgY3g9IjExMCIgY3k9IjI4MCIgcj0iNCIgZmlsbD0iI2U4YTU1YyIvPgo8Y2lyY2xlIGN4PSIxMjAiIGN5PSI0MDAiIHI9IjQiIGZpbGw9IiNlOGE1NWMiLz4KPC9zdmc+");
+  background-repeat: repeat-y;
+  background-position: 50px top;
   color: var(--text-body);
   font-family: var(--font-body);
   font-weight: 400;
@@ -1290,6 +1293,14 @@ h1, h2, h3 {
 .is-media-box img:hover,
 .is-media-box video:hover {
   opacity: 0.92;
+}
+
+.task-video-box video {
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  height: auto;
+  min-height: 280px;
+  max-height: 460px;
 }
 
 .is-media-box .filter-mock,
@@ -4994,39 +5005,41 @@ h1, h2, h3 {
 
 .phase-timeline {
   margin: 20px 0 28px;
+  padding: 0 20px;
 }
 
 .phase-timeline-track {
   position: relative;
-  display: flex;
-  justify-content: space-between;
-  padding: 0 4px;
+  height: 58px;
 }
 
 .phase-timeline-line {
   position: absolute;
-  left: 14px;
-  right: 14px;
-  top: 6px;
+  left: 0;
+  right: 0;
+  top: 7px;
   height: 2px;
   background: var(--border);
 }
 
 .phase-timeline-fill {
   position: absolute;
-  left: 14px;
-  top: 6px;
+  left: 0;
+  top: 7px;
   height: 2px;
   background: var(--orange);
   transition: width 0.25s ease;
 }
 
 .phase-timeline-step {
-  position: relative;
-  flex: 1;
+  position: absolute;
+  top: 0;
+  --s: 1;
+  transform: translateX(-50%) scale(var(--s));
+  width: 96px;
   text-align: center;
   cursor: pointer;
-  padding: 26px 8px 0;
+  padding: 26px 4px 0;
   border-radius: 8px;
   background: none;
   border: none;
@@ -5035,15 +5048,15 @@ h1, h2, h3 {
 }
 
 .phase-timeline-step:hover {
-  transform: scale(1.05);
+  --s: 1.05;
 }
 
 .phase-timeline-step.active {
-  transform: scale(1.08);
+  --s: 1.08;
 }
 
 .phase-timeline-step.active:hover {
-  transform: scale(1.1);
+  --s: 1.1;
 }
 
 .phase-timeline-step:focus-visible {
@@ -5216,6 +5229,10 @@ h1, h2, h3 {
   gap: 14px;
 }
 
+#taskCarousel .phase-body-content {
+  gap: 8px;
+}
+
 .phase-why {
   flex: 1;
   display: flex;
@@ -5253,6 +5270,15 @@ h1, h2, h3 {
 #taskCarousel .phase-why {
   background: #f4f8fc;
   border-color: #cfdcee;
+  padding: 10px 12px;
+}
+
+#taskCarousel .phase-why ul {
+  gap: 5px;
+}
+
+#taskCarousel .phase-why li {
+  font-size: 11px;
 }
 
 #taskCarousel .phase-why-label {
@@ -5264,35 +5290,37 @@ h1, h2, h3 {
 .task-checklist-title {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 5px;
 }
 
 .task-checklist-title svg {
   color: var(--navy);
+  width: 12px;
+  height: 12px;
 }
 
 .task-checklist-progress {
   font-family: var(--font-head);
   font-weight: 700;
-  font-size: 10px;
+  font-size: 9px;
   color: var(--navy);
   background: #dce8f7;
-  padding: 2px 8px;
+  padding: 1px 7px;
   border-radius: 10px;
 }
 
 #taskCarousel .phase-why li {
   display: flex;
   align-items: flex-start;
-  gap: 9px;
+  gap: 8px;
   cursor: pointer;
   user-select: none;
 }
 
 .task-check-box {
   flex-shrink: 0;
-  width: 16px;
-  height: 16px;
+  width: 14px;
+  height: 14px;
   margin-top: 1px;
   border: 1.5px solid var(--border-strong, #c7d2e0);
   border-radius: 4px;
@@ -5305,8 +5333,8 @@ h1, h2, h3 {
 }
 
 .task-check-box svg {
-  width: 11px;
-  height: 11px;
+  width: 9px;
+  height: 9px;
   opacity: 0;
   transition: opacity 0.1s ease;
 }
@@ -5489,26 +5517,26 @@ h1, h2, h3 {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 
 .task-split-label-task {
   font-family: var(--font-head);
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 700;
   color: var(--navy);
 }
 
 .task-split-label-q {
   font-family: var(--font-head);
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 700;
   color: var(--orange-deep);
 }
 
 .task-split-track {
   position: relative;
-  height: 28px;
+  height: 22px;
   border-radius: 6px;
   background: var(--bg-alt);
   touch-action: none;
@@ -5540,12 +5568,12 @@ h1, h2, h3 {
 .task-split-handle {
   position: absolute;
   top: 50%;
-  width: 18px;
-  height: 34px;
+  width: 15px;
+  height: 28px;
   transform: translate(-50%, -50%);
   background: #fff;
   border: 1.5px solid var(--navy);
-  border-radius: 6px;
+  border-radius: 5px;
   cursor: grab;
   display: flex;
   align-items: center;
@@ -6214,21 +6242,24 @@ h1, h2, h3 {
         </div>
         <div class="phase-body">
           <div class="phase-body-media">
-            <div class="ah-notes-demo">
-              <div class="ah-notes-header">
-                <div class="ah-notes-icon">
-                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="var(--navy)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="M9 12l2 2 4-4"/></svg>
-                </div>
-                <span class="ah-notes-title">Consultant notes</span>
+            <div class="ah-screener-demo">
+              <div class="ah-screener-label">Consultation topics</div>
+              <div class="ah-screener-factors">
+                <div class="ah-screener-factor"><span>Session structure &amp; pacing</span></div>
+                <div class="ah-screener-factor"><span>Interview question wording</span></div>
+                <div class="ah-screener-factor"><span>Recruitment &amp; accommodation strategy</span></div>
               </div>
-              <div class="ah-notes-card">
-                <div class="ah-notes-row">
-                  <span class="ah-notes-tag before">Before</span>
-                  <p class="ah-notes-text">&ldquo;Can you walk me through your typical process for locating community services?&rdquo;</p>
-                </div>
-                <div class="ah-notes-row">
-                  <span class="ah-notes-tag after">After</span>
-                  <p class="ah-notes-text after-text">&ldquo;Tell me about the last time you looked for help.&rdquo;</p>
+              <div class="ah-screener-q-wrap">
+                <div class="ah-screener-label">Sample revision</div>
+                <div class="ah-notes-card">
+                  <div class="ah-notes-row">
+                    <span class="ah-notes-tag before">Before</span>
+                    <p class="ah-notes-text">&ldquo;Can you walk me through your typical process for locating community services?&rdquo;</p>
+                  </div>
+                  <div class="ah-notes-row">
+                    <span class="ah-notes-tag after">After</span>
+                    <p class="ah-notes-text after-text">&ldquo;Tell me about the last time you looked for help.&rdquo;</p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -6630,14 +6661,14 @@ h1, h2, h3 {
             <span class="phase-banner-title">Locate &amp; Initiate Search</span>
           </div>
         </div>
-        <div class="phase-body">
-          <div class="phase-body-media">
-            <div class="is-media-box" style="width:100%;">
+        <div class="phase-body-full" style="padding-top:14px;">
+          <div class="is-media-box task-video-box" style="width:100%;">
               <video autoplay muted loop playsinline aria-label="Screen recording of Locate &amp; Initiate Search">
                 <source src="assets/task_1-demo.mp4" type="video/mp4">
               </video>
-            </div>
           </div>
+        </div>
+        <div class="phase-body">
           <div class="phase-body-content">
             <div class="task-split-interactive" data-task-sec="60">
               <div class="task-split-labels">
@@ -6682,14 +6713,14 @@ h1, h2, h3 {
             <span class="phase-banner-title">Identify Resources</span>
           </div>
         </div>
-        <div class="phase-body">
-          <div class="phase-body-media">
-            <div class="is-media-box" style="width:100%;">
+        <div class="phase-body-full" style="padding-top:14px;">
+          <div class="is-media-box task-video-box" style="width:100%;">
               <video autoplay muted loop playsinline aria-label="Screen recording of Identify Resources">
                 <source src="assets/task_2-demo.mp4" type="video/mp4">
               </video>
-            </div>
           </div>
+        </div>
+        <div class="phase-body">
           <div class="phase-body-content">
             <div class="task-split-interactive" data-task-sec="60">
               <div class="task-split-labels">
@@ -6734,14 +6765,14 @@ h1, h2, h3 {
             <span class="phase-banner-title">Utilize Filter Mechanics</span>
           </div>
         </div>
-        <div class="phase-body">
-          <div class="phase-body-media">
-            <div class="is-media-box" style="width:100%;">
+        <div class="phase-body-full" style="padding-top:14px;">
+          <div class="is-media-box task-video-box" style="width:100%;">
               <video autoplay muted loop playsinline aria-label="Screen recording of Utilize Filter Mechanics">
                 <source src="assets/task_3-demo.mp4" type="video/mp4">
               </video>
-            </div>
           </div>
+        </div>
+        <div class="phase-body">
           <div class="phase-body-content">
             <div class="task-split-interactive" data-task-sec="60">
               <div class="task-split-labels">
@@ -6787,14 +6818,14 @@ h1, h2, h3 {
             <span class="phase-banner-title">Understand Key Information</span>
           </div>
         </div>
-        <div class="phase-body">
-          <div class="phase-body-media">
-            <div class="is-media-box" style="width:100%;">
+        <div class="phase-body-full" style="padding-top:14px;">
+          <div class="is-media-box task-video-box" style="width:100%;">
               <video autoplay muted loop playsinline aria-label="Screen recording of Understand Key Information">
                 <source src="assets/task_4-demo.mp4" type="video/mp4">
               </video>
-            </div>
           </div>
+        </div>
+        <div class="phase-body">
           <div class="phase-body-content">
             <div class="task-split-interactive" data-task-sec="60">
               <div class="task-split-labels">
@@ -6852,11 +6883,6 @@ h1, h2, h3 {
       <span>Blocks the task without help</span>
       <span>Task fails, user abandons</span>
     </div>
-  </div>
-
-  <div class="phase-media-placeholder" style="margin-top:12px;min-height:56px;flex:none;flex-direction:row;gap:8px;">
-    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 16h.01"/></svg>
-    why this scale &mdash; placeholder, notes pending
   </div>
 
   <div class="finding" id="finding1">
@@ -7464,6 +7490,11 @@ function initPhaseTimeline() {
     var current = 1;
     var prevBtn = carousel.querySelector('.phase-carousel-prev');
     var nextBtn = carousel.querySelector('.phase-carousel-next');
+
+    steps.forEach(function (step, i) {
+      var leftPct = (i / (total - 1)) * 100;
+      step.style.left = leftPct + '%';
+    });
 
     function setActive(phase) {
       current = phase;
