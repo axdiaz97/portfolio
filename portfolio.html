@@ -7,7 +7,7 @@
 <meta name="description" content="Angel Diaz, UX Researcher based in Seattle, working across AI-Implementation, Robotics, and AR/VR/MR.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,500;0,600;1,500&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,500;0,600;1,500&family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root{
     --bg:#0A0A0D;
@@ -49,16 +49,17 @@
   }
 
   .eyebrow{
-    font-family:'IBM Plex Mono', monospace;
-    font-size:12px;
-    letter-spacing:.08em;
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    font-size:14px;
+    letter-spacing:.04em;
     text-transform:uppercase;
     color:var(--ink-faint);
     display:flex;
     align-items:center;
     gap:10px;
   }
-  .eyebrow .num{color:var(--teal); font-weight:500;}
+  .eyebrow .num{color:var(--teal); font-weight:600;}
   .eyebrow::after{
     content:"";
     flex:1;
@@ -82,6 +83,7 @@
   .nav{
     max-width:var(--max); margin:0 auto; padding:18px 32px;
     display:flex; align-items:center; justify-content:space-between;
+    position:relative;
   }
   .nav .name{
     font-family:'Fraunces', serif;
@@ -89,16 +91,63 @@
     font-weight:500;
     text-decoration:none;
     cursor:pointer;
+    display:inline-block;
+    transition:text-shadow .35s ease, transform .35s ease;
+  }
+  .nav .name.active{
+    text-shadow:0 0 24px rgba(255,255,255,.6), 0 0 48px rgba(255,201,75,.28);
+    transform:scale(1.05);
   }
   .nav .links{
     display:flex; gap:28px;
-    font-family:'IBM Plex Mono', monospace;
-    font-size:12px;
-    letter-spacing:.05em;
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    font-size:14px;
+    letter-spacing:.03em;
     text-transform:uppercase;
   }
   .nav .links a{text-decoration:none; color:var(--ink-soft); transition:color .18s ease, transform .18s ease; display:inline-block;}
-  .nav .links a:hover, .nav .links a:focus-visible{color:var(--teal); transform:scale(1.08);}
+
+  .nav-toggle{
+    display:none;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    gap:5px;
+    width:36px; height:36px;
+    background:none;
+    border:none;
+    cursor:pointer;
+    padding:0;
+  }
+  .nav-toggle span{
+    display:block;
+    width:20px; height:1.5px;
+    background:var(--ink);
+    border-radius:2px;
+    transition:transform .3s ease, opacity .2s ease;
+  }
+  .nav-toggle[aria-expanded="true"] span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
+  .nav-toggle[aria-expanded="true"] span:nth-child(2){opacity:0;}
+  .nav-toggle[aria-expanded="true"] span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
+
+  .nav-mobile-actions{display:flex; align-items:center; gap:14px;}
+  .nav-social-btn{
+    display:none;
+    align-items:center; justify-content:center;
+    width:32px; height:32px;
+    color:var(--ink-soft);
+    transition:color .18s ease, transform .18s ease;
+  }
+  .nav-social-btn svg{width:17px; height:17px; display:block;}
+  .nav-social-btn:hover, .nav-social-btn:focus-visible{color:var(--ink); transform:scale(1.1);}
+  @media (max-width:820px){
+    .nav-social-btn{display:flex;}
+  }
+  @media (min-width:821px){
+    .nav-mobile-actions{display:none;}
+  }
+  .nav .links a:hover, .nav .links a:focus-visible{color:var(--ink); transform:scale(1.16); text-shadow:0 0 20px rgba(255,255,255,.6);}
   .nav .links a.active{color:var(--ink); transform:scale(1.06); text-shadow:0 0 16px rgba(255,255,255,.35);}
 
   header.site.scrolled{
@@ -291,12 +340,9 @@
 
   /* featured-project tile — always shows the current project */
   .tile-sticky-zone{
-    min-height:900px;
     margin-top:44px;
   }
   .tile-wrap{
-    position:sticky;
-    top:80px;
     z-index:15;
   }
   .tile{
@@ -339,6 +385,15 @@
     text-align:center; padding:20px; line-height:1.6;
   }
   .tile.no-shot .shot-placeholder{display:flex;}
+  .tile .tile-logo{
+    position:absolute;
+    right:24px; top:24px;
+    width:120px; height:120px;
+    z-index:2;
+    opacity:.16;
+    pointer-events:none;
+  }
+  .tile .tile-logo img{width:100%; height:100%; object-fit:contain;}
   .tile .wash{
     position:absolute; inset:0; z-index:2;
     background:linear-gradient(0deg, rgba(10,10,13,.92) 0%, rgba(10,10,13,.55) 38%, rgba(232,69,43,.16) 75%, rgba(255,201,75,.1) 100%);
@@ -377,12 +432,14 @@
   .exp-list{border-top:1px solid var(--line);}
   .exp-row{
     display:grid;
-    grid-template-columns:110px 1fr;
+    grid-template-columns:110px 1fr auto;
     gap:32px;
-    padding:36px 0;
+    padding:28px 0;
     border-bottom:1px solid var(--line);
     position:relative;
     overflow:hidden;
+    transition:padding .3s ease;
+    align-items:center;
   }
   .exp-row > *{position:relative; z-index:1;}
   .exp-watermark{
@@ -390,9 +447,10 @@
     right:-8px; top:50%;
     transform:translateY(-50%);
     width:190px; height:190px;
-    opacity:.07;
+    opacity:0;
     pointer-events:none;
     z-index:0;
+    transition:opacity .3s ease;
   }
   .exp-watermark img{width:100%; height:100%; object-fit:contain;}
   .exp-watermark.text{
@@ -404,16 +462,17 @@
     color:transparent;
     -webkit-text-stroke:1px var(--ink-soft);
     white-space:nowrap;
-    opacity:.35;
   }
   @media (max-width:820px){
     .exp-watermark{display:none;}
   }
   .exp-row .years{
-    font-family:'IBM Plex Mono', monospace;
-    font-size:13px;
+    font-family:'Fraunces', serif;
+    font-weight:300;
+    font-size:16px;
     color:var(--ink);
-    padding-top:4px;
+    padding-top:2px;
+    line-height:1.4;
   }
   .exp-row .role{
     font-family:'Fraunces', serif;
@@ -421,11 +480,23 @@
     font-weight:500;
     margin:0 0 4px;
   }
+  .caret{
+    flex:none;
+    color:var(--ink-faint);
+    transition:transform .15s ease-out, color .2s ease;
+  }
+  .caret svg{display:block; width:16px; height:16px;}
   .exp-row .org{
     font-size:14px;
     color:var(--teal);
-    margin:0 0 16px;
+    margin:0;
     font-weight:500;
+  }
+  .exp-details{
+    max-height:0;
+    opacity:0;
+    overflow:hidden;
+    transition:max-height .4s ease, opacity .3s ease, margin-top .4s ease;
   }
   .exp-row ul{
     margin:0 0 18px; padding:0 0 0 18px;
@@ -434,6 +505,21 @@
     line-height:1.65;
   }
   .exp-row ul li{margin-bottom:6px;}
+
+  /* expanded state: desktop hovers the row, mobile taps to add .expanded */
+  @media (hover:hover) and (min-width:821px){
+    .exp-row:hover{padding:36px 0;}
+    .exp-row:hover .exp-watermark{opacity:.07;}
+    .exp-row:hover .exp-watermark.text{opacity:.35;}
+    .exp-row:hover .exp-details{max-height:400px; opacity:1; margin-top:16px;}
+  }
+  .exp-row.expanded{padding:36px 0;}
+  .exp-row.expanded .exp-watermark{opacity:.07;}
+  .exp-row.expanded .exp-watermark.text{opacity:.35;}
+  .exp-row.expanded .exp-details{max-height:400px; opacity:1; margin-top:16px;}
+  @media (max-width:820px){
+    .exp-row{cursor:pointer;}
+  }
 
   /* attention-grabbing role tags — gradient wordmarks, no chip background */
   .exp-tags{
@@ -476,54 +562,84 @@
   .resume-btn svg{width:13px; height:13px; color:var(--teal); flex:none;}
 
   /* ---------- Case studies ---------- */
-  .case-list{display:flex; flex-direction:column; gap:20px;}
-  .case-card{
+  .case-list{display:block;}
+  .cs-row{
+    padding:36px 0; border-bottom:1px solid var(--line);
     position:relative;
-    display:block;
-    min-height:260px;
-    border-radius:12px;
-    overflow:hidden;
-    border:1px solid var(--line);
-    text-decoration:none;
+    text-decoration:none; color:var(--ink); display:block;
+    transition:transform .25s ease;
+  }
+  .cs-row-bg{
+    position:absolute;
+    left:50%; width:100vw; top:0; bottom:0;
+    transform:translateX(-50%);
+    background:rgba(255,255,255,.025);
+    opacity:0;
+    transition:opacity .3s ease;
+    pointer-events:none;
+    z-index:0;
+  }
+  .cs-row::before, .cs-row::after{
+    content:"";
+    position:absolute;
+    left:50%; width:100vw;
+    height:2px;
+    background:var(--grad);
+    opacity:0;
+    transform:translateX(-50%) scaleX(0);
+    transition:opacity .35s ease, transform .5s ease;
+    pointer-events:none;
+    box-shadow:0 0 24px 6px rgba(255,122,61,.55), 0 0 46px 12px rgba(255,201,75,.3);
+    z-index:3;
+  }
+  .cs-row::before{top:0;}
+  .cs-row::after{bottom:0;}
+  .cs-row:hover, .cs-row:focus-visible{transform:scale(1.015); z-index:4;}
+  .cs-row:hover .cs-row-bg, .cs-row:focus-visible .cs-row-bg{opacity:1;}
+  .cs-row:hover::before, .cs-row:hover::after,
+  .cs-row:focus-visible::before, .cs-row:focus-visible::after{
+    opacity:1; transform:translateX(-50%) scaleX(1);
+  }
+  .cs-row-inner{
+    display:grid; grid-template-columns:110px 1fr auto; gap:32px; align-items:center;
+    position:relative; z-index:1;
+  }
+  .cs-date{
+    font-family:'Fraunces', serif;
+    font-weight:300;
+    font-size:16px;
     color:var(--ink);
-    transition:border-color .2s ease, transform .2s ease, box-shadow .2s ease;
   }
-  .case-card:hover, .case-card:focus-visible{
-    border-color:var(--glow);
-    transform:translateY(-4px) scale(1.015);
-    box-shadow:
-      0 0 0 1px rgba(255,238,221,.55),
-      0 0 34px 6px rgba(255,122,61,.4),
-      0 0 64px 16px rgba(255,201,75,.2),
-      0 24px 40px -20px rgba(0,0,0,.5);
+  .cs-logo{
+    position:absolute;
+    right:-8px; top:50%;
+    transform:translateY(-50%);
+    width:190px; height:190px;
+    opacity:.09;
+    pointer-events:none;
+    z-index:0;
   }
-  .case-card .shot{
-    position:absolute; inset:0;
-    width:100%; height:100%;
-    object-fit:cover;
+  .cs-logo img{width:100%; height:100%; object-fit:contain;}
+  .cs-logo.text{
+    width:auto; height:auto;
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    font-size:76px;
+    line-height:1;
+    color:transparent;
+    -webkit-text-stroke:1px var(--ink-soft);
+    white-space:nowrap;
+    opacity:.35;
   }
-  .case-card .shot-placeholder{
-    position:absolute; inset:0;
-    display:none;
-    align-items:center; justify-content:center;
-    background:linear-gradient(145deg,#241a14,#0A0A0D);
-    font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--ink-faint);
-    text-align:center; padding:20px; line-height:1.6;
+  @media (max-width:820px){
+    .cs-logo{display:none;}
   }
-  .case-card.no-shot .shot-placeholder{display:flex;}
-  .case-card .wash{
-    position:absolute; inset:0;
-    background:linear-gradient(0deg, rgba(10,10,13,.94) 22%, rgba(10,10,13,.55) 55%, rgba(232,69,43,.14) 85%);
+  .cs-content{position:relative; z-index:1;}
+  .cs-meta{
+    display:flex; align-items:center; gap:10px;
+    margin-bottom:10px;
   }
-  .case-card .case-inner{
-    position:relative; z-index:2;
-    height:100%;
-    display:flex; flex-direction:column; justify-content:flex-end;
-    padding:32px;
-    min-height:260px;
-  }
-  .case-card .status{
-    display:inline-block;
+  .cs-status{
     font-family:'IBM Plex Mono', monospace;
     font-size:11px;
     letter-spacing:.05em;
@@ -531,17 +647,7 @@
     font-weight:500;
     color:var(--ink-soft);
   }
-  .case-meta{
-    display:flex; align-items:center; gap:10px;
-    margin-bottom:14px;
-  }
-  .case-date{
-    font-family:'IBM Plex Mono', monospace;
-    font-size:11px;
-    letter-spacing:.04em;
-    color:var(--ink-faint);
-  }
-  .case-new{
+  .cs-new{
     display:inline-flex; align-items:center; gap:6px;
     font-family:'IBM Plex Mono', monospace;
     font-size:11px;
@@ -565,27 +671,25 @@
     70%{box-shadow:0 0 0 8px rgba(255,122,61,0);}
     100%{box-shadow:0 0 0 0 rgba(255,122,61,0);}
   }
-  .case-card h3{
+  .cs-title{
     font-family:'Fraunces', serif;
     font-weight:500;
-    font-size:28px;
-    margin:0 0 8px;
+    font-size:26px;
+    margin:0 0 6px;
   }
-  .case-card p{
-    margin:0 0 16px;
+  .cs-desc{
+    margin:0;
     color:var(--ink-soft);
     font-size:15px;
     line-height:1.55;
-    max-width:520px;
+    max-width:480px;
   }
-  .case-card .go{
+  .cs-go{
     font-family:'IBM Plex Mono', monospace;
     font-size:13px;
     color:var(--teal);
-    display:flex;
-    align-items:center;
-    gap:6px;
     white-space:nowrap;
+    position:relative; z-index:1;
   }
 
   /* ---------- Footer ---------- */
@@ -597,6 +701,18 @@
     display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;
   }
   .foot-links{display:flex; gap:12px;}
+
+  /* ---------- Vertical social rail (left side) ---------- */
+  .social-rail{
+    position:fixed;
+    left:24px; top:110px;
+    z-index:45;
+    display:flex; flex-direction:column;
+    gap:14px;
+  }
+  @media (max-width:1080px){
+    .social-rail{display:none;}
+  }
   .social-btn{
     display:inline-flex; align-items:center;
     height:42px; padding:0 13px; border-radius:100px;
@@ -648,14 +764,40 @@
   a:focus-visible{outline:2px solid var(--teal); outline-offset:3px;}
 
   @media (max-width:820px){
+    .hero{padding:56px 0 60px;}
     .tile{aspect-ratio:4/3;}
-    .photo-badge{width:52px; height:52px;}
+    .photo-badge{width:120px; height:120px;}
     .hero-top{margin-bottom:16px;}
-    .tile-sticky-zone{min-height:700px;}
-    .exp-row{grid-template-columns:1fr; gap:10px;}
-    .case-card{min-height:220px;}
-    .case-card .case-inner{padding:24px;}
-    .nav .links{gap:16px;}
+    .exp-row{grid-template-columns:1fr; gap:10px; padding-right:40px;}
+    .caret{position:absolute; top:32px; right:0;}
+    .cs-row{padding:28px 0 28px 0;}
+    .cs-row-inner{grid-template-columns:1fr; gap:8px; padding-right:0;}
+    .cs-date{order:-1;}
+    .cs-go{margin-top:4px;}
+    .nav-toggle{display:flex;}
+    .nav .links{
+      position:absolute;
+      top:100%; left:0; right:0;
+      flex-direction:column;
+      gap:0;
+      max-height:0;
+      overflow:hidden;
+      opacity:0;
+      background:rgba(10,10,13,.96);
+      backdrop-filter:blur(14px);
+      border-bottom:1px solid var(--line);
+      transition:max-height .3s ease, opacity .25s ease;
+    }
+    .nav .links.open{
+      max-height:260px;
+      opacity:1;
+    }
+    .nav .links a{
+      padding:16px 32px;
+      border-top:1px solid var(--line);
+      font-size:16px;
+    }
+    .nav .links a:hover, .nav .links a:focus-visible{transform:none;}
   }
 
   @media (prefers-reduced-motion: reduce){
@@ -668,11 +810,21 @@
 
 <header class="site" id="siteHeader">
   <div class="nav">
-    <a class="name" href="portfolio.html">Angel Diaz</a>
-    <div class="links">
+    <a class="name" href="portfolio.html" data-target="top">Angel Diaz</a>
+    <div class="nav-mobile-actions">
+      <a class="nav-social-btn" href="https://www.linkedin.com/in/angel-x-diaz/" aria-label="LinkedIn">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 2h-17A1.5 1.5 0 0 0 2 3.5v17A1.5 1.5 0 0 0 3.5 22h17a1.5 1.5 0 0 0 1.5-1.5v-17A1.5 1.5 0 0 0 20.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 1 1 8.3 6.5a1.78 1.78 0 0 1-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0 0 13 14.19a.66.66 0 0 0 0 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 0 1 2.7-1.4c1.55 0 3.36.86 3.36 3.66z"></path></svg>
+      </a>
+      <a class="nav-social-btn" href="https://www.instagram.com/fujixdiaz/" aria-label="Instagram — photography">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="links" id="navLinks">
       <a href="#experience" data-target="experience">Experience</a>
       <a href="#work" data-target="work">Case Studies</a>
-      <a href="https://www.linkedin.com/in/angel-x-diaz/">LinkedIn</a>
     </div>
   </div>
 </header>
@@ -680,6 +832,17 @@
 <a href="#top" id="toTop" class="to-top" aria-label="Back to top">
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
 </a>
+
+<nav class="social-rail" aria-label="Social links">
+  <a class="social-btn" href="https://www.linkedin.com/in/angel-x-diaz/" aria-label="LinkedIn">
+    <span class="social-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 2h-17A1.5 1.5 0 0 0 2 3.5v17A1.5 1.5 0 0 0 3.5 22h17a1.5 1.5 0 0 0 1.5-1.5v-17A1.5 1.5 0 0 0 20.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 1 1 8.3 6.5a1.78 1.78 0 0 1-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0 0 13 14.19a.66.66 0 0 0 0 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 0 1 2.7-1.4c1.55 0 3.36.86 3.36 3.66z"></path></svg></span>
+    <span class="social-label">LinkedIn</span>
+  </a>
+  <a class="social-btn" href="https://www.instagram.com/fujixdiaz/" aria-label="Instagram — photography">
+    <span class="social-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></span>
+    <span class="social-label">Photography</span>
+  </a>
+</nav>
 
 <section class="hero" id="top">
   <div class="hero-glow-clip"><div class="hero-glow" aria-hidden="true"></div><div class="hero-grain" aria-hidden="true"></div></div>
@@ -690,7 +853,7 @@
         <div>
           <div class="hero-top">
             <div class="photo-badge" id="photoBadge">
-              <img src="assets/profile-photo.jpg" alt="Angel Diaz"
+              <img src="assets/profile-badge.jpg" alt="Angel Diaz"
                    onerror="this.parentElement.classList.add('no-photo'); this.style.display='none';">
               <div class="placeholder">you</div>
             </div>
@@ -721,11 +884,12 @@
     </div>
 
     <div class="tile-sticky-zone">
-      <div class="tile-wrap">
+      <div class="tile-wrap" id="tileWrap">
         <a class="tile" href="wa211" id="coverTile">
           <img src="assets/cover-latest.jpg" alt="Washington 211 preview"
                onerror="this.parentElement.classList.add('no-shot'); this.style.display='none';">
           <div class="shot-placeholder">Drop a screenshot at<br><code>assets/cover-latest.jpg</code></div>
+          <div class="tile-logo"><img src="assets/logos/wa211.png" alt=""></div>
           <div class="wash"></div>
           <div class="tile-content">
             <div>
@@ -763,20 +927,23 @@
           <img src="assets/logos/amazon.png" alt=""
                onerror="this.parentElement.classList.add('text'); this.parentElement.textContent='AMAZON';">
         </div>
-        <div class="years">2026 to<br>current</div>
+        <div class="years">2026 to current</div>
         <div>
           <p class="role">Data Collection Researcher</p>
           <p class="org">Amazon Lab126 · V-CARE, contract via KForce</p>
-          <ul>
-            <li>Sole Seattle-site moderator collecting near-field acoustic voice data to train an on-device AI model for Amazon's next-gen smart glasses.</li>
-            <li>Cut average session time from 90 to 50–60 minutes and troubleshooting resolution from ~30 minutes to 5–10.</li>
-            <li>Wrote a troubleshooting guide later adopted org-wide across the Seattle and San Jose teams.</li>
-          </ul>
-          <div class="exp-tags">
-            <span>Robotics</span>
-            <span>AI-Implementation</span>
+          <div class="exp-details">
+            <ul>
+              <li>Sole Seattle-site moderator collecting near-field acoustic voice data to train an on-device AI model for Amazon's next-gen smart glasses.</li>
+              <li>Cut average session time from 90 to 50–60 minutes and troubleshooting resolution from ~30 minutes to 5–10.</li>
+              <li>Wrote a troubleshooting guide later adopted org-wide across the Seattle and San Jose teams.</li>
+            </ul>
+            <div class="exp-tags">
+              <span>Robotics</span>
+              <span>AI-Implementation</span>
+            </div>
           </div>
         </div>
+        <span class="caret"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
       </div>
 
       <div class="exp-row">
@@ -784,35 +951,41 @@
           <img src="assets/logos/meta.png" alt=""
                onerror="this.parentElement.classList.add('text'); this.parentElement.textContent='META';">
         </div>
-        <div class="years">2024–26<br>Meta</div>
+        <div class="years">2024–26</div>
         <div>
           <p class="role">Research Operations &amp; Data Collection Specialist</p>
           <p class="org">Meta · via Experis</p>
-          <ul>
-            <li>Supported Wearables, XR/VR, and LLM studies, including audio/speech interaction auditing on Meta Ray-Ban glasses.</li>
-            <li>Ran precision-recall analysis across five annotation workflows, sustaining 90%+ quality benchmarks.</li>
-            <li>Led root-cause analysis on recurring annotation issues, partnering with vendor and PDO teams on fixes.</li>
-          </ul>
-          <div class="exp-tags">
-            <span>AR / VR / MR</span>
-            <span>AI-Implementation</span>
+          <div class="exp-details">
+            <ul>
+              <li>Supported Wearables, XR/VR, and LLM studies, including audio/speech interaction auditing on Meta Ray-Ban glasses.</li>
+              <li>Ran precision-recall analysis across five annotation workflows, sustaining 90%+ quality benchmarks.</li>
+              <li>Led root-cause analysis on recurring annotation issues, partnering with vendor and PDO teams on fixes.</li>
+            </ul>
+            <div class="exp-tags">
+              <span>AR / VR / MR</span>
+              <span>AI-Implementation</span>
+            </div>
           </div>
         </div>
+        <span class="caret"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
       </div>
 
       <div class="exp-row">
         <div class="exp-watermark text">WESTPAC</div>
-        <div class="years">2022–24<br>Westpac</div>
+        <div class="years">2022–24</div>
         <div>
           <p class="role">Clinical QA &amp; Wearable Hardware</p>
           <p class="org">Westpac Labs</p>
-          <ul>
-            <li>Clinical testing and quality assurance on wearable hardware devices.</li>
-          </ul>
-          <div class="exp-tags">
-            <span>Robotics</span>
+          <div class="exp-details">
+            <ul>
+              <li>Clinical testing and quality assurance on wearable hardware devices.</li>
+            </ul>
+            <div class="exp-tags">
+              <span>Robotics</span>
+            </div>
           </div>
         </div>
+        <span class="caret"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
       </div>
 
       <div class="exp-row">
@@ -820,17 +993,20 @@
           <img src="assets/logos/csumb.png" alt=""
                onerror="this.parentElement.classList.add('text'); this.parentElement.textContent='CSUMB';">
         </div>
-        <div class="years">2020–22<br>CSUMB</div>
+        <div class="years">2020–22</div>
         <div>
           <p class="role">Undergraduate Researcher</p>
           <p class="org">CSU Monterey Bay · BS Psychology, behavioral &amp; cognitive neuroscience</p>
-          <ul>
-            <li>Worked directly with an IRB on academic research — beyond CITI certification alone.</li>
-          </ul>
-          <div class="exp-tags">
-            <span>Academic Research</span>
+          <div class="exp-details">
+            <ul>
+              <li>Worked directly with an IRB on academic research — beyond CITI certification alone.</li>
+            </ul>
+            <div class="exp-tags">
+              <span>Academic Research</span>
+            </div>
           </div>
         </div>
+        <span class="caret"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
       </div>
 
     </div>
@@ -845,35 +1021,38 @@
     </div>
 
     <div class="case-list">
-      <a class="case-card" href="wa211">
-        <img class="shot" src="assets/case-wa211.jpg" alt="Washington 211 preview"
-             onerror="this.parentElement.classList.add('no-shot'); this.style.display='none';">
-        <div class="shot-placeholder">Drop a screenshot at<br><code>assets/case-wa211.jpg</code></div>
-        <div class="wash"></div>
-        <div class="case-inner">
-          <div class="case-meta">
-            <span class="case-new"><span class="pulse-dot"></span>New case study</span>
-            <span class="case-date">Jan 2026</span>
+      <a class="cs-row" href="wa211" id="csWa211">
+        <div class="cs-row-bg"></div>
+        <div class="cs-row-inner">
+          <div class="cs-logo">
+            <img src="assets/logos/wa211.png" alt=""
+                 onerror="this.parentElement.classList.add('text'); this.parentElement.textContent='WA211';">
           </div>
-          <h3>Washington 211</h3>
-          <p>Usability study evaluating navigation and search relevance for TBI users on a crisis resource site. HCDE 517, 2026.</p>
-          <div class="go">Read the case study →</div>
+          <div class="cs-date">Jan 2026</div>
+          <div class="cs-content">
+            <div class="cs-meta">
+              <span class="cs-new"><span class="pulse-dot"></span>New case study</span>
+            </div>
+            <p class="cs-title">Washington 211</p>
+            <p class="cs-desc">Usability study evaluating navigation and search relevance for TBI users on a crisis resource site. HCDE 517, 2026.</p>
+          </div>
+          <div class="cs-go">Read the case study →</div>
         </div>
       </a>
 
-      <a class="case-card" href="https://sleek-link-44185981.figma.site/" target="_blank" rel="noopener">
-        <img class="shot" src="assets/case-orientation-express.jpg" alt="Orientation Express preview"
-             onerror="this.parentElement.classList.add('no-shot'); this.style.display='none';">
-        <div class="shot-placeholder">Drop a screenshot at<br><code>assets/case-orientation-express.jpg</code></div>
-        <div class="wash"></div>
-        <div class="case-inner">
-          <div class="case-meta">
-            <span class="status">Prototype</span>
-            <span class="case-date">Aug 2025</span>
+      <a class="cs-row" href="https://sleek-link-44185981.figma.site/" target="_blank" rel="noopener" id="csOe">
+        <div class="cs-row-bg"></div>
+        <div class="cs-row-inner">
+          <div class="cs-logo text">OE</div>
+          <div class="cs-date">Aug 2025</div>
+          <div class="cs-content">
+            <div class="cs-meta">
+              <span class="cs-status">Prototype</span>
+            </div>
+            <p class="cs-title">Orientation Express</p>
+            <p class="cs-desc">A streamlined onboarding hub for incoming UW students, designed and built by a 4-person HCDE team.</p>
           </div>
-          <h3>Orientation Express</h3>
-          <p>A streamlined onboarding hub for incoming UW students, designed and built by a 4-person HCDE team.</p>
-          <div class="go">View prototype ↗</div>
+          <div class="cs-go">View prototype ↗</div>
         </div>
       </a>
     </div>
@@ -886,16 +1065,6 @@
       <div>
         <div class="foot-note">Angel Diaz — UX Research · Seattle, WA</div>
         <div class="vibe-badge"><span class="spark">⚡</span> Vibe-coded with <b>Claude</b></div>
-      </div>
-      <div class="foot-links">
-        <a class="social-btn" href="https://www.linkedin.com/in/angel-x-diaz/" aria-label="LinkedIn">
-          <span class="social-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 2h-17A1.5 1.5 0 0 0 2 3.5v17A1.5 1.5 0 0 0 3.5 22h17a1.5 1.5 0 0 0 1.5-1.5v-17A1.5 1.5 0 0 0 20.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 1 1 8.3 6.5a1.78 1.78 0 0 1-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0 0 13 14.19a.66.66 0 0 0 0 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 0 1 2.7-1.4c1.55 0 3.36.86 3.36 3.66z"></path></svg></span>
-          <span class="social-label">LinkedIn</span>
-        </a>
-        <a class="social-btn" href="https://www.instagram.com/fujixdiaz/" aria-label="Instagram — photography">
-          <span class="social-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></span>
-          <span class="social-label">Photography</span>
-        </a>
       </div>
     </div>
   </div>
@@ -910,11 +1079,26 @@
     toTop.classList.toggle('show', window.scrollY > 500);
   });
 
-  const navLinks = document.querySelectorAll('.nav .links a[data-target]');
+  const navToggle = document.getElementById('navToggle');
+  const navLinksPanel = document.getElementById('navLinks');
+  navToggle.addEventListener('click', () => {
+    const open = navLinksPanel.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', String(open));
+    navToggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  });
+  navLinksPanel.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      navLinksPanel.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', 'false');
+      navToggle.setAttribute('aria-label', 'Open menu');
+    });
+  });
+
+  const navLinks = document.querySelectorAll('.nav [data-target]');
   const targets = Array.from(navLinks).map(a => document.getElementById(a.dataset.target)).filter(Boolean);
   const spy = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-      const link = document.querySelector('.nav .links a[data-target="' + entry.target.id + '"]');
+      const link = document.querySelector('.nav [data-target="' + entry.target.id + '"]');
       if(!link) return;
       if(entry.isIntersecting){
         navLinks.forEach(a => a.classList.remove('active'));
@@ -924,8 +1108,71 @@
   }, { rootMargin: '-45% 0px -45% 0px', threshold: 0 });
   targets.forEach(t => spy.observe(t));
 
+  const expRows = document.querySelectorAll('.exp-row');
+  expRows.forEach(row => {
+    row.addEventListener('click', () => {
+      if(window.innerWidth > 820) return;
+      const isOpen = row.classList.contains('expanded');
+      expRows.forEach(r => r.classList.remove('expanded'));
+      if(!isOpen) row.classList.add('expanded');
+    });
+  });
+
+  const carets = document.querySelectorAll('.caret');
+  function updateCarets(){
+    if(reducedMotion()){
+      carets.forEach(c => { c.style.transform = 'none'; c.style.color = ''; });
+      return;
+    }
+    const vh = window.innerHeight;
+    const center = vh / 2;
+    carets.forEach(c => {
+      const rect = c.getBoundingClientRect();
+      const rowCenter = rect.top + rect.height / 2;
+      const dist = Math.abs(rowCenter - center);
+      const proximity = Math.max(0, 1 - dist / (vh / 2));
+      const scale = 1 + proximity * 0.9;
+      c.style.transform = 'scale(' + scale.toFixed(2) + ')';
+      c.style.color = proximity > 0.6 ? 'var(--teal)' : 'var(--ink-faint)';
+    });
+  }
+  let caretTicking = false;
+  window.addEventListener('scroll', () => {
+    if(!caretTicking){
+      requestAnimationFrame(() => { updateCarets(); caretTicking = false; });
+      caretTicking = true;
+    }
+  });
+  updateCarets();
+
+  const csRows = document.querySelectorAll('.cs-row-inner');
+  const CS_LAG_FACTOR = 0.12;
+  function updateCaseParallax(){
+    if(reducedMotion()){
+      csRows.forEach(r => { r.style.transform = 'none'; });
+      return;
+    }
+    const center = window.innerHeight / 2;
+    csRows.forEach(row => {
+      const rect = row.getBoundingClientRect();
+      const rowCenter = rect.top + rect.height / 2;
+      const offset = (center - rowCenter) * CS_LAG_FACTOR;
+      row.style.transform = 'translateY(' + offset.toFixed(1) + 'px)';
+    });
+  }
+  let csTicking = false;
+  window.addEventListener('scroll', () => {
+    if(!csTicking){
+      requestAnimationFrame(() => { updateCaseParallax(); csTicking = false; });
+      csTicking = true;
+    }
+  });
+  updateCaseParallax();
+
   const heroContent = document.getElementById('heroContent');
+  const tileWrap = document.getElementById('tileWrap');
   const HERO_FADE_DISTANCE = 400;
+  const TILE_LAG_PX = 50;
 
   function reducedMotion(){ return window.matchMedia('(prefers-reduced-motion: reduce)').matches; }
 
@@ -934,11 +1181,15 @@
     if(reducedMotion()){
       heroContent.style.opacity = '1';
       heroContent.style.transform = 'none';
+      if(tileWrap){ tileWrap.style.opacity = '1'; tileWrap.style.transform = 'none'; }
       return;
     }
     const p = Math.min(Math.max(window.scrollY / HERO_FADE_DISTANCE, 0), 1);
     heroContent.style.opacity = String(1 - p);
     heroContent.style.transform = 'translateY(' + (p * -18) + 'px)';
+    if(tileWrap){
+      tileWrap.style.transform = 'translateY(' + (p * TILE_LAG_PX) + 'px)';
+    }
   }
 
   let heroTicking = false;
