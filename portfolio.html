@@ -444,9 +444,9 @@
   .exp-row > *{position:relative; z-index:1;}
   .exp-watermark{
     position:absolute;
-    right:-8px; top:50%;
+    right:-16px; top:50%;
     transform:translateY(-50%);
-    width:190px; height:190px;
+    width:260px; height:260px;
     opacity:0;
     pointer-events:none;
     z-index:0;
@@ -457,7 +457,7 @@
     width:auto; height:auto;
     font-family:'Fraunces', serif;
     font-weight:500;
-    font-size:84px;
+    font-size:112px;
     line-height:1;
     color:transparent;
     -webkit-text-stroke:1px var(--ink-soft);
@@ -953,7 +953,7 @@
         </div>
         <div class="years">2024–26</div>
         <div>
-          <p class="role">Research Operations &amp; Data Collection Specialist</p>
+          <p class="role">Data Collection Specialist | Research Operations</p>
           <p class="org">Meta · via Experis</p>
           <div class="exp-details">
             <ul>
@@ -974,11 +974,12 @@
         <div class="exp-watermark text">WESTPAC</div>
         <div class="years">2022–24</div>
         <div>
-          <p class="role">Clinical QA &amp; Wearable Hardware</p>
+          <p class="role">Quality Assurance Specialist</p>
           <p class="org">Westpac Labs</p>
           <div class="exp-details">
             <ul>
-              <li>Clinical testing and quality assurance on wearable hardware devices.</li>
+              <li>Performed root-cause and qualitative defect analysis, maintaining error rates below 0.5% across 90,000 monthly specimens.</li>
+              <li>Improved lab turnaround time from 88% to 97% through workflow evaluation and process redesign.</li>
             </ul>
             <div class="exp-tags">
               <span>Robotics</span>
@@ -996,7 +997,7 @@
         <div class="years">2020–22</div>
         <div>
           <p class="role">Undergraduate Researcher</p>
-          <p class="org">CSU Monterey Bay · BS Psychology, behavioral &amp; cognitive neuroscience</p>
+          <p class="org">California State University, Monterey Bay · Behavioral Neuroscience Lab</p>
           <div class="exp-details">
             <ul>
               <li>Worked directly with an IRB on academic research — beyond CITI certification alone.</li>
@@ -1115,13 +1116,21 @@
       const isOpen = row.classList.contains('expanded');
       expRows.forEach(r => r.classList.remove('expanded'));
       if(!isOpen) row.classList.add('expanded');
+      updateCarets();
     });
+    row.addEventListener('mouseenter', updateCarets);
+    row.addEventListener('mouseleave', updateCarets);
   });
 
   const carets = document.querySelectorAll('.caret');
   function updateCarets(){
     if(reducedMotion()){
-      carets.forEach(c => { c.style.transform = 'none'; c.style.color = ''; });
+      carets.forEach(c => {
+        const row = c.closest('.exp-row');
+        const isOpen = row && (row.classList.contains('expanded') || row.matches(':hover'));
+        c.style.transform = isOpen ? 'rotate(180deg)' : 'none';
+        c.style.color = '';
+      });
       return;
     }
     const vh = window.innerHeight;
@@ -1132,7 +1141,10 @@
       const dist = Math.abs(rowCenter - center);
       const proximity = Math.max(0, 1 - dist / (vh / 2));
       const scale = 1 + proximity * 0.9;
-      c.style.transform = 'scale(' + scale.toFixed(2) + ')';
+      const row = c.closest('.exp-row');
+      const isOpen = row && (row.classList.contains('expanded') || row.matches(':hover'));
+      const rotate = isOpen ? 180 : 0;
+      c.style.transform = 'scale(' + scale.toFixed(2) + ') rotate(' + rotate + 'deg)';
       c.style.color = proximity > 0.6 ? 'var(--teal)' : 'var(--ink-faint)';
     });
   }
