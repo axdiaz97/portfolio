@@ -504,20 +504,12 @@
   }
   .exp-row ul li{margin-bottom:6px;}
 
-  /* expanded state: desktop hovers the row, mobile taps to add .expanded */
-  @media (hover:hover) and (min-width:821px){
-    .exp-row:hover{padding:36px 0;}
-    .exp-row:hover .exp-watermark{opacity:.07;}
-    .exp-row:hover .exp-watermark.text{opacity:.35;}
-    .exp-row:hover .exp-details{max-height:400px; opacity:1; margin-top:16px;}
-  }
+  /* expanded state: click/tap toggles .expanded on both desktop and mobile */
   .exp-row.expanded{padding:36px 0;}
   .exp-row.expanded .exp-watermark{opacity:.07;}
   .exp-row.expanded .exp-watermark.text{opacity:.35;}
   .exp-row.expanded .exp-details{max-height:400px; opacity:1; margin-top:16px;}
-  @media (max-width:820px){
-    .exp-row{cursor:pointer;}
-  }
+  .exp-row{cursor:pointer;}
 
   /* attention-grabbing role tags — gradient wordmarks, no chip background */
   .exp-tags{
@@ -989,7 +981,10 @@
       </div>
 
       <div class="exp-row">
-        <div class="exp-watermark text">WESTPAC</div>
+        <div class="exp-watermark">
+          <img src="assets/logos/westpac.png" alt=""
+               onerror="this.parentElement.classList.add('text'); this.parentElement.textContent='WESTPAC';">
+        </div>
         <div class="years">2022–24</div>
         <div>
           <p class="role">Quality Assurance Specialist</p>
@@ -1069,7 +1064,10 @@
       <a class="cs-row" href="https://sleek-link-44185981.figma.site/" target="_blank" rel="noopener" id="csOe">
         <div class="cs-row-bg"></div>
         <div class="cs-row-inner">
-          <div class="cs-logo text">OE</div>
+          <div class="cs-logo">
+            <img src="assets/logos/uw.png" alt=""
+                 onerror="this.parentElement.classList.add('text'); this.parentElement.textContent='OE';">
+          </div>
           <div class="cs-date">Aug 2025</div>
           <div class="cs-content">
             <div class="cs-meta">
@@ -1139,14 +1137,11 @@
   const expRows = document.querySelectorAll('.exp-row');
   expRows.forEach(row => {
     row.addEventListener('click', () => {
-      if(window.innerWidth > 820) return;
       const isOpen = row.classList.contains('expanded');
       expRows.forEach(r => r.classList.remove('expanded'));
       if(!isOpen) row.classList.add('expanded');
       updateCarets();
     });
-    row.addEventListener('mouseenter', updateCarets);
-    row.addEventListener('mouseleave', updateCarets);
   });
 
   const carets = document.querySelectorAll('.caret');
@@ -1154,7 +1149,7 @@
     if(reducedMotion()){
       carets.forEach(c => {
         const row = c.closest('.exp-row');
-        const isOpen = row && (row.classList.contains('expanded') || row.matches(':hover'));
+        const isOpen = row && row.classList.contains('expanded');
         c.style.transform = isOpen ? 'rotate(180deg)' : 'none';
         c.style.color = '';
       });
@@ -1169,7 +1164,7 @@
       const proximity = Math.max(0, 1 - dist / (vh / 2));
       const scale = 1 + proximity * 0.9;
       const row = c.closest('.exp-row');
-      const isOpen = row && (row.classList.contains('expanded') || row.matches(':hover'));
+      const isOpen = row && row.classList.contains('expanded');
       const rotate = isOpen ? 180 : 0;
       c.style.transform = 'scale(' + scale.toFixed(2) + ') rotate(' + rotate + 'deg)';
       c.style.color = proximity > 0.6 ? 'var(--teal)' : 'var(--ink-faint)';
