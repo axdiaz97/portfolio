@@ -674,12 +674,14 @@ h1, h2, h3 {
   display: block;
   color: inherit;
   text-decoration: none;
-  transition: background 0.15s ease, box-shadow 0.15s ease;
+  border: 1px solid var(--border);
+  transition: background 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
 }
 
 .intro-people-card:hover {
   background: #edf1f9;
-  box-shadow: inset 0 0 0 1px var(--border);
+  border-color: var(--border-strong, #c7d2e0);
+  box-shadow: inset 0 0 0 1px var(--border-strong, #c7d2e0);
 }
 
 .intro-people-card:focus-visible {
@@ -1740,69 +1742,121 @@ h1, h2, h3 {
 
 .reflections-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
   margin-top: 28px;
+}
+
+.reflection-card.span-full {
+  grid-column: 1 / -1;
 }
 
 @media (max-width: 800px) {
   .reflections-grid { grid-template-columns: 1fr; }
+  .reflection-card.span-full { grid-column: auto; }
 }
 
 .reflection-card {
-  border: 1px solid var(--border);
-  border-radius: 12px;
+  border-radius: 10px;
   overflow: hidden;
   background: #fff;
 }
 
 .reflection-card-head {
-  background: var(--navy);
-  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--bg-alt);
+  padding: 10px 14px;
+}
+
+.reflection-card-icon {
+  width: 26px;
+  height: 26px;
+  border-radius: 6px;
+  background: #eef2f8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--navy);
+}
+
+.reflection-card-head span {
   font-family: var(--font-head);
   font-weight: 700;
-  font-size: 15px;
-  text-align: center;
-  padding: 12px;
+  font-size: 12.5px;
+  color: var(--navy);
+}
+
+.reflection-card-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.reflection-card.span-full .reflection-card-body {
+  flex-direction: row;
+}
+
+@media (max-width: 640px) {
+  .reflection-card.span-full .reflection-card-body { flex-direction: column; }
+}
+
+.reflection-issues,
+.reflection-solution {
+  flex: 1;
+  padding: 10px 14px;
 }
 
 .reflection-issues {
-  background: var(--amber-bg);
-  padding: 16px 18px;
+  background: #f6dedb;
 }
 
 .reflection-solution {
-  padding: 16px 18px;
+  background: #d5f0e0;
 }
 
 .reflection-label {
   font-family: var(--font-head);
-  font-weight: 800;
-  font-size: 13px;
-  color: var(--navy);
+  font-weight: 700;
+  font-size: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
   display: block;
-  margin-bottom: 8px;
+}
+
+.reflection-issues .reflection-label {
+  color: #8a1f1f;
+}
+
+.reflection-solution .reflection-label {
+  color: #1f6b3a;
 }
 
 .reflection-issues p {
-  font-size: 13.5px;
-  color: var(--navy);
-  margin: 0;
-  line-height: 1.45;
+  font-size: 9.5px;
+  color: var(--text-body);
+  margin: 2px 0 0;
+  line-height: 1.35;
+}
+
+.reflection-issues p strong {
+  color: #8a1f1f;
+  font-weight: 700;
 }
 
 .reflection-solution ol {
-  margin: 0;
-  padding-left: 18px;
+  margin: 2px 0 0;
+  padding-left: 14px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 4px;
 }
 
 .reflection-solution li {
-  font-size: 13.5px;
-  color: var(--navy);
-  line-height: 1.4;
+  font-size: 9.5px;
+  color: var(--text-body);
+  line-height: 1.5;
 }
 
 .stat-group-divider {
@@ -2947,6 +3001,7 @@ h1, h2, h3 {
 .who-where-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  align-items: start;
   gap: 16px;
   max-width: 560px;
   margin: 22px auto 0;
@@ -2958,6 +3013,7 @@ h1, h2, h3 {
   border-radius: 12px;
   padding: 16px;
   text-align: center;
+  overflow: hidden;
 }
 
 .who-where-card h5 {
@@ -3040,6 +3096,70 @@ h1, h2, h3 {
 }
 .act-marker.on-dark .act-rule {
   background: rgba(255, 255, 255, 0.25);
+}
+
+.key-findings {
+  background: var(--navy);
+  border-radius: 12px;
+  padding: 22px 24px;
+  margin: 24px 0;
+  text-decoration: none;
+  display: block;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.key-findings:hover {
+  transform: scale(1.01);
+  box-shadow: 0 4px 16px rgba(13, 59, 120, 0.25);
+}
+
+.key-findings-label {
+  font-family: var(--font-head);
+  font-size: 9.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #ffcf94;
+  margin-bottom: 14px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  transition: font-size 0.15s ease;
+}
+
+.key-findings:hover .key-findings-label {
+  font-size: 11px;
+}
+
+.key-findings-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.key-findings-stat {
+  text-align: center;
+}
+
+.key-findings-num {
+  font-family: var(--font-head);
+  font-size: 26px;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1;
+}
+
+.key-findings-desc {
+  font-size: 9.5px;
+  color: #cfe0f5;
+  margin-top: 5px;
+  line-height: 1.3;
+}
+
+@media (max-width: 640px) {
+  .key-findings-grid { grid-template-columns: repeat(2, 1fr); row-gap: 18px; }
 }
 
 .intro-timeline {
@@ -3169,6 +3289,7 @@ h1, h2, h3 {
   width: 100%;
   justify-content: center;
   flex-wrap: wrap;
+  align-items: flex-start;
   margin-bottom: 4px;
 }
 
@@ -3179,8 +3300,30 @@ h1, h2, h3 {
   background: #fff;
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 18px 14px;
+  padding: 18px 14px 0;
   text-align: center;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.funnel-card-pin {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: var(--orange);
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+.funnel-card.pinned {
+  border-color: var(--orange);
+  box-shadow: 0 0 0 1px var(--orange);
+}
+
+.funnel-card.pinned .funnel-card-pin {
+  opacity: 1;
 }
 
 .funnel-icon {
@@ -3205,14 +3348,108 @@ h1, h2, h3 {
   font-weight: 700;
   font-size: 14px;
   color: var(--navy);
-  margin-bottom: 5px;
+  margin-bottom: 0;
+  padding-bottom: 14px;
 }
 
-.funnel-card-sub {
-  font-size: 12px;
+.funnel-card-extra {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.25s ease, opacity 0.2s ease;
+  text-align: left;
+}
+
+.funnel-card.expanded .funnel-card-extra {
+  max-height: 220px;
+  opacity: 1;
+}
+
+.funnel-card-extra-stat-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-top: 10px;
+  border-top: 1px solid var(--bg-alt);
+}
+
+.funnel-card-extra-icon {
+  width: 26px;
+  height: 26px;
+  border-radius: 6px;
+  background: #eef2f8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--navy);
+}
+
+.funnel-card-extra-stat {
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: 15px;
+  color: var(--orange-deep);
+  line-height: 1;
+}
+
+.funnel-card-extra-stat span {
+  display: block;
+  font-size: 9px;
+  font-weight: 700;
   color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.funnel-card-narrative-list {
+  font-size: 9.5px;
+  color: var(--text-body);
   line-height: 1.4;
-  margin: 0;
+  margin: 8px 0 0;
+  padding-left: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.funnel-card-narrative-list li {
+  position: relative;
+  padding-left: 11px;
+}
+
+.funnel-card-narrative-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 5px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--orange);
+}
+
+.funnel-card-banner {
+  display: flex;
+  justify-content: center;
+  margin: 10px -14px 0;
+  padding: 6px 0;
+  background: var(--navy);
+  transition: background 0.15s ease;
+}
+
+.funnel-card.pinned .funnel-card-banner {
+  background: var(--orange-deep);
+}
+
+.funnel-card-chevron {
+  transition: transform 0.2s ease, stroke 0.15s ease;
+  stroke: #fff;
+}
+
+.funnel-card.expanded .funnel-card-chevron {
+  transform: rotate(180deg);
+  stroke: #ffcf5c;
 }
 
 .funnel-arrow {
@@ -3392,9 +3629,158 @@ h1, h2, h3 {
 
 .rq-item {
   display: flex;
+  flex-direction: column;
   border: 1px solid var(--border);
   border-radius: 12px;
   overflow: hidden;
+}
+
+.rq-item-row {
+  display: flex;
+}
+
+.rq-item-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  width: 100%;
+  padding: 8px;
+  background: var(--navy);
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-head);
+  font-size: 10px;
+  font-weight: 700;
+  color: #fff;
+  transition: color 0.15s ease;
+}
+
+.rq-item-toggle:hover {
+  color: #ffcf5c;
+}
+
+.rq-item-toggle svg {
+  transition: transform 0.2s ease;
+}
+
+.rq-item.expanded .rq-item-toggle svg {
+  transform: rotate(180deg);
+}
+
+.rq-item-expand {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.25s ease, opacity 0.2s ease;
+}
+
+.rq-item.expanded .rq-item-expand {
+  max-height: 320px;
+  opacity: 1;
+}
+
+.rq-item-expand-inner {
+  padding: 14px 18px;
+  background: #fff;
+  border-top: 1px solid var(--border);
+}
+
+.rq-split-row {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+}
+
+.rq-split-row + .rq-split-row {
+  margin-top: 8px;
+}
+
+.rq-split-icon {
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  background: #eef2f8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--navy);
+}
+
+.rq-split-label {
+  font-family: var(--font-head);
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--navy);
+}
+
+.rq-split-desc {
+  font-size: 9.5px;
+  color: var(--text-muted);
+  margin: 1px 0 0;
+  line-height: 1.35;
+}
+
+.rq-roadmap {
+  position: relative;
+  padding: 0 4px;
+  margin-bottom: 8px;
+}
+
+.rq-roadmap-line {
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  top: 8px;
+  height: 2px;
+  background: var(--border);
+}
+
+.rq-roadmap-steps {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+}
+
+.rq-roadmap-step {
+  text-align: center;
+  flex: 1;
+}
+
+.rq-roadmap-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--border-strong, #c7d2e0);
+  margin: 0 auto 4px;
+}
+
+.rq-roadmap-step.active .rq-roadmap-dot {
+  width: 16px;
+  height: 16px;
+  background: var(--orange);
+}
+
+.rq-roadmap-step-label {
+  font-size: 7.5px;
+  color: var(--text-muted);
+}
+
+.rq-roadmap-step.active .rq-roadmap-step-label {
+  font-weight: 700;
+  color: var(--navy);
+}
+
+.rq-expand-note {
+  font-size: 9.5px;
+  color: var(--text-muted);
+  margin: 0;
+  line-height: 1.4;
+}
+
+.rq-expand-note strong {
+  color: var(--navy);
 }
 
 .rq-item-media {
@@ -4108,6 +4494,90 @@ h1, h2, h3 {
   color: var(--orange-deep);
 }
 
+.who-where-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  width: calc(100% + 32px);
+  margin: 12px -16px -16px;
+  padding: 8px;
+  background: var(--navy);
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-head);
+  font-size: 10px;
+  font-weight: 700;
+  color: #fff;
+  transition: color 0.15s ease;
+}
+
+.who-where-toggle:hover {
+  color: #ffcf5c;
+}
+
+.who-where-toggle svg {
+  transition: transform 0.2s ease;
+}
+
+.who-where-card.expanded .who-where-toggle svg {
+  transform: rotate(180deg);
+}
+
+.who-where-expand {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.25s ease, opacity 0.2s ease;
+  text-align: left;
+}
+
+.who-where-card.expanded .who-where-expand {
+  max-height: 260px;
+  opacity: 1;
+}
+
+.who-where-expand-inner {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(13, 59, 120, 0.12);
+}
+
+.who-where-expand-inner ul {
+  margin: 0;
+  padding-left: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.who-where-expand-inner li {
+  position: relative;
+  padding-left: 12px;
+  font-size: 10px;
+  color: var(--text-body);
+  line-height: 1.4;
+}
+
+.who-where-expand-inner li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 5px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--orange);
+}
+
+.who-where-expand-inner p {
+  margin: 0;
+  font-size: 10px;
+  color: var(--text-body);
+  line-height: 1.4;
+}
+
 .who-where-card .illo {
   width: 100%;
   max-width: 150px;
@@ -4118,7 +4588,7 @@ h1, h2, h3 {
 
 .who-where-card .illo-funnel {
   max-width: 230px;
-  margin: 8px auto 0;
+  margin: 8px auto 10px;
   overflow: visible;
 }
 
@@ -5953,6 +6423,31 @@ h1, h2, h3 {
       findings</strong>, with one team member confirming the search-discoverability fix as a known issue.
     </p>
 
+    <a href="#solution" class="key-findings">
+      <div class="key-findings-label">
+        Key findings at a glance
+        <svg viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+      </div>
+      <div class="key-findings-grid">
+        <div class="key-findings-stat">
+          <div class="key-findings-num">2/6</div>
+          <div class="key-findings-desc">couldn&rsquo;t find search</div>
+        </div>
+        <div class="key-findings-stat">
+          <div class="key-findings-num">4/6</div>
+          <div class="key-findings-desc">got unrelated results</div>
+        </div>
+        <div class="key-findings-stat">
+          <div class="key-findings-num">100%</div>
+          <div class="key-findings-desc">results were out-of-state</div>
+        </div>
+        <div class="key-findings-stat">
+          <div class="key-findings-num">3/6</div>
+          <div class="key-findings-desc">wanted to abandon the site</div>
+        </div>
+      </div>
+    </a>
+
     <div class="intro-people-divider"></div>
 
     <h3 class="intro-people-heading intro-team-heading">Team</h3>
@@ -6021,23 +6516,75 @@ h1, h2, h3 {
 
   <div class="problem-funnel">
     <div class="funnel-row">
-      <div class="funnel-card">
+      <div class="funnel-card" data-funnel-card>
+        <span class="funnel-card-pin" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor" stroke="none"><circle cx="12" cy="12" r="10"/></svg>
+        </span>
         <svg class="funnel-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
         <div class="funnel-card-label">Problem</div>
         <div class="funnel-card-title">Overburdened call center</div>
-        <p class="funnel-card-sub">The site needs to actually hold people, or they call instead</p>
+        <div class="funnel-card-extra">
+          <div class="funnel-card-extra-stat-row">
+            <span class="funnel-card-extra-icon">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            </span>
+            <span class="funnel-card-extra-stat">6M<span>calls per year</span></span>
+          </div>
+          <ul class="funnel-card-narrative-list">
+            <li>These inquiries also live on the website</li>
+            <li>The site needs to carry more of that load</li>
+          </ul>
+        </div>
+        <div class="funnel-card-banner">
+          <svg class="funnel-card-chevron" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        </div>
       </div>
-      <div class="funnel-card">
+      <div class="funnel-card" data-funnel-card>
+        <span class="funnel-card-pin" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor" stroke="none"><circle cx="12" cy="12" r="10"/></svg>
+        </span>
         <svg class="funnel-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 9h18"/><path d="M8 21h8"/><path d="M12 18v3"/></svg>
         <div class="funnel-card-label">Product</div>
         <div class="funnel-card-title">WA211 Website</div>
-        <p class="funnel-card-sub">Feedback here will inform future mobile app development</p>
+        <div class="funnel-card-extra">
+          <div class="funnel-card-extra-stat-row">
+            <span class="funnel-card-extra-icon">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 3l4 4-4 4"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><path d="M7 21l-4-4 4-4"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
+            </span>
+            <span class="funnel-card-extra-stat" style="font-size:11px;line-height:1.3;">Call &rarr; Site</span>
+          </div>
+          <ul class="funnel-card-narrative-list">
+            <li>Redirect traffic to the website first</li>
+            <li>Use what we learn to shape the future mobile app</li>
+          </ul>
+        </div>
+        <div class="funnel-card-banner">
+          <svg class="funnel-card-chevron" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        </div>
       </div>
-      <div class="funnel-card">
+      <div class="funnel-card" data-funnel-card>
+        <span class="funnel-card-pin" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor" stroke="none"><circle cx="12" cy="12" r="10"/></svg>
+        </span>
         <svg class="funnel-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-        <div class="funnel-card-label">Target Audience</div>
+        <div class="funnel-card-label">Users</div>
         <div class="funnel-card-title">Users with TBI</div>
-        <p class="funnel-card-sub">Most likely to hit friction and revert to the phone &mdash; the hardest test</p>
+        <div class="funnel-card-extra">
+          <div class="funnel-card-extra-stat-row">
+            <span class="funnel-card-extra-icon">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+            </span>
+            <span class="funnel-card-extra-stat" style="font-size:11px;line-height:1.3;">Proxy population</span>
+          </div>
+          <ul class="funnel-card-narrative-list">
+            <li>Most likely to hit friction and revert to the phone</li>
+            <li>Stand-in for others with cognitive or language barriers</li>
+            <li>Pain points found here point to fixes needed sitewide</li>
+          </ul>
+        </div>
+        <div class="funnel-card-banner">
+          <svg class="funnel-card-chevron" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        </div>
       </div>
     </div>
 
@@ -6047,8 +6594,8 @@ h1, h2, h3 {
 
     <div class="funnel-barrier">
       <span class="funnel-barrier-label">Barrier</span>
-      <p>Prior studies relied on <strong>proxy participants</strong> &mdash; never people with TBI
-      themselves &mdash; leaving <strong>no direct usability feedback</strong> from the actual population.</p>
+      <p>No prior research had tested Washington 211 directly with <strong>people living with TBI</strong>
+      &mdash; this study set out to <strong>close that gap</strong>.</p>
     </div>
 
     </div>
@@ -6075,6 +6622,7 @@ h1, h2, h3 {
 
     <div class="rq-items">
       <div class="rq-item">
+        <div class="rq-item-row">
         <div class="rq-item-media rq-item-media-live">
           <div class="ah-search-demo">
             <div class="ah-search-bar">
@@ -6089,13 +6637,40 @@ h1, h2, h3 {
         </div>
         <div class="rq-item-text">
           <svg class="rq-item-watermark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
-          <span class="rq-item-eyebrow">Angle 01</span>
-          <p class="rq-item-title">Map the site&rsquo;s IA &amp; key nav points against real user needs.</p>
+          <p class="rq-item-title">1) Map the site&rsquo;s IA &amp; key nav points against real user needs.</p>
           <p class="rq-item-question">Does <strong>navigation &amp; hierarchy</strong> help users locate services without distraction?</p>
+        </div>
+        </div>
+        <button class="rq-item-toggle" type="button" onclick="toggleRqItem(this)" aria-expanded="false">
+          Show more
+          <svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="rq-item-expand">
+          <div class="rq-item-expand-inner">
+            <div class="rq-split-row">
+              <span class="rq-split-icon">
+                <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+              </span>
+              <div>
+                <div class="rq-split-label">Navigation</div>
+                <p class="rq-split-desc">How many steps to locate a resource &mdash; are search, menus, and filters easy to find along the way?</p>
+              </div>
+            </div>
+            <div class="rq-split-row">
+              <span class="rq-split-icon">
+                <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="4" rx="1"/><rect x="3" y="10" width="12" height="4" rx="1"/><rect x="3" y="16" width="8" height="4" rx="1"/></svg>
+              </span>
+              <div>
+                <div class="rq-split-label">Hierarchy</div>
+                <p class="rq-split-desc">Is information organized the way users scan a page &mdash; most important content surfaced first?</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
       <div class="rq-item">
+        <div class="rq-item-row">
         <div class="rq-item-media rq-item-media-live">
           <div class="ah-frustration-card" id="ah2Card">
             <div class="ah-frustration-line" style="width:70%;"></div>
@@ -6106,13 +6681,32 @@ h1, h2, h3 {
         </div>
         <div class="rq-item-text">
           <svg class="rq-item-watermark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
-          <span class="rq-item-eyebrow">Angle 02</span>
-          <p class="rq-item-title">Surface pain points in the resource-search flow.</p>
+          <p class="rq-item-title">2) Surface pain points in the resource-search flow.</p>
           <p class="rq-item-question">Does the site support <strong>completing tasks</strong> to find crisis resources?</p>
+        </div>
+        </div>
+        <button class="rq-item-toggle" type="button" onclick="toggleRqItem(this)" aria-expanded="false">
+          Show more
+          <svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="rq-item-expand">
+          <div class="rq-item-expand-inner">
+            <div class="rq-roadmap">
+              <div class="rq-roadmap-line"></div>
+              <div class="rq-roadmap-steps">
+                <div class="rq-roadmap-step"><div class="rq-roadmap-dot"></div><div class="rq-roadmap-step-label">Search</div></div>
+                <div class="rq-roadmap-step"><div class="rq-roadmap-dot"></div><div class="rq-roadmap-step-label">Resources</div></div>
+                <div class="rq-roadmap-step"><div class="rq-roadmap-dot"></div><div class="rq-roadmap-step-label">Filters</div></div>
+                <div class="rq-roadmap-step active"><div class="rq-roadmap-dot"></div><div class="rq-roadmap-step-label">Key info</div></div>
+              </div>
+            </div>
+            <p class="rq-expand-note"><strong>Task 4, Understand Key Information</strong>, tests whether users can find and correctly interpret eligibility requirements &mdash; a prerequisite for completing the task at all.</p>
+          </div>
         </div>
       </div>
 
       <div class="rq-item">
+        <div class="rq-item-row">
         <div class="rq-item-media rq-item-media-live">
           <div class="ah-transform-demo">
             <div class="ah-transform-btn">
@@ -6129,9 +6723,18 @@ h1, h2, h3 {
         </div>
         <div class="rq-item-text">
           <svg class="rq-item-watermark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-          <span class="rq-item-eyebrow">Angle 03</span>
-          <p class="rq-item-title">Turn findings into actionable recommendations.</p>
+          <p class="rq-item-title">3) Turn findings into actionable recommendations.</p>
           <p class="rq-item-question">Which elements cause the most <strong>cognitive friction or fatigue</strong>?</p>
+        </div>
+        </div>
+        <button class="rq-item-toggle" type="button" onclick="toggleRqItem(this)" aria-expanded="false">
+          Show more
+          <svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="rq-item-expand">
+          <div class="rq-item-expand-inner">
+            <p class="rq-expand-note">Early findings varied widely in how much they actually hurt someone completing a task &mdash; that gap pointed toward needing a formal severity scale to prioritize what mattered most.</p>
+          </div>
         </div>
       </div>
     </div>
@@ -6143,7 +6746,7 @@ h1, h2, h3 {
   <h3 class="strategy-subhead" id="population"><span class="sub-num">02.2</span>Population &amp; Setting</h3>
 
   <div class="who-where-row illustrated">
-    <div class="who-where-card illustrated">
+    <div class="who-where-card illustrated" data-who-where-card>
       <h5>Users</h5>
       <svg class="illo illo-funnel" viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Recruitment funnel: 40 screened, narrowing to 15 scheduled, narrowing to 6 completed">
         <g class="pf-seg">
@@ -6164,8 +6767,21 @@ h1, h2, h3 {
           <text x="100" y="128" text-anchor="middle" class="pf-label pf-label-dark">Completed</text>
         </g>
       </svg>
+      <button class="who-where-toggle" type="button" onclick="toggleWhoWhereCard(this)" aria-expanded="false">
+        Why did participants struggle to show up?
+        <svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
+      <div class="who-where-expand">
+        <div class="who-where-expand-inner">
+          <ul>
+            <li>Needed additional reminders beyond the initial invite</li>
+            <li>Difficulty accessing Zoom, and while we prepared text instructions, visual assistance features weren&rsquo;t accounted for</li>
+            <li>Several reschedules became no-shows with no follow-up</li>
+          </ul>
+        </div>
+      </div>
     </div>
-    <div class="who-where-card illustrated">
+    <div class="who-where-card illustrated" data-who-where-card>
       <h5>Where</h5>
       <svg class="illo" viewBox="0 0 160 110" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <ellipse cx="80" cy="60" rx="76" ry="46" fill="#f5f7fb"/>
@@ -6176,7 +6792,16 @@ h1, h2, h3 {
         <rect x="100" y="76" width="20" height="28" rx="3" fill="#0d3b78" opacity="0.55"/>
       </svg>
       <p>Remotely via Zoom &mdash; scoped for laptops &amp; PCs</p>
-      <span class="mobile-note">+ mobile device<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg></span>
+      <button class="who-where-toggle" type="button" onclick="toggleWhoWhereCard(this)" aria-expanded="false">
+        Why mobile too?
+        <svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
+      <div class="who-where-expand">
+        <div class="who-where-expand-inner">
+          <span class="mobile-note">+ mobile device<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg></span>
+          <p>The study was originally scoped for laptops and PCs, but once it became clear the user population mainly relies on mobile devices, sessions were accommodated to retain participants.</p>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -7306,46 +7931,67 @@ h1, h2, h3 {
   <p class="act-intro">Lessons learned from running sessions with participants who have Traumatic Brain Injury.</p>
   <div class="reflections-grid">
     <div class="reflection-card">
-      <div class="reflection-card-head">Scheduling</div>
-      <div class="reflection-issues">
-        <span class="reflection-label">Issues</span>
-        <p>Pts would often &ldquo;forget&rdquo; about session</p>
+      <div class="reflection-card-head">
+        <span class="reflection-card-icon">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18"/><path d="M8 3v4"/><path d="M16 3v4"/></svg>
+        </span>
+        <span>Screening Criteria</span>
       </div>
-      <div class="reflection-solution">
-        <span class="reflection-label">Solution</span>
-        <ol>
-          <li>Source better scheduling software</li>
-          <li>Include more reminders/notifications</li>
-          <li>Have a reminder email + joining instructions earlier</li>
-        </ol>
-      </div>
-    </div>
-    <div class="reflection-card">
-      <div class="reflection-card-head">Troubleshooting</div>
-      <div class="reflection-issues">
-        <span class="reflection-label">Issues</span>
-        <p>Some pts would encounter challenging troubleshooting issues</p>
-      </div>
-      <div class="reflection-solution">
-        <span class="reflection-label">Solution</span>
-        <ol>
-          <li>Develop better troubleshooting instructions</li>
-          <li>Prepare for multiple devices</li>
-        </ol>
+      <div class="reflection-card-body">
+        <div class="reflection-issues">
+          <span class="reflection-label">Issue</span>
+          <p>Pts used <strong>multiple devices</strong> we <strong>weren&rsquo;t prepared</strong> to collect data or troubleshoot with.</p>
+        </div>
+        <div class="reflection-solution">
+          <span class="reflection-label">Solution</span>
+          <ol>
+            <li>Incorporate device question</li>
+            <li>Refine tech literacy questions</li>
+          </ol>
+        </div>
       </div>
     </div>
     <div class="reflection-card">
-      <div class="reflection-card-head">Screening Criteria</div>
-      <div class="reflection-issues">
-        <span class="reflection-label">Issues</span>
-        <p>Pts used multiple devices we weren&rsquo;t prepared to collect data or troubleshoot with.</p>
+      <div class="reflection-card-head">
+        <span class="reflection-card-icon">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        </span>
+        <span>Scheduling</span>
       </div>
-      <div class="reflection-solution">
-        <span class="reflection-label">Solution</span>
-        <ol>
-          <li>Incorporate device question</li>
-          <li>Refine tech literacy questions</li>
-        </ol>
+      <div class="reflection-card-body">
+        <div class="reflection-issues">
+          <span class="reflection-label">Issue</span>
+          <p>Pts would often <strong>&ldquo;forget&rdquo;</strong> about session</p>
+        </div>
+        <div class="reflection-solution">
+          <span class="reflection-label">Solution</span>
+          <ol>
+            <li>Source better scheduling software</li>
+            <li>Include more reminders/notifications</li>
+            <li>Have a reminder email + joining instructions earlier</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <div class="reflection-card">
+      <div class="reflection-card-head">
+        <span class="reflection-card-icon">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+        </span>
+        <span>Troubleshooting</span>
+      </div>
+      <div class="reflection-card-body">
+        <div class="reflection-issues">
+          <span class="reflection-label">Issue</span>
+          <p>Some pts would encounter <strong>challenging troubleshooting issues</strong></p>
+        </div>
+        <div class="reflection-solution">
+          <span class="reflection-label">Solution</span>
+          <ol>
+            <li>Develop better troubleshooting instructions</li>
+            <li>Prepare for multiple devices</li>
+          </ol>
+        </div>
       </div>
     </div>
   </div>
@@ -7411,6 +8057,7 @@ h1, h2, h3 {
   var stickySub = document.getElementById('stickySectionSub');
 
   var sectionMap = {
+    intro: { num: '', label: 'Intro' },
     problem: { num: '01', label: 'Problem' },
     strategy: { num: '02', label: 'Strategy' },
     rq: { num: '02', label: 'Strategy', subNum: '02.1', subLabel: 'Research question' },
@@ -7535,6 +8182,40 @@ function initPhaseTimeline() {
 }
 
 initPhaseTimeline();
+
+function initFunnelCards() {
+  document.querySelectorAll('[data-funnel-card]').forEach(function (card) {
+    var pinned = false;
+
+    card.addEventListener('mouseenter', function () {
+      card.classList.add('expanded');
+      card.setAttribute('aria-expanded', 'true');
+    });
+    card.addEventListener('mouseleave', function () {
+      if (!pinned) {
+        card.classList.remove('expanded');
+        card.setAttribute('aria-expanded', 'false');
+      }
+    });
+    card.addEventListener('click', function () {
+      pinned = !pinned;
+      card.classList.toggle('pinned', pinned);
+      card.classList.toggle('expanded', pinned);
+      card.setAttribute('aria-expanded', pinned ? 'true' : 'false');
+    });
+    card.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        card.click();
+      }
+    });
+    card.setAttribute('tabindex', '0');
+    card.setAttribute('role', 'button');
+    card.setAttribute('aria-expanded', 'false');
+  });
+}
+
+initFunnelCards();
 
 function initAngleAnimations() {
   var t1 = document.getElementById('ah4T1');
@@ -7888,6 +8569,21 @@ function initCarousels() {
 }
 
 initCarousels();
+
+function toggleWhoWhereCard(btn) {
+  var card = btn.closest('[data-who-where-card]');
+  if (!card) return;
+  var expanded = card.classList.toggle('expanded');
+  btn.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+}
+
+function toggleRqItem(btn) {
+  var item = btn.closest('.rq-item');
+  if (!item) return;
+  var expanded = item.classList.toggle('expanded');
+  btn.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+  btn.childNodes[0].textContent = expanded ? 'Show less' : 'Show more';
+}
 
 function toggleTocGroup(btn) {
   event.preventDefault();
